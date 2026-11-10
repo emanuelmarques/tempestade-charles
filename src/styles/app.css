@@ -235,16 +235,25 @@ textarea { resize: vertical; }
   .dock .tab { display: none; }
   .mapctl { left: 10px; right: 10px; top: 140px; max-width: none; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 8px; }
   .mapctl::-webkit-scrollbar { display: none; } .mapctl > * { flex: none; flex-wrap: nowrap !important; }
-  .mapbox { inset: 186px 0 0 0; transform-origin: 50% 20%; }
-  .hero[data-s="1"] .mapbox { transform: translateY(-50px) scale(.84); }
-  .hero[data-s="2"] .mapbox { transform: translateY(-110px) scale(.62); }
-  .regionwrap { inset: 190px 10px 0 10px; }
+  .mapbox { inset: 186px 0 214px 0; transition: bottom .4s cubic-bezier(.3, .8, .3, 1); }
+  .hero[data-s="1"] .mapbox { bottom: 44%; }
+  .regionwrap { inset: 190px 10px 214px 10px; transition: bottom .4s cubic-bezier(.3, .8, .3, 1); }
+  .hero[data-s="1"] .regionwrap { bottom: 44%; }
   .legend { display: none; } .legend-pn { display: block; position: static; width: auto; }
   .zoom { top: 8px; }
   .panel { left: 0; right: 0; top: 0; bottom: 0; width: auto; border-radius: 26px 26px 0 0; border-bottom: 0; transform: translateY(calc(100% - 214px)); transition: transform .4s cubic-bezier(.3, .8, .3, 1); }
-  .hero[data-s="1"] .panel { transform: translateY(46%); }
+  .hero[data-s="1"] .panel { transform: translateY(56%); }
   .hero[data-s="2"] .panel { transform: translateY(160px); }
-  .grab { display: grid; } .pc { padding-top: 4px; padding-bottom: 100px; }
+  .hero[data-s="3"] .panel { transform: translateY(calc(100% - 64px)); }
+  .hero[data-s="3"] .mapbox { bottom: 64px; } .hero[data-s="3"] .regionwrap { bottom: 64px; }
+  .hero[data-s="3"] .pc { opacity: 0; pointer-events: none; }
+  .pc { transition: opacity .25s; overscroll-behavior: contain; }
+  .hero:not([data-s="2"]) .pc { overflow: hidden; }
+  .hero:not([data-s="2"]) .panel { touch-action: none; }
+  .grab .gl { display: none; font: 400 11px var(--mono); color: var(--muted); margin-top: 4px; }
+  .hero[data-s="3"] .grab .gl { display: block; }
+  .hero[data-s="3"] .grab { min-height: 56px; align-content: start; }
+  .grab { display: grid; min-height: 34px; touch-action: none; cursor: grab; } .pc { padding-top: 4px; padding-bottom: 100px; }
   .pm { order: 99; }
 }
 
