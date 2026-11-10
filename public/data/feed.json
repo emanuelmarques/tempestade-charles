@@ -1,5 +1,42 @@
 [
   {
+    "id": "f-2026-11-10-vost",
+    "time": "2026-11-10T09:28:22Z",
+    "title": "#FMA_Charles Amanhã, quarta-feira, 11 de novembro de 2026 Portugal Continental - Fica em casa e evita deslocações desnecessárias Existe o risco de inundações urbanas, queda de árvores, ramos e estruturas móveis, bem como interrupções localizadas de eletricidade e comunicações.",
+    "verified": false,
+    "source": {
+      "category": "redes_sociais",
+      "name": "@VOSTPT (X)",
+      "url": "https://x.com/VOSTPT/status/2120086149976780825"
+    }
+  },
+  {
+    "id": "f-2026-11-10-moedas",
+    "time": "2026-11-10T14:16:00Z",
+    "title": {
+      "pt": "Lisboa: mais de 300 ocorrências desde a madrugada; túneis, escolas e parques fecham a partir da meia-noite e a Web Summit deverá não decorrer na quarta-feira (decisão final do Ministro da Administração Interna)",
+      "en": "Lisbon: more than 300 incidents since early morning; tunnels, schools and parks close from midnight and the Web Summit probably cannot run on Wednesday (final decision rests with the Internal Administration Minister)"
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/2026/11/10/websummit-em-risco-tuneis-encerrados-e-o-mercado-de-natal-que-se-vai-manter-no-rossio-as-medidas-de-moedas-para-a-depressao-charles/"
+    }
+  },
+  {
+    "id": "f-2026-11-10-vermelho",
+    "time": "2026-11-10T08:36:00Z",
+    "title": {
+      "pt": "IPMA agrava aviso para vermelho em Beja, Évora, Faro, Leiria, Lisboa, Portalegre, Santarém e Setúbal na quarta-feira até às 21:00; rajadas podem passar os 130 km/h",
+      "en": "IPMA raises warning to red in Beja, Évora, Faro, Leiria, Lisbon, Portalegre, Santarém and Setúbal on Wednesday until 21:00; gusts may exceed 130 km/h"
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Executive Digest",
+      "url": "https://executivedigest.sapo.pt/depressao-charles-ipma-agrava-alerta-para-vermelho-em-oito-distritos-vento-pode-ultrapassar-os-130-km-h/"
+    }
+  },
+  {
     "id": "f-2026-11-10-gov-alerta",
     "time": "2026-11-10T10:33:00Z",
     "title": {

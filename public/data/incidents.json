@@ -5,12 +5,22 @@
     "place": "Lisboa",
     "lat": null,
     "lon": null,
-    "time": "2026-11-10T06:00:00Z",
+    "time": "2026-11-10T14:16:00Z",
     "severity": 1,
     "verified": true,
-    "title": { "pt": "130 ocorrências entre as 00:00 e as 06:00, sobretudo inundações sem danos significativos", "en": "130 incidents between 00:00 and 06:00, mostly flooding without significant damage" },
-    "description": { "pt": "Registadas pelo Regimento de Sapadores Bombeiros de Lisboa, segundo o artigo citado.", "en": "Logged by the Lisbon Fire Brigade, according to the cited article." },
-    "source": { "category": "comunicacao_social", "name": "Euronews", "url": "https://pt.euronews.com/2026/11/10/depressao-charles-traz-chuva-e-vento-forte-governo-pede-prudencia-maxima-so-saia-se-for-me" }
+    "title": {
+      "pt": "Mais de 300 ocorrências em Lisboa desde a madrugada, segundo o presidente da Câmara",
+      "en": "More than 300 incidents in Lisbon since early morning, according to the mayor"
+    },
+    "description": {
+      "pt": "O Regimento de Sapadores Bombeiros registou 130 ocorrências entre as 00:00 e as 06:00 (Euronews); o presidente da Câmara referiu depois 304 (Observador).",
+      "en": "The Lisbon Fire Brigade logged 130 incidents between 00:00 and 06:00 (Euronews); the mayor later cited 304 (Observador)."
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/2026/11/10/websummit-em-risco-tuneis-encerrados-e-o-mercado-de-natal-que-se-vai-manter-no-rossio-as-medidas-de-moedas-para-a-depressao-charles/"
+    }
   },
   {
     "id": "i-lisboa-segunda-circular",
@@ -21,8 +31,18 @@
     "time": "2026-11-10T07:56:00Z",
     "severity": 2,
     "verified": true,
-    "title": { "pt": "Segunda Circular cortada cerca de hora e meia na terça-feira; estradas interditadas no Campo Grande, Prior Velho e Olivais", "en": "Segunda Circular closed for about 90 minutes on Tuesday; roads closed at Campo Grande, Prior Velho and Olivais" },
-    "description": { "pt": "O corte da Segunda Circular já foi resolvido, segundo o artigo. O mapa marca o Campo Grande como localização aproximada.", "en": "The Segunda Circular closure has been resolved, according to the article. The map marks Campo Grande as an approximate location." },
-    "source": { "category": "comunicacao_social", "name": "Euronews", "url": "https://pt.euronews.com/2026/11/10/depressao-charles-traz-chuva-e-vento-forte-governo-pede-prudencia-maxima-so-saia-se-for-me" }
+    "title": {
+      "pt": "Segunda Circular cortada cerca de hora e meia na terça-feira; estradas interditadas no Campo Grande, Prior Velho e Olivais",
+      "en": "Segunda Circular closed for about 90 minutes on Tuesday; roads closed at Campo Grande, Prior Velho and Olivais"
+    },
+    "description": {
+      "pt": "O corte da Segunda Circular já foi resolvido, segundo o artigo. O mapa marca o Campo Grande como localização aproximada.",
+      "en": "The Segunda Circular closure has been resolved, according to the article. The map marks Campo Grande as an approximate location."
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Euronews",
+      "url": "https://pt.euronews.com/2026/11/10/depressao-charles-traz-chuva-e-vento-forte-governo-pede-prudencia-maxima-so-saia-se-for-me"
+    }
   }
 ]
