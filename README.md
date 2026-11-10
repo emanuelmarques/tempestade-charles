@@ -25,7 +25,7 @@ npm run dev:sample   # com dados de exemplo (tests/fixtures/sample), sem alterar
 npm test             # testes
 npm run validate-data
 npm run build        # gera dist/ (estático, publica-se em qualquer alojamento)
-SITE_URL=https://exemplo.pt npm run build   # acrescenta canonical, sitemap.xml e robots.txt com sitemap
+npm run build   # SITE_URL (por omissão https://charles.emanuelsmarques.pt) acrescenta canonical, og:image, sitemap.xml e robots.txt com sitemap
 ```
 
 ## Por decidir

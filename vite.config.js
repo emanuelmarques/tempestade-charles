@@ -22,7 +22,7 @@ function sampleData() {
 // SEO: com SITE_URL definido (ex.: SITE_URL=https://exemplo.pt npm run build) injeta canonical e og:url
 // e gera robots.txt e sitemap.xml. Sem domínio, não se emitem URLs absolutos inventados.
 function seo() {
-  const site = (process.env.SITE_URL ?? '').replace(/\/$/, '');
+  const site = (process.env.SITE_URL ?? 'https://charles.emanuelsmarques.pt').replace(/\/$/, '');
   const pages = { 'index.html': '/', 'recomendacoes.html': '/recomendacoes.html', 'metodologia.html': '/metodologia.html', 'feedback.html': '/feedback.html', 'fontes.html': '/fontes.html' };
   return {
     name: 'seo',
@@ -31,7 +31,9 @@ function seo() {
       handler(html, ctx) {
         if (!site) return html.replace('<!--seo-head-->', '');
         const url = site + (pages[basename(ctx.filename ?? '')] ?? '/');
-        return html.replace('<!--seo-head-->', `<link rel="canonical" href="${url}">\n<meta property="og:url" content="${url}">`);
+        return html.replace('<!--seo-head-->', `<link rel="canonical" href="${url}">\n<meta property="og:url" content="${url}">
+<meta property="og:image" content="${site}/og-image.png">
+<meta name="twitter:image" content="${site}/og-image.png">`);
       },
     },
     generateBundle() {
