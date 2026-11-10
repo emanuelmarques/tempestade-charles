@@ -14,7 +14,7 @@ describe('safe', () => {
 
 describe('sourceBadge', () => {
   const gov = { category: 'governamental', name: 'IPMA', url: 'https://www.ipma.pt' };
-  it('mostra categoria, nome e link', () => {
+  it('mostra só o nome (categoria só para leitores de ecrã) e o link', () => {
     const h = sourceBadge(gov, { lang: 'pt' });
     expect(h).toContain('Governamental');
     expect(h).toContain('IPMA');
@@ -27,10 +27,10 @@ describe('sourceBadge', () => {
     expect(h).not.toContain('Comunicação social ·');
     expect(h).not.toContain('class="shape');
     expect(h).toContain('<span class="sr">Comunicação social: </span>');
-    expect(sourceBadge(gov, { lang: 'pt' })).toContain('Governamental · IPMA');
+    expect(sourceBadge(gov, { lang: 'pt' })).not.toContain('Governamental · IPMA');
   });
   it('marca redes sociais não verificadas', () => {
-    const soc = { category: 'redes_sociais', name: 'X', url: 'https://x.com/a' };
+    const soc = { category: 'redes_sociais', name: '@conta (X)', url: 'https://x.com/a' };
     expect(sourceBadge(soc, { verified: false })).toContain('Não verificado');
     expect(sourceBadge(soc, { verified: true })).not.toContain('Não verificado');
     expect(sourceBadge(gov, { verified: false })).not.toContain('Não verificado');

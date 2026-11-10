@@ -12,16 +12,13 @@ export function isUnverified(source, verified) {
 }
 
 /**
- * Etiqueta curta da fonte, sem símbolos: comunicação social mostra só o nome do meio;
- * governamental e redes sociais mostram a categoria e o nome. A categoria fica também em texto para leitores de ecrã.
+ * Etiqueta curta da fonte: só o nome (IPMA, Diário de Notícias, @conta (X), @conta@servidor (Mastodon)).
+ * A categoria fica na cor da etiqueta e em texto só para leitores de ecrã.
  */
 export function sourceChip(source, lang = 'pt') {
   const cat = CATEGORIES[source?.category];
   if (!cat) return '';
-  const catName = cat.label[lang];
-  const media = source.category === 'comunicacao_social';
-  const sr = media ? `<span class="sr">${escapeHtml(catName)}: </span>` : '';
-  return `<span class="badge ${cat.cls}">${sr}${escapeHtml(media ? source.name : `${catName} · ${source.name}`)}</span>`;
+  return `<span class="badge ${cat.cls}"><span class="sr">${escapeHtml(cat.label[lang])}: </span>${escapeHtml(source.name)}</span>`;
 }
 
 /** Selo de fonte: etiqueta curta, link para a fonte original e, nas redes sociais por confirmar, "Não verificado". */
