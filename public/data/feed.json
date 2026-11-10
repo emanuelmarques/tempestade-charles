@@ -1,5 +1,18 @@
 [
   {
+    "id": "f-2026-11-10-publico-saude",
+    "time": "2026-11-10T18:30:00Z",
+    "title": {
+      "pt": "Cuidados programados não urgentes suspensos em vários hospitais e centros de saúde, incluindo Hospital Beatriz Ângelo e as ULS de Leiria, Lezíria, Alto Alentejo, Baixo Alentejo, Coimbra, Gaia e Espinho; estações de Metro de Lisboa ficam abertas para abrigar sem-abrigo",
+      "en": "Non-urgent scheduled care suspended at several hospitals and health centres, including Hospital Beatriz Ângelo and the Leiria, Lezíria, Alto Alentejo, Baixo Alentejo, Coimbra, Gaia and Espinho health units; Lisbon Metro stations stay open to shelter homeless people"
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Público",
+      "url": "https://www.publico.pt/2026/11/10/sociedade/noticia/mau-tempo-governo-pede-apenas-deslocacoes-necessarias-periodos-chuva-intensa-2194385"
+    }
+  },
+  {
     "id": "f-2026-11-10-dn-mar",
     "time": "2026-11-10T17:58:00Z",
     "title": {

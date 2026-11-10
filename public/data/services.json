@@ -166,5 +166,33 @@
       "name": "Diário de Notícias",
       "url": "https://www.dn.pt/sociedade/proteo-civil-alerta-para-chuva-forte-e-rajadas-at-120-kmh-governo-pede-que-se-evitem-sadas-de-casa"
     }
+  },
+  {
+    "id": "s-publico-ferry-gaia",
+    "type": "estrada",
+    "name": {
+      "pt": "Ligações fluviais de barco entre o Porto e Vila Nova de Gaia suspensas",
+      "en": "River ferry links between Porto and Vila Nova de Gaia suspended"
+    },
+    "status": "suprimida",
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Público",
+      "url": "https://www.publico.pt/2026/11/10/sociedade/noticia/mau-tempo-governo-pede-apenas-deslocacoes-necessarias-periodos-chuva-intensa-2194385"
+    }
+  },
+  {
+    "id": "s-publico-flixbus",
+    "type": "estrada",
+    "name": {
+      "pt": "FlixBus suspende operações nacionais desde o início de quarta-feira até ao fim do dia, mantendo algumas ligações internacionais a partir do Norte",
+      "en": "FlixBus suspends domestic operations from early Wednesday to end of day, keeping some international links from the North"
+    },
+    "status": "suprimida",
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Público",
+      "url": "https://www.publico.pt/2026/11/10/sociedade/noticia/mau-tempo-governo-pede-apenas-deslocacoes-necessarias-periodos-chuva-intensa-2194385"
+    }
   }
 ]
