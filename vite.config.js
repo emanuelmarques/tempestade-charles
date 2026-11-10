@@ -23,7 +23,7 @@ function sampleData() {
 // e gera robots.txt e sitemap.xml. Sem domínio, não se emitem URLs absolutos inventados.
 function seo() {
   const site = (process.env.SITE_URL ?? 'https://charles.emanuelsmarques.pt').replace(/\/$/, '');
-  const pages = { 'index.html': '/', 'recomendacoes.html': '/recomendacoes.html', 'metodologia.html': '/metodologia.html', 'feedback.html': '/feedback.html', 'fontes.html': '/fontes.html' };
+  const pages = { 'index.html': '/', 'recomendacoes.html': '/recomendacoes.html', 'situacao.html': '/situacao.html', 'metodologia.html': '/metodologia.html', 'feedback.html': '/feedback.html', 'fontes.html': '/fontes.html' };
   return {
     name: 'seo',
     transformIndexHtml: {
@@ -54,7 +54,7 @@ export default defineConfig({
   plugins: [sampleData(), seo()],
   build: {
     rollupOptions: {
-      input: { main: resolve(import.meta.dirname, 'index.html'), recs: resolve(import.meta.dirname, 'recomendacoes.html'), how: resolve(import.meta.dirname, 'metodologia.html'), feedback: resolve(import.meta.dirname, 'feedback.html'), sources: resolve(import.meta.dirname, 'fontes.html') },
+      input: { main: resolve(import.meta.dirname, 'index.html'), recs: resolve(import.meta.dirname, 'recomendacoes.html'), detail: resolve(import.meta.dirname, 'situacao.html'), how: resolve(import.meta.dirname, 'metodologia.html'), feedback: resolve(import.meta.dirname, 'feedback.html'), sources: resolve(import.meta.dirname, 'fontes.html') },
     },
   },
 });
