@@ -5,7 +5,7 @@ import { countdown, parseLisbon, freshness, formatTime, formatDayTime, formatDay
 import { toMap } from './lib/projection.js';
 import { districtAt } from './lib/districtAt.js';
 import { lookupContacts, GEOAPI_SITE } from './data/geoapi.js';
-import { lookupNearby } from './data/places.js';
+import { lookupNearby, OSM_COPYRIGHT } from './data/places.js';
 import { haversineKm } from './lib/geo.js';
 import { DISTRICTS, DISTRICT_BY_ID, DISTRICT_BY_AREA, LAND_PATH } from './data/districts.js';
 import { IPMA, IPMA_SOURCE, WIND_CLASS, PREC_CLASS, normalizeWarnings, normalizeForecast, normalizeWeatherTypes, normalizeLocations, fetchCached } from './data/ipma.js';
@@ -107,6 +107,17 @@ function freshnessInfo() {
   return { dot, text: parts.join(' · ') };
 }
 
+const NAV = [
+  ['home', './', ['Início', 'Home']],
+  ['recs', 'recomendacoes.html', ['O que fazer', 'What to do']],
+  ['how', 'metodologia.html', ['Metodologia', 'Methodology']],
+  ['sources', 'fontes.html', ['Fontes', 'Sources']],
+  ['feedback', 'feedback.html', ['Feedback', 'Feedback']],
+];
+function navBar() {
+  return `<nav class="mainnav" aria-label="${L('Navegação principal', 'Main navigation')}">${NAV.map(([k, href, [pt, en]]) => `<a href="${href}"${state.page === k ? ' aria-current="page"' : ''}>${L(pt, en)}</a>`).join('')}</nav>`;
+}
+
 function topbar() {
   const f = freshnessInfo();
   return `<header class="top">
@@ -124,7 +135,7 @@ function topbar() {
           <button class="seg ${state.lang === 'en' ? 'on' : ''}" aria-pressed="${state.lang === 'en'}" data-a="lang" data-v="en" lang="en">EN</button>
         </div>
       </div>
-    </div></header>`;
+    </div></header>${navBar()}`;
 }
 
 function banners() {
@@ -182,12 +193,18 @@ function mapPins() {
 
 function mapSvg(imp) {
   const v = state.view; const cur = state.national ? null : curDistrict(imp);
-  const dists = DISTRICTS.map((d) => {
+  // Primeiro todos os distritos (o selecionado por último, para o contorno ficar por cima), depois todos os nomes por cima.
+  const ordered = [...DISTRICTS].sort((x, y) => (x.id === cur) - (y.id === cur));
+  const paths = ordered.map((d) => {
     const r = imp.get(d.id); const sel = d.id === cur;
     const tierName = TIER_NAMES[r.tier][state.lang === 'en' ? 1 : 0];
-    return `<g class="dist" tabindex="0" role="button" data-a="district" data-id="${d.id}" aria-label="${esc(d.name)}: ${L('impacto', 'impact')} ${tierName}${r.top ? `, ${L('aviso', 'warning')} ${lvName(r.top.level)}` : ''}" style="cursor:pointer"><path d="${d.d}" fill="${TIER_FILL[r.tier]}" stroke="${sel ? '#15202B' : '#fff'}" stroke-width="${sel ? 3.5 : 1.5}"/><text x="${d.lx}" y="${d.ly}" text-anchor="middle" fill="${r.tier === 3 ? '#fff' : '#15202B'}">${esc(d.name)}</text></g>`;
+    return `<g class="dist" tabindex="0" role="button" data-a="district" data-id="${d.id}" aria-label="${esc(d.name)}: ${L('impacto', 'impact')} ${tierName}${r.top ? `, ${L('aviso', 'warning')} ${lvName(r.top.level)}` : ''}" style="cursor:pointer"><path d="${d.d}" fill="${TIER_FILL[r.tier]}" stroke="${sel ? '#15202B' : '#fff'}" stroke-width="${sel ? 3.5 : 1.5}"/></g>`;
   }).join('');
-  return `<svg viewBox="${v.x} ${v.y} ${v.w} ${v.h}" role="group" aria-label="${L('Mapa de Portugal continental por distrito', 'Map of mainland Portugal by district')}"><g transform="translate(60,0)"><path d="${LAND_PATH}" fill="#F0EEE6" stroke="none"/><text x="262" y="368" font-family="'Inter Variable',sans-serif" font-size="13" letter-spacing="4" fill="#4A5663" font-weight="600">ESPANHA</text>${dists}${mapPins()}</g></svg>`;
+  const labels = DISTRICTS.map((d) => {
+    const r = imp.get(d.id); const dark = r.tier === 3;
+    return `<text x="${d.lx}" y="${d.ly}" text-anchor="middle" fill="${dark ? '#fff' : '#15202B'}" stroke="${dark ? '#7F1020' : TIER_FILL[r.tier]}" stroke-width="3" paint-order="stroke" stroke-linejoin="round">${esc(d.name)}</text>`;
+  }).join('');
+  return `<svg viewBox="${v.x} ${v.y} ${v.w} ${v.h}" role="group" aria-label="${L('Mapa de Portugal continental por distrito', 'Map of mainland Portugal by district')}"><g transform="translate(60,0)"><path d="${LAND_PATH}" fill="#F0EEE6" stroke="none"/><text x="262" y="368" font-family="'Inter Variable',sans-serif" font-size="13" letter-spacing="4" fill="#4A5663" font-weight="600">ESPANHA</text>${paths}<g class="labels" pointer-events="none">${labels}</g>${mapPins()}</g></svg>`;
 }
 
 function legend() {
@@ -318,16 +335,22 @@ function zoneSection() {
 
   /* Bombeiros e farmácia mais próximos */
   const nb = data.nearby;
-  const near = (emoji, title, part, q) => {
+  const near = (emoji, title, part, q, kind) => {
     if (!nb) return zoneRow(emoji, title, L('A procurar…', 'Searching…'), '');
     if (!part || part.error) return zoneRow(emoji, title, L('Não foi possível obter este dado.', 'Could not load this.'), find(q));
     if (!part.place) return zoneRow(emoji, title, L(`Nenhum encontrado num raio de ${part.radiusKm} km.`, `None found within ${part.radiusKm} km.`), find(q));
     const p = part.place;
-    const sub = `${esc(kmTxt(p.km))} ${nb.byUser ? L('de si', 'from you') : L('da localidade escolhida', 'from the chosen location')}${p.address ? ` · ${esc(p.address)}` : ''}`;
-    return zoneRow(emoji, esc(p.name || title), sub, `${phoneBtn(p.phone)}${mapLink(p.mapUrl)}`);
+    const noPhoneNote = !p.phone && kind === 'fire' ? `<br>${L('Sem telefone registado: em emergência ligue 112.', 'No phone on record: in an emergency call 112.')}` : '';
+    const sub = `${esc(kmTxt(p.km))} ${nb.byUser ? L('de si', 'from you') : L('da localidade escolhida', 'from the chosen location')}${p.address ? ` · ${esc(p.address)}` : ''}${noPhoneNote}`;
+    const call = p.phone
+      ? phoneBtn(p.phone)
+      : kind === 'fire'
+        ? `<a class="zbtn zbtn-alt" href="tel:112"><span aria-hidden="true">📞</span> 112</a>`
+        : `<a class="zlink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${p.name || 'farmácia'} ${p.address || ''}`.trim())}" target="_blank" rel="noopener noreferrer">${L('Ver telefone no mapa', 'See phone on map')} ↗</a>`;
+    return zoneRow(emoji, esc(p.name || title), sub, `${call}${mapLink(p.mapUrl)}`);
   };
-  const fire = near('🚒', L('Bombeiros mais próximos', 'Nearest fire station'), nb?.fire, 'quartel de bombeiros');
-  const pharmacy = near('💊', L('Farmácia mais próxima', 'Nearest pharmacy'), nb?.pharmacy, 'farmácia');
+  const fire = near('🚒', L('Bombeiros mais próximos', 'Nearest fire station'), nb?.fire, 'quartel de bombeiros', 'fire');
+  const pharmacy = near('💊', L('Farmácia mais próxima', 'Nearest pharmacy'), nb?.pharmacy, 'farmácia', 'pharmacy');
 
   const prociv = zoneRow('🛡️', L('Proteção Civil (ANEPC)', 'Civil Protection (ANEPC)'), L('Avisos e orientações oficiais', 'Official warnings and guidance'), `<a class="zlink" href="${ANEPC.url}" target="_blank" rel="noopener noreferrer">prociv.gov.pt ↗</a>`);
   const abrigos = zoneRow('⛺', L('Abrigos no distrito', 'Shelters in the district'), shelters.length ? shelters.slice(0, 3).map((x) => esc(txt(x.name))).join(' · ') : L('Sem abrigos registados. Siga as indicações da câmara municipal.', 'No shelters recorded. Follow your town hall’s instructions.'), '');
@@ -391,14 +414,45 @@ const FEEDBACK_EMAIL = 'hello@emanuelsmarques.pt';
 const backLink = () => `<a href="./" style="display:inline-flex;align-items:center;min-height:44px;font-weight:600">← ${L('Voltar ao início', 'Back to home')}</a>`;
 
 function howPage() {
-  const src = (n, d) => `<li><strong>${n}</strong>: ${d}</li>`;
   return `<div>${backLink()}${howSection()}
-    <section aria-labelledby="h-fontes" style="margin-top:32px"><h2 id="h-fontes" class="h2">${L('De onde vêm os dados', 'Where the data comes from')}</h2><div class="card tinted"><ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:15px">
-      ${src('IPMA', L('avisos meteorológicos e previsão, lidos em tempo real neste dispositivo.', 'weather warnings and forecast, read live on this device.'))}
-      ${src(L('Ocorrências, notícias e serviços', 'Incidents, news and services'), L('recolhidos de hora a hora de fontes oficiais, imprensa e redes sociais; cada item indica a categoria da fonte e o link original.', 'collected hourly from official sources, the press and social media; each item shows its source category and original link.'))}
-      ${src('geoapi.pt', L('concelho e contactos da câmara municipal a partir da localização.', 'municipality and town-hall contacts from your location.'))}
-      ${src('OpenStreetMap', L('farmácias e quartéis de bombeiros mais próximos (podem estar incompletos).', 'nearest pharmacies and fire stations (may be incomplete).'))}
-    </ul></div></section></div>`;
+    <p style="margin:24px 0 0">${L('Veja de onde vêm os dados na página', 'See where the data comes from on the')} <a href="fontes.html">${L('Fontes', 'Sources')}</a>.</p></div>`;
+}
+
+/** Fontes citadas nos dados curados, agrupadas por categoria. */
+function citedSources() {
+  const map = new Map();
+  const all = [...data.curated.feed, ...data.curated.incidents, ...data.curated.services, ...data.curated.shelters, ...data.curated.myths];
+  for (const it of all) {
+    const src = it.source; if (!src?.name || !safeUrl(src.url)) continue;
+    const key = `${src.category}|${src.name}`;
+    const cur = map.get(key) ?? { ...src, n: 0 };
+    cur.n += 1; map.set(key, cur);
+  }
+  return ['governamental', 'comunicacao_social', 'redes_sociais'].map((cat) => ({ cat, items: [...map.values()].filter((x) => x.category === cat).sort((x, y) => y.n - x.n) }));
+}
+
+function sourcesPage() {
+  const ext = (href, text) => `<a href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(text)} ↗</a>`;
+  const block = (emoji, title, body) => `<div class="card"><h3 style="font-size:18px;margin:0 0 8px"><span aria-hidden="true">${emoji}</span> ${title}</h3><div style="display:flex;flex-direction:column;gap:8px;font-size:15px">${body}</div></div>`;
+  const upd = data.curated.meta.updatedAt ? formatDayTime(new Date(data.curated.meta.updatedAt), state.lang) : L('ainda sem dados', 'no data yet');
+  const cited = citedSources().map(({ cat, items }) => {
+    const c = CATEGORIES[cat];
+    return `<div><span class="badge ${c.cls}"><span class="shape ${c.shape}"></span>${esc(c.label[state.lang])}</span>${items.length ? `<ul style="margin:8px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:4px">${items.map((x) => `<li>${ext(x.url, x.name)} <span class="muted">(${x.n})</span></li>`).join('')}</ul>` : `<p class="muted" style="margin:8px 0 0">${L('Ainda sem itens.', 'No items yet.')}</p>`}</div>`;
+  }).join('');
+  return `<div>${backLink()}
+  <h2 id="h-src" style="font-size:34px;margin:8px 0 6px">${L('Fontes dos dados', 'Data sources')}</h2>
+  <p class="muted" style="margin:0 0 20px;max-width:680px">${L('Cada informação do site indica a categoria da fonte e o link original. Aqui está o que usamos e de onde vem.', 'Every item on the site shows its source category and original link. Here is what we use and where it comes from.')}</p>
+  <div class="grid">
+    ${block('🌦️', 'IPMA', `<p style="margin:0">${L('Avisos meteorológicos e previsão, lidos em tempo real neste dispositivo, com cópia local se a rede falhar.', 'Weather warnings and forecast, read live on this device, with a local copy if the network fails.')}</p>${sourceBadge(IPMA_SOURCE, { lang: state.lang })}`)}
+    ${block('🗺️', L('Mapa e distritos', 'Map and districts'), `<p style="margin:0">${L('Contornos dos distritos a partir da Carta Administrativa Oficial de Portugal (CAOP), da Direção-Geral do Território, simplificados para o desenho do mapa.', 'District outlines from the Official Administrative Map of Portugal (CAOP), Directorate-General for the Territory, simplified for the map drawing.')}</p>`)}
+    ${block('📍', 'geoapi.pt', `<p style="margin:0">${L('Concelho a partir da localização e contactos da câmara municipal (telefone, email, site, morada).', 'Municipality from your location and town-hall contacts (phone, email, website, address).')}</p>${ext(GEOAPI_SITE, 'geoapi.pt')}`)}
+    ${block('💊', 'OpenStreetMap', `<p style="margin:0">${L('Farmácias e quartéis de bombeiros mais próximos. Localizações e telefones dos colaboradores do OpenStreetMap: podem estar incompletos e a farmácia pode não estar de serviço. Em alternativa, procuramos em tempo real com o Photon (Komoot) e o Nominatim.', 'Nearest pharmacies and fire stations. Locations and phones from OpenStreetMap contributors: they may be incomplete and the pharmacy may not be on duty. As a fallback we search live with Photon (Komoot) and Nominatim.')}</p><p style="margin:0">${L('Dados', 'Data')} © ${ext(OSM_COPYRIGHT, L('colaboradores do OpenStreetMap', 'OpenStreetMap contributors'))} (ODbL).</p>`)}
+  </div>
+  <section aria-labelledby="h-cit" style="margin-top:32px"><h2 id="h-cit" class="h2">${L('Fontes citadas nas ocorrências, notícias e serviços', 'Sources cited in incidents, news and services')}</h2>
+    <div class="card" style="display:flex;flex-direction:column;gap:16px">
+      <p class="muted" style="margin:0;font-size:14px">${L('Atualizado de hora a hora. Última atualização', 'Updated hourly. Last update')}: ${esc(upd)}. ${L('Os números indicam quantos itens citam cada fonte. Relatos de redes sociais (X e hashtags públicas da Mastodon) aparecem sempre como não verificados.', 'Numbers show how many items cite each source. Social media reports (X and public Mastodon hashtags) always appear as unverified.')}</p>
+      ${cited}
+    </div></section></div>`;
 }
 
 function feedbackPage() {
@@ -417,7 +471,7 @@ function feedbackPage() {
 function footer() {
   return `<footer class="foot"><div><strong style="color:var(--ink)">${L('Sobre este site', 'About this site')}</strong><p style="margin:6px 0 0">${L('Não é um serviço oficial e não substitui os avisos da Proteção Civil nem do IPMA. Cada informação indica a fonte e o link original. Relatos de redes sociais aparecem sempre como não verificados.', 'This is not an official service and does not replace Civil Protection or IPMA warnings. Every item shows its source and original link. Social media reports always appear as unverified.')}</p></div>
   <div><strong style="color:var(--ink)">${L('Dados', 'Data')}</strong><p style="margin:6px 0 0">${L('Avisos e previsão: IPMA, lidos em tempo real neste dispositivo. Ocorrências, notícias e serviços: atualizados aproximadamente de hora a hora.', 'Warnings and forecast: IPMA, read live on this device. Incidents, news and services: updated roughly every hour.')}</p></div>
-  <div><strong style="color:var(--ink)">${L('Mais', 'More')}</strong><p style="margin:6px 0 0"><a href="metodologia.html">${L('Como calculamos o impacto', 'How we calculate impact')}</a><br><a href="feedback.html">${L('Feedback e reportar um erro', 'Feedback and report an error')}</a></p></div></footer>`;
+  <div><strong style="color:var(--ink)">${L('Mais', 'More')}</strong><p style="margin:6px 0 0"><a href="metodologia.html">${L('Como calculamos o impacto', 'How we calculate impact')}</a><br><a href="fontes.html">${L('Fontes dos dados', 'Data sources')}</a><br><a href="feedback.html">${L('Feedback e reportar um erro', 'Feedback and report an error')}</a></p></div></footer>`;
 }
 
 function recsLink() {
@@ -441,7 +495,7 @@ function recsPage() {
 /* ---------- página ---------- */
 function pageHtml() {
   const imp = impact();
-  const main = state.page === 'recs' ? recsPage() : state.page === 'how' ? howPage() : state.page === 'feedback' ? feedbackPage()
+  const main = state.page === 'recs' ? recsPage() : state.page === 'how' ? howPage() : state.page === 'sources' ? sourcesPage() : state.page === 'feedback' ? feedbackPage()
     : [statusSection(imp), mapSection(imp), zoneSection(), recsLink(), servicesSection(), feedSection(), forecastSection(), sheltersSection(), mythsSection()].join('');
   return `<a class="skip" href="#main">${L('Saltar para o conteúdo', 'Skip to content')}</a>${emergencyBar()}${topbar()}<main id="main" class="sheet">${banners()}${main}</main>${footer()}`;
 }

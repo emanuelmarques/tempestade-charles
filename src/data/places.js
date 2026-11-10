@@ -7,8 +7,13 @@ const RADIUS_KM = { pharmacy: 25, fire: 40 };
 
 /** Telefone português (9 dígitos, com ou sem +351) -> { display, href } ou null. */
 export function cleanPhone(tags = {}) {
-  const raw = String(tags.phone || tags['contact:phone'] || '').split(';')[0];
-  return phoneFromDigits(raw);
+  for (const key of ['phone', 'contact:phone', 'mobile', 'contact:mobile']) {
+    for (const part of String(tags[key] || '').split(/[;,]/)) {
+      const ph = phoneFromDigits(part);
+      if (ph) return ph;
+    }
+  }
+  return null;
 }
 
 export function phoneFromDigits(raw) {

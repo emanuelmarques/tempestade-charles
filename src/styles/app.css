@@ -86,7 +86,7 @@ select { min-height: 44px; font: 600 14px 'Inter Variable', sans-serif; border: 
 .mapview svg.drag { cursor: grabbing; }
 .dist path { stroke-linejoin: round; transition: fill .2s; }
 .dist:hover path { filter: brightness(.96); }
-.dist text { pointer-events: none; font: 600 11px 'Inter Variable', sans-serif; }
+.labels text { font: 600 11px 'Inter Variable', sans-serif; }
 .mappin { cursor: pointer; }
 .mappin:focus-visible { outline: none; }
 .mappin:focus-visible .ring { stroke: var(--focus); stroke-width: 3; }
@@ -153,3 +153,12 @@ textarea { resize: vertical; }
   .zrow { grid-template-columns: 44px minmax(0, 1fr); }
   .za { grid-column: 2; justify-content: flex-start; }
 }
+
+/* Navegação principal */
+.mainnav { max-width: 1240px; margin: 0 auto; padding: 0 24px 12px; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+.mainnav::-webkit-scrollbar { display: none; }
+.mainnav a { min-height: 44px; display: inline-flex; align-items: center; padding: 0 16px; border-radius: 999px; border: 1.5px solid transparent; color: var(--ink); font-weight: 600; font-size: 15px; text-decoration: none; white-space: nowrap; }
+.mainnav a:hover { background: #fff; border-color: var(--rule); color: var(--ink); }
+.mainnav a[aria-current="page"] { background: var(--ink); color: #fff; }
+@media (max-width: 720px) { .mainnav { padding: 0 16px 10px; } }
+.zbtn-alt { background: var(--vermelho); } .zbtn-alt:hover { background: #A81D26; }

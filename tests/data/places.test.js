@@ -17,6 +17,8 @@ describe('places', () => {
     expect(phoneFromDigits('javascript:alert(1)')).toBeNull();
     expect(phoneFromDigits('123')).toBeNull();
     expect(phoneFromDigits('')).toBeNull();
+    expect(cleanPhone({ phone: 'n/a', mobile: '+351 912 345 678' }).display).toBe('912 345 678');
+    expect(cleanPhone({ 'contact:phone': '123, 244 111 222' }).display).toBe('244 111 222');
   });
   it('escolhe o mais próximo e ignora linhas inválidas', () => {
     const p = nearestPlace(rows, pt, 25);
