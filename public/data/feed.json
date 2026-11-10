@@ -1,5 +1,44 @@
 [
   {
+    "id": "f-2026-11-10-dn-mar",
+    "time": "2026-11-10T17:58:00Z",
+    "title": {
+      "pt": "Autoridade Marítima prevê ondas até 10 metros a partir das 06:00 de quarta-feira, com pico da maré às 15:20; navegação no Douro proibida a embarcações com menos de 12 metros",
+      "en": "Maritime Authority forecasts waves up to 10 metres from 06:00 on Wednesday, with the tide peaking at 15:20; boats under 12 metres banned from the Douro"
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Diário de Notícias",
+      "url": "https://www.dn.pt/sociedade/proteo-civil-alerta-para-chuva-forte-e-rajadas-at-120-kmh-governo-pede-que-se-evitem-sadas-de-casa"
+    }
+  },
+  {
+    "id": "f-2026-11-10-dn-saude",
+    "time": "2026-11-10T17:58:00Z",
+    "title": {
+      "pt": "Hospitais do Sul e algumas unidades de Lisboa adiam consultas e exames não urgentes; cada ULS decide; USF do Arco (Lisboa) encerrada por danos",
+      "en": "Southern hospitals and some Lisbon units postpone non-urgent appointments and tests; each local health unit decides; USF do Arco (Lisbon) closed due to damage"
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Diário de Notícias",
+      "url": "https://www.dn.pt/sociedade/proteo-civil-alerta-para-chuva-forte-e-rajadas-at-120-kmh-governo-pede-que-se-evitem-sadas-de-casa"
+    }
+  },
+  {
+    "id": "f-2026-11-10-24n-catolica",
+    "time": "2026-11-10T09:11:00Z",
+    "title": {
+      "pt": "Universidade Católica encerra o campus de Lisboa (incluindo Sintra e Oeiras) na quarta-feira, com aulas online; IPMA admite imprevisibilidade na entrada da depressão por Lisboa",
+      "en": "Universidade Católica closes its Lisbon campus (including Sintra and Oeiras) on Wednesday, with online classes; IPMA admits unpredictability as the depression enters via Lisbon"
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "24notícias",
+      "url": "https://24noticias.sapo.pt/atualidade/artigos/tempestade-situacao-e-bastante-complexa-alerta-ipma"
+    }
+  },
+  {
     "id": "f-2026-11-10-anepc-aviso21",
     "time": "2026-11-10T15:17:32Z",
     "verified": false,

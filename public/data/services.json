@@ -110,5 +110,61 @@
       "name": "RTP Notícias",
       "url": "https://www.rtp.pt/noticias/pais/pais-vai-ser-posto-a-prova-governo-declara-situacao-de-alerta-para-quarta-feira_e1778024"
     }
+  },
+  {
+    "id": "s-dn-fluvial-porto",
+    "type": "estrada",
+    "name": {
+      "pt": "Travessias fluviais Porto–Vila Nova de Gaia suspensas todo o dia 11 de novembro",
+      "en": "Porto–Vila Nova de Gaia river crossings suspended all day on 11 November"
+    },
+    "status": "suprimida",
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Diário de Notícias",
+      "url": "https://www.dn.pt/sociedade/proteo-civil-alerta-para-chuva-forte-e-rajadas-at-120-kmh-governo-pede-que-se-evitem-sadas-de-casa"
+    }
+  },
+  {
+    "id": "s-dn-tmar",
+    "type": "estrada",
+    "name": {
+      "pt": "Terras de Trás-os-Montes: transporte público suspenso (00:00–23:59 de 11 de novembro)",
+      "en": "Terras de Trás-os-Montes: public transport suspended (00:00–23:59 on 11 November)"
+    },
+    "status": "suprimida",
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Diário de Notícias",
+      "url": "https://www.dn.pt/sociedade/proteo-civil-alerta-para-chuva-forte-e-rajadas-at-120-kmh-governo-pede-que-se-evitem-sadas-de-casa"
+    }
+  },
+  {
+    "id": "s-dn-cp",
+    "type": "comboio",
+    "name": {
+      "pt": "CP: possíveis constrangimentos, sem cancelamentos anunciados; reembolso ou troca gratuita",
+      "en": "CP: possible disruption, no cancellations announced; free refund or exchange"
+    },
+    "status": "condicionada",
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Diário de Notícias",
+      "url": "https://www.dn.pt/sociedade/proteo-civil-alerta-para-chuva-forte-e-rajadas-at-120-kmh-governo-pede-que-se-evitem-sadas-de-casa"
+    }
+  },
+  {
+    "id": "s-dn-aeroportos",
+    "type": "aeroporto",
+    "name": {
+      "pt": "Aeroportos de Lisboa, Faro e Madeira: possíveis cancelamentos (ANA); TAP permite remarcar voos de 11 a 17 de novembro sem penalização",
+      "en": "Lisbon, Faro and Madeira airports: possible cancellations (ANA); TAP allows rebooking flights from 11 to 17 November free of charge"
+    },
+    "status": "condicionada",
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Diário de Notícias",
+      "url": "https://www.dn.pt/sociedade/proteo-civil-alerta-para-chuva-forte-e-rajadas-at-120-kmh-governo-pede-que-se-evitem-sadas-de-casa"
+    }
   }
 ]
