@@ -279,16 +279,6 @@ function forecastSection() {
   return `<section aria-labelledby="h-prev"><div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:14px"><h2 id="h-prev" style="font-size:26px">${L('Próximos 3 dias', 'Next 3 days')}${loc ? ` · ${esc(loc.name)}` : ''}</h2>${sourceBadge(IPMA_SOURCE, { lang: state.lang })}</div>${body}</section>`;
 }
 
-function warningsSection() {
-  const [from, to] = windowRange();
-  const rows = data.warnings.filter((w) => w.start <= to && w.end >= from).sort((a, b) => rank(b.level) - rank(a.level) || a.start - b.start);
-  const nm = (a) => DISTRICT_BY_AREA[a]?.name || AREA_NAMES[a] || a;
-  const line = (w) => `<div class="li"><span class="k">${esc(nm(w.area))}</span><span class="n"><strong>${esc(typeName(w.type))}</strong><span class="muted" style="display:block;font-size:14px">${esc(formatDayTime(w.start, state.lang))} → ${esc(formatDayTime(w.end, state.lang))}</span></span>${lvPill(w.level)}</div>`;
-  const head = rows.slice(0, 8).map(line).join(''); const rest = rows.slice(8);
-  const body = rows.length ? `<div class="card list" style="padding:8px 20px">${head}${rest.length ? `<details style="border-top:1px solid var(--rule)"><summary style="cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:600;color:var(--gov)">${L('Mostrar mais', 'Show more')} (${rest.length})</summary>${rest.map(line).join('')}</details>` : ''}</div>` : `<div class="empty">${data.warnErr && !data.warnFetchedAt ? L('Avisos indisponíveis de momento.', 'Warnings unavailable right now.') : L('Sem avisos em vigor neste momento.', 'No warnings in force right now.')}</div>`;
-  return `<section aria-labelledby="h-avisos"><div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:14px"><h2 id="h-avisos" style="font-size:26px">${L('Avisos meteorológicos', 'Weather warnings')} · ${esc(winLabel())}</h2>${sourceBadge(IPMA_SOURCE, { lang: state.lang })}</div>${body}</section>`;
-}
-
 function emptyList(pt, en) { return `<div class="empty">${L(pt, en)}</div>`; }
 
 function servicesSection() {
@@ -339,7 +329,7 @@ function recsPage() {
 function pageHtml() {
   const imp = impact();
   const main = state.page === 'recs' ? recsPage()
-    : [statusSection(imp), mapSection(imp), zoneSection(), recsLink(), warningsSection(), forecastSection(), servicesSection(), sheltersSection(), mythsSection(), feedSection(), howSection()].join('');
+    : [statusSection(imp), mapSection(imp), zoneSection(), recsLink(), servicesSection(), feedSection(), forecastSection(), sheltersSection(), mythsSection(), howSection()].join('');
   return `<a class="skip" href="#main">${L('Saltar para o conteúdo', 'Skip to content')}</a>${emergencyBar()}${topbar()}<main id="main" class="sheet">${banners()}${main}</main>${footer()}`;
 }
 
