@@ -149,6 +149,7 @@ textarea { resize: vertical; }
 .mappin .halo { transform-box: fill-box; transform-origin: center; animation: pinpulse 2.6s ease-out infinite; }
 @keyframes pinpulse { 0% { transform: scale(.7); opacity: .9; } 100% { transform: scale(1.7); opacity: 0; } }
 .mappin:hover circle:not(.halo):not(.ring) { filter: brightness(1.15); }
+.pinsw-n { display: inline-grid; place-items: center; font: 700 9px var(--mono); color: #06222c; }
 .pinsw { display: inline-block; width: 16px; height: 16px; border-radius: 50%; background: #45e0ff; border: 2px solid #fff; flex: none; box-shadow: 0 0 0 3px rgba(69, 224, 255, .3); }
 .mappin:focus-visible { outline: none; }
 .mappin:focus-visible .ring { stroke: var(--focus); stroke-width: 3; }
