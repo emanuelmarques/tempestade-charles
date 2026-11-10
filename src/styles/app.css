@@ -100,7 +100,7 @@ textarea { resize: vertical; }
 .hd { position: absolute; left: 16px; right: 16px; top: 14px; z-index: 7; display: flex; gap: 10px; align-items: stretch; }
 .hd .sp { flex: 1; }
 .hd .brand .short { display: none; }
-@media (max-width: 480px) { .hd .brand .full { display: none; } .hd .brand .short { display: inline; } }
+@media (max-width: 480px) { .hd .brand .full { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } .hd .brand .short { display: none; } .hd .brand { flex: none; } .hd .countdown { margin-left: auto; } }
 .hd .brand { padding: 8px 16px; border-radius: 16px; gap: 12px; }
 .hd .brand h1 { font-size: 20px; }
 .hd .brand .sub { display: block; font-size: 11px; font-family: var(--mono); letter-spacing: .06em; white-space: nowrap; }
@@ -121,6 +121,15 @@ textarea { resize: vertical; }
 .hd-nav a[aria-current="page"], .panel-nav a[aria-current="page"] { background: rgba(69, 224, 255, .15); color: var(--cy); }
 .sos { display: none; width: 60px; border-radius: 16px; background: #e5242f; color: #fff; font: 700 20px var(--f); place-items: center; text-decoration: none; box-shadow: 0 0 24px #e5242f66; }
 .panel-nav { display: none; }
+.menubtn, .menu { display: none; }
+.menubtn { width: 48px; border-radius: 16px; place-items: center; cursor: pointer; color: var(--ink); padding: 0; }
+.menubtn span, .menubtn span:before, .menubtn span:after { display: block; width: 20px; height: 2px; background: var(--ink); border-radius: 2px; position: relative; content: ""; }
+.menubtn span:before { position: absolute; top: -7px; left: 0; } .menubtn span:after { position: absolute; top: 7px; left: 0; }
+.menu-links { display: flex; flex-direction: column; gap: 4px; }
+.menu-links a { min-height: 48px; display: flex; align-items: center; padding: 0 14px; border-radius: 12px; color: var(--ink); text-decoration: none; font-weight: 600; font-size: 16px; background: rgba(255, 255, 255, .05); }
+.menu-links a[aria-current="page"] { background: rgba(69, 224, 255, .15); color: var(--cy); }
+.menu-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 8px; }
+.menu-tel { color: var(--ink); text-decoration: none; font: 400 12px var(--mono); min-height: 44px; display: inline-flex; align-items: center; gap: 8px; } .menu-tel b { color: #ff6b78; }
 .mapctl { position: absolute; left: 20px; top: 78px; z-index: 5; display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; max-width: calc(100% - 460px); }
 .mapctl .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .mapctl .seg, .mapctl .chip { min-height: 38px; font-size: 13px; background: var(--glass); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
@@ -137,6 +146,10 @@ textarea { resize: vertical; }
 .dist:hover path { filter: brightness(1.3); }
 .labels text { font: 600 11px var(--f); transition: fill .6s ease, stroke .6s ease; }
 .mappin { cursor: pointer; }
+.mappin .halo { transform-box: fill-box; transform-origin: center; animation: pinpulse 2.6s ease-out infinite; }
+@keyframes pinpulse { 0% { transform: scale(.7); opacity: .9; } 100% { transform: scale(1.7); opacity: 0; } }
+.mappin:hover circle:not(.halo):not(.ring) { filter: brightness(1.15); }
+.pinsw { display: inline-block; width: 16px; height: 16px; border-radius: 50%; background: #45e0ff; border: 2px solid #fff; flex: none; box-shadow: 0 0 0 3px rgba(69, 224, 255, .3); }
 .mappin:focus-visible { outline: none; }
 .mappin:focus-visible .ring { stroke: var(--focus); stroke-width: 3; }
 .dist:focus-visible { outline: none; }
@@ -228,6 +241,9 @@ textarea { resize: vertical; }
   .hd .brand { padding: 6px 10px; flex: 1 1 0; min-width: 0; gap: 8px; } .hd .brand > span { min-width: 0; } .hd .brand h1 { font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .hd .brand svg { width: 28px; height: 28px; flex: none; }
   .hd .countdown { padding: 6px 10px; } .hd .countdown .t { font-size: 16px; } .hd .countdown .l { display: none; }
   .hd .langtog { display: none; }
+  .menubtn { display: grid; }
+  .hero.menu-open .menu { display: block; position: absolute; top: 66px; left: 10px; right: 10px; z-index: 12; padding: 12px; border-radius: 18px; box-shadow: 0 20px 50px rgba(0, 0, 0, .55); }
+  .pm .panel-nav, .pm { display: none !important; }
   .when { display: none; }
   .dock { left: 10px; right: 10px; top: 70px; bottom: auto; padding: 8px 12px 4px; gap: 10px; }
   .play { width: 40px; height: 40px; } .tm { min-width: 62px; } .tm b { font-size: 18px; } .sw2 { height: 54px; }

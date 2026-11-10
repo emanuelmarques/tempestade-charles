@@ -208,32 +208,45 @@ function statusSection(imp) {
 }
 
 /* ---------- mapa ---------- */
-function pinShape(cat, s, selected) {
-  const r = 8 * s;
-  const ring = selected ? `<circle class="ring" r="${15 * s}" fill="none" stroke="#fff" stroke-width="${2.5 * s}"/>` : '<circle class="ring" r="0" fill="none"/>';
-  if (cat === 'governamental') return `${ring}<rect x="${-r}" y="${-r}" width="${2 * r}" height="${2 * r}" rx="${2 * s}" fill="#8ab8ff" stroke="#0b1a2b" stroke-width="${2 * s}"/>`;
-  if (cat === 'comunicacao_social') return `${ring}<circle r="${r}" fill="#3dd6b8" stroke="#0b1a2b" stroke-width="${2 * s}"/>`;
-  return `${ring}<rect x="${-r * .85}" y="${-r * .85}" width="${r * 1.7}" height="${r * 1.7}" transform="rotate(45)" fill="#3a2a0c" stroke="#ffb224" stroke-width="${2 * s}" stroke-dasharray="${3 * s} ${2 * s}"/>`;
+/** Ponto de ocorrência: igual para todas as fontes; o tamanho acompanha a gravidade (1 a 3). */
+function pinShape(sev, s, selected, approx) {
+  const r = (7 + 1.5 * (sev || 1)) * s;
+  const ring = selected ? `<circle class="ring" r="${r + 6 * s}" fill="none" stroke="#fff" stroke-width="${3 * s}"/>` : '<circle class="ring" r="0" fill="none"/>';
+  return `${ring}<circle class="halo" r="${r * 1.5}" fill="rgba(69,224,255,.28)"/><circle r="${r}" fill="#45e0ff" stroke="#fff" stroke-width="${2.4 * s}"${approx ? ` stroke-dasharray="${4 * s} ${2.5 * s}"` : ''}/><path d="M0 ${-r * .5}V${r * .1}" stroke="#06222c" stroke-width="${2.4 * s}" stroke-linecap="round"/><circle cy="${r * .48}" r="${1.35 * s}" fill="#06222c"/>`;
 }
 
 function mapPins() {
   const hasCoords = (i) => i.lat != null && i.lon != null;
-  // Ocorrências sem coordenadas (ex.: relatos de redes sociais) aparecem junto ao nome do distrito, lado a lado.
-  const inc = data.curated.incidents.filter((i) => state.filt[i.source.category] && (hasCoords(i) || DISTRICT_BY_ID[i.district]));
-  const approx = {};
-  for (const i of inc) if (!hasCoords(i)) (approx[i.district] ||= []).push(i.id);
+  // Ocorrências sem coordenadas aparecem junto ao nome do distrito, lado a lado.
+  const inc = data.curated.incidents.filter((i) => hasCoords(i) || DISTRICT_BY_ID[i.district]);
+  const approxGrp = {};
+  for (const i of inc) if (!hasCoords(i)) (approxGrp[i.district] ||= []).push(i.id);
   const box = document.querySelector('#mapbox svg');
   const ppu = box ? Math.min(box.clientWidth / state.view.w, box.clientHeight / state.view.h) || 1 : 1;
   const s = 1 / ppu;
-  return inc.map((i) => {
-    let x; let y; const approxHere = !hasCoords(i);
-    if (approxHere) {
-      const d = DISTRICT_BY_ID[i.district]; const grp = approx[i.district]; const k = grp.indexOf(i.id);
-      x = d.lx + (k - (grp.length - 1) / 2) * 22 * s; y = d.ly + 20 * s;
-    } else [x, y] = toMap(i.lat, i.lon);
-    const cat = CATEGORIES[i.source.category];
-    const label = `${cat.label[state.lang]}${i.verified === false && i.source.category === 'redes_sociais' ? `, ${L('não verificado', 'unverified')}` : ''}${approxHere ? `, ${L('localização aproximada', 'approximate location')}` : ''}: ${txt(i.title)}`;
-    return `<g class="mappin" transform="translate(${x.toFixed(1)},${y.toFixed(1)})" tabindex="0" role="button" data-a="pin" data-id="${esc(i.id)}" aria-label="${esc(label)}"><circle r="${22 * s}" fill="transparent"/>${pinShape(i.source.category, s, state.incidentId === i.id)}</g>`;
+  const pts = inc.map((i) => {
+    const approx = !hasCoords(i);
+    let x; let y;
+    if (approx) { const d = DISTRICT_BY_ID[i.district]; const grp = approxGrp[i.district]; x = d.lx + (grp.indexOf(i.id) - (grp.length - 1) / 2) * 26 * s; y = d.ly + 22 * s; }
+    else [x, y] = toMap(i.lat, i.lon);
+    return { i, approx, x, y, x0: x, y0: y };
+  });
+  // Afasta pontos que se sobreporiam (mínimo ~28 px no ecrã), sem os deslocar mais de ~40 px do sítio.
+  const minD = 24 * s; const maxMove = 36 * s;
+  for (let it = 0; it < 30; it++) {
+    for (let m = 0; m < pts.length; m++) for (let n = m + 1; n < pts.length; n++) {
+      let dx = pts[n].x - pts[m].x; let dy = pts[n].y - pts[m].y; let d = Math.hypot(dx, dy);
+      if (d >= minD) continue;
+      if (d < 1e-6) { dx = (n % 2 ? 1 : -1); dy = 0.5; d = Math.hypot(dx, dy); }
+      const push = (minD - d) / 2; const ux = dx / d; const uy = dy / d;
+      pts[m].x -= ux * push; pts[m].y -= uy * push; pts[n].x += ux * push; pts[n].y += uy * push;
+    }
+    for (const p of pts) { const ox = p.x - p.x0; const oy = p.y - p.y0; const od = Math.hypot(ox, oy); if (od > maxMove) { p.x = p.x0 + (ox / od) * maxMove; p.y = p.y0 + (oy / od) * maxMove; } }
+  }
+  pts.sort((p, q) => (p.i.severity || 1) - (q.i.severity || 1) || (p.i.id === state.incidentId) - (q.i.id === state.incidentId));
+  return pts.map(({ i, approx, x, y }) => {
+    const label = `${L('Ocorrência', 'Incident')}${i.source.category === 'redes_sociais' && i.verified === false ? `, ${L('não verificada', 'unverified')}` : ''}${approx ? `, ${L('localização aproximada', 'approximate location')}` : ''}: ${txt(i.title)}`;
+    return `<g class="mappin" transform="translate(${x.toFixed(1)},${y.toFixed(1)})" tabindex="0" role="button" data-a="pin" data-id="${esc(i.id)}" aria-label="${esc(label)}"><circle r="${24 * s}" fill="transparent"/>${pinShape(i.severity, s, state.incidentId === i.id, approx)}</g>`;
   }).join('');
 }
 
@@ -255,10 +268,9 @@ function mapSvg(imp) {
 
 function legend(extra = '') {
   const sw = (c, t) => `<span><span class="sw" style="background:${c}"></span>${t}</span>`;
-  const sh = (c, t) => `<span><span class="shape ${c}"></span>${t}</span>`;
   return `<div class="card legend${extra}"><h4>${L('Impacto no distrito', 'District impact')}</h4><div>
     ${sw('#E5303B', L('Muito alto', 'Very high'))}${sw('#EE7B1E', L('Alto', 'High'))}${sw('#F4C20D', L('Moderado', 'Moderate'))}${sw('#26384d', L('Sem impacto relevante', 'No relevant impact'))}</div>
-    <h4>${L('Ocorrências', 'Incidents')}</h4><div>${sh('sh-g', L('Governamental, oficial', 'Government, official'))}${sh('sh-c', L('Comunicação social', 'News media'))}${sh('sh-r', L('Redes sociais, não verificado', 'Social media, unverified'))}</div></div>`;
+    <h4>${L('Ocorrências', 'Incidents')}</h4><div><span><span class="pinsw" aria-hidden="true"></span>${L('Ocorrência registada (maior = mais grave)', 'Recorded incident (bigger = more severe)')}</span></div></div>`;
 }
 
 function regionPanel(region) {
@@ -385,6 +397,7 @@ function stageHeader() {
     ${countdownBox()}
     <div class="glass tel"><a href="tel:112"><span class="muted">${L('Emergência', 'Emergency')}</span> <b>112</b></a><a href="tel:808242424"><span class="muted">SNS 24</span> <b>808 24 24 24</b></a></div>
     ${langToggle()}
+    <button class="glass menubtn" data-a="menu" aria-expanded="false" aria-controls="menu" aria-label="${L('Menu', 'Menu')}"><span aria-hidden="true"></span></button>
     <a class="sos" href="tel:112" aria-label="${L('Emergência 112', 'Emergency 112')}">112</a></header>`;
 }
 function whenParts() {
@@ -501,6 +514,7 @@ function heroStage(imp) {
   return `<section class="hero" id="stage" data-s="${state.sheet}" aria-labelledby="h-mapa"><h2 id="h-mapa" class="sr">${L('Mapa de impacto por distrito', 'District impact map')}</h2>
   ${stageHeader()}
   <div class="mapctl"><div style="display:flex" role="group" aria-label="${L('Região', 'Region')}">${seg('region', [['continente', 'Continente'], ['acores', 'Açores'], ['madeira', 'Madeira']], state.region)}</div></div>
+  <nav id="menu" class="menu glass" aria-label="${L('Navegação principal', 'Main navigation')}">${navBar('menu-links')}<div class="menu-row">${langToggle()}<a class="menu-tel" href="tel:808242424">SNS 24 <b>808 24 24 24</b></a></div></nav>
   ${whenReadout()}
   ${reg ? `<div class="regionwrap" id="regionwrap">${regionPanel(state.region)}</div>` : `<div class="mapbox" id="mapbox"><div class="mapview">${mapSvg(imp)}<div class="zoom"><button class="ctl" data-a="zoom" data-v="in" aria-label="${L('Aproximar', 'Zoom in')}">+</button><button class="ctl" data-a="zoom" data-v="out" aria-label="${L('Afastar', 'Zoom out')}">−</button></div></div>${legend()}</div>`}
   ${timelineDock()}
@@ -799,6 +813,7 @@ function zoomBy(f, cx = 0.5, cy = 0.5) {
 }
 
 function onClick(e) {
+  if (!e.target.closest('.menu, .menubtn')) { document.getElementById('stage')?.classList.remove('menu-open'); document.querySelector('.menubtn')?.setAttribute('aria-expanded', 'false'); }
   const el = e.target.closest('[data-a]');
   if (!el) return;
   const { a, v, id } = el.dataset;
@@ -820,6 +835,7 @@ function onClick(e) {
   else if (a === 'incgo') { state.inc = v; state.pg.inc = 1; render(); document.getElementById('h-inc')?.scrollIntoView({ block: 'start' }); return; }
   else if (a === 'sit') { state.sit = v; }
   else if (a === 'ptab') { state.ptab = v; state.incidentId = null; if (state.sheet === 0) state.sheet = 1; }
+  else if (a === 'menu') { const h = document.getElementById('stage'); const open = !h.classList.contains('menu-open'); h.classList.toggle('menu-open', open); el.setAttribute('aria-expanded', String(open)); return; }
   else if (a === 'sheet') { if (sheetDrag.recent) return; state.sheet = [1, 2, 0, 0][state.sheet] ?? 0; document.getElementById('stage')?.setAttribute('data-s', String(state.sheet)); return; }
   else if (a === 'play') { if (state.playing) stopPlay(); else startPlay(); return; }
   else if (a === 'live') { setAtFromValue(0); }
