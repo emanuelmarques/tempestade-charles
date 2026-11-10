@@ -11,10 +11,23 @@ export function isUnverified(source, verified) {
   return source?.category === 'redes_sociais' && verified === false;
 }
 
-/** Selo de fonte: categoria (forma + texto), nome e link para a fonte original. */
-export function sourceBadge(source, { verified, lang = 'pt' } = {}) {
+/**
+ * Etiqueta curta da fonte, sem símbolos: comunicação social mostra só o nome do meio;
+ * governamental e redes sociais mostram a categoria e o nome. A categoria fica também em texto para leitores de ecrã.
+ */
+export function sourceChip(source, lang = 'pt') {
   const cat = CATEGORIES[source?.category];
   if (!cat) return '';
+  const catName = cat.label[lang];
+  const media = source.category === 'comunicacao_social';
+  const sr = media ? `<span class="sr">${escapeHtml(catName)}: </span>` : '';
+  return `<span class="badge ${cat.cls}">${sr}${escapeHtml(media ? source.name : `${catName} · ${source.name}`)}</span>`;
+}
+
+/** Selo de fonte: etiqueta curta, link para a fonte original e, nas redes sociais por confirmar, "Não verificado". */
+export function sourceBadge(source, { verified, lang = 'pt' } = {}) {
+  const chip = sourceChip(source, lang);
+  if (!chip) return '';
   const href = safeUrl(source.url);
   const link = href
     ? ` <a href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${lang === 'en' ? 'Source' : 'Fonte'}<span class="sr"> (${lang === 'en' ? 'opens in a new tab' : 'abre num novo separador'})</span> <span aria-hidden="true">↗</span></a>`
@@ -22,5 +35,5 @@ export function sourceBadge(source, { verified, lang = 'pt' } = {}) {
   const warn = isUnverified(source, verified)
     ? ` <span class="st st-org">${lang === 'en' ? 'Unverified' : 'Não verificado'}</span>`
     : '';
-  return `<span class="src"><span class="badge ${cat.cls}"><span class="shape ${cat.shape}"></span>${escapeHtml(cat.label[lang])} · ${escapeHtml(source.name)}</span>${link}${warn}</span>`;
+  return `<span class="src">${chip}${link}${warn}</span>`;
 }

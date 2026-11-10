@@ -1,5 +1,5 @@
 import { escapeHtml as esc, safeUrl } from './lib/safe.js';
-import { CATEGORIES, sourceBadge } from './lib/sources.js';
+import { CATEGORIES, sourceBadge, sourceChip } from './lib/sources.js';
 import { computeImpact, LEVELS, BASE, WEIGHTS } from './lib/impact.js';
 import { countdown, parseLisbon, freshness, formatTime, formatDayTime, formatDay, pad2, STORM_START_LOCAL } from './lib/time.js';
 import { toMap } from './lib/projection.js';
@@ -243,7 +243,7 @@ function districtPanel(imp) {
     ${upcomingBlock([d.area])}
     <div style="display:flex;flex-direction:column;gap:8px"><h4 class="h" style="font-size:16px;margin:0">${L('Ocorrências recentes', 'Recent incidents')} <span class="muted" style="font-weight:500;font-size:14px">· ${shown}</span></h4>
       ${r.count === 0 ? `<p class="muted" style="margin:0;font-size:14px">${L('Sem ocorrências registadas neste distrito.', 'No incidents recorded in this district.')}</p>` : ''}
-      ${list.map((i) => { const c = CATEGORIES[i.source.category]; return `<button class="item" data-a="incident" data-id="${esc(i.id)}"><span class="muted" style="display:flex;justify-content:space-between;gap:8px;font-size:13px"><span>${esc(i.place || '')}</span><span class="num">${esc(formatTime(new Date(i.time), state.lang))}</span></span><span style="font-weight:600;font-size:15px">${esc(txt(i.title))}</span><span><span class="badge ${c.cls}"><span class="shape ${c.shape}"></span>${esc(c.label[state.lang])}</span>${i.source.category === 'redes_sociais' && !i.verified ? ` <span class="st st-org">${L('Não verificado', 'Unverified')}</span>` : ''}</span></button>`; }).join('')}</div></div>`;
+      ${list.map((i) => { const c = CATEGORIES[i.source.category]; return `<button class="item" data-a="incident" data-id="${esc(i.id)}"><span class="muted" style="display:flex;justify-content:space-between;gap:8px;font-size:13px"><span>${esc(i.place || '')}</span><span class="num">${esc(formatTime(new Date(i.time), state.lang))}</span></span><span style="font-weight:600;font-size:15px">${esc(txt(i.title))}</span><span>${sourceChip(i.source, state.lang)}${i.source.category === 'redes_sociais' && !i.verified ? ` <span class="st st-org">${L('Não verificado', 'Unverified')}</span>` : ''}</span></button>`; }).join('')}</div></div>`;
 }
 
 function nationalPanel(imp) {
@@ -404,7 +404,7 @@ function mythsSection() {
 function feedSection() {
   const cats = [['todas', L('Todas', 'All'), ''], ['governamental', CATEGORIES.governamental.label[state.lang], 'sh-g'], ['comunicacao_social', CATEGORIES.comunicacao_social.label[state.lang], 'sh-c'], ['redes_sociais', CATEGORIES.redes_sociais.label[state.lang], 'sh-r']];
   const items = data.curated.feed.filter((f) => state.cat === 'todas' || f.source.category === state.cat).sort((a, b) => Date.parse(b.time) - Date.parse(a.time));
-  return `<section aria-labelledby="h-feed"><div style="display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;margin-bottom:14px"><h2 id="h-feed" style="font-size:26px">${L('Últimas informações', 'Latest updates')}</h2><div style="display:flex;flex-wrap:wrap;gap:8px" role="group" aria-label="${L('Filtrar por categoria de fonte', 'Filter by source category')}">${cats.map(([k, l, s]) => `<button class="chip ${state.cat === k ? 'on' : ''}" aria-pressed="${state.cat === k}" data-a="cat" data-v="${k}">${s ? `<span class="shape ${s}"></span>` : ''}${esc(l)}</button>`).join('')}</div></div>
+  return `<section aria-labelledby="h-feed"><div style="display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;margin-bottom:14px"><h2 id="h-feed" style="font-size:26px">${L('Últimas informações', 'Latest updates')}</h2><div style="display:flex;flex-wrap:wrap;gap:8px" role="group" aria-label="${L('Filtrar por categoria de fonte', 'Filter by source category')}">${cats.map(([k, l, s]) => `<button class="chip ${state.cat === k ? 'on' : ''}" aria-pressed="${state.cat === k}" data-a="cat" data-v="${k}">${esc(l)}</button>`).join('')}</div></div>
   ${items.length ? `<div class="card list" style="padding:8px 20px">${items.map((f) => `<article class="li"><time class="num" datetime="${esc(f.time)}">${esc(formatTime(new Date(f.time), state.lang))}</time><span class="n" style="font-weight:600">${esc(txt(f.title))}</span>${sourceBadge(f.source, { verified: f.verified, lang: state.lang })}</article>`).join('')}</div>` : emptyList('Sem informações nesta categoria ainda.', 'No updates in this category yet.')}</section>`;
 }
 function howSection() {

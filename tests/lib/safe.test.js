@@ -20,6 +20,15 @@ describe('sourceBadge', () => {
     expect(h).toContain('IPMA');
     expect(h).toContain('href="https://www.ipma.pt/"');
   });
+  it('comunicação social mostra só o nome do meio, sem símbolo', () => {
+    const media = { category: 'comunicacao_social', name: 'Correio da Manhã', url: 'https://www.cmjornal.pt/x' };
+    const h = sourceBadge(media, { lang: 'pt' });
+    expect(h).toContain('>Correio da Manhã<');
+    expect(h).not.toContain('Comunicação social ·');
+    expect(h).not.toContain('class="shape');
+    expect(h).toContain('<span class="sr">Comunicação social: </span>');
+    expect(sourceBadge(gov, { lang: 'pt' })).toContain('Governamental · IPMA');
+  });
   it('marca redes sociais não verificadas', () => {
     const soc = { category: 'redes_sociais', name: 'X', url: 'https://x.com/a' };
     expect(sourceBadge(soc, { verified: false })).toContain('Não verificado');
