@@ -68,5 +68,47 @@
       "name": "Euronews",
       "url": "https://pt.euronews.com/2026/11/10/depressao-charles-traz-chuva-e-vento-forte-governo-pede-prudencia-maxima-so-saia-se-for-me"
     }
+  },
+  {
+    "id": "s-rtp-aeroporto-funchal",
+    "type": "aeroporto",
+    "name": {
+      "pt": "Aeroporto do Funchal: pelo menos 20 voos cancelados desde domingo; TAP permite alterar bilhetes sem penalização até 11 de novembro",
+      "en": "Funchal Airport: at least 20 flights cancelled since Sunday; TAP allows free ticket changes for travel up to 11 November"
+    },
+    "status": "condicionada",
+    "source": {
+      "category": "comunicacao_social",
+      "name": "RTP Notícias",
+      "url": "https://www.rtp.pt/noticias/pais/pais-vai-ser-posto-a-prova-governo-declara-situacao-de-alerta-para-quarta-feira_e1778024"
+    }
+  },
+  {
+    "id": "s-rtp-fertagus",
+    "type": "comboio",
+    "name": {
+      "pt": "Fertagus: circulação garantida conforme a evolução da situação; algumas bilheteiras podem não funcionar",
+      "en": "Fertagus: service guaranteed depending on how the situation evolves; some ticket offices may be closed"
+    },
+    "status": "condicionada",
+    "source": {
+      "category": "comunicacao_social",
+      "name": "RTP Notícias",
+      "url": "https://www.rtp.pt/noticias/pais/pais-vai-ser-posto-a-prova-governo-declara-situacao-de-alerta-para-quarta-feira_e1778024"
+    }
+  },
+  {
+    "id": "s-rtp-pico-areeiro",
+    "type": "estrada",
+    "name": {
+      "pt": "Madeira: estrada do Pico do Areeiro fechada na quarta-feira",
+      "en": "Madeira: Pico do Areeiro road closed on Wednesday"
+    },
+    "status": "cortada",
+    "source": {
+      "category": "comunicacao_social",
+      "name": "RTP Notícias",
+      "url": "https://www.rtp.pt/noticias/pais/pais-vai-ser-posto-a-prova-governo-declara-situacao-de-alerta-para-quarta-feira_e1778024"
+    }
   }
 ]

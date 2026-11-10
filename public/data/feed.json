@@ -1,5 +1,44 @@
 [
   {
+    "id": "f-2026-11-10-rtp-medidas",
+    "time": "2026-11-10T17:00:00Z",
+    "title": {
+      "pt": "Museus e monumentos nacionais encerrados na quarta-feira; tribunais decidem caso a caso; pais que ficam com os filhos têm falta justificada sem perda de rendimento",
+      "en": "National museums and monuments closed on Wednesday; courts decide case by case; parents staying home with children get a justified absence without loss of income"
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "RTP Notícias",
+      "url": "https://www.rtp.pt/noticias/pais/pais-vai-ser-posto-a-prova-governo-declara-situacao-de-alerta-para-quarta-feira_e1778024"
+    }
+  },
+  {
+    "id": "f-2026-11-10-rtp-madeira",
+    "time": "2026-11-10T17:00:00Z",
+    "title": {
+      "pt": "Madeira: aviso vermelho na costa sul e zonas montanhosas desde as 21h00 de terça-feira; percursos pedestres e estrada do Pico do Areeiro fechados; 210 ocorrências na passagem da depressão Bruna (Funchal 94)",
+      "en": "Madeira: red warning for the south coast and mountains from 21:00 Tuesday; hiking trails and Pico do Areeiro road closed; 210 incidents during depression Bruna (Funchal 94)"
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "RTP Notícias",
+      "url": "https://www.rtp.pt/noticias/pais/pais-vai-ser-posto-a-prova-governo-declara-situacao-de-alerta-para-quarta-feira_e1778024"
+    }
+  },
+  {
+    "id": "f-2026-11-10-rtp-leiria",
+    "time": "2026-11-10T17:00:00Z",
+    "title": {
+      "pt": "Leiria: atendimento presencial suspenso e mercados (incluindo o Mercado do Falcão) encerrados na quarta e quinta-feira",
+      "en": "Leiria: in-person services suspended and markets (including Mercado do Falcão) closed Wednesday and Thursday"
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "RTP Notícias",
+      "url": "https://www.rtp.pt/noticias/pais/pais-vai-ser-posto-a-prova-governo-declara-situacao-de-alerta-para-quarta-feira_e1778024"
+    }
+  },
+  {
     "id": "f-2026-11-10-vost",
     "time": "2026-11-10T09:28:22Z",
     "title": "#FMA_Charles Amanhã, quarta-feira, 11 de novembro de 2026 Portugal Continental - Fica em casa e evita deslocações desnecessárias Existe o risco de inundações urbanas, queda de árvores, ramos e estruturas móveis, bem como interrupções localizadas de eletricidade e comunicações.",
