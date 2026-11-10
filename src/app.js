@@ -140,12 +140,13 @@ async function loadWx() {
 
 function wxWidget() {
   const w = data.wx;
-  const title = `${L('Próximas 4 horas', 'Next 4 hours')}${w ? ` · ${w.byUser ? L('na sua localização', 'at your location') : esc(w.name || '')}` : ''}`;
+  const where = w ? (w.byUser ? L('na sua localização', 'at your location') : esc(w.name || '')) : '';
+  const label = `${L('Tempo nas próximas 4 horas', 'Weather in the next 4 hours')}${where ? ' · ' + where : ''}`;
   let body;
-  if (!w) body = `<span class="muted" style="font-size:13px">${data.wxErr ? L('Previsão horária indisponível.', 'Hourly forecast unavailable.') : L('A carregar…', 'Loading…')}</span>`;
-  else if (!w.hours.length) body = `<span class="muted" style="font-size:13px">${L('Sem dados para as próximas horas.', 'No data for the next hours.')}</span>`;
-  else body = `<ol class="wxh">${w.hours.map((h) => { const i = weatherInfo(h.code, state.lang); return `<li title="${esc(i.label)}"><span class="num muted">${esc(formatTime(h.time, state.lang))}</span><span class="wxe" aria-hidden="true">${i.emoji}</span><span class="sr">${esc(i.label)}, </span><strong class="num">${Math.round(h.temp)}°</strong><span class="num wxs">💧${Math.round(h.pop)}%</span><span class="num wxs">💨${Math.round(h.gust)}<span class="sr"> km/h</span></span></li>`; }).join('')}</ol>`;
-  return `<div class="wx" role="group" aria-label="${L('Tempo nas próximas 4 horas', 'Weather in the next 4 hours')}"><div class="wxt">${title}</div>${body}<div class="wxf"><span>💨 ${L('rajada máx. km/h', 'max gust km/h')}</span><a href="${OPEN_METEO_SITE}" target="_blank" rel="noopener noreferrer">Open-Meteo ↗</a></div></div>`;
+  if (!w) body = `<span class="muted wxm">${data.wxErr ? L('Tempo indisponível', 'Weather unavailable') : L('A carregar…', 'Loading…')}</span>`;
+  else if (!w.hours.length) body = `<span class="muted wxm">${L('Sem dados', 'No data')}</span>`;
+  else body = `<ol class="wxh">${w.hours.map((h) => { const i = weatherInfo(h.code, state.lang); return `<li title="${esc(i.label)}: ${Math.round(h.temp)}°, ${L('chuva', 'rain')} ${Math.round(h.pop)}%, ${L('rajada', 'gust')} ${Math.round(h.gust)} km/h"><span class="num muted">${esc(formatTime(h.time, state.lang))}</span><span class="wxe" aria-hidden="true">${i.emoji}</span><strong class="num">${Math.round(h.temp)}°</strong><span class="sr">${esc(i.label)}, ${L('chuva', 'rain')} ${Math.round(h.pop)}%, ${L('rajada', 'gust')} ${Math.round(h.gust)} km/h</span></li>`; }).join('')}</ol>`;
+  return `<div class="wx" role="group" aria-label="${label}" title="${label}"><div class="wxt">${L('Próximas 4h', 'Next 4h')}${where ? ` · ${where}` : ''} · <a href="${OPEN_METEO_SITE}" target="_blank" rel="noopener noreferrer">Open-Meteo</a></div>${body}</div>`;
 }
 
 function topbar() {
@@ -158,6 +159,7 @@ function topbar() {
     </a>
     <div class="tools">
       ${countdownBox()}
+      ${wxWidget()}
       <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
         <p style="margin:0;display:inline-flex;align-items:center;gap:8px;font-size:14px"><span style="width:10px;height:10px;border-radius:50%;background:${f.dot};flex:none"></span>${esc(f.text)}</p>
         <div style="display:flex" role="group" aria-label="${L('Idioma', 'Language')}">
@@ -165,7 +167,7 @@ function topbar() {
           <button class="seg ${state.lang === 'en' ? 'on' : ''}" aria-pressed="${state.lang === 'en'}" data-a="lang" data-v="en" lang="en">EN</button>
         </div>
       </div>
-    </div>${wxWidget()}</header>${navBar()}`;
+    </div></header>${navBar()}`;
 }
 
 function banners() {
