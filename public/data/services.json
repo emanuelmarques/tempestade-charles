@@ -1,1 +1,37 @@
-[]
+[
+  {
+    "id": "s-escolas-continente",
+    "type": "escola",
+    "name": { "pt": "Todos os estabelecimentos de ensino (público, privado e social, incluindo pré-escolar) no continente, a 11 de novembro", "en": "All schools (public, private and social, including pre-school) on the mainland, 11 November" },
+    "status": "encerrada",
+    "source": { "category": "comunicacao_social", "name": "Correio da Manhã", "url": "https://www.cmjornal.pt/sociedade/detalhe/chuva-vento-forte-e-agitacao-maritima-mau-tempo-deixa-pais-em-alerta" }
+  },
+  {
+    "id": "s-tuneis-lisboa",
+    "type": "estrada",
+    "name": { "pt": "Túneis de Lisboa fecham a partir das 00:00 de 11 de novembro (segundo o presidente da Câmara)", "en": "Lisbon tunnels close from 00:00 on 11 November (according to the mayor)" },
+    "status": "cortada",
+    "source": { "category": "comunicacao_social", "name": "Correio da Manhã", "url": "https://www.cmjornal.pt/sociedade/detalhe/chuva-vento-forte-e-agitacao-maritima-mau-tempo-deixa-pais-em-alerta" }
+  },
+  {
+    "id": "s-pontes-lisboa",
+    "type": "estrada",
+    "name": { "pt": "Pontes 25 de Abril e Vasco da Gama: velocidade limitada a 60 km/h na terça-feira; encerramento possível se o vento chegar aos 150 km/h", "en": "25 de Abril and Vasco da Gama bridges: speed limited to 60 km/h on Tuesday; closure possible if wind reaches 150 km/h" },
+    "status": "condicionada",
+    "source": { "category": "comunicacao_social", "name": "Euronews", "url": "https://pt.euronews.com/2026/11/10/depressao-charles-traz-chuva-e-vento-forte-governo-pede-prudencia-maxima-so-saia-se-for-me" }
+  },
+  {
+    "id": "s-rede-expressos",
+    "type": "estrada",
+    "name": { "pt": "Autocarros Rede Expressos suspensos em todo o país entre as 10:00 e a meia-noite de 11 de novembro", "en": "Rede Expressos coaches suspended nationwide between 10:00 and midnight on 11 November" },
+    "status": "suprimida",
+    "source": { "category": "comunicacao_social", "name": "Correio da Manhã", "url": "https://www.cmjornal.pt/sociedade/detalhe/chuva-vento-forte-e-agitacao-maritima-mau-tempo-deixa-pais-em-alerta" }
+  },
+  {
+    "id": "s-eletricidade",
+    "type": "eletricidade",
+    "name": { "pt": "Cerca de 2 000 clientes sem eletricidade; a E-Redes ativou o plano operacional de crise", "en": "About 2,000 customers without electricity; E-Redes activated its crisis operating plan" },
+    "status": "sem_servico",
+    "source": { "category": "comunicacao_social", "name": "Euronews", "url": "https://pt.euronews.com/2026/11/10/depressao-charles-traz-chuva-e-vento-forte-governo-pede-prudencia-maxima-so-saia-se-for-me" }
+  }
+]

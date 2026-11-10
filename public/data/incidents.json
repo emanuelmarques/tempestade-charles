@@ -1,1 +1,28 @@
-[]
+[
+  {
+    "id": "i-lisboa-sapadores-130",
+    "district": "lisboa",
+    "place": "Lisboa",
+    "lat": null,
+    "lon": null,
+    "time": "2026-11-10T06:00:00Z",
+    "severity": 1,
+    "verified": true,
+    "title": { "pt": "130 ocorrências entre as 00:00 e as 06:00, sobretudo inundações sem danos significativos", "en": "130 incidents between 00:00 and 06:00, mostly flooding without significant damage" },
+    "description": { "pt": "Registadas pelo Regimento de Sapadores Bombeiros de Lisboa, segundo o artigo citado.", "en": "Logged by the Lisbon Fire Brigade, according to the cited article." },
+    "source": { "category": "comunicacao_social", "name": "Euronews", "url": "https://pt.euronews.com/2026/11/10/depressao-charles-traz-chuva-e-vento-forte-governo-pede-prudencia-maxima-so-saia-se-for-me" }
+  },
+  {
+    "id": "i-lisboa-segunda-circular",
+    "district": "lisboa",
+    "place": "Lisboa (Segunda Circular, Campo Grande, Prior Velho, Olivais)",
+    "lat": 38.76,
+    "lon": -9.153,
+    "time": "2026-11-10T07:56:00Z",
+    "severity": 2,
+    "verified": true,
+    "title": { "pt": "Segunda Circular cortada cerca de hora e meia na terça-feira; estradas interditadas no Campo Grande, Prior Velho e Olivais", "en": "Segunda Circular closed for about 90 minutes on Tuesday; roads closed at Campo Grande, Prior Velho and Olivais" },
+    "description": { "pt": "O corte da Segunda Circular já foi resolvido, segundo o artigo. O mapa marca o Campo Grande como localização aproximada.", "en": "The Segunda Circular closure has been resolved, according to the article. The map marks Campo Grande as an approximate location." },
+    "source": { "category": "comunicacao_social", "name": "Euronews", "url": "https://pt.euronews.com/2026/11/10/depressao-charles-traz-chuva-e-vento-forte-governo-pede-prudencia-maxima-so-saia-se-for-me" }
+  }
+]
