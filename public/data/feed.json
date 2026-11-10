@@ -1,5 +1,31 @@
 [
   {
+    "id": "f-2026-11-10-healthnews-avisos",
+    "time": "2026-11-10T19:50:00Z",
+    "title": {
+      "pt": "A depressão Bruna fica quase estacionária a noroeste da Península até sexta-feira (13) e pode acumular cerca de 200 mm de chuva até ao fim da semana, sobretudo no Norte e Centro",
+      "en": "Depression Bruna stays almost stationary north-west of the Peninsula until Friday (13) and may accumulate about 200 mm of rain by the end of the week, mainly in the North and Centre"
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Health News",
+      "url": "https://healthnews.pt/2026/11/10/depressao-charles-seis-distritos-em-aviso-laranja-e-protecao-civil-apela-a-prevencao/"
+    }
+  },
+  {
+    "id": "f-2026-11-10-alvalade",
+    "time": "2026-11-10T20:00:00Z",
+    "title": {
+      "pt": "Junta de Freguesia de Alvalade (Lisboa): a 11 de novembro encerram o atendimento presencial, parques e espaços verdes, além das escolas e serviços públicos não essenciais decretados pelo Governo",
+      "en": "Alvalade parish council (Lisbon): on 11 November in-person service, parks and green spaces close, besides the schools and non-essential public services closed by the Government"
+    },
+    "source": {
+      "category": "governamental",
+      "name": "Junta de Freguesia de Alvalade",
+      "url": "https://jf-alvalade.pt/depressao-charles-encerramento-de-servicos-e-equipamentos-em-alvalade-no-dia-11-de-novembro/"
+    }
+  },
+  {
     "id": "f-2026-11-10-publico-saude",
     "time": "2026-11-10T18:30:00Z",
     "title": {
