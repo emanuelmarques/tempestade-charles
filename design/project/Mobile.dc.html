@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<title>Tempestade Charles — Telemóvel</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+body{margin:0;background:#F5F3EE;color:#15202B;font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.5}
+h1,h2,h3,.h{font-family:'Space Grotesk',Inter,sans-serif;margin:0}
+a{color:#1B4F9C}
+a:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid #1B4F9C;outline-offset:2px}
+.shape{display:inline-block;width:12px;height:12px;flex:none;box-sizing:border-box}
+.sh-g{background:#1B4F9C;border-radius:2px}
+.sh-c{background:#0E6B63;border-radius:50%}
+.sh-r{border:2px dashed #8A5200;background:#FBEBCF;transform:rotate(45deg);width:11px;height:11px}
+.badge{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;padding:3px 10px;border-radius:999px;border:1px solid;line-height:1.4}
+.cat-g{color:#1B4F9C;border-color:#1B4F9C;background:#E9F0FA}
+.cat-c{color:#0E6B63;border-color:#0E6B63;background:#E4F3F1}
+.cat-r{color:#8A5200;border-color:#8A5200;background:#FBEBCF}
+.lv{display:inline-flex;align-items:center;padding:2px 10px;border-radius:6px;font-weight:700;font-size:13px;line-height:1.5}
+.lv-amarelo{background:#F4C20D;color:#15202B}
+.lv-laranja{background:#EE7B1E;color:#15202B}
+.lv-vermelho{background:#D1242F;color:#fff}
+.lv-none{background:#E8ECF1;color:#2A3644}
+.card{background:#fff;border:1px solid #DDD8CC;border-radius:12px;padding:16px;box-sizing:border-box}
+.st{display:inline-flex;align-items:center;padding:2px 10px;border-radius:6px;font-weight:700;font-size:13px;border:1px solid}
+.st-red{background:#FBE3E4;color:#8E1B23;border-color:#8E1B23}
+.st-org{background:#FDEBD3;color:#7A3E00;border-color:#7A3E00}
+.st-gry{background:#E8ECF1;color:#2A3644;border-color:#2A3644}
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:999px;border:1.5px solid #15202B;background:#fff;color:#15202B;font:600 14px Inter,sans-serif;cursor:pointer;box-sizing:border-box}
+.chip.on{background:#15202B;color:#fff}
+.chip.on .shape.sh-g,.chip.on .shape.sh-c{outline:1.5px solid #fff}
+.tab{min-height:44px;padding:0 14px;border-radius:8px;border:1.5px solid #15202B;background:#fff;color:#15202B;font:600 14px Inter,sans-serif;cursor:pointer}
+.tab.on{background:#15202B;color:#fff}
+.pin{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;padding:0;border:0;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.pin .shape{width:16px;height:16px;box-shadow:0 0 0 2px #fff}
+.pin .sh-r{width:14px;height:14px;box-shadow:none;outline:2px solid #fff}
+.pin.sel .shape{box-shadow:0 0 0 3px #fff,0 0 0 6px #15202B}
+.pin.sel .sh-r{outline:2px solid #fff;box-shadow:0 0 0 5px #15202B}
+.ctl{width:44px;height:44px;border-radius:8px;border:1.5px solid #15202B;background:#fff;font:600 22px Inter,sans-serif;color:#15202B;cursor:pointer}
+.seg{min-height:44px;padding:0 12px;border:1.5px solid #15202B;background:#fff;color:#15202B;font:600 14px Inter,sans-serif;cursor:pointer;flex:1}
+.seg.on{background:#15202B;color:#fff}
+.muted{color:#4A5663}
+.ph{color:#4A5663;font-style:italic}
+.item{width:100%;text-align:left;background:#fff;border:1px solid #DDD8CC;border-radius:10px;padding:12px 14px;min-height:44px;cursor:pointer;font:inherit;color:inherit;display:flex;flex-direction:column;gap:6px;box-sizing:border-box}
+.sw{display:inline-block;width:16px;height:16px;border-radius:4px;border:1px solid #15202B;flex:none}
+</style>
+</helmet>
+
+<div style="min-height:100%;overflow-x:hidden">
+
+  <!-- Emergência -->
+  <div style="background:#15202B;color:#fff;padding:8px 16px;display:flex;gap:8px;justify-content:space-between;box-sizing:border-box">
+    <a href="tel:112" style="color:#fff;text-decoration:none;display:flex;align-items:center;gap:8px;min-height:44px"><span class="h" style="font-size:24px;font-weight:700">112</span><span style="font-size:13px">Emergência</span></a>
+    <a href="tel:808242424" style="color:#fff;text-decoration:none;display:flex;align-items:center;gap:8px;min-height:44px"><span class="h" style="font-size:18px;font-weight:700">808 24 24 24</span><span style="font-size:13px">SNS 24</span></a>
+  </div>
+
+  <header style="padding:16px;border-bottom:1px solid #DDD8CC;display:flex;flex-direction:column;gap:12px;box-sizing:border-box">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+      <div style="display:flex;align-items:center;gap:10px;min-width:0">
+        <svg width="36" height="36" viewBox="0 0 44 44" fill="none" aria-hidden="true" style="flex:none"><rect width="44" height="44" rx="10" fill="#15202B"/><path d="M12 17c0-4 3.4-7 7.5-7 3 0 5.600 1.600 6.800 4 3.500.200 6.200 2.700 6.200 6s-2.800 6-6.300 6H15c-2.200 0-3-1.700-3-3.500z" fill="#fff"/><path d="M23 25l-4 7h4l-2 6 7-9h-4l2-4z" fill="#F4C20D"/></svg>
+        <h1 style="font-size:22px;line-height:1.15;font-weight:700">Tempestade Charles</h1>
+      </div>
+      <div style="display:flex;flex:none" role="group" aria-label="Idioma">
+        <button class="seg on" aria-pressed="true" style="border-radius:8px 0 0 8px;flex:none;min-width:44px">PT</button>
+        <button class="seg" aria-pressed="false" style="border-radius:0 8px 8px 0;border-left:0;flex:none;min-width:44px">EN</button>
+      </div>
+    </div>
+    <p style="margin:0;display:flex;align-items:center;gap:10px;font-size:14px"><span style="width:10px;height:10px;border-radius:50%;background:#0E6B63;flex:none"></span><span><strong>Atualizado às 14:30</strong> <span class="muted">· há 4 min</span></span></p>
+  </header>
+
+  <main style="padding:24px 16px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:36px">
+
+    <!-- Estado -->
+    <section aria-labelledby="h-estado">
+      <h2 id="h-estado" style="font-size:22px;margin-bottom:12px">Estado atual</h2>
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">
+        <div class="card" style="padding:14px"><p class="muted" style="margin:0 0 8px;font-size:13px">Aviso mais alto</p><span class="lv lv-vermelho" style="font-size:17px;padding:3px 12px">Vermelho</span></div>
+        <div class="card" style="padding:14px"><p class="muted" style="margin:0 0 4px;font-size:13px">Rajada máxima</p><p class="h" style="margin:0;font-size:28px;font-weight:700;line-height:1.1">118 <span style="font-size:14px">km/h</span></p></div>
+        <div class="card" style="padding:14px"><p class="muted" style="margin:0 0 4px;font-size:13px">Ocorrências</p><p class="h" style="margin:0;font-size:28px;font-weight:700;line-height:1.1">47</p></div>
+        <div class="card" style="padding:14px"><p class="muted" style="margin:0 0 4px;font-size:13px">Distritos em vermelho</p><p class="h" style="margin:0;font-size:28px;font-weight:700;line-height:1.1">3 <span style="font-size:14px">de 18</span></p></div>
+      </div>
+    </section>
+
+    <!-- Zona -->
+    <section aria-labelledby="h-zona">
+      <h2 id="h-zona" style="font-size:22px;margin-bottom:12px">Na sua zona</h2>
+      <div class="card" style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <label for="concelho" style="font-weight:600;font-size:14px">Concelho</label>
+          <select id="concelho" style="min-height:48px;font:500 16px Inter,sans-serif;border:1.5px solid #15202B;border-radius:8px;padding:0 12px;background:#fff;color:#15202B"><option>Leiria</option><option>Marinha Grande</option><option>Porto</option></select>
+        </div>
+        <button class="tab" style="display:flex;align-items:center;justify-content:center;gap:10px;min-height:48px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.800" aria-hidden="true"><circle cx="9" cy="9" r="3"/><path d="M9 1v3M9 14v3M1 9h3M14 9h3"/></svg>Usar a minha localização</button>
+        <div style="background:#FDEBD3;border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><span class="lv lv-vermelho">Vermelho</span><strong>Vento e agitação marítima · Leiria</strong></div>
+          <p style="margin:0;font-size:14px">Hoje às 18:00 até amanhã às 06:00.</p>
+          <span class="badge cat-g" style="align-self:flex-start"><span class="shape sh-g"></span>Governamental · IPMA <a href="#" style="margin-left:4px">Fonte</a></span>
+        </div>
+        <a href="tel:112" style="text-decoration:none;color:#fff;background:#D1242F;border-radius:10px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;min-height:56px"><span class="h" style="font-size:28px;font-weight:700">112</span><span style="font-size:15px;font-weight:600">Ligar emergência</span></a>
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">
+          <div style="background:#F5F3EE;border-radius:10px;padding:12px"><p class="muted" style="margin:0;font-size:13px">Bombeiros</p><p class="ph" style="margin:2px 0 0;font-size:14px">[n.º dos bombeiros]</p></div>
+          <div style="background:#F5F3EE;border-radius:10px;padding:12px"><p class="muted" style="margin:0;font-size:13px">Proteção civil</p><p class="ph" style="margin:2px 0 0;font-size:14px">[n.º municipal]</p></div>
+        </div>
+        <div style="background:#F5F3EE;border-radius:10px;padding:12px"><p class="muted" style="margin:0;font-size:13px">Abrigo mais próximo</p><p style="margin:2px 0 0;font-weight:600">Pavilhão Municipal <span class="muted" style="font-weight:400;font-size:14px">· 1,8 km</span></p></div>
+        <div style="background:#F5F3EE;border-radius:10px;padding:12px"><p class="muted" style="margin:0;font-size:13px">Farmácia mais próxima</p><p class="ph" style="margin:2px 0 0;font-size:14px">[nome da farmácia]</p><p class="ph" style="margin:0;font-size:14px">[n.º de telefone] · <span style="font-style:normal" class="muted">0,6 km</span></p></div>
+      </div>
+    </section>
+
+    <!-- Mapa -->
+    <section aria-labelledby="h-mapa">
+      <h2 id="h-mapa" style="font-size:22px;margin-bottom:6px">Mapa de impacto por distrito</h2>
+      <p class="muted" style="margin:0 0 12px;font-size:14px">Toque num distrito para ver o detalhe. <a href="#como">Como calculamos</a></p>
+      <div style="display:flex;margin-bottom:10px" role="group" aria-label="Região">
+        <button class="seg on" aria-pressed="true" style="border-radius:8px 0 0 8px">Continente</button>
+        <button class="seg" aria-pressed="false" style="border-left:0">Açores</button>
+        <button class="seg" aria-pressed="false" style="border-radius:0 8px 8px 0;border-left:0">Madeira</button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:2px;margin-bottom:10px">
+        <label for="distrito" style="font-weight:600;font-size:12.500px" class="muted">Distrito</label>
+        <select id="distrito" value="{{districtId}}" onChange="{{onSelect}}" style="min-height:48px;font:600 15px Inter,sans-serif;border:1.5px solid #15202B;border-radius:8px;padding:0 10px;background:#fff;color:#15202B">
+          <sc-for list="{{options}}" as="o" hint-placeholder-count="18"><option value="{{o.id}}">{{o.name}}</option></sc-for>
+        </select>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px" role="group" aria-label="Filtrar ocorrências por categoria de fonte">
+        <sc-for list="{{fchips}}" as="c" hint-placeholder-count="3">
+          <button class="chip {{c.on}}" aria-pressed="{{c.pressed}}" onClick="{{c.pick}}"><span class="shape {{c.shape}}"></span>{{c.label}}</button>
+        </sc-for>
+      </div>
+      <div style="position:relative;width:100%;aspect-ratio:390/620;border-radius:12px;overflow:hidden;background:#D5E2EA;border:1px solid #DDD8CC;box-sizing:border-box">
+        <svg viewBox="0 0 390 620" width="100%" height="100%" aria-hidden="true" style="display:block;position:absolute;inset:0">
+          <g transform="translate(60,0)">
+            <path d="M42,405 L39,403 L36,406 L21,402 L22,397 L20,393 L27,375 L27,361 L34,344 L32,331 L28,329 L39,325 L52,313 L57,304 L60,290 L76,245 L72,238 L83,201 L95,146 L84,102 L85,95 L80,73 L76,64 L77,52 L95,36 L97,31 L104,30 L106,28 L122,27 L128,22 L125,14 L98,27 L68,55 L61,55 L58,50 L62,-10 L721,-10 L721,550 L678,617 L561,626 L288,626 L278,602 L198,587 L194,584 L192,575 L162,597 L156,596 L134,583 L125,585 L118,581 L112,583 L98,579 L94,579 L91,583 L77,585 L66,592 L63,589 L63,585 L70,574 L74,562 L73,556 L80,543 L81,533 L78,525 L81,513 L78,509 L80,491 L72,486 L80,466 L81,445 L77,434 L70,425 L58,433 L44,435 L47,423 L40,407 Z" fill="#E4E0D4"></path>
+            <text x="262" y="368" font-family="Inter,sans-serif" font-size="10" letter-spacing="2" fill="#4A5663" font-weight="600">ESPANHA</text>
+
+            <g onClick="{{pick.viana}}" style="cursor:pointer"><path d="M82,80 L87,80 L90,77 L95,77 L96,78 L96,75 L100,77 L102,77 L103,78 L105,78 L104,74 L106,72 L107,68 L109,66 L109,67 L112,67 L114,64 L118,63 L119,62 L121,64 L124,63 L126,61 L127,62 L131,61 L134,58 L136,58 L136,57 L136,52 L136,50 L133,51 L132,47 L133,44 L135,42 L136,39 L138,38 L139,37 L143,35 L143,32 L142,29 L140,28 L137,28 L135,30 L134,20 L131,22 L129,22 L125,25 L123,26 L122,28 L119,27 L118,28 L116,28 L114,29 L113,28 L106,28 L106,30 L105,31 L101,31 L97,32 L95,34 L95,36 L88,41 L88,43 L85,46 L82,47 L79,51 L78,52 L77,62 L77,64 L79,72 L81,73 L81,76 Z" fill="{{f.viana}}" stroke="{{sk.viana}}" stroke-width="{{sw.viana}}" stroke-linejoin="round"></path><text x="110" y="50" text-anchor="middle" font-size="10" font-weight="600" font-family="Inter,sans-serif" fill="{{lf.viana}}" pointer-events="none">Viana</text></g>
+            <g onClick="{{pick.braga}}" style="cursor:pointer"><path d="M152,106 L151,110 L147,113 L144,110 L143,111 L138,108 L138,106 L137,106 L136,104 L134,102 L131,102 L132,104 L130,104 L127,107 L127,110 L125,110 L123,107 L123,106 L120,107 L117,108 L118,106 L117,105 L113,108 L112,106 L108,107 L107,110 L100,110 L99,110 L98,105 L100,104 L99,102 L96,101 L95,99 L93,98 L91,99 L88,96 L85,95 L84,92 L84,91 L82,80 L87,80 L90,77 L95,77 L96,78 L96,75 L100,77 L102,77 L103,78 L105,78 L104,74 L106,72 L107,68 L109,66 L109,67 L112,67 L114,64 L118,63 L119,62 L121,64 L124,63 L126,61 L127,62 L131,61 L134,58 L136,58 L136,57 L139,58 L142,58 L146,57 L146,59 L145,61 L145,63 L144,65 L142,69 L140,71 L147,70 L151,73 L150,74 L150,79 L150,81 L153,81 L154,82 L160,83 L162,80 L164,81 L166,84 L163,88 L161,90 L162,91 L159,91 L158,94 L155,95 L155,100 L152,103 Z" fill="{{f.braga}}" stroke="{{sk.braga}}" stroke-width="{{sw.braga}}" stroke-linejoin="round"></path><text x="125" y="87" text-anchor="middle" font-size="10" font-weight="600" font-family="Inter,sans-serif" fill="{{lf.braga}}" pointer-events="none">Braga</text></g>
+            <g onClick="{{pick.porto}}" style="cursor:pointer"><path d="M152,106 L152,108 L154,109 L153,111 L158,114 L157,116 L158,118 L159,120 L160,121 L159,125 L159,127 L157,133 L157,135 L154,134 L146,138 L142,137 L138,139 L132,138 L132,139 L128,141 L125,139 L124,142 L120,144 L119,142 L116,142 L116,144 L118,145 L118,148 L115,146 L112,142 L112,143 L109,142 L109,144 L111,144 L107,146 L106,143 L103,146 L100,146 L99,145 L96,146 L95,141 L95,138 L94,133 L92,128 L90,125 L89,119 L88,113 L88,110 L87,110 L84,102 L85,95 L88,96 L91,99 L93,98 L95,99 L96,101 L99,102 L100,104 L98,105 L99,110 L100,110 L107,110 L108,107 L112,106 L113,108 L117,105 L118,106 L117,108 L120,107 L123,106 L123,107 L125,110 L127,110 L127,107 L130,104 L132,104 L131,102 L134,102 L136,104 L137,106 L138,106 L138,108 L143,111 L144,110 L147,113 L151,110 Z" fill="{{f.porto}}" stroke="{{sk.porto}}" stroke-width="{{sw.porto}}" stroke-linejoin="round"></path><text x="124" y="124" text-anchor="middle" font-size="10" font-weight="600" font-family="Inter,sans-serif" fill="{{lf.porto}}" pointer-events="none">Porto</text></g>
+            <g onClick="{{pick.vilareal}}" style="cursor:pointer"><path d="M216,50 L217,51 L215,56 L217,61 L219,62 L219,65 L216,69 L215,72 L213,76 L213,79 L212,82 L212,85 L214,90 L210,90 L209,92 L208,96 L206,97 L203,99 L203,101 L203,107 L205,109 L207,110 L204,111 L202,113 L203,114 L201,116 L201,121 L199,120 L198,124 L196,124 L195,125 L191,126 L190,128 L188,127 L187,129 L184,131 L178,130 L175,132 L169,131 L167,130 L166,132 L162,130 L160,131 L159,133 L157,135 L157,133 L159,127 L159,125 L160,121 L159,120 L158,118 L157,116 L158,114 L153,111 L154,109 L152,108 L152,106 L152,103 L155,100 L155,95 L158,94 L159,91 L162,91 L161,90 L163,88 L166,84 L164,81 L162,80 L160,83 L154,82 L153,81 L150,81 L150,79 L150,74 L151,73 L147,70 L140,71 L142,69 L144,65 L145,63 L145,61 L146,59 L146,57 L147,56 L149,56 L151,52 L152,51 L154,51 L156,50 L158,45 L159,45 L159,49 L159,52 L160,54 L161,53 L163,52 L163,50 L168,49 L169,48 L172,49 L174,47 L179,50 L182,50 L184,51 L183,52 L182,56 L185,56 L188,55 L191,53 L190,52 L192,51 L193,52 L195,52 L196,55 L197,55 L197,58 L200,56 L201,54 L203,53 L203,54 L207,54 L211,51 Z" fill="{{f.vilareal}}" stroke="{{sk.vilareal}}" stroke-width="{{sw.vilareal}}" stroke-linejoin="round"></path><text x="188" y="84" text-anchor="middle" font-size="10" font-weight="600" font-family="Inter,sans-serif" fill="{{lf.vilareal}}" pointer-events="none">Vila Real</text></g>
+            <g onClick="{{pick.braganca}}" style="cursor:pointer"><path d="M240,144 L237,143 L235,145 L233,143 L232,143 L230,141 L226,139 L225,136 L227,133 L224,133 L224,128 L222,130 L220,134 L217,133 L213,132 L210,133 L208,132 L205,132 L202,130 L201,126 L198,124 L199,120 L201,121 L201,116 L203,114 L202,113 L204,111 L207,110 L205,109 L203,107 L203,101 L203,99 L206,97 L208,96 L209,92 L210,90 L214,90 L212,85 L212,82 L213,79 L213,76 L215,72 L216,69 L219,65 L219,62 L217,61 L215,56 L217,51 L216,50 L217,48 L218,45 L217,42 L218,39 L220,39 L221,38 L225,39 L226,42 L232,42 L234,39 L236,40 L237,42 L242,43 L244,42 L248,42 L248,40 L248,37 L252,38 L253,42 L258,43 L266,42 L267,39 L270,42 L270,43 L268,49 L273,50 L272,55 L270,64 L271,69 L271,71 L274,73 L276,74 L278,73 L279,71 L287,71 L291,73 L295,76 L297,79 L299,80 L301,82 L299,84 L297,88 L295,89 L296,91 L293,93 L292,96 L292,98 L289,101 L291,103 L288,104 L287,103 L285,104 L284,105 L286,106 L283,108 L280,113 L278,113 L276,115 L277,116 L276,117 L274,116 L272,118 L271,119 L269,120 L268,119 L265,120 L263,119 L260,124 L259,127 L256,131 L253,132 L255,136 L250,143 L245,144 L241,143 Z" fill="{{f.braganca}}" stroke="{{sk.braganca}}" stroke-width="{{sw.braganca}}" stroke-linejoin="round"></path><text x="246" y="95" text-anchor="middle" font-size="10" font-weight="600" font-family="Inter,sans-serif" fill="{{lf.braganca}}" pointer-events="none">Bragança</text></g>
+            <g onClick="{{pick.viseu}}" style="cursor:pointer"><path d="M208,132 L207,134 L205,143 L206,145 L205,146 L202,146 L203,149 L207,151 L206,155 L203,157 L203,160 L200,161 L198,167 L196,169 L194,166 L191,162 L187,162 L185,165 L185,167 L181,172 L185,174 L186,176 L184,178 L184,179 L187,182 L189,182 L188,184 L189,186 L187,187 L187,188 L185,194 L185,195 L181,196 L178,198 L174,199 L173,200 L171,200 L168,203 L165,203 L165,204 L162,205 L157,209 L156,211 L154,212 L152,214 L149,216 L147,216 L145,218 L143,219 L139,222 L136,221 L134,222 L132,221 L129,223 L127,222 L125,219 L122,219 L120,218 L120,214 L123,210 L122,205 L126,203 L129,202 L126,199 L126,196 L124,193 L129,191 L125,188 L126,185 L122,180 L122,177 L126,176 L127,174 L130,167 L129,164 L131,163 L134,165 L136,163 L140,165 L141,163 L139,159 L140,157 L139,154 L143,149 L142,147 L138,150 L134,148 L133,147 L130,147 L131,144 L130,142 L128,141 L132,139 L132,138 L138,139 L142,137 L146,138 L154,134 L157,135 L159,133 L160,131 L162,130 L166,132 L167,130 L169,131 L175,132 L178,130 L184,131 L187,129 L188,127 L190,128 L191,126 L195,125 L196,124 L198,124 L201,126 L202,130 L205,132 Z M200,156 L202,159 L202,161 L198,160 L198,159 Z" fill="{{f.viseu}}" stroke="{{sk.viseu}}" stroke-width="{{sw.viseu}}" stroke-linejoin="round"></path><text x="159" y="182" text-anchor="middle" font-size="10" font-weight="600" font-family="Inter,sans-serif" fill="{{lf.viseu}}" pointer-events="none">Viseu</text></g>
+            <g onClick="{{pick.guarda}}" style="cursor:pointer"><path d="M240,144 L241,147 L242,147 L246,153 L247,156 L247,158 L248,159 L250,160 L251,164 L249,164 L250,170 L249,175 L251,179 L250,180 L252,185 L250,190 L248,192 L248,195 L252,197 L252,201 L251,202 L248,208 L249,212 L254,218 L253,219 L253,221 L251,222 L247,225 L246,229 L243,230 L239,230 L234,226 L232,228 L228,228 L226,223 L225,223 L224,224 L224,227 L221,229 L217,227 L215,230 L208,228 L207,226 L209,225 L212,220 L212,217 L212,213 L210,213 L209,214 L208,213 L206,214 L206,216 L204,215 L201,217 L199,215 L197,216 L196,214 L194,215 L191,218 L191,221 L189,224 L183,223 L183,226 L179,229 L175,230 L173,233 L170,233 L169,233 L167,231 L165,230 L167,225 L170,224 L171,222 L167,220 L167,219 L167,214 L165,214 L163,212 L166,210 L167,208 L165,206 L165,204 L165,203 L168,203 L171,200 L173,200 L174,199 L178,198 L181,196 L185,195 L185,194 L187,188 L187,187 L189,186 L188,184 L189,182 L187,182 L184,179 L184,178 L186,176 L185,174 L181,172 L185,167 L185,165 L187,162 L191,162 L194,166 L196,169 L198,167 L200,161 L203,160 L203,157 L206,155 L207,151 L203,149 L202,146 L205,146 L206,145 L205,143 L207,134 L208,132 L210,133 L213,132 L217,133 L220,134 L222,130 L224,128 L224,133 L227,133 L225,136 L226,139 L230,141 L232,143 L233,143 L235,145 L237,143 Z" fill="{{f.guarda}}" stroke="{{sk.guarda}}" stroke-width="{{sw.guarda}}" stroke-linejoin="round"></path><text x="222" y="178" text-anchor="middle" font-size="10" font-weight="600" font-family="Inter,sans-serif" fill="{{lf.guarda}}" pointer-events="none">Guarda</text></g>
+            <g onClick="{{pick.aveiro}}" style="cursor:pointer"><path d="M128,141 L130,142 L131,144 L130,147 L133,147 L134,148 L138,150 L142,147 L143,149 L139,154 L140,157 L139,159 L141,163 L140,165 L136,163 L134,165 L131,163 L129,164 L130,167 L127,174 L126,176 L122,177 L122,180 L126,185 L125,188 L129,191 L124,193 L126,196 L126,199 L129,202 L126,203 L122,205 L123,210 L120,214 L120,218 L120,220 L118,221 L116,220 L115,223 L112,224 L112,228 L110,227 L105,226 L105,224 L109,224 L108,221 L109,216 L107,214 L107,212 L102,215 L101,213 L102,209 L101,206 L98,205 L97,207 L96,212 L95,212 L92,210 L91,208 L84,201 L86,190 L86,187 L89,176 L94,159 L95,151 L96,146 L99,145 L100,146 L103,146 L106,143 L107,146 L111,144 L109,144 L109,142 L112,143 L112,142 L115,146 L118,148 L118,145 L116,144 L116,142 L119,142 L120,144 L124,142 L125,139 Z" fill="{{f.aveiro}}" stroke="{{sk.aveiro}}" stroke-width="{{sw.aveiro}}" stroke-linejoin="round"></path><text x="113" y="170" text-anchor="middle" font-size="10" font-weight="600" font-family="Inter,sans-serif" fill="{{lf.aveiro}}" pointer-events="none">Aveiro</text></g>
+            <g onClick="{{pick.coimbra}}" style="cursor:pointer"><path d="M120,218 L122,219 L125,219 L127,222 L129,223 L132,221 L134,222 L136,221 L139,222 L143,219 L145,218 L147,216 L149,216 L152,214 L154,212 L156,211 L157,209 L162,205 L165,204 L165,206 L167,208 L166,210 L163,212 L165,214 L167,214 L167,219 L167,220 L171,222 L170,224 L167,225 L165,230 L167,231 L169,233 L169,236 L167,239 L168,241 L173,245 L173,247 L169,252 L167,249 L166,251 L167,252 L167,255 L165,253 L163,253 L157,255 L159,259 L154,259 L153,262 L152,260 L149,262 L147,261 L147,263 L145,262 L140,266 L139,266 L141,263 L140,261 L138,259 L137,256 L138,251 L135,249 L132,253 L130,252 L127,253 L125,258 L127,260 L126,263 L123,262 L118,267 L115,267 L118,264 L116,261 L116,259 L114,256 L113,257 L114,259 L111,257 L108,261 L106,261 L104,265 L103,263 L103,256 L100,256 L98,260 L95,260 L96,258 L93,257 L93,256 L88,255 L85,254 L83,255 L82,257 L79,256 L76,256 L76,255 L74,254 L76,245 L76,241 L73,238 L76,231 L78,222 L84,201 L91,208 L92,210 L95,212 L96,212 L97,207 L98,205 L101,206 L102,209 L101,213 L102,215 L107,212 L107,214 L109,216 L108,221 L109,224 L105,224 L105,226 L110,227 L112,228 L112,224 L115,223 L116,220 L118,221 L120,220 Z" fill="{{f.coimbra}}" stroke="{{sk.coimbra}}" stroke-width="{{sw.coimbra}}" stroke-linejoin="round"></path><text x="149" y="240" text-anchor="middle" font-size="10" font-weight="600" font-family="Inter,sans-serif" fill="{{lf.coimbra}}" pointer-events="none">Coimbra</text></g>
+            <g onClick="{{pick.leiria}}" style="cursor:pointer"><path d="M140,266 L137,272 L134,273 L132,276 L127,276 L127,279 L125,280 L126,281 L126,282 L124,282 L121,281 L122,283 L122,286 L121,284 L119,285 L118,287 L116,286 L114,286 L111,289 L112,286 L111,284 L111,281 L109,277 L107,280 L106,278 L103,281 L99,284 L96,282 L92,284 L92,287 L93,289 L92,291 L96,293 L95,297 L90,299 L91,302 L91,306 L93,308 L90,311 L89,312 L87,310 L86,311 L88,317 L85,317 L81,316 L77,317 L74,317 L73,318 L70,323 L69,326 L67,326 L64,330 L65,334 L65,337 L62,337 L61,335 L58,335 L55,337 L53,340 L53,342 L52,344 L49,346 L47,342 L48,339 L47,336 L40,335 L38,338 L35,337 L32,330 L29,329 L31,328 L32,329 L34,329 L39,326 L45,321 L49,314 L53,313 L52,312 L53,311 L58,304 L57,303 L57,300 L60,292 L60,290 L62,285 L65,278 L74,254 L76,255 L76,256 L79,256 L82,257 L83,255 L85,254 L88,255 L93,256 L93,257 L96,258 L95,260 L98,260 L100,256 L103,256 L103,263 L104,265 L106,261 L108,261 L111,257 L114,259 L113,257 L114,256 L116,259 L116,261 L118,264 L115,267 L118,267 L123,262 L126,263 L127,260 L125,258 L127,253 L130,252 L132,253 L135,249 L138,251 L137,256 L138,259 L140,261 L141,263 L139,266 Z" fill="{{f.leiria}}" stroke="{{sk.leiria}}" stroke-width="{{sw.leiria}}" stroke-linejoin="round"></path><text x="112" y="305" text-anchor="middle" font-size="10" font-weight="600" font-family="Inter,sans-serif" fill="{{lf.leiria}}" pointer-events="none">Leiria</text></g>
+            <g onClick="{{pick.castelobranco}}" style="cursor:pointer"><path d="M239,230 L238,232 L237,232 L234,233 L233,238 L234,239 L234,244 L235,245 L240,246 L242,249 L243,251 L245,252 L246,254 L246,257 L245,260 L245,265 L244,267 L244,269 L244,273 L242,275 L241,277 L238,278 L237,280 L238,284 L236,287 L237,289 L236,292 L235,295 L231,296 L225,296 L223,297 L214,296 L212,296 L208,299 L204,298 L200,298 L197,296 L190,296 L190,296 L186,297 L185,299 L181,301 L178,298 L175,301 L174,304 L171,305 L170,307 L167,310 L165,310 L166,308 L167,307 L165,305 L163,303 L163,301 L162,299 L159,298 L158,296 L154,297 L154,294 L154,288 L151,289 L150,288 L147,288 L145,293 L145,295 L143,297 L146,302 L139,302 L137,301 L131,299 L130,298 L131,292 L130,291 L131,288 L129,284 L128,285 L126,284 L126,282 L126,281 L125,280 L127,279 L127,276 L132,276 L134,273 L137,272 L140,266 L145,262 L147,263 L147,261 L149,262 L152,260 L153,262 L154,259 L159,259 L157,255 L163,253 L165,253 L167,255 L167,252 L166,251 L167,249 L169,252 L173,247 L173,245 L168,241 L167,239 L169,236 L169,233 L170,233 L173,233 L175,230 L179,229 L183,226 L183,223 L189,224 L191,221 L191,218 L194,215 L196,214 L197,216 L199,215 L201,217 L204,215 L206,216 L206,214 L208,213 L209,214 L210,213 L212,213 L212,217 L212,220 L209,225 L207,226 L208,228 L215,230 L217,227 L221,229 L224,227 L224,224 L225,223 L226,223 L228,228 L232,228 L234,226 Z" fill="{{f.castelobranco}}" stroke="{{sk.castelobranco}}" stroke-width="{{sw.castelobranco}}" stroke-linejoin="round"></path><text x="204" y="265" text-anchor="middle" font-size="10" font-weight="600" font-family="Inter,sans-serif" fill="{{lf.castelobranco}}" pointer-events="none">C. Branco</text></g>
+            <g onClick="{{pick.santarem}}" style="cursor:pointer"><path d="M126,282 L126,284 L128,285 L129,284 L131,288 L130,291 L131,292 L130,298 L131,299 L137,301 L139,302 L146,302 L143,297 L145,295 L145,293 L147,288 L150,288 L151,289 L154,288 L154,294 L154,297 L158,296 L159,298 L162,299 L163,301 L163,303 L165,305 L167,307 L166,308 L165,310 L163,313 L158,309 L155,308 L153,309 L152,312 L150,315 L150,318 L151,320 L155,323 L155,325 L153,328 L152,327 L150,329 L148,330 L148,332 L146,335 L144,338 L144,339 L140,339 L139,338 L137,340 L137,342 L134,346 L130,350 L128,350 L124,352 L121,359 L125,361 L125,364 L127,364 L128,369 L129,370 L131,370 L131,371 L129,377 L127,380 L132,383 L132,384 L135,383 L137,385 L134,387 L134,388 L136,389 L137,391 L138,390 L140,392 L138,395 L135,394 L135,392 L134,393 L131,389 L129,390 L124,385 L123,387 L122,386 L121,388 L118,386 L117,388 L115,390 L114,388 L109,393 L107,391 L103,396 L98,395 L98,391 L99,388 L96,389 L95,391 L91,389 L89,387 L89,389 L86,395 L85,398 L83,399 L80,399 L78,396 L73,399 L70,397 L69,392 L66,389 L66,389 L71,382 L71,381 L73,379 L73,376 L77,374 L74,373 L77,368 L76,367 L80,366 L81,364 L83,363 L81,360 L81,359 L79,357 L77,357 L75,355 L74,353 L71,351 L75,349 L76,350 L79,349 L79,347 L78,345 L76,344 L75,342 L69,343 L67,341 L65,342 L66,338 L65,337 L65,334 L64,330 L67,326 L69,326 L70,323 L73,318 L74,317 L77,317 L81,316 L85,317 L88,317 L86,311 L87,310 L89,312 L90,311 L93,308 L91,306 L91,302 L90,299 L95,297 L96,293 L92,291 L93,289 L92,287 L92,284 L96,282 L99,284 L103,281 L106,278 L107,280 L109,277 L111,281 L111,284 L112,286 L111,289 L114,286 L116,286 L118,287 L119,285 L121,284 L122,286 L122,283 L121,281 L124,282 Z" fill="{{f.santarem}}" stroke="{{sk.santarem}}" stroke-width="{{sw.santarem}}" stroke-linejoin="round"></path><text x="145" y="330" text-anchor="middle" font-size="10" font-weight="600" font-family="Inter,sans-serif" fill="{{lf.santarem}}" pointer-events="none">Santarém</text></g>
+            <g onClick="{{pick.lisboa}}" style="cursor:pointer"><path d="M65,337 L66,338 L65,342 L67,341 L69,343 L75,342 L76,344 L78,345 L79,347 L79,349 L76,350 L75,349 L71,351 L74,353 L75,355 L77,357 L79,357 L81,359 L81,360 L83,363 L81,364 L80,366 L76,367 L77,368 L74,373 L77,374 L73,376 L73,379 L71,381 L71,382 L66,389 L64,393 L62,389 L61,386 L59,388 L56,392 L56,397 L55,400 L53,402 L51,404 L43,405 L43,403 L39,403 L36,406 L28,402 L26,404 L23,403 L21,401 L22,400 L22,398 L22,397 L22,397 L20,394 L24,386 L28,375 L27,367 L28,364 L27,361 L33,350 L35,344 L35,339 L35,337 L38,338 L40,335 L47,336 L48,339 L47,342 L49,346 L52,344 L53,342 L53,340 L55,337 L58,335 L61,335 L62,337 Z" fill="{{f.lisboa}}" stroke="{{sk.lisboa}}" stroke-width="{{sw.lisboa}}" stroke-linejoin="round"></path><text x="48" y="371" text-anchor="middle" font-size="10" font-weight="600" font-family="Inter,sans-serif" fill="{{lf.lisboa}}" pointer-events="none">Lisboa</text></g>
+            <g onClick="{{pick.portalegre}}" style="cursor:pointer"><path d="M220,397 L218,396 L217,394 L219,391 L216,387 L213,389 L212,387 L209,389 L210,391 L207,392 L203,392 L201,387 L202,385 L200,383 L200,381 L197,378 L198,374 L195,372 L193,371 L191,369 L189,371 L190,373 L188,375 L185,375 L183,378 L180,379 L178,378 L177,380 L174,377 L172,380 L169,382 L161,380 L161,378 L157,373 L155,373 L153,375 L148,377 L149,372 L147,371 L146,369 L143,369 L143,373 L141,374 L140,370 L141,368 L139,368 L138,369 L137,367 L135,368 L132,372 L131,371 L131,370 L129,370 L128,369 L127,364 L125,364 L125,361 L121,359 L124,352 L128,350 L130,350 L134,346 L137,342 L137,340 L139,338 L140,339 L144,339 L144,338 L146,335 L148,332 L148,330 L150,329 L152,327 L153,328 L155,325 L155,323 L151,320 L150,318 L150,315 L152,312 L153,309 L155,308 L158,309 L163,313 L165,310 L167,310 L170,307 L171,305 L174,304 L175,301 L178,298 L181,301 L185,299 L186,297 L190,296 L190,296 L191,299 L192,301 L193,304 L196,306 L200,311 L203,311 L203,315 L206,316 L211,319 L210,320 L210,323 L209,328 L210,329 L210,332 L217,339 L215,342 L216,347 L218,348 L222,350 L225,351 L225,353 L224,358 L228,359 L232,356 L234,357 L239,360 L240,363 L240,365 L241,367 L239,372 L236,375 L235,378 L233,380 L234,383 L234,385 L231,386 L229,390 L226,390 L223,394 L221,395 Z" fill="{{f.portalegre}}" stroke="{{sk.portalegre}}" stroke-width="{{sw.portalegre}}" stroke-linejoin="round"></path><text x="181" y="344" text-anchor="middle" font-size="10" font-weight="600" font-family="Inter,sans-serif" fill="{{lf.portalegre}}" pointer-events="none">Portalegre</text></g>
+            <g onClick="{{pick.evora}}" style="cursor:pointer"><path d="M220,397 L215,400 L214,410 L216,411 L215,413 L215,415 L211,420 L211,423 L210,424 L210,428 L212,428 L210,430 L210,432 L213,434 L214,437 L220,444 L223,449 L225,450 L226,454 L228,458 L229,460 L227,462 L225,461 L224,463 L222,458 L221,456 L221,453 L217,452 L215,449 L215,447 L213,444 L210,446 L209,445 L207,448 L204,447 L202,452 L200,452 L200,454 L198,456 L194,458 L194,460 L189,459 L182,458 L179,459 L176,457 L172,454 L169,453 L166,454 L152,446 L151,448 L149,448 L147,445 L145,446 L141,446 L138,446 L137,445 L136,446 L133,443 L127,442 L126,440 L122,440 L126,435 L125,433 L122,433 L123,430 L121,425 L119,423 L118,420 L116,421 L115,423 L112,423 L109,424 L107,420 L105,421 L106,423 L104,424 L104,422 L101,422 L100,420 L99,421 L97,420 L95,420 L93,414 L97,409 L104,404 L105,402 L107,402 L106,400 L108,397 L103,396 L107,391 L109,393 L114,388 L115,390 L117,388 L118,386 L121,388 L122,386 L123,387 L124,385 L129,390 L131,389 L134,393 L135,392 L135,394 L138,395 L140,392 L138,390 L137,391 L136,389 L134,388 L134,387 L137,385 L135,383 L132,384 L132,383 L127,380 L129,377 L131,371 L132,372 L135,368 L137,367 L138,369 L139,368 L141,368 L140,370 L141,374 L143,373 L143,369 L146,369 L147,371 L149,372 L148,377 L153,375 L155,373 L157,373 L161,378 L161,380 L169,382 L172,380 L174,377 L177,380 L178,378 L180,379 L183,378 L185,375 L188,375 L190,373 L189,371 L191,369 L193,371 L195,372 L198,374 L197,378 L200,381 L200,383 L202,385 L201,387 L203,392 L207,392 L210,391 L209,389 L212,387 L213,389 L216,387 L219,391 L217,394 L218,396 Z" fill="{{f.evora}}" stroke="{{sk.evora}}" stroke-width="{{sw.evora}}" stroke-linejoin="round"></path><text x="175" y="420" text-anchor="middle" font-size="10" font-weight="600" font-family="Inter,sans-serif" fill="{{lf.evora}}" pointer-events="none">Évora</text></g>
+            <g onClick="{{pick.setubal}}" style="cursor:pointer"><path d="M103,396 L108,397 L106,400 L107,402 L105,402 L104,404 L97,409 L93,414 L95,420 L97,420 L99,421 L100,420 L101,422 L104,422 L104,424 L106,423 L105,421 L107,420 L109,424 L112,423 L115,423 L116,421 L118,420 L119,423 L121,425 L123,430 L122,433 L125,433 L126,435 L122,440 L126,440 L127,442 L133,443 L136,446 L138,448 L139,452 L139,456 L136,457 L133,459 L130,459 L129,461 L126,460 L125,466 L123,466 L121,464 L119,466 L119,470 L117,468 L115,473 L116,475 L118,478 L120,479 L123,478 L125,482 L125,487 L123,491 L124,492 L121,496 L121,498 L118,497 L112,495 L112,497 L110,496 L108,497 L104,497 L102,498 L102,501 L100,501 L99,503 L99,508 L96,509 L92,507 L90,508 L87,502 L84,501 L82,503 L81,501 L81,499 L80,491 L79,489 L76,488 L74,486 L72,486 L74,484 L75,483 L79,474 L81,466 L82,461 L83,452 L82,445 L80,438 L78,433 L71,427 L70,424 L69,427 L65,428 L63,430 L59,431 L58,432 L54,432 L52,433 L48,433 L46,435 L44,435 L44,433 L46,429 L47,426 L47,423 L47,418 L44,412 L41,407 L42,406 L48,405 L51,404 L50,406 L51,407 L55,409 L59,405 L59,402 L61,400 L61,398 L62,397 L65,397 L66,396 L63,396 L63,394 L67,392 L65,393 L66,389 L69,392 L70,397 L73,399 L78,396 L80,399 L83,399 L85,398 L86,395 L89,389 L89,387 L91,389 L95,391 L96,389 L99,388 L98,391 L98,395 Z" fill="{{f.setubal}}" stroke="{{sk.setubal}}" stroke-width="{{sw.setubal}}" stroke-linejoin="round"></path><text x="104" y="454" text-anchor="middle" font-size="10" font-weight="600" font-family="Inter,sans-serif" fill="{{lf.setubal}}" pointer-events="none">Setúbal</text></g>
+            <g onClick="{{pick.beja}}" style="cursor:pointer"><path d="M229,460 L231,462 L232,460 L236,460 L237,458 L240,457 L241,458 L244,456 L244,458 L242,460 L241,463 L242,464 L240,469 L239,469 L239,474 L238,478 L236,478 L234,479 L230,476 L227,477 L227,479 L223,481 L221,480 L218,482 L217,482 L215,483 L217,486 L216,489 L214,492 L214,494 L210,501 L205,505 L204,507 L202,508 L202,509 L200,512 L199,517 L200,518 L197,521 L197,523 L193,529 L193,531 L194,534 L189,534 L186,535 L184,538 L182,536 L176,536 L172,539 L171,539 L163,544 L160,544 L159,547 L156,547 L154,547 L151,548 L151,551 L148,553 L145,557 L143,556 L141,556 L134,554 L128,549 L126,549 L125,544 L122,543 L121,545 L118,544 L114,545 L113,549 L110,551 L107,549 L105,550 L100,546 L98,547 L96,547 L94,550 L92,547 L90,548 L87,547 L86,548 L84,544 L81,544 L80,543 L80,535 L81,533 L80,530 L78,525 L80,519 L81,514 L81,513 L80,510 L79,509 L81,501 L82,503 L84,501 L87,502 L90,508 L92,507 L96,509 L99,508 L99,503 L100,501 L102,501 L102,498 L104,497 L108,497 L110,496 L112,497 L112,495 L118,497 L121,498 L121,496 L124,492 L123,491 L125,487 L125,482 L123,478 L120,479 L118,478 L116,475 L115,473 L117,468 L119,470 L119,466 L121,464 L123,466 L125,466 L126,460 L129,461 L130,459 L133,459 L136,457 L139,456 L139,452 L138,448 L136,446 L137,445 L138,446 L141,446 L145,446 L147,445 L149,448 L151,448 L152,446 L166,454 L169,453 L172,454 L176,457 L179,459 L182,458 L189,459 L194,460 L194,458 L198,456 L200,454 L200,452 L202,452 L204,447 L207,448 L209,445 L210,446 L213,444 L215,447 L215,449 L217,452 L221,453 L221,456 L222,458 L224,463 L225,461 L227,462 Z" fill="{{f.beja}}" stroke="{{sk.beja}}" stroke-width="{{sw.beja}}" stroke-linejoin="round"></path><text x="163" y="501" text-anchor="middle" font-size="10" font-weight="600" font-family="Inter,sans-serif" fill="{{lf.beja}}" pointer-events="none">Beja</text></g>
+            <g onClick="{{pick.faro}}" style="cursor:pointer"><path d="M194,534 L195,534 L196,537 L198,537 L199,544 L200,545 L198,547 L200,548 L201,551 L200,553 L200,558 L202,561 L201,565 L203,567 L204,573 L200,572 L195,573 L186,578 L182,582 L176,585 L169,590 L167,592 L163,595 L162,596 L157,595 L142,585 L134,582 L128,582 L125,584 L123,584 L121,582 L118,581 L112,583 L106,581 L104,579 L98,578 L94,579 L91,581 L91,583 L86,582 L85,583 L84,584 L77,585 L75,586 L74,587 L71,587 L70,589 L68,590 L68,592 L66,591 L65,589 L63,589 L64,586 L65,584 L70,574 L70,573 L70,571 L72,566 L74,562 L73,556 L76,553 L78,548 L79,546 L80,543 L81,544 L84,544 L86,548 L87,547 L90,548 L92,547 L94,550 L96,547 L98,547 L100,546 L105,550 L107,549 L110,551 L113,549 L114,545 L118,544 L121,545 L122,543 L125,544 L126,549 L128,549 L134,554 L141,556 L143,556 L145,557 L148,553 L151,551 L151,548 L154,547 L156,547 L159,547 L160,544 L163,544 L171,539 L172,539 L176,536 L182,536 L184,538 L186,535 L189,534 Z" fill="{{f.faro}}" stroke="{{sk.faro}}" stroke-width="{{sw.faro}}" stroke-linejoin="round"></path><text x="167" y="569" text-anchor="middle" font-size="10" font-weight="600" font-family="Inter,sans-serif" fill="{{lf.faro}}" pointer-events="none">Faro</text></g>
+
+          </g>
+        </svg>
+        <sc-for list="{{pins}}" as="p" hint-placeholder-count="8">
+          <button class="pin {{p.sel}}" aria-label="{{p.label}}" style="left:{{p.left}};top:{{p.top}}" onClick="{{p.pick}}"><span class="shape {{p.shape}}"></span></button>
+        </sc-for>
+        <div style="position:absolute;top:12px;right:12px;display:flex;flex-direction:column;gap:8px">
+          <button class="ctl" aria-label="Aproximar">+</button>
+          <button class="ctl" aria-label="Afastar">−</button>
+        </div>
+        <p style="position:absolute;right:6px;bottom:4px;margin:0;font-size:11px;background:rgba(255,255,255,.85);padding:1px 6px;border-radius:4px" class="muted">© OpenStreetMap</p>
+      </div>
+
+      <!-- legenda -->
+      <div class="card" style="margin-top:12px;padding:14px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+        <div>
+          <p class="h" style="margin:0 0 8px;font-size:14px;font-weight:600">Impacto</p>
+          <div style="display:flex;flex-direction:column;gap:5px;font-size:13px">
+            <span style="display:flex;align-items:center;gap:8px"><span class="sw" style="background:#D1242F"></span>Muito alto</span>
+            <span style="display:flex;align-items:center;gap:8px"><span class="sw" style="background:#EE7B1E"></span>Alto</span>
+            <span style="display:flex;align-items:center;gap:8px"><span class="sw" style="background:#F4C20D"></span>Moderado</span>
+            <span style="display:flex;align-items:center;gap:8px"><span class="sw" style="background:#F7F5EE"></span>Sem relevância</span>
+          </div>
+        </div>
+        <div>
+          <p class="h" style="margin:0 0 8px;font-size:14px;font-weight:600">Ocorrências</p>
+          <div style="display:flex;flex-direction:column;gap:5px;font-size:13px">
+            <span style="display:flex;align-items:center;gap:8px"><span class="shape sh-g"></span>Governamental</span>
+            <span style="display:flex;align-items:center;gap:8px"><span class="shape sh-c"></span>Comunicação social</span>
+            <span style="display:flex;align-items:center;gap:8px"><span class="shape sh-r"></span>Redes sociais, não verificado</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- detalhe -->
+      <aside class="card" style="margin-top:12px;display:flex;flex-direction:column;gap:14px" aria-live="polite" aria-label="Detalhe">
+
+        <sc-if value="{{showDistrict}}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div>
+              <p class="muted" style="margin:0;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.04em">Distrito</p>
+              <h3 style="font-size:26px;line-height:1.15">{{dv.name}}</h3>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+              <span class="lv {{dv.impactClass}}">Impacto {{dv.impactLabel}}</span>
+              <span class="lv {{dv.warnClass}}">Aviso {{dv.warnLabel}}</span>
+            </div>
+            <div>
+              <span class="h" style="font-size:32px;font-weight:700;line-height:1">{{dv.score}}<span style="font-size:15px;font-weight:600" class="muted"> / 100</span></span>
+              <div style="height:10px;border-radius:5px;background:#E8ECF1;margin-top:8px;overflow:hidden"><div class="{{dv.barClass}}" style="height:100%;width:{{dv.pct}}"></div></div>
+              <p class="muted" style="margin:8px 0 0;font-size:13.500px">Aviso IPMA <strong style="color:#15202B">+{{dv.base}}</strong> · Ocorrências <strong style="color:#15202B">+{{dv.pts}}</strong></p>
+            </div>
+            <div style="padding:12px 14px;border-radius:10px;background:#F5F3EE;font-size:14px">
+              <strong>{{dv.warnType}}</strong>
+              <span class="badge cat-g" style="margin-top:6px;display:flex;width:fit-content"><span class="shape sh-g"></span>Governamental · IPMA <a href="#" style="margin-left:4px">Fonte</a></span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <h4 class="h" style="margin:0;font-size:16px">Ocorrências recentes <span class="muted" style="font-weight:500;font-size:14px">· {{dv.shown}}</span></h4>
+              <sc-if value="{{dv.empty}}" hint-placeholder-val="{{ false }}"><p class="muted" style="margin:0;font-size:14px">Sem ocorrências registadas neste distrito.</p></sc-if>
+              <sc-for list="{{dv.incidents}}" as="i" hint-placeholder-count="3">
+                <button class="item" onClick="{{i.pick}}">
+                  <span style="display:flex;justify-content:space-between;gap:8px;font-size:13px" class="muted"><span>{{i.place}}</span><span>{{i.time}}</span></span>
+                  <span style="font-weight:600;font-size:15px">{{i.title}}</span>
+                  <span style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span class="badge {{i.catClass}}"><span class="shape {{i.shape}}"></span>{{i.catLabel}}</span><sc-if value="{{i.unverified}}" hint-placeholder-val="{{ false }}"><span class="st st-org">Não verificado</span></sc-if></span>
+                </button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{showIncident}}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <button class="tab" onClick="{{back}}" style="align-self:flex-start">← {{dv.name}}</button>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center">
+              <span class="badge {{inc.catClass}}"><span class="shape {{inc.shape}}"></span>{{inc.catLabel}}</span>
+              <sc-if value="{{inc.unverified}}" hint-placeholder-val="{{ false }}"><span class="st st-org">Não verificado</span></sc-if>
+            </div>
+            <h3 style="font-size:20px;line-height:1.25">{{inc.title}}</h3>
+            <p class="muted" style="margin:0;font-size:14px">{{inc.place}} · hoje, {{inc.time}}</p>
+            <sc-if value="{{inc.hasImage}}" hint-placeholder-val="{{ false }}">
+              <div style="border-radius:8px;background:repeating-linear-gradient(135deg,#E8E5DB 0 12px,#EFECE3 12px 24px);height:150px;display:flex;align-items:flex-end;border:1px solid #DDD8CC;box-sizing:border-box">
+                <span style="margin:8px;font-size:12px;background:#fff;padding:3px 8px;border-radius:4px" class="muted">Licença aberta · Crédito: [autor]</span>
+              </div>
+            </sc-if>
+            <p style="margin:0;font-size:15px">{{inc.desc}}</p>
+            <div style="padding-top:10px;border-top:1px solid #DDD8CC">
+              <p style="margin:0;font-size:14px"><span class="muted">Fonte:</span> <strong>{{inc.src}}</strong></p>
+              <a href="#" style="display:inline-flex;align-items:center;gap:6px;min-height:44px;font-weight:600">Ver fonte original <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.800" aria-hidden="true"><path d="M5 2H2v10h10V9M8 2h4v4M12 2L6 8"/></svg></a>
+            </div>
+          </div>
+        </sc-if>
+      </aside>
+    </section>
+
+    <!-- Recomendações -->
+    <section aria-labelledby="h-rec">
+      <h2 id="h-rec" style="font-size:22px;margin-bottom:6px">O que fazer</h2>
+      <p style="margin:0 0 12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14px" class="muted">Nível na sua zona: <span class="lv lv-vermelho">Vermelho</span></p>
+      <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap" role="group" aria-label="Situação">
+        <sc-for list="{{tabs}}" as="tab" hint-placeholder-count="3">
+          <button class="tab {{tab.on}}" aria-pressed="{{tab.pressed}}" onClick="{{tab.pick}}">{{tab.label}}</button>
+        </sc-for>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <sc-for list="{{recs}}" as="r" hint-placeholder-count="6">
+          <div class="card" style="display:flex;gap:12px;padding:14px">
+            <span class="h" style="flex:none;width:30px;height:30px;border-radius:50%;background:#15202B;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px">{{r.n}}</span>
+            <div><h3 style="font-size:16px;margin-bottom:2px">{{r.title}}</h3><p style="margin:0;font-size:14px" class="muted">{{r.text}}</p></div>
+          </div>
+        </sc-for>
+      </div>
+      <p style="margin:12px 0 0;font-size:13px;display:flex;flex-wrap:wrap;gap:8px;align-items:center" class="muted">Conselhos de: <span class="badge cat-g"><span class="shape sh-g"></span>Governamental · ANEPC <a href="#" style="margin-left:4px">Fonte</a></span></p>
+    </section>
+
+    <!-- 72h -->
+    <section aria-labelledby="h-prev">
+      <h2 id="h-prev" style="font-size:22px;margin-bottom:12px">Próximas 72 horas</h2>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <sc-for list="{{forecast}}" as="d" hint-placeholder-count="3">
+          <div class="card" style="display:flex;flex-direction:column;gap:10px;padding:14px">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h3 style="font-size:17px">{{d.day}}</h3><span class="lv {{d.lvClass}}">{{d.level}}</span></div>
+            <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+              <div><p class="muted" style="margin:0;font-size:12.500px">Rajada</p><p class="h" style="margin:0;font-size:20px;font-weight:700">{{d.wind}}<span style="font-size:12px"> km/h</span></p></div>
+              <div><p class="muted" style="margin:0;font-size:12.500px">Chuva</p><p class="h" style="margin:0;font-size:20px;font-weight:700">{{d.rain}}<span style="font-size:12px"> mm</span></p></div>
+              <div><p class="muted" style="margin:0;font-size:12.500px">Ondas</p><p class="h" style="margin:0;font-size:20px;font-weight:700">{{d.wave}}<span style="font-size:12px"> m</span></p></div>
+            </div>
+            <span class="badge cat-g" style="align-self:flex-start"><span class="shape sh-g"></span>Governamental · IPMA <a href="#" style="margin-left:4px">Fonte</a></span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- Serviços -->
+    <section aria-labelledby="h-serv">
+      <h2 id="h-serv" style="font-size:22px;margin-bottom:12px">Estradas, transportes e serviços</h2>
+      <div class="card" style="padding:0;overflow:hidden">
+        <sc-for list="{{services}}" as="s" hint-placeholder-count="6">
+          <div style="display:flex;flex-direction:column;gap:8px;padding:14px 16px;border-bottom:1px solid #EAE6DB">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+              <div style="min-width:0"><p class="muted" style="margin:0;font-size:12px;text-transform:uppercase;letter-spacing:.04em;font-weight:600">{{s.type}}</p><p style="margin:0;font-weight:600;font-size:15px">{{s.name}}</p></div>
+              <span class="st {{s.stClass}}" style="flex:none">{{s.status}}</span>
+            </div>
+            <span class="badge {{s.catClass}}" style="align-self:flex-start"><span class="shape {{s.shape}}"></span>{{s.catLabel}} · {{s.src}} <a href="#" style="margin-left:4px">Fonte</a></span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- Abrigos -->
+    <section aria-labelledby="h-abr">
+      <h2 id="h-abr" style="font-size:22px;margin-bottom:12px">Abrigos e pontos de apoio</h2>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <sc-for list="{{shelters}}" as="a" hint-placeholder-count="3">
+          <div class="card" style="display:flex;flex-direction:column;gap:4px;padding:14px">
+            <p class="muted" style="margin:0;font-size:13px;font-weight:600">{{a.concelho}}</p>
+            <h3 style="font-size:17px">{{a.name}}</h3>
+            <p class="ph" style="margin:0;font-size:14px">[morada]</p>
+            <span class="badge cat-g" style="align-self:flex-start;margin-top:6px"><span class="shape sh-g"></span>Governamental · {{a.src}} <a href="#" style="margin-left:4px">Fonte</a></span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- Boatos -->
+    <section aria-labelledby="h-boatos">
+      <h2 id="h-boatos" style="font-size:22px;margin-bottom:12px">Boatos desmentidos</h2>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <sc-for list="{{myths}}" as="m" hint-placeholder-count="2">
+          <div class="card" style="display:flex;flex-direction:column;gap:12px">
+            <div><span class="st st-red">Falso</span><p style="margin:8px 0 0;font-weight:600">{{m.claim}}</p></div>
+            <div><span class="st st-gry">O que dizem as fontes</span><p style="margin:8px 0 0;font-size:15px">{{m.fact}}</p></div>
+            <span class="badge {{m.catClass}}" style="align-self:flex-start"><span class="shape {{m.shape}}"></span>{{m.catLabel}} · {{m.src}} <a href="#" style="margin-left:4px">Fonte</a></span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- Feed -->
+    <section aria-labelledby="h-feed">
+      <h2 id="h-feed" style="font-size:22px;margin-bottom:12px">Últimas informações</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px" role="group" aria-label="Filtrar por categoria">
+        <sc-for list="{{cats}}" as="c" hint-placeholder-count="4">
+          <button class="chip {{c.on}}" aria-pressed="{{c.pressed}}" onClick="{{c.pick}}"><sc-if value="{{c.hasShape}}" hint-placeholder-val="{{ true }}"><span class="shape {{c.shape}}"></span></sc-if>{{c.label}}</button>
+        </sc-for>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden">
+        <sc-for list="{{feed}}" as="f" hint-placeholder-count="5">
+          <div style="display:flex;flex-direction:column;gap:6px;padding:14px 16px;border-bottom:1px solid #EAE6DB">
+            <p class="h" style="margin:0;font-weight:700;font-size:16px">{{f.time}}</p>
+            <p style="margin:0;font-weight:600;font-size:15px">{{f.title}}</p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+              <span class="badge {{f.catClass}}"><span class="shape {{f.shape}}"></span>{{f.catLabel}} · {{f.src}} <a href="#" style="margin-left:4px">Fonte</a></span>
+              <sc-if value="{{f.unverified}}" hint-placeholder-val="{{ false }}"><span class="st st-org">Não verificado</span></sc-if>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+
+  <footer id="como" style="background:#15202B;color:#fff;padding:28px 16px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px">
+    <div>
+      <h2 style="font-size:19px;margin-bottom:8px">Como calculamos o impacto</h2>
+      <p style="margin:0 0 8px;font-size:14px;color:#D6DCE3">Base pelo aviso do IPMA no distrito (verde 0, amarelo 10, laranja 20, vermelho 30), mais pontos pelas ocorrências do distrito: peso da fonte × gravidade × 5. Máximo 100. Menos de 10: sem relevância; 10 a 24: moderado; 25 a 49: alto; 50 ou mais: muito alto.</p>
+      <p style="margin:0;font-size:14px;color:#D6DCE3">Pesos: governamental 1 · comunicação social 0,7 · redes sociais verificada 0,7 · não verificada 0,3.</p>
+    </div>
+    <div>
+      <h2 style="font-size:19px;margin-bottom:8px">Sobre este site</h2>
+      <p style="margin:0;font-size:14px;color:#D6DCE3">Não é um serviço oficial e não substitui os avisos da Proteção Civil nem do IPMA. Relatos de redes sociais aparecem sempre como não verificados. Atualizado aproximadamente de 15 em 15 minutos.</p>
+    </div>
+  </footer>
+</div>
+</x-dc>
+
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":4700}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { sit: 'casa', cat: 'todas', district: 'leiria', incident: null, fg: true, fc: true, fr: true };
+  }
+  renderVals() {
+    const st = this.state;
+    const CAT = {
+      governamental: { catClass: 'cat-g', shape: 'sh-g', catLabel: 'Governamental' },
+      comunicacao_social: { catClass: 'cat-c', shape: 'sh-c', catLabel: 'Comunicação social' },
+      redes_sociais: { catClass: 'cat-r', shape: 'sh-r', catLabel: 'Redes sociais' }
+    };
+    const BASE = { verde: 0, amarelo: 10, laranja: 20, vermelho: 30 };
+    const WARN_CLASS = { verde: 'lv-none', amarelo: 'lv-amarelo', laranja: 'lv-laranja', vermelho: 'lv-vermelho' };
+    const LV_FILL = ['#F7F5EE', '#F4C20D', '#EE7B1E', '#D1242F'];
+    const LV_LABEL = ['sem relevância', 'moderado', 'alto', 'muito alto'];
+    const LV_CLASS = ['lv-none', 'lv-amarelo', 'lv-laranja', 'lv-vermelho'];
+    const D = [
+      { id: 'viana', name: 'Viana do Castelo', warn: 'amarelo', wt: 'Vento forte', count: 0, pts: 0 },
+      { id: 'braga', name: 'Braga', warn: 'amarelo', wt: 'Vento forte', count: 1, pts: 5 },
+      { id: 'porto', name: 'Porto', warn: 'laranja', wt: 'Vento forte e precipitação', count: 4, pts: 12 },
+      { id: 'vilareal', name: 'Vila Real', warn: 'amarelo', wt: 'Vento forte', count: 0, pts: 0 },
+      { id: 'braganca', name: 'Bragança', warn: 'verde', wt: 'Sem aviso em vigor', count: 0, pts: 0 },
+      { id: 'viseu', name: 'Viseu', warn: 'amarelo', wt: 'Vento forte', count: 0, pts: 0 },
+      { id: 'guarda', name: 'Guarda', warn: 'amarelo', wt: 'Vento forte', count: 1, pts: 2 },
+      { id: 'aveiro', name: 'Aveiro', warn: 'vermelho', wt: 'Vento e agitação marítima', count: 8, pts: 35 },
+      { id: 'coimbra', name: 'Coimbra', warn: 'vermelho', wt: 'Vento e agitação marítima', count: 8, pts: 30 },
+      { id: 'leiria', name: 'Leiria', warn: 'vermelho', wt: 'Vento e agitação marítima', count: 13, pts: 45 },
+      { id: 'castelobranco', name: 'Castelo Branco', warn: 'amarelo', wt: 'Vento forte', count: 0, pts: 0 },
+      { id: 'santarem', name: 'Santarém', warn: 'laranja', wt: 'Vento forte', count: 2, pts: 6 },
+      { id: 'lisboa', name: 'Lisboa', warn: 'laranja', wt: 'Vento forte e precipitação', count: 5, pts: 14 },
+      { id: 'portalegre', name: 'Portalegre', warn: 'verde', wt: 'Sem aviso em vigor', count: 0, pts: 0 },
+      { id: 'evora', name: 'Évora', warn: 'verde', wt: 'Sem aviso em vigor', count: 0, pts: 0 },
+      { id: 'setubal', name: 'Setúbal', warn: 'laranja', wt: 'Vento forte e agitação marítima', count: 3, pts: 6 },
+      { id: 'beja', name: 'Beja', warn: 'verde', wt: 'Sem aviso em vigor', count: 0, pts: 0 },
+      { id: 'faro', name: 'Faro', warn: 'amarelo', wt: 'Agitação marítima', count: 1, pts: 3 }
+    ].map((x) => {
+      const base = BASE[x.warn];
+      const score = Math.min(100, base + x.pts);
+      const level = score < 10 ? 0 : score < 25 ? 1 : score < 50 ? 2 : 3;
+      return { ...x, base, score, level };
+    });
+    const byId = {};
+    D.forEach((x) => { byId[x.id] = x; });
+    const pick = {}, f = {}, lf = {}, sk = {}, sw = {};
+    D.forEach((x) => {
+      pick[x.id] = () => this.setState({ district: x.id, incident: null });
+      f[x.id] = LV_FILL[x.level];
+      lf[x.id] = x.level === 3 ? '#FFFFFF' : '#15202B';
+      sk[x.id] = x.id === st.district ? '#15202B' : '#FFFFFF';
+      sw[x.id] = x.id === st.district ? 3.5 : 1.5;
+    });
+    const W = 390;
+    const INC = [
+      { id: 'i1', dist: 'aveiro', x: 98, y: 188, k: 'governamental', title: 'Inundação em vias urbanas', place: 'Aveiro', time: '12:40', desc: 'Várias ruas com água acumulada. Equipas de limpeza de sarjetas no local.', src: 'Proteção Civil Municipal de Aveiro' },
+      { id: 'i2', dist: 'aveiro', x: 106, y: 152, k: 'comunicacao_social', title: 'Queda de árvore sobre viaturas estacionadas', place: 'Ovar', time: '13:25', desc: 'Sem feridos, segundo o meio local. Viaturas danificadas.', src: '[Meio de comunicação]' },
+      { id: 'i3', dist: 'coimbra', x: 84, y: 238, k: 'governamental', title: 'Corte de estrada nacional', place: 'Figueira da Foz', time: '13:10', desc: 'Estrada cortada ao trânsito por queda de árvores e inundação. Desvio sinalizado.', src: 'Infraestruturas de Portugal' },
+      { id: 'i4', dist: 'coimbra', x: 130, y: 238, k: 'comunicacao_social', title: 'Habitações sem eletricidade', place: 'Coimbra', time: '12:55', desc: 'Falha de energia em várias ruas, segundo o meio local.', src: '[Meio de comunicação]' },
+      { id: 'i5', dist: 'leiria', x: 100, y: 268, k: 'governamental', title: 'Queda de árvores condiciona estrada municipal', place: 'Leiria', time: '13:48', desc: 'Várias árvores caídas na via. Equipas no local a remover os obstáculos. Circulação condicionada nos dois sentidos.', src: 'Proteção Civil Municipal de Leiria', image: true },
+      { id: 'i6', dist: 'leiria', x: 82, y: 276, k: 'comunicacao_social', title: 'Falha de eletricidade em várias freguesias', place: 'Marinha Grande', time: '13:30', desc: 'Sem serviço em várias freguesias, segundo o meio local.', src: '[Meio de comunicação]' },
+      { id: 'i7', dist: 'leiria', x: 52, y: 326, k: 'redes_sociais', title: 'Relato de telhado levantado pelo vento', place: 'Peniche', time: '13:05', desc: 'Publicação com fotografia. Sem confirmação oficial.', src: '[Rede social]', unverified: true },
+      { id: 'i8', dist: 'porto', x: 98, y: 128, k: 'redes_sociais', title: 'Relato de queda de telhado numa rua da cidade', place: 'Porto', time: '14:12', desc: 'Publicação sem confirmação oficial.', src: '[Rede social]', unverified: true },
+      { id: 'i9', dist: 'porto', x: 104, y: 137, k: 'comunicacao_social', title: 'Cheias em vias da cidade condicionam o trânsito', place: 'Vila Nova de Gaia', time: '14:05', desc: 'Trânsito condicionado em várias artérias, segundo o meio local.', src: '[Meio de comunicação]' },
+      { id: 'i10', dist: 'lisboa', x: 42, y: 366, k: 'comunicacao_social', title: 'Inundação em arruamento', place: 'Lisboa', time: '14:00', desc: 'Água acumulada numa avenida, segundo o meio local.', src: '[Meio de comunicação]' },
+      { id: 'i11', dist: 'setubal', x: 108, y: 468, k: 'governamental', title: 'Árvores caídas na via pública', place: 'Setúbal', time: '12:15', desc: 'Equipas municipais no local.', src: 'Proteção Civil Municipal de Setúbal' },
+      { id: 'i12', dist: 'faro', x: 160, y: 586, k: 'comunicacao_social', title: 'Vento forte derruba estruturas na orla', place: 'Faro', time: '11:55', desc: 'Sem registo de feridos, segundo o meio local.', src: '[Meio de comunicação]' },
+      { id: 'i13', dist: 'guarda', x: 216, y: 190, k: 'redes_sociais', title: 'Vídeo mostra árvore caída numa estrada do interior', place: 'Guarda', time: '13:20', desc: 'Local por confirmar.', src: '[Rede social]', unverified: true }
+    ];
+    const fOn = { governamental: st.fg, comunicacao_social: st.fc, redes_sociais: st.fr };
+    const selId = st.incident;
+    const pins = INC.filter((i) => fOn[i.k]).map((i) => ({
+      left: (((i.x + 60) / W) * 100).toFixed(2) + '%',
+      top: ((i.y / 620) * 100).toFixed(2) + '%',
+      shape: CAT[i.k].shape,
+      sel: selId === i.id ? 'sel' : '',
+      label: CAT[i.k].catLabel + (i.unverified ? ', não verificado' : '') + ': ' + i.title + ', ' + i.place + ', ' + i.time,
+      pick: () => this.setState({ district: i.dist, incident: i.id })
+    }));
+    const fchips = [['fg', 'Governamental', 'sh-g'], ['fc', 'Comunicação social', 'sh-c'], ['fr', 'Redes sociais', 'sh-r']].map(([key, label, shape]) => ({
+      label, shape, on: st[key] ? 'on' : '', pressed: st[key] ? 'true' : 'false',
+      pick: () => this.setState({ [key]: !st[key] })
+    }));
+    const cur = byId[st.district];
+    const list = INC.filter((i) => i.dist === cur.id).sort((a, b) => (a.time < b.time ? 1 : -1)).slice(0, 3);
+    const dv = {
+      name: cur.name,
+      impactLabel: LV_LABEL[cur.level],
+      impactClass: LV_CLASS[cur.level],
+      warnLabel: cur.warn,
+      warnClass: WARN_CLASS[cur.warn],
+      warnType: cur.wt,
+      score: cur.score,
+      base: cur.base,
+      pts: cur.pts,
+      pct: cur.score + '%',
+      barClass: LV_CLASS[cur.level],
+      shown: cur.count === 0 ? 'nenhuma' : (list.length < cur.count ? 'as ' + list.length + ' mais recentes de ' + cur.count : cur.count + ' no total'),
+      empty: cur.count === 0,
+      incidents: list.map((i) => ({
+        place: i.place, time: i.time, title: i.title, unverified: !!i.unverified,
+        ...CAT[i.k], pick: () => this.setState({ incident: i.id })
+      }))
+    };
+    const sel = INC.find((i) => i.id === selId);
+    const inc = sel
+      ? { ...CAT[sel.k], title: sel.title, place: sel.place, time: sel.time, desc: sel.desc, src: sel.src, unverified: !!sel.unverified, hasImage: !!sel.image }
+      : { catClass: '', shape: '', catLabel: '', title: '', place: '', time: '', desc: '', src: '', unverified: false, hasImage: false };
+
+    const sit = st.sit;
+    const cat = st.cat;
+    const tabsDef = [['casa', 'Em casa'], ['estrada', 'Na estrada'], ['costa', 'Perto da costa']];
+    const tabs = tabsDef.map(([id, label]) => ({
+      label, on: sit === id ? 'on' : '', pressed: sit === id ? 'true' : 'false',
+      pick: () => this.setState({ sit: id })
+    }));
+    const RECS = {
+      casa: [
+        ['Fique em casa', 'Se possível, evite sair enquanto durar o aviso.'],
+        ['Afaste-se de janelas', 'Evite portas e janelas de vidro; fique em divisões interiores.'],
+        ['Recolha objetos', 'Prenda ou guarde vasos, toldos e mobiliário no exterior.'],
+        ['Prepare luz e comunicações', 'Lanterna, rádio a pilhas e telemóvel carregado.'],
+        ['Não se abrigue sob árvores', 'Árvores, postes e placards podem cair com o vento.'],
+        ['Siga a Proteção Civil', 'Acompanhe as indicações das autoridades da sua zona.']
+      ],
+      estrada: [
+        ['Evite deslocações', 'Só viaje se for mesmo necessário.'],
+        ['Reduza a velocidade', 'Aumente a distância de segurança e agarre bem o volante.'],
+        ['Não atravesse zonas alagadas', 'Nem vias com árvores ou cabos elétricos caídos.'],
+        ['Estacione longe de árvores', 'E de placards e linhas elétricas.']
+      ],
+      costa: [
+        ['Afaste-se da orla costeira', 'Evite molhes, falésias e passeios marítimos.'],
+        ['Não vá ver as ondas', 'Ondas fortes arrastam pessoas sem aviso.'],
+        ['Retire equipamentos', 'Embarcações e material em zonas expostas.'],
+        ['Siga as autoridades marítimas', 'E as indicações da Proteção Civil local.']
+      ]
+    };
+    const recs = RECS[sit].map((r, i) => ({ n: i + 1, title: r[0], text: r[1] }));
+    const forecast = [
+      { day: 'Hoje, 10 nov', level: 'Vermelho', lvClass: 'lv-vermelho', wind: 118, rain: 42, wave: '7,5' },
+      { day: 'Amanhã, 11 nov', level: 'Laranja', lvClass: 'lv-laranja', wind: 96, rain: 28, wave: '6,0' },
+      { day: 'Quinta, 12 nov', level: 'Amarelo', lvClass: 'lv-amarelo', wind: 64, rain: 12, wave: '4,0' }
+    ];
+    const gov = (src) => ({ ...CAT.governamental, src });
+    const med = (src) => ({ ...CAT.comunicacao_social, src });
+    const services = [
+      { type: 'Estrada', name: 'Estrada nacional entre Figueira da Foz e Leiria', status: 'Cortada', stClass: 'st-red', ...gov('Infraestruturas de Portugal') },
+      { type: 'Comboio', name: 'Ligações Lisboa – Porto', status: 'Atrasos', stClass: 'st-org', ...gov('CP') },
+      { type: 'Aeroporto', name: 'Aeroporto de Lisboa', status: 'Atrasos', stClass: 'st-org', ...gov('ANA') },
+      { type: 'Escolas', name: 'Concelho de Leiria', status: 'Encerradas', stClass: 'st-gry', ...gov('Câmara Municipal de Leiria') },
+      { type: 'Eletricidade', name: 'Marinha Grande, várias freguesias', status: 'Sem serviço', stClass: 'st-red', ...med('[Meio de comunicação]') },
+      { type: 'Comunicações', name: 'Rede móvel no litoral centro', status: 'Condicionadas', stClass: 'st-org', ...med('[Meio de comunicação]') }
+    ];
+    const shelters = [
+      { concelho: 'Leiria', name: 'Pavilhão Municipal', src: 'Câmara Municipal de Leiria' },
+      { concelho: 'Leiria', name: 'Escola Secundária [nome]', src: 'Câmara Municipal de Leiria' },
+      { concelho: 'Marinha Grande', name: 'Pavilhão Gimnodesportivo', src: 'Proteção Civil Municipal' }
+    ];
+    const myths = [
+      { claim: 'Vão ser suspensas todas as aulas no país durante uma semana.', fact: 'Não há decisão nacional. Cada escola ou município informa os seus encerramentos pelos canais oficiais.', ...gov('Ministério da Educação') },
+      { claim: 'A água da torneira deixou de ser segura em todo o litoral.', fact: 'Não foi emitido qualquer alerta geral. As entidades gestoras avisam diretamente as zonas afetadas.', ...med('[Verificador de factos]') }
+    ];
+    const feedAll = [
+      { time: '14:22', title: 'Proteção Civil reforça meios de prevenção nos distritos em aviso vermelho.', k: 'governamental', src: 'ANEPC' },
+      { time: '14:12', title: 'Relato de queda de telhado numa rua do Porto. Sem confirmação oficial.', k: 'redes_sociais', src: '[Rede social]', unverified: true },
+      { time: '14:05', title: 'Cheias em vias da cidade condicionam o trânsito, segundo o meio local.', k: 'comunicacao_social', src: '[Meio de comunicação]' },
+      { time: '13:48', title: 'Câmara de Leiria informa abertura de pavilhão como abrigo.', k: 'governamental', src: 'Câmara Municipal de Leiria' },
+      { time: '13:20', title: 'Vídeo mostra árvore caída numa estrada do interior. Local por confirmar.', k: 'redes_sociais', src: '[Rede social]', unverified: true }
+    ];
+    const feed = feedAll.filter((x) => cat === 'todas' || x.k === cat).map((x) => ({
+      time: x.time, title: x.title, src: x.src, unverified: !!x.unverified, ...CAT[x.k]
+    }));
+    const catsDef = [['todas', 'Todas', null], ['governamental', 'Governamental', 'sh-g'], ['comunicacao_social', 'Comunicação social', 'sh-c'], ['redes_sociais', 'Redes sociais', 'sh-r']];
+    const cats = catsDef.map(([id, label, shape]) => ({
+      label, shape: shape || '', hasShape: !!shape,
+      on: cat === id ? 'on' : '', pressed: cat === id ? 'true' : 'false',
+      pick: () => this.setState({ cat: id })
+    }));
+    return {
+      pick, f, lf, sk, sw, pins, fchips, dv, inc,
+      districtId: st.district,
+      options: D.map((x) => ({ id: x.id, name: x.name })),
+      onSelect: (e) => this.setState({ district: e.target.value, incident: null }),
+      showDistrict: !sel,
+      showIncident: !!sel,
+      back: () => this.setState({ incident: null }),
+      tabs, recs, forecast, services, shelters, myths, feed, cats
+    };
+  }
+}
+</script>
+</body>
+</html>

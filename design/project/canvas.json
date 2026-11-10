@@ -1,0 +1,18 @@
+{
+  "v": 3,
+  "createdOnFiles": { "v": 1, "at": "2026-11-10T14:50:00Z" },
+  "title": "Tempestade Charles",
+  "launch": { "view": "canvas" },
+  "pages": [],
+  "boards": {
+    "Main.dc.html": { "x": 0, "y": 0, "w": 1440, "h": 4700, "title": "Desktop", "expand": "fill", "is_interactive": true },
+    "Recomendacoes.dc.html": { "x": 0, "y": 4820, "w": 1440, "h": 1000, "title": "O que fazer (página)", "expand": "fill", "is_interactive": true },
+    "Mobile.dc.html": { "x": 1560, "y": 0, "w": 390, "h": 4700, "title": "Telemóvel", "expand": "fill", "is_interactive": true }
+  },
+  "order": ["Main.dc.html", "Recomendacoes.dc.html", "Mobile.dc.html"],
+  "notes": {
+    "titulo": { "x": 0, "y": -260, "text": "Tempestade Charles — site de informação", "kind": "title1", "maxW": 1950 },
+    "aviso": { "x": 2070, "y": 0, "w": 300, "text": "Todo o conteúdo é ilustrativo. Dados reais vêm do IPMA e da tarefa agendada. Contactos por preencher aparecem entre [parênteses rectos].", "fill": "orange", "size": "s" }
+  },
+  "designSystems": []
+}
