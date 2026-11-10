@@ -5,7 +5,7 @@ import { countdown, parseLisbon, freshness, formatTime, formatDayTime, formatDay
 import { toMap } from './lib/projection.js';
 import { districtAt } from './lib/districtAt.js';
 import { lookupContacts, GEOAPI_SITE } from './data/geoapi.js';
-import { lookupNearby, OSM_COPYRIGHT } from './data/places.js';
+import { lookupNearby } from './data/places.js';
 import { haversineKm } from './lib/geo.js';
 import { DISTRICTS, DISTRICT_BY_ID, DISTRICT_BY_AREA, LAND_PATH } from './data/districts.js';
 import { IPMA, IPMA_SOURCE, WIND_CLASS, PREC_CLASS, normalizeWarnings, normalizeForecast, normalizeWeatherTypes, normalizeLocations, fetchCached } from './data/ipma.js';
@@ -281,75 +281,67 @@ function mapSection(imp) {
 }
 
 /* ---------- zona ---------- */
+function zoneRow(emoji, title, sub, actions) {
+  return `<li class="zrow"><span class="zi" aria-hidden="true">${emoji}</span><div class="zt"><strong>${title}</strong>${sub ? `<span class="muted">${sub}</span>` : ''}</div>${actions ? `<div class="za">${actions}</div>` : ''}</li>`;
+}
+
 function zoneSection() {
   const loc = locById(state.zoneLoc);
   const [from, to] = windowRange();
-  const ws = loc ? data.warnings.filter((w) => w.area === loc.area && w.start <= to && w.end >= from).sort((a, b) => rank(b.level) - rank(a.level)) : [];
+  const ws = loc ? data.warnings.filter((w) => w.area === loc.area && w.start <= to && w.end >= from).sort((x, y) => rank(y.level) - rank(x.level)) : [];
   const dist = loc ? DISTRICT_BY_AREA[loc.area] : null;
-  const shelters = dist ? data.curated.shelters.filter((s) => s.district === dist.id) : [];
+  const shelters = dist ? data.curated.shelters.filter((x) => x.district === dist.id) : [];
   const group = (r, name) => `<optgroup label="${name}">${data.locations.filter((l) => l.region === r).map((l) => `<option value="${l.id}" ${l.id === state.zoneLoc ? 'selected' : ''}>${esc(l.name)}</option>`).join('')}</optgroup>`;
   const top = ws[0];
   const next = loc ? upcoming([loc.area])[0] : null;
-  return `<section aria-labelledby="h-zona"><h2 id="h-zona" class="h2">${L('Na sua zona', 'In your area')}</h2>
-  <div class="card" style="display:flex;flex-wrap:wrap;gap:28px"><div style="flex:1 1 320px;display:flex;flex-direction:column;gap:14px;min-width:0">
-    <div class="field"><label for="localidade" style="font-size:14px">${L('Localidade (estações IPMA)', 'Location (IPMA stations)')}</label><select id="localidade" data-a="zoneSel" data-key="localidade" style="min-height:48px;font-size:16px">${group('continente', 'Continente')}${group('madeira', 'Madeira')}${group('acores', 'Açores')}</select></div>
-    <div><button class="tab" data-a="geo" id="geo" style="display:inline-flex;align-items:center;gap:10px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M9 1v3M9 14v3M1 9h3M14 9h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>${L('Usar a minha localização', 'Use my location')}</button><p id="geomsg" class="muted" style="margin:6px 0 0;font-size:13.5px" role="status"></p></div>
-    <div style="background:${top ? '#FDEBD3' : 'var(--frame)'};border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:8px">
-      ${top ? `<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">${lvPill(top.level)}<strong>${esc(typeName(top.type))} · ${esc(loc.name)}</strong></div><p style="margin:0;font-size:14px">${esc(formatDayTime(top.start, state.lang))} → ${esc(formatDayTime(top.end, state.lang))}</p>` : `<strong>${L('Sem aviso em vigor neste momento', 'No warning in force right now')}</strong>${next ? `<p style="margin:0;font-size:14px">${L('A seguir:', 'Next:')} ${lvPill(next.level)} ${esc(typeName(next.type))} · ${esc(formatDayTime(next.start, state.lang))}</p>` : ''}`}
-      ${sourceBadge(IPMA_SOURCE, { lang: state.lang })}</div></div>
-  <div style="flex:1 1 360px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(170px,100%),1fr));gap:12px;min-width:0">
-    <a href="tel:112" style="text-decoration:none;color:#fff;background:#D1242F;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;justify-content:center;min-height:72px"><span class="h" style="font-size:30px;font-weight:700">112</span><span style="font-size:14px">${L('Emergência: bombeiros, INEM, PSP e GNR', 'Emergency: fire, ambulance, police')}</span></a>
-    <a href="tel:808242424" class="card tinted" style="text-decoration:none;color:var(--ink);padding:14px 16px"><span class="muted" style="display:block;font-size:13px">SNS 24</span><span class="h num" style="font-size:20px;font-weight:700">808 24 24 24</span></a>
-    ${municipalCard()}${nearbyCards()}
-    <a href="${ANEPC.url}" target="_blank" rel="noopener noreferrer" class="card tinted" style="text-decoration:none;color:var(--ink);padding:14px 16px"><span class="muted" style="display:block;font-size:13px">${L('Proteção civil', 'Civil protection')}</span><span style="font-weight:600">${L('Contactos e orientações (ANEPC)', 'Contacts and guidance (ANEPC)')} ↗</span></a>
-    <div class="card tinted" style="padding:14px 16px"><span class="muted" style="display:block;font-size:13px">${L('Abrigos no distrito', 'Shelters in the district')}</span>${shelters.length ? shelters.slice(0, 3).map((s) => `<span style="display:block;font-weight:600;font-size:14px">${esc(txt(s.name))}</span>`).join('') : `<span style="font-size:14px">${L('Sem abrigos registados. Siga as indicações da câmara municipal.', 'No shelters recorded. Follow your municipality’s instructions.')}</span>`}</div>
-  </div></div></section>`;
-}
-
-function municipalCard() {
-  const label = L('Proteção civil municipal', 'Municipal civil protection');
-  const c = data.contact;
-  const wrap = (inner) => `<div class="card tinted" style="padding:14px 16px;grid-column:1/-1"><span class="muted" style="display:block;font-size:13px">${label}</span>${inner}</div>`;
-  if (!c) {
-    const msg = data.contactErr
-      ? L('Não foi possível obter os contactos do seu concelho. Em emergência ligue 112; para outros assuntos consulte a câmara municipal.', 'Could not load your municipality’s contacts. In an emergency call 112; for other matters contact your town hall.')
-      : L('Use a sua localização para ver os contactos do seu concelho.', 'Use your location to see your municipality’s contacts.');
-    return wrap(`<span style="font-size:14px">${msg}</span>`);
-  }
-  const m = c.municipio;
-  const line = (k, v) => (v ? `<span style="display:block;font-size:14px"><span class="muted">${k}</span> ${v}</span>` : '');
-  const rows = m
-    ? line(L('Telefone', 'Phone'), m.phoneHref ? `<a href="${esc(m.phoneHref)}" style="font-weight:600">${esc(m.phone)}</a>` : '')
-      + line('Email', m.email ? `<a href="mailto:${esc(m.email)}">${esc(m.email)}</a>` : '')
-      + line(L('Site', 'Website'), m.site ? `<a href="${esc(m.site)}" target="_blank" rel="noopener noreferrer">${esc(m.site.replace(/^https?:\/\//, ''))}</a>` : '')
-      + line(L('Morada', 'Address'), m.address ? esc(m.address) : '')
-    : `<span style="font-size:14px">${L('Contactos do município indisponíveis.', 'Municipality contacts unavailable.')}</span>`;
-  return wrap(`<strong style="font-size:17px">${L('Câmara Municipal de', 'Town hall of')} ${esc(c.concelho)}</strong>
-    <span class="muted" style="display:block;font-size:13px;margin-bottom:6px">${L('O presidente da câmara é a autoridade municipal de proteção civil.', 'The mayor is the municipal civil protection authority.')}</span>
-    ${rows}
-    <span class="muted" style="display:block;font-size:12px;margin-top:6px">${c.byUser ? L('Concelho pela sua localização', 'Municipality from your location') : L('Concelho da localidade escolhida; ative a localização para ver o seu', 'Municipality of the chosen location; enable location to see yours')}. ${L('Fonte dos contactos', 'Contacts source')}: <a href="${GEOAPI_SITE}" target="_blank" rel="noopener noreferrer">geoapi.pt</a></span>`);
-}
-
-function nearbyCards() {
-  const nb = data.nearby;
+  const level = top ? top.level : 'verde';
   const kmTxt = (km) => (km < 1 ? `${Math.round(km * 10) * 100} m` : `${km.toFixed(1).replace('.', state.lang === 'en' ? '.' : ',')} km`);
-  const find = (q) => `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}" target="_blank" rel="noopener noreferrer" style="display:block;margin-top:6px;font-size:14px;font-weight:600">${L('Procurar perto de si no mapa', 'Search near you on the map')} ↗</a>`;
-  const card = (title, part, q) => {
-    let body;
-    if (!nb) body = `<span style="font-size:14px" class="muted">${L('A procurar…', 'Searching…')}</span>`;
-    else if (!part || part.error) body = `<span style="font-size:14px">${L('Não foi possível obter este dado. Em emergência ligue 112.', 'Could not load this. In an emergency call 112.')}</span>${find(q)}`;
-    else if (!part.place) body = `<span style="font-size:14px">${L(`Nenhuma encontrada num raio de ${part.radiusKm} km.`, `None found within ${part.radiusKm} km.`)}</span>${find(q)}`;
-    else {
-      const p = part.place;
-      body = `<strong style="display:block;font-size:15px">${esc(p.name || title)}</strong>
-        <span class="muted num" style="display:block;font-size:13px">${esc(kmTxt(p.km))} ${nb.byUser ? L('de si', 'from you') : L('da localidade escolhida', 'from the chosen location')}${p.address ? ` · ${esc(p.address)}` : ''}</span>
-        ${p.phone ? `<a href="${esc(p.phone.href)}" style="font-weight:600;font-size:14px">${esc(p.phone.display)}</a>` : ''}
-        <a href="${esc(p.mapUrl)}" target="_blank" rel="noopener noreferrer" style="display:inline-block;font-size:14px;margin-left:${p.phone ? '12px' : '0'}">${L('Ver no mapa', 'View on map')} ↗</a>`;
-    }
-    return `<div class="card tinted" style="padding:14px 16px"><span class="muted" style="display:block;font-size:13px">${title}</span>${body}</div>`;
+  const phoneBtn = (p) => (p ? `<a class="zbtn" href="${esc(p.href || p.phoneHref)}"><span aria-hidden="true">📞</span> ${esc(p.display || p.phone)}</a>` : '');
+  const mapLink = (url) => `<a class="zlink" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${L('Mapa', 'Map')} ↗</a>`;
+  const find = (q) => `<a class="zlink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}" target="_blank" rel="noopener noreferrer">${L('Procurar no mapa', 'Search on map')} ↗</a>`;
+
+  const warn = `<div class="zwarn" style="--lc:${level === 'verde' ? '#8A857A' : `var(--${level})`}">
+    ${top ? `<div style="display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center">${lvPill(top.level)}<strong>${esc(typeName(top.type))} · ${esc(loc.name)}</strong></div><span class="muted" style="font-size:14px">${esc(formatDayTime(top.start, state.lang))} → ${esc(formatDayTime(top.end, state.lang))}</span>` : `<strong>${L('Sem aviso em vigor neste momento', 'No warning in force right now')}</strong>`}
+    ${next ? `<span style="font-size:14px">${L('A seguir', 'Next')}: ${lvPill(next.level)} ${esc(typeName(next.type))} · ${esc(formatDayTime(next.start, state.lang))}</span>` : ''}
+    <span style="margin-top:2px">${sourceBadge(IPMA_SOURCE, { lang: state.lang })}</span></div>`;
+
+  /* Câmara municipal */
+  const c = data.contact; const m = c?.municipio;
+  let camara;
+  if (!c) {
+    camara = zoneRow('🏛️', L('Câmara Municipal', 'Town hall'), data.contactErr ? L('Não foi possível obter os contactos. Consulte a câmara municipal.', 'Could not load the contacts. Contact your town hall.') : L('A procurar o seu concelho…', 'Finding your municipality…'), '');
+  } else {
+    const extra = m ? [m.address ? esc(m.address) : '', m.email ? `<a href="mailto:${esc(m.email)}">${esc(m.email)}</a>` : '', m.site ? `<a href="${esc(m.site)}" target="_blank" rel="noopener noreferrer">${esc(m.site.replace(/^https?:\/\//, '').replace(/\/$/, ''))}</a>` : ''].filter(Boolean).join(' · ') : '';
+    const where = c.byUser ? '' : ` (${L('localidade escolhida', 'chosen location')})`;
+    camara = zoneRow('🏛️', `${L('Câmara Municipal de', 'Town hall of')} ${esc(c.concelho)}${where}`, `${L('Autoridade municipal de proteção civil', 'Municipal civil protection authority')}${extra ? `<br>${extra}` : ''}`, m ? phoneBtn(m) : '');
+  }
+
+  /* Bombeiros e farmácia mais próximos */
+  const nb = data.nearby;
+  const near = (emoji, title, part, q) => {
+    if (!nb) return zoneRow(emoji, title, L('A procurar…', 'Searching…'), '');
+    if (!part || part.error) return zoneRow(emoji, title, L('Não foi possível obter este dado.', 'Could not load this.'), find(q));
+    if (!part.place) return zoneRow(emoji, title, L(`Nenhum encontrado num raio de ${part.radiusKm} km.`, `None found within ${part.radiusKm} km.`), find(q));
+    const p = part.place;
+    const sub = `${esc(kmTxt(p.km))} ${nb.byUser ? L('de si', 'from you') : L('da localidade escolhida', 'from the chosen location')}${p.address ? ` · ${esc(p.address)}` : ''}`;
+    return zoneRow(emoji, esc(p.name || title), sub, `${phoneBtn(p.phone)}${mapLink(p.mapUrl)}`);
   };
-  return `${card(L('Bombeiros mais próximos', 'Nearest fire station'), nb?.fire, 'quartel de bombeiros')}${card(L('Farmácia mais próxima', 'Nearest pharmacy'), nb?.pharmacy, 'farmácia')}
-    <p class="muted" style="grid-column:1/-1;margin:0;font-size:12px">${L('Localizações e telefones do OpenStreetMap (podem estar incompletos; a farmácia pode não estar de serviço). Dados ©', 'Locations and phones from OpenStreetMap (may be incomplete; the pharmacy may not be on duty). Data ©')} <a href="${OSM_COPYRIGHT}" target="_blank" rel="noopener noreferrer">OpenStreetMap</a></p>`;
+  const fire = near('🚒', L('Bombeiros mais próximos', 'Nearest fire station'), nb?.fire, 'quartel de bombeiros');
+  const pharmacy = near('💊', L('Farmácia mais próxima', 'Nearest pharmacy'), nb?.pharmacy, 'farmácia');
+
+  const prociv = zoneRow('🛡️', L('Proteção Civil (ANEPC)', 'Civil Protection (ANEPC)'), L('Avisos e orientações oficiais', 'Official warnings and guidance'), `<a class="zlink" href="${ANEPC.url}" target="_blank" rel="noopener noreferrer">prociv.gov.pt ↗</a>`);
+  const abrigos = zoneRow('⛺', L('Abrigos no distrito', 'Shelters in the district'), shelters.length ? shelters.slice(0, 3).map((x) => esc(txt(x.name))).join(' · ') : L('Sem abrigos registados. Siga as indicações da câmara municipal.', 'No shelters recorded. Follow your town hall’s instructions.'), '');
+
+  return `<section aria-labelledby="h-zona"><h2 id="h-zona" class="h2">${L('Na sua zona', 'In your area')}</h2>
+  <div class="card zone">
+    <div class="zbar">
+      <div class="field" style="flex:1 1 240px;max-width:380px"><label for="localidade" style="font-size:14px">${L('Localidade', 'Location')}</label><select id="localidade" data-a="zoneSel" data-key="localidade" style="min-height:48px;font-size:16px;width:100%">${group('continente', 'Continente')}${group('madeira', 'Madeira')}${group('acores', 'Açores')}</select></div>
+      <button class="tab" data-a="geo" id="geo" style="display:inline-flex;align-items:center;gap:10px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M9 1v3M9 14v3M1 9h3M14 9h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>${L('Usar a minha localização', 'Use my location')}</button>
+      <p id="geomsg" class="muted" style="margin:0;font-size:13.5px;flex:1 1 100%" role="status"></p>
+    </div>
+    ${warn}
+    <ul class="zlist">${camara}${fire}${pharmacy}${prociv}${abrigos}</ul>
+  </div></section>`;
 }
 
 function forecastSection() {
