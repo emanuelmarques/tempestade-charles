@@ -272,5 +272,31 @@
       "name": "Euronews",
       "url": "https://pt.euronews.com/2026/11/10/depressao-charles-traz-chuva-e-vento-forte-governo-pede-prudencia-maxima-so-saia-se-for-me"
     }
+  },
+  {
+    "id": "f-2026-11-10-rtp-recursos",
+    "time": "2026-11-10T20:30:00Z",
+    "title": {
+      "pt": "GNR com cerca de 1.100 militares em prontidão; Forças Armadas em prontidão; 101 municípios sinalizados pela APA com risco de cheias urbanas; Leiria declara situação de alerta e Nível de Prontidão 4 desde a meia-noite de quarta-feira",
+      "en": "GNR has about 1,100 personnel on standby; Armed Forces on standby; 101 municipalities flagged by APA for urban flood risk; Leiria declares alert and Readiness Level 4 from midnight Wednesday"
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "RTP",
+      "url": "https://www.rtp.pt/noticias/pais/pais-vai-ser-posto-a-prova-governo-declara-situacao-de-alerta-para-quarta-feira_e1778024"
+    }
+  },
+  {
+    "id": "f-2026-11-10-rtp-websummit",
+    "time": "2026-11-10T20:30:00Z",
+    "title": {
+      "pt": "Web Summit: o segundo dia (quarta-feira) não se realiza; o terceiro dia (quinta-feira) mantém-se. Parlamento em teletrabalho na quarta-feira",
+      "en": "Web Summit: day two (Wednesday) will not take place; day three (Thursday) stays. Parliament works remotely on Wednesday"
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "RTP",
+      "url": "https://www.rtp.pt/noticias/pais/pais-vai-ser-posto-a-prova-governo-declara-situacao-de-alerta-para-quarta-feira_e1778024"
+    }
   }
 ]

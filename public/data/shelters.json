@@ -1,1 +1,86 @@
-[]
+[
+  {
+    "id": "sh-metro-0",
+    "name": {
+      "pt": "Estação de metro de Santa Apolónia (Linha Azul) aberta para pessoas sem-abrigo nas noites de 10 para 11 e 11 para 12 de novembro",
+      "en": "Metro station Santa Apolónia (Linha Azul) open to homeless people on the nights of 10–11 and 11–12 November"
+    },
+    "place": "Lisboa",
+    "district": "lisboa",
+    "source": {
+      "category": "comunicacao_social",
+      "name": "RTP",
+      "url": "https://www.rtp.pt/noticias/pais/pais-vai-ser-posto-a-prova-governo-declara-situacao-de-alerta-para-quarta-feira_e1778024"
+    }
+  },
+  {
+    "id": "sh-metro-1",
+    "name": {
+      "pt": "Estação de metro de Marquês de Pombal (Linha Amarela) aberta para pessoas sem-abrigo nas noites de 10 para 11 e 11 para 12 de novembro",
+      "en": "Metro station Marquês de Pombal (Linha Amarela) open to homeless people on the nights of 10–11 and 11–12 November"
+    },
+    "place": "Lisboa",
+    "district": "lisboa",
+    "source": {
+      "category": "comunicacao_social",
+      "name": "RTP",
+      "url": "https://www.rtp.pt/noticias/pais/pais-vai-ser-posto-a-prova-governo-declara-situacao-de-alerta-para-quarta-feira_e1778024"
+    }
+  },
+  {
+    "id": "sh-metro-2",
+    "name": {
+      "pt": "Estação de metro de Moscavide (Linha Vermelha) aberta para pessoas sem-abrigo nas noites de 10 para 11 e 11 para 12 de novembro",
+      "en": "Metro station Moscavide (Linha Vermelha) open to homeless people on the nights of 10–11 and 11–12 November"
+    },
+    "place": "Lisboa",
+    "district": "lisboa",
+    "source": {
+      "category": "comunicacao_social",
+      "name": "RTP",
+      "url": "https://www.rtp.pt/noticias/pais/pais-vai-ser-posto-a-prova-governo-declara-situacao-de-alerta-para-quarta-feira_e1778024"
+    }
+  },
+  {
+    "id": "sh-metro-3",
+    "name": {
+      "pt": "Estação de metro de Amadora Este (Linha Azul) aberta para pessoas sem-abrigo nas noites de 10 para 11 e 11 para 12 de novembro",
+      "en": "Metro station Amadora Este (Linha Azul) open to homeless people on the nights of 10–11 and 11–12 November"
+    },
+    "place": "Lisboa",
+    "district": "lisboa",
+    "source": {
+      "category": "comunicacao_social",
+      "name": "RTP",
+      "url": "https://www.rtp.pt/noticias/pais/pais-vai-ser-posto-a-prova-governo-declara-situacao-de-alerta-para-quarta-feira_e1778024"
+    }
+  },
+  {
+    "id": "sh-metro-4",
+    "name": {
+      "pt": "Estação de metro de Interface de Olaias aberta para pessoas sem-abrigo nas noites de 10 para 11 e 11 para 12 de novembro",
+      "en": "Metro station Interface de Olaias open to homeless people on the nights of 10–11 and 11–12 November"
+    },
+    "place": "Lisboa",
+    "district": "lisboa",
+    "source": {
+      "category": "comunicacao_social",
+      "name": "RTP",
+      "url": "https://www.rtp.pt/noticias/pais/pais-vai-ser-posto-a-prova-governo-declara-situacao-de-alerta-para-quarta-feira_e1778024"
+    }
+  },
+  {
+    "id": "sh-marinha-grande",
+    "name": {
+      "pt": "Marinha Grande: duas zonas de concentração e apoio, para 50 pessoas cada",
+      "en": "Marinha Grande: two gathering and support zones, 50 people each"
+    },
+    "place": "Marinha Grande",
+    "district": "leiria",
+    "source": {
+      "category": "comunicacao_social",
+      "name": "RTP",
+      "url": "https://www.rtp.pt/noticias/pais/pais-vai-ser-posto-a-prova-governo-declara-situacao-de-alerta-para-quarta-feira_e1778024"
+    }
+  }
+]
