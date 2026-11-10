@@ -18,14 +18,14 @@ function boxes() {
   grid(32.3, 33.2, -17.3, -16.2, 1.2); // Madeira
   return out;
 }
-const query = ([s0, w, n0, e]) => `[out:json][timeout:30];(node[amenity=pharmacy](${s0},${w},${n0},${e});nwr[amenity=fire_station](${s0},${w},${n0},${e}););out tags center;`;
+const query = ([s0, w, n0, e]) => `[out:json][timeout:60];(node[amenity=pharmacy](${s0},${w},${n0},${e});nwr[amenity=fire_station](${s0},${w},${n0},${e}););out tags center;`;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function fetchBox(box, depth = 0) {
   for (let attempt = 0; attempt < 3; attempt++) {
-    const ep = ENDPOINTS[(attempt + depth) % ENDPOINTS.length];
+    const ep = attempt < 2 ? ENDPOINTS[0] : ENDPOINTS[1 + ((attempt + depth) % (ENDPOINTS.length - 1))];
     try {
-      const res = await fetch(`${ep}?data=${encodeURIComponent(query(box))}`, { headers: { 'User-Agent': 'tempestade-charles-build/0.1' }, signal: AbortSignal.timeout(45000) });
+      const res = await fetch(`${ep}?data=${encodeURIComponent(query(box))}`, { headers: { 'User-Agent': 'tempestade-charles-build/0.1' }, signal: AbortSignal.timeout(100000) });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const json = JSON.parse(await res.text());
       if (!Array.isArray(json.elements)) throw new Error('resposta inválida');

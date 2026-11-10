@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { cleanPhone, phoneFromDigits, nearestPlace } from '../../src/data/places.js';
+import { cleanPhone, phoneFromDigits, nearestPlace, photonRows, photonUrl } from '../../src/data/places.js';
 
 const pt = { lat: 39.7436, lon: -8.8071 }; // Leiria
 const rows = [
@@ -44,11 +44,44 @@ describe('lookupNearby', () => {
     expect(r.fire.place.name).toContain('Bombeiros');
     expect(r.pharmacy.place.name).toBe('Farmácia Longe');
   });
-  it('devolve erro nas duas partes se o ficheiro falhar', async () => {
+  it('sem places.json procura em tempo real e acrescenta o telefone', async () => {
     vi.resetModules();
     const { lookupNearby } = await import('../../src/data/places.js');
-    const r = await lookupNearby(pt, async () => ({ ok: false, status: 404 }));
-    expect(r.pharmacy.error).toContain('404');
-    expect(r.fire.error).toContain('404');
+    const photon = { features: [
+      { geometry: { coordinates: [-8.8166, 39.7675] }, properties: { name: 'Bombeiros Longe', osm_type: 'W', osm_id: 1 } },
+      { geometry: { coordinates: [-8.8003, 39.7411] }, properties: { name: 'Bombeiros Sapadores', street: 'Rua de Tomar', city: 'Leiria', osm_type: 'N', osm_id: 2 } },
+    ] };
+    const fetchFn = vi.fn(async (url) => {
+      if (url.includes('places.json')) return { ok: false, status: 404 };
+      if (url.includes('photon')) return { ok: true, json: async () => photon };
+      if (url.includes('nominatim')) return { ok: true, json: async () => [{ extratags: { phone: '+351 244 839 100' } }] };
+      throw new Error('inesperado');
+    });
+    const r = await lookupNearby(pt, fetchFn);
+    expect(r.fire.place.name).toBe('Bombeiros Sapadores');
+    expect(r.fire.place.address).toBe('Rua de Tomar, Leiria');
+    expect(r.fire.place.phone.href).toBe('tel:+351244839100');
+  });
+  it('se o Nominatim falhar mantém o lugar sem telefone; se tudo falhar devolve erro', async () => {
+    vi.resetModules();
+    const { lookupNearby } = await import('../../src/data/places.js');
+    const photon = { features: [{ geometry: { coordinates: [-8.8003, 39.7411] }, properties: { name: 'X', osm_type: 'N', osm_id: 2 } }] };
+    const half = async (url) => {
+      if (url.includes('photon')) return { ok: true, json: async () => photon };
+      return { ok: false, status: 429 };
+    };
+    const r = await lookupNearby(pt, half);
+    expect(r.pharmacy.place.name).toBe('X');
+    expect(r.pharmacy.place.phone).toBeNull();
+    vi.resetModules();
+    const again = await import('../../src/data/places.js');
+    const bad = await again.lookupNearby(pt, async () => ({ ok: false, status: 503 }));
+    expect(bad.fire.error).toContain('503');
+    expect(bad.pharmacy.error).toContain('503');
+  });
+  it('converte a resposta do Photon e monta o pedido', () => {
+    expect(photonRows({ features: [{ geometry: { coordinates: [-8.8, 39.7] }, properties: { name: 'A', postcode: '2400-000', city: 'Leiria', osm_type: 'N', osm_id: 5 } }, { geometry: {}, properties: {} }] })).toEqual([[39.7, -8.8, 'A', '', '2400-000 Leiria', 'N5']]);
+    expect(photonUrl('fire', pt)).toContain('osm_tag=amenity:fire_station');
+    expect(photonRows(null)).toEqual([]);
   });
 });

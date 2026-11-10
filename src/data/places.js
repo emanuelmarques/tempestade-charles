@@ -44,7 +44,60 @@ export function loadPlaces(fetchFn = fetch, base = './data/') {
   return loading;
 }
 
-/** Farmácia e bombeiros mais próximos de um ponto {lat, lon}: { pharmacy, fire } com { place, radiusKm } ou { error }. */
+/* ---- alternativa em tempo real (sem Overpass): Photon para encontrar, Nominatim para o telefone ---- */
+const PHOTON = 'https://photon.komoot.io/api/';
+const NOMINATIM = 'https://nominatim.openstreetmap.org/lookup';
+const LIVE = { pharmacy: { q: 'farmácia', tag: 'amenity:pharmacy' }, fire: { q: 'bombeiros', tag: 'amenity:fire_station' } };
+
+export const photonUrl = (kind, pt) =>
+  `${PHOTON}?q=${encodeURIComponent(LIVE[kind].q)}&lat=${pt.lat.toFixed(3)}&lon=${pt.lon.toFixed(3)}&osm_tag=${LIVE[kind].tag}&limit=10`;
+
+/** Resposta do Photon -> linhas [lat, lon, nome, telefone, morada, refOSM]. */
+export function photonRows(json) {
+  return (json?.features ?? []).flatMap((f) => {
+    const [lon, lat] = f.geometry?.coordinates ?? [];
+    const p = f.properties ?? {};
+    if (typeof lat !== 'number' || typeof lon !== 'number') return [];
+    const street = [p.street, p.housenumber].filter(Boolean).join(' ');
+    const town = [p.postcode, p.city || p.district].filter(Boolean).join(' ');
+    const ref = p.osm_type && p.osm_id ? `${p.osm_type}${p.osm_id}` : '';
+    return [[lat, lon, p.name || '', '', [street, town].filter(Boolean).join(', '), ref]];
+  });
+}
+
+async function getJson(url, fetchFn, ms) {
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), ms);
+  try {
+    const res = await fetchFn(url, { signal: ctl.signal });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  } finally { clearTimeout(timer); }
+}
+
+/** Telefone pelo Nominatim (melhor esforço): devolve o lugar com `phone` se existir. */
+async function withPhone(place, ref, fetchFn) {
+  if (!place || !ref) return place;
+  try {
+    const rows = await getJson(`${NOMINATIM}?osm_ids=${encodeURIComponent(ref)}&format=jsonv2&extratags=1`, fetchFn, 6000);
+    const t = rows?.[0]?.extratags;
+    return { ...place, phone: (t && cleanPhone(t)) || place.phone };
+  } catch {
+    return place;
+  }
+}
+
+async function liveNearest(kind, pt, fetchFn) {
+  const rows = photonRows(await getJson(photonUrl(kind, pt), fetchFn, 9000));
+  const place = nearestPlace(rows, pt, RADIUS_KM[kind]);
+  const row = place && rows.find((r) => r[0] === place.lat && r[1] === place.lon);
+  return { place: await withPhone(place, row?.[5], fetchFn), radiusKm: RADIUS_KM[kind] };
+}
+
+/**
+ * Farmácia e quartel de bombeiros mais próximos de um ponto {lat, lon}: { pharmacy, fire } com { place, radiusKm } ou { error }.
+ * Usa primeiro public/data/places.json; se não existir, procura em tempo real (Photon + Nominatim).
+ */
 export async function lookupNearby(pt, fetchFn = fetch) {
   try {
     const places = await loadPlaces(fetchFn);
@@ -52,8 +105,9 @@ export async function lookupNearby(pt, fetchFn = fetch) {
       pharmacy: { place: nearestPlace(places.pharmacy, pt, RADIUS_KM.pharmacy), radiusKm: RADIUS_KM.pharmacy },
       fire: { place: nearestPlace(places.fire, pt, RADIUS_KM.fire), radiusKm: RADIUS_KM.fire },
     };
-  } catch (e) {
-    const error = String(e.message || e);
-    return { pharmacy: { error }, fire: { error } };
+  } catch {
+    const one = (kind) => liveNearest(kind, pt, fetchFn).catch((e) => ({ error: String(e.message || e) }));
+    const [pharmacy, fire] = await Promise.all([one('pharmacy'), one('fire')]);
+    return { pharmacy, fire };
   }
 }
