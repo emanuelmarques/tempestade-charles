@@ -157,7 +157,7 @@ function pinShape(cat, s, selected) {
 
 function mapPins() {
   const inc = data.curated.incidents.filter((i) => i.lat != null && i.lon != null && state.filt[i.source.category]);
-  const box = document.getElementById('mapbox');
+  const box = document.querySelector('#mapbox svg');
   const ppu = box ? Math.min(box.clientWidth / state.view.w, box.clientHeight / state.view.h) || 1 : 1;
   const s = 1 / ppu;
   return inc.map((i) => {
@@ -239,7 +239,7 @@ function mapSection(imp) {
       <div style="display:flex" role="group" aria-label="${L('Região', 'Region')}">${seg('region', [['continente', 'Continente'], ['acores', 'Açores'], ['madeira', 'Madeira']], state.region)}</div>
     </div>
       ${reg ? '' : `<div style="display:flex;flex-wrap:wrap;gap:8px" role="group" aria-label="${L('Filtrar ocorrências por categoria de fonte', 'Filter incidents by source category')}">${chips}</div>`}</div>
-    ${reg ? regionPanel(state.region) : `<div class="mapbox" id="mapbox">${mapSvg(imp)}<div class="zoom"><button class="ctl" data-a="zoom" data-v="in" aria-label="${L('Aproximar', 'Zoom in')}">+</button><button class="ctl" data-a="zoom" data-v="out" aria-label="${L('Afastar', 'Zoom out')}">−</button></div>${legend()}</div>`}
+    ${reg ? regionPanel(state.region) : `<div class="mapbox" id="mapbox"><div class="mapview">${mapSvg(imp)}<div class="zoom"><button class="ctl" data-a="zoom" data-v="in" aria-label="${L('Aproximar', 'Zoom in')}">+</button><button class="ctl" data-a="zoom" data-v="out" aria-label="${L('Afastar', 'Zoom out')}">−</button></div></div>${legend()}</div>`}
   </div>
   <aside class="card panel" aria-live="polite" aria-label="${L('Detalhe', 'Details')}">${state.incidentId ? incidentPanel() : districtPanel(imp)}</aside></div></section>`;
 }
@@ -440,11 +440,11 @@ function onPointerMove(e) {
   const dx = e.clientX - mapDrag.x; const dy = e.clientY - mapDrag.y;
   if (!mapDrag.moved && Math.hypot(dx, dy) < 5) return;
   mapDrag.moved = true;
-  const box = document.getElementById('mapbox'); if (!box) return;
+  const box = document.querySelector('#mapbox svg'); if (!box) return;
   const ppu = Math.min(box.clientWidth / state.view.w, box.clientHeight / state.view.h) || 1;
   mapDrag.x = e.clientX; mapDrag.y = e.clientY;
   setView({ ...state.view, x: state.view.x - dx / ppu, y: state.view.y - dy / ppu });
-  box.querySelector('svg').classList.add('drag');
+  box.classList.add('drag');
 }
 function onPointerUp() {
   if (!mapDrag.on) return;

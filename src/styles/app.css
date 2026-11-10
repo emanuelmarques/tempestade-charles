@@ -81,8 +81,9 @@ select { min-height: 44px; font: 600 14px 'Inter Variable', sans-serif; border: 
 .maprow { display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch; }
 .mapcol { flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 12px; }
 .mapbox { position: relative; height: 620px; border-radius: 12px; overflow: hidden; background: var(--sea); border: 1px solid var(--rule); touch-action: none; }
-.mapbox svg { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; }
-.mapbox svg.drag { cursor: grabbing; }
+.mapview { position: absolute; inset: 0; }
+.mapview svg { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; }
+.mapview svg.drag { cursor: grabbing; }
 .dist path { stroke-linejoin: round; transition: fill .2s; }
 .dist:hover path { filter: brightness(.96); }
 .dist text { pointer-events: none; font: 600 11px 'Inter Variable', sans-serif; }
@@ -97,7 +98,11 @@ select { min-height: 44px; font: 600 14px 'Inter Variable', sans-serif; border: 
 .legend span { display: flex; align-items: center; gap: 8px; }
 .sw { display: inline-block; width: 16px; height: 16px; border-radius: 4px; border: 1px solid var(--ink); flex: none; }
 .maphint { position: absolute; left: 8px; bottom: 6px; font-size: 11px; background: rgba(255,255,255,.85); padding: 1px 6px; border-radius: 4px; }
-@media (max-width: 720px) { .mapbox { height: 440px; } .legend { position: static; width: auto; margin: 8px; } .mapbox.has-legend { height: auto; } }
+@media (max-width: 720px) {
+  .mapbox { height: auto; display: flex; flex-direction: column; }
+  .mapview { position: relative; inset: auto; height: 440px; flex: none; }
+  .legend { position: static; width: auto; margin: 8px; }
+}
 .panel { flex: 1 1 340px; max-width: 100%; display: flex; flex-direction: column; gap: 14px; align-self: stretch; }
 .item { width: 100%; text-align: left; background: #fff; border: 1px solid var(--rule); border-radius: 10px; padding: 12px 14px; min-height: 44px; cursor: pointer; font: inherit; color: inherit; display: flex; flex-direction: column; gap: 6px; }
 .item:hover { border-color: var(--ink); }
