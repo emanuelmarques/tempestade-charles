@@ -3,8 +3,8 @@
     "id": "i-lisboa-bratislava",
     "district": "lisboa",
     "place": "Lisboa (Avenida Cidade de Bratislava)",
-    "lat": null,
-    "lon": null,
+    "lat": 38.7498,
+    "lon": -9.1196,
     "time": "2026-11-10T10:33:52Z",
     "severity": 1,
     "verified": false,
@@ -20,14 +20,15 @@
       "category": "redes_sociais",
       "name": "@jt_rebelo@ciberlandia.pt (Mastodon)",
       "url": "https://ciberlandia.pt/@jt_rebelo/117591692591663759"
-    }
+    },
+    "locationApprox": true
   },
   {
     "id": "i-lisboa-vila-maia",
     "district": "lisboa",
     "place": "Lisboa (Vila Maia, Estrela)",
-    "lat": null,
-    "lon": null,
+    "lat": 38.715,
+    "lon": -9.1635,
     "time": "2026-11-10T10:32:15Z",
     "severity": 1,
     "verified": false,
@@ -43,14 +44,15 @@
       "category": "redes_sociais",
       "name": "@jt_rebelo@ciberlandia.pt (Mastodon)",
       "url": "https://ciberlandia.pt/@jt_rebelo/117591686217622367"
-    }
+    },
+    "locationApprox": true
   },
   {
     "id": "i-lisboa-sapadores-130",
     "district": "lisboa",
     "place": "Lisboa",
-    "lat": null,
-    "lon": null,
+    "lat": 38.7077,
+    "lon": -9.1366,
     "time": "2026-11-10T14:16:00Z",
     "severity": 1,
     "verified": true,
@@ -66,7 +68,8 @@
       "category": "comunicacao_social",
       "name": "Observador",
       "url": "https://observador.pt/2026/11/10/websummit-em-risco-tuneis-encerrados-e-o-mercado-de-natal-que-se-vai-manter-no-rossio-as-medidas-de-moedas-para-a-depressao-charles/"
-    }
+    },
+    "locationApprox": true
   },
   {
     "id": "i-lisboa-segunda-circular",
