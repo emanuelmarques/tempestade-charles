@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import { resolve } from 'node:path';
+import { resolve, basename } from 'node:path';
 import fs from 'node:fs';
 
 // Com SAMPLE=1 o servidor de desenvolvimento serve dados de exemplo (tests/fixtures/sample) em vez de public/data.
@@ -19,10 +19,37 @@ function sampleData() {
   };
 }
 
+// SEO: com SITE_URL definido (ex.: SITE_URL=https://exemplo.pt npm run build) injeta canonical e og:url
+// e gera robots.txt e sitemap.xml. Sem domínio, não se emitem URLs absolutos inventados.
+function seo() {
+  const site = (process.env.SITE_URL ?? '').replace(/\/$/, '');
+  const pages = { 'index.html': '/', 'recomendacoes.html': '/recomendacoes.html' };
+  return {
+    name: 'seo',
+    transformIndexHtml: {
+      order: 'post',
+      handler(html, ctx) {
+        if (!site) return html.replace('<!--seo-head-->', '');
+        const url = site + (pages[basename(ctx.filename ?? '')] ?? '/');
+        return html.replace('<!--seo-head-->', `<link rel="canonical" href="${url}">\n<meta property="og:url" content="${url}">`);
+      },
+    },
+    generateBundle() {
+      const lastmod = new Date().toISOString().slice(0, 10);
+      const robots = `User-agent: *\nAllow: /\n${site ? `\nSitemap: ${site}/sitemap.xml\n` : ''}`;
+      this.emitFile({ type: 'asset', fileName: 'robots.txt', source: robots });
+      if (site) {
+        const urls = Object.values(pages).map((p) => `  <url><loc>${site}${p}</loc><lastmod>${lastmod}</lastmod></url>`).join('\n');
+        this.emitFile({ type: 'asset', fileName: 'sitemap.xml', source: `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n` });
+      }
+    },
+  };
+}
+
 // Site estático. base './' permite publicar em qualquer alojamento ou subcaminho.
 export default defineConfig({
   base: './',
-  plugins: [sampleData()],
+  plugins: [sampleData(), seo()],
   build: {
     rollupOptions: {
       input: { main: resolve(import.meta.dirname, 'index.html'), recs: resolve(import.meta.dirname, 'recomendacoes.html') },
