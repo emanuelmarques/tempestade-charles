@@ -1,5 +1,19 @@
 [
   {
+    "id": "x-2119825404613509600",
+    "time": "2026-11-09T16:12:15.000Z",
+    "title": {
+      "pt": "VOST Portugal, resumo do comunicado do IPMA: o IPMA atribuiu o nome Charles a uma depressão perto da Madeira que deverá deslocar-se em direção ao Continente; na Madeira, chuva persistente e por vezes forte entre o final do dia 10 e a manhã do dia 11",
+      "en": "VOST Portugal, summary of the IPMA statement: IPMA named a depression near Madeira Charles, expected to move towards the mainland; in Madeira, persistent and at times heavy rain between late on the 10th and the morning of the 11th"
+    },
+    "verified": false,
+    "source": {
+      "category": "redes_sociais",
+      "name": "@VOSTPT (X)",
+      "url": "https://x.com/VOSTPT/status/2119825404613509600"
+    }
+  },
+  {
     "id": "f-2026-11-10-prontidao",
     "time": "2026-11-10T07:56:00Z",
     "title": {
