@@ -275,7 +275,7 @@ function districtPanel(imp) {
 }
 
 function nationalPanel(imp) {
-  const rows = DISTRICTS.map((d) => ({ d, r: imp.get(d.id) })).sort((a, b) => b.r.score - a.r.score || a.d.name.localeCompare(b.d.name, 'pt'));
+  const rows = DISTRICTS.map((d) => ({ d, r: imp.get(d.id) }));
   const counts = [0, 0, 0, 0]; rows.forEach((x) => { counts[x.r.tier] += 1; });
   const [from, to] = windowRange();
   const names = TIER_NAMES.map((t) => t[state.lang === 'en' ? 1 : 0]);
@@ -290,7 +290,6 @@ function nationalPanel(imp) {
     <div style="display:flex;flex-wrap:wrap;gap:8px"><span class="lv lv-${highestLevel()}">${L('Aviso mais alto', 'Highest warning')} ${esc(lvName(highestLevel()))}</span></div>
     <p class="muted" style="margin:0;font-size:14px">${[3, 2, 1, 0].map((t) => `<strong style="color:var(--ink)">${counts[t]}</strong> ${esc(names[t])}`).join(' · ')} (${L('distritos', 'districts')})</p>
     <p class="muted" style="margin:0;font-size:14px">${nUp ? `${nUp} ${L('avisos previstos nas próximas 48 h em todo o país.', 'warnings forecast in the next 48 h nationwide.')}` : L('Sem avisos previstos nas próximas 48 h.', 'No warnings forecast in the next 48 h.')}</p>
-    <div><h4 class="h" style="font-size:16px;margin:0 0 6px">${L('Distritos por impacto', 'Districts by impact')}</h4><div style="display:flex;flex-direction:column;gap:6px">${rows.map(({ d, r }) => `<button class="item" data-a="district" data-id="${d.id}" style="flex-direction:row;align-items:center;justify-content:space-between;gap:8px"><span style="font-weight:600">${esc(d.name)}</span><span style="display:flex;gap:8px;align-items:center"><span class="num muted" style="font-size:13px">${r.score}/100</span><span class="lv ${TIER_CLASS[r.tier]}">${esc(names[r.tier])}</span></span></button>`).join('')}</div></div>
     <div><h4 class="h" style="font-size:16px;margin:0 0 6px">${L('Regiões autónomas', 'Autonomous regions')}</h4><div style="display:flex;flex-direction:column;gap:6px">${islands}</div></div>
     <button class="tab" data-a="incgo" data-v="all" style="align-self:flex-start">${L('Ver as ocorrências', 'See the incidents')} (${data.curated.incidents.length}) ↓</button>
     <div>${sourceBadge(IPMA_SOURCE, { lang: state.lang })}</div></div>`;

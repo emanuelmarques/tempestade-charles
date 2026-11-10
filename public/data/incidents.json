@@ -93,5 +93,145 @@
       "name": "Euronews",
       "url": "https://pt.euronews.com/2026/11/10/depressao-charles-traz-chuva-e-vento-forte-governo-pede-prudencia-maxima-so-saia-se-for-me"
     }
+  },
+  {
+    "id": "i-lisboa-afonso-costa",
+    "title": {
+      "pt": "Inundação na Av. Afonso Costa, no Areeiro",
+      "en": "Flooding on Avenida Afonso Costa, Areeiro"
+    },
+    "description": {
+      "pt": "Relato numa rede social que remete para o registo em fogos.pt; não confirmado oficialmente.",
+      "en": "Social media report pointing to a fogos.pt entry; not officially confirmed."
+    },
+    "time": "2026-11-10T06:28:40Z",
+    "place": "Lisboa (Av. Afonso Costa, Areeiro)",
+    "district": "lisboa",
+    "lat": 38.7392,
+    "lon": -9.127,
+    "severity": 1,
+    "verified": false,
+    "source": {
+      "category": "redes_sociais",
+      "name": "@jt_rebelo@ciberlandia.pt (Mastodon)",
+      "url": "https://ciberlandia.pt/@jt_rebelo/117590728417946579"
+    }
+  },
+  {
+    "id": "i-lisboa-bispo-cousin",
+    "title": {
+      "pt": "Inundação na Rua Bispo de Cousin, no Beato",
+      "en": "Flooding on Rua Bispo de Cousin, Beato"
+    },
+    "description": {
+      "pt": "Relato numa rede social que remete para o registo em fogos.pt; não confirmado oficialmente.",
+      "en": "Social media report pointing to a fogos.pt entry; not officially confirmed."
+    },
+    "time": "2026-11-10T06:12:35Z",
+    "place": "Lisboa (Beato)",
+    "district": "lisboa",
+    "lat": 38.7317,
+    "lon": -9.1075,
+    "locationApprox": true,
+    "severity": 1,
+    "verified": false,
+    "source": {
+      "category": "redes_sociais",
+      "name": "@jt_rebelo@ciberlandia.pt (Mastodon)",
+      "url": "https://ciberlandia.pt/@jt_rebelo/117590665194954731"
+    }
+  },
+  {
+    "id": "i-lisboa-gago-coutinho",
+    "title": {
+      "pt": "Inundação na Av. Gago Coutinho, em Lisboa",
+      "en": "Flooding on Avenida Gago Coutinho, Lisbon"
+    },
+    "description": {
+      "pt": "Relato numa rede social que remete para o registo em fogos.pt; não confirmado oficialmente.",
+      "en": "Social media report pointing to a fogos.pt entry; not officially confirmed."
+    },
+    "time": "2026-11-10T06:04:36Z",
+    "place": "Lisboa (Av. Gago Coutinho)",
+    "district": "lisboa",
+    "lat": 38.7435,
+    "lon": -9.1324,
+    "locationApprox": true,
+    "severity": 1,
+    "verified": false,
+    "source": {
+      "category": "redes_sociais",
+      "name": "@jt_rebelo@ciberlandia.pt (Mastodon)",
+      "url": "https://ciberlandia.pt/@jt_rebelo/117590633778379272"
+    }
+  },
+  {
+    "id": "i-lisboa-cidade-porto",
+    "title": {
+      "pt": "Inundação na Av. Cidade do Porto, nos Olivais",
+      "en": "Flooding on Avenida Cidade do Porto, Olivais"
+    },
+    "description": {
+      "pt": "Relato numa rede social que remete para o registo em fogos.pt; não confirmado oficialmente.",
+      "en": "Social media report pointing to a fogos.pt entry; not officially confirmed."
+    },
+    "time": "2026-11-10T05:18:26Z",
+    "place": "Lisboa (Olivais)",
+    "district": "lisboa",
+    "lat": 38.783,
+    "lon": -9.1222,
+    "severity": 1,
+    "verified": false,
+    "source": {
+      "category": "redes_sociais",
+      "name": "@jt_rebelo@ciberlandia.pt (Mastodon)",
+      "url": "https://ciberlandia.pt/@jt_rebelo/117590452272252463"
+    }
+  },
+  {
+    "id": "i-lisboa-campolide",
+    "title": {
+      "pt": "Inundação na Rua de Campolide, em Campolide",
+      "en": "Flooding on Rua de Campolide, Campolide"
+    },
+    "description": {
+      "pt": "Relato numa rede social que remete para o registo em fogos.pt; não confirmado oficialmente.",
+      "en": "Social media report pointing to a fogos.pt entry; not officially confirmed."
+    },
+    "time": "2026-11-10T04:40:17Z",
+    "place": "Lisboa (Campolide)",
+    "district": "lisboa",
+    "lat": 38.7369,
+    "lon": -9.1674,
+    "severity": 1,
+    "verified": false,
+    "source": {
+      "category": "redes_sociais",
+      "name": "@jt_rebelo@ciberlandia.pt (Mastodon)",
+      "url": "https://ciberlandia.pt/@jt_rebelo/117590302229559893"
+    }
+  },
+  {
+    "id": "i-lisboa-palmira-bastos",
+    "title": {
+      "pt": "Inundação na Rua Palmira Bastos, em Marvila, devido à chuva intensa",
+      "en": "Flooding on Rua Palmira Bastos, Marvila, due to intense rain"
+    },
+    "description": {
+      "pt": "Relato numa rede social que remete para o registo em fogos.pt; não confirmado oficialmente.",
+      "en": "Social media report pointing to a fogos.pt entry; not officially confirmed."
+    },
+    "time": "2026-11-10T04:39:21Z",
+    "place": "Lisboa (Marvila)",
+    "district": "lisboa",
+    "lat": 38.7547,
+    "lon": -9.1132,
+    "severity": 1,
+    "verified": false,
+    "source": {
+      "category": "redes_sociais",
+      "name": "@jt_rebelo@ciberlandia.pt (Mastodon)",
+      "url": "https://ciberlandia.pt/@jt_rebelo/117590298580163706"
+    }
   }
 ]
