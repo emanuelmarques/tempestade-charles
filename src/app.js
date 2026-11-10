@@ -4,6 +4,8 @@ import { computeImpact, LEVELS, BASE, WEIGHTS } from './lib/impact.js';
 import { countdown, parseLisbon, freshness, formatTime, formatDayTime, formatDay, pad2, STORM_START_LOCAL } from './lib/time.js';
 import { toMap } from './lib/projection.js';
 import { districtAt } from './lib/districtAt.js';
+import { paginate } from './lib/paginate.js';
+import { loadNextHours, weatherInfo, OPEN_METEO_SITE } from './data/openmeteo.js';
 import { lookupContacts, GEOAPI_SITE } from './data/geoapi.js';
 import { lookupNearby, OSM_COPYRIGHT } from './data/places.js';
 import { haversineKm } from './lib/geo.js';
@@ -25,15 +27,15 @@ const store = {
 const state = {
   lang: store.get('lang', 'pt') === 'en' ? 'en' : 'pt',
   page: document.body.dataset.page || 'home',
-  win: 'now', region: 'continente', national: false, district: null, userPicked: false, locNote: '', incidentId: null,
+  win: 'now', here: null, region: 'continente', national: false, district: null, userPicked: false, locNote: '', incidentId: null,
   filt: { governamental: true, comunicacao_social: true, redes_sociais: true },
-  sit: 'casa', cat: 'todas', zoneLoc: Number(store.get('zoneLoc', '1100900')) || 1100900,
+  sit: 'casa', cat: 'todas', svc: 'todas', pg: { serv: 1, feed: 1 }, zoneLoc: Number(store.get('zoneLoc', '1100900')) || 1100900,
   view: { x: 0, y: 0, w: 640, h: 620 }, now: new Date(),
 };
 const data = {
   curated: { meta: { updatedAt: null }, incidents: [], feed: [], services: [], shelters: [], myths: [] }, curatedErrors: {}, curatedLoaded: false,
   warnings: [], warnErr: null, warnFetchedAt: null, warnCache: false,
-  contact: null, contactErr: null, nearby: null, locations: [], forecast: null, forecastErr: null, forecastLoc: null, weatherTypes: {},
+  contact: null, contactErr: null, nearby: null, wx: null, wxErr: null, locations: [], forecast: null, forecastErr: null, forecastLoc: null, weatherTypes: {},
 };
 
 const L = (pt, en) => (state.lang === 'en' ? en : pt);
@@ -118,6 +120,34 @@ function navBar() {
   return `<nav class="mainnav" aria-label="${L('Navegação principal', 'Main navigation')}">${NAV.map(([k, href, [pt, en]]) => `<a href="${href}"${state.page === k ? ' aria-current="page"' : ''}>${L(pt, en)}</a>`).join('')}</nav>`;
 }
 
+/** Ponto para o tempo: a localização do visitante, ou a localidade escolhida. */
+function wxPoint() {
+  if (state.here) return { lat: state.here.lat, lon: state.here.lon, name: null };
+  const l = locById(state.zoneLoc);
+  return l ? { lat: l.lat, lon: l.lon, name: l.name } : null;
+}
+let wxSeq = 0;
+async function loadWx() {
+  const pt = wxPoint(); if (!pt) return;
+  const seq = ++wxSeq;
+  try {
+    const hours = await loadNextHours(pt.lat, pt.lon, new Date());
+    if (seq !== wxSeq) return;
+    data.wx = { hours, name: pt.name, byUser: !!state.here }; data.wxErr = null;
+  } catch (e) { if (seq === wxSeq) { data.wxErr = String(e.message || e); } }
+  render();
+}
+
+function wxWidget() {
+  const w = data.wx;
+  const title = `${L('Próximas 4 horas', 'Next 4 hours')}${w ? ` · ${w.byUser ? L('na sua localização', 'at your location') : esc(w.name || '')}` : ''}`;
+  let body;
+  if (!w) body = `<span class="muted" style="font-size:13px">${data.wxErr ? L('Previsão horária indisponível.', 'Hourly forecast unavailable.') : L('A carregar…', 'Loading…')}</span>`;
+  else if (!w.hours.length) body = `<span class="muted" style="font-size:13px">${L('Sem dados para as próximas horas.', 'No data for the next hours.')}</span>`;
+  else body = `<ol class="wxh">${w.hours.map((h) => { const i = weatherInfo(h.code, state.lang); return `<li title="${esc(i.label)}"><span class="num muted">${esc(formatTime(h.time, state.lang))}</span><span class="wxe" aria-hidden="true">${i.emoji}</span><span class="sr">${esc(i.label)}, </span><strong class="num">${Math.round(h.temp)}°</strong><span class="num wxs">💧${Math.round(h.pop)}%</span><span class="num wxs">💨${Math.round(h.gust)}<span class="sr"> km/h</span></span></li>`; }).join('')}</ol>`;
+  return `<div class="wx" role="group" aria-label="${L('Tempo nas próximas 4 horas', 'Weather in the next 4 hours')}"><div class="wxt">${title}</div>${body}<div class="wxf"><span>💨 ${L('rajada máx. km/h', 'max gust km/h')}</span><a href="${OPEN_METEO_SITE}" target="_blank" rel="noopener noreferrer">Open-Meteo ↗</a></div></div>`;
+}
+
 function topbar() {
   const f = freshnessInfo();
   return `<header class="top">
@@ -135,7 +165,7 @@ function topbar() {
           <button class="seg ${state.lang === 'en' ? 'on' : ''}" aria-pressed="${state.lang === 'en'}" data-a="lang" data-v="en" lang="en">EN</button>
         </div>
       </div>
-    </div></header>${navBar()}`;
+    </div>${wxWidget()}</header>${navBar()}`;
 }
 
 function banners() {
@@ -389,9 +419,27 @@ function forecastSection() {
 
 function emptyList(pt, en) { return `<div class="empty">${L(pt, en)}</div>`; }
 
+const SERV_PAGE = 5; const FEED_PAGE = 6;
+
+function pager(key, p) {
+  if (p.pages <= 1) return '';
+  return `<nav class="pager" aria-label="${L('Paginação', 'Pagination')}"><button class="tab" data-a="pg" data-v="${key}-prev"${p.page <= 1 ? ' disabled' : ''}>← ${L('Anterior', 'Previous')}</button><span class="num muted" aria-live="polite">${L('Página', 'Page')} ${p.page} ${L('de', 'of')} ${p.pages} · ${p.total}</span><button class="tab" data-a="pg" data-v="${key}-next"${p.page >= p.pages ? ' disabled' : ''}>${L('Seguinte', 'Next')} →</button></nav>`;
+}
+
 function servicesSection() {
-  const s = data.curated.services;
-  return `<section aria-labelledby="h-serv"><h2 id="h-serv" class="h2">${L('Estradas, transportes e serviços', 'Roads, transport and services')}</h2>${s.length ? `<div class="card list" style="padding:8px 20px">${s.map((x) => `<div class="li"><span class="k"><span aria-hidden="true">${TYPE_EMOJI[x.type] || '📌'}</span> ${esc(TYPE_NAMES[x.type]?.[state.lang === 'en' ? 1 : 0] || x.type)}</span><span class="n">${esc(txt(x.name))}</span><span class="st ${STATUS_CLASS[x.status] || 'st-gry'}">${esc(STATUS_NAMES[x.status]?.[state.lang === 'en' ? 1 : 0] || x.status)}</span>${sourceBadge(x.source, { lang: state.lang })}</div>`).join('')}</div>` : emptyList('Sem cortes ou condicionamentos registados ainda.', 'No closures or restrictions recorded yet.')}</section>`;
+  const all = data.curated.services;
+  const idx = state.lang === 'en' ? 1 : 0;
+  const types = Object.keys(TYPE_NAMES).filter((t) => all.some((x) => x.type === t));
+  const cur = types.includes(state.svc) ? state.svc : 'todas';
+  const filtered = cur === 'todas' ? all : all.filter((x) => x.type === cur);
+  const p = paginate(filtered, state.pg.serv, SERV_PAGE);
+  state.pg.serv = p.page;
+  const chip = (k, label, n) => `<button class="chip ${cur === k ? 'on' : ''}" aria-pressed="${cur === k}" data-a="svcf" data-v="${k}">${label} <span class="num" style="opacity:.75">${n}</span></button>`;
+  const filters = types.length > 1
+    ? `<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px" role="group" aria-label="${L('Filtrar por categoria', 'Filter by category')}">${chip('todas', L('Todas', 'All'), all.length)}${types.map((t) => chip(t, `<span aria-hidden="true">${TYPE_EMOJI[t] || '📌'}</span> ${esc(TYPE_NAMES[t][idx])}`, all.filter((x) => x.type === t).length)).join('')}</div>`
+    : '';
+  const rows = p.items.map((x) => `<div class="li"><span class="k"><span aria-hidden="true">${TYPE_EMOJI[x.type] || '📌'}</span> ${esc(TYPE_NAMES[x.type]?.[idx] || x.type)}</span><span class="n">${esc(txt(x.name))}</span><span class="st ${STATUS_CLASS[x.status] || 'st-gry'}">${esc(STATUS_NAMES[x.status]?.[idx] || x.status)}</span>${sourceBadge(x.source, { lang: state.lang })}</div>`).join('');
+  return `<section aria-labelledby="h-serv"><h2 id="h-serv" class="h2">${L('Estradas, transportes e serviços', 'Roads, transport and services')}</h2>${filters}${filtered.length ? `<div class="card list" style="padding:8px 20px 14px">${rows}${pager('serv', p)}</div>` : emptyList('Sem cortes ou condicionamentos registados ainda.', 'No closures or restrictions recorded yet.')}</section>`;
 }
 function sheltersSection() {
   const s = data.curated.shelters;
@@ -402,10 +450,13 @@ function mythsSection() {
   return `<section aria-labelledby="h-boatos"><h2 id="h-boatos" class="h2">${L('Boatos desmentidos', 'Debunked rumours')}</h2><p class="muted" style="margin:-6px 0 14px">${L('Informação falsa a circular e o que dizem fontes oficiais ou verificadores de factos.', 'False information in circulation and what official sources or fact-checkers say.')}</p>${m.length ? `<div class="grid">${m.map((x) => `<div class="card" style="display:flex;flex-direction:column;gap:12px"><div><span class="st st-red">${L('FALSO', 'FALSE')}</span><p style="margin:8px 0 0;font-weight:600;text-decoration:line-through;text-decoration-color:#D1242F">${esc(txt(x.claim))}</p></div><div><span class="st st-gry">${L('O QUE DIZEM AS FONTES', 'WHAT SOURCES SAY')}</span><p style="margin:8px 0 0;font-size:15px">${esc(txt(x.fact))}</p></div><div style="margin-top:auto">${sourceBadge(x.source, { lang: state.lang })}</div></div>`).join('')}</div>` : emptyList('Nenhum boato desmentido até ao momento.', 'No debunked rumours so far.')}</section>`;
 }
 function feedSection() {
-  const cats = [['todas', L('Todas', 'All'), ''], ['governamental', CATEGORIES.governamental.label[state.lang], 'sh-g'], ['comunicacao_social', CATEGORIES.comunicacao_social.label[state.lang], 'sh-c'], ['redes_sociais', CATEGORIES.redes_sociais.label[state.lang], 'sh-r']];
-  const items = data.curated.feed.filter((f) => state.cat === 'todas' || f.source.category === state.cat).sort((a, b) => Date.parse(b.time) - Date.parse(a.time));
-  return `<section aria-labelledby="h-feed"><div style="display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;margin-bottom:14px"><h2 id="h-feed" style="font-size:26px">${L('Últimas informações', 'Latest updates')}</h2><div style="display:flex;flex-wrap:wrap;gap:8px" role="group" aria-label="${L('Filtrar por categoria de fonte', 'Filter by source category')}">${cats.map(([k, l, s]) => `<button class="chip ${state.cat === k ? 'on' : ''}" aria-pressed="${state.cat === k}" data-a="cat" data-v="${k}">${esc(l)}</button>`).join('')}</div></div>
-  ${items.length ? `<div class="card list" style="padding:8px 20px">${items.map((f) => `<article class="li"><time class="num" datetime="${esc(f.time)}">${esc(formatTime(new Date(f.time), state.lang))}</time><span class="n" style="font-weight:600">${esc(txt(f.title))}</span>${sourceBadge(f.source, { verified: f.verified, lang: state.lang })}</article>`).join('')}</div>` : emptyList('Sem informações nesta categoria ainda.', 'No updates in this category yet.')}</section>`;
+  const cats = [['todas', L('Todas', 'All')], ['governamental', CATEGORIES.governamental.label[state.lang]], ['comunicacao_social', CATEGORIES.comunicacao_social.label[state.lang]], ['redes_sociais', CATEGORIES.redes_sociais.label[state.lang]]];
+  const filtered = data.curated.feed.filter((f) => state.cat === 'todas' || f.source.category === state.cat).sort((a, b) => Date.parse(b.time) - Date.parse(a.time));
+  const p = paginate(filtered, state.pg.feed, FEED_PAGE);
+  state.pg.feed = p.page;
+  const rows = p.items.map((f) => `<article class="li"><time class="num" datetime="${esc(f.time)}">${esc(formatTime(new Date(f.time), state.lang))}</time><span class="n" style="font-weight:600">${esc(txt(f.title))}</span>${sourceBadge(f.source, { verified: f.verified, lang: state.lang })}</article>`).join('');
+  return `<section aria-labelledby="h-feed"><div style="display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;margin-bottom:14px"><h2 id="h-feed" style="font-size:26px">${L('Últimas informações', 'Latest updates')}</h2><div style="display:flex;flex-wrap:wrap;gap:8px" role="group" aria-label="${L('Filtrar por categoria de fonte', 'Filter by source category')}">${cats.map(([k, l]) => `<button class="chip ${state.cat === k ? 'on' : ''}" aria-pressed="${state.cat === k}" data-a="cat" data-v="${k}">${esc(l)}</button>`).join('')}</div></div>
+  ${filtered.length ? `<div class="card list" style="padding:8px 20px 14px">${rows}${pager('feed', p)}</div>` : emptyList('Sem informações nesta categoria ainda.', 'No updates in this category yet.')}</section>`;
 }
 function howSection() {
   return `<section id="como" aria-labelledby="h-como"><h2 id="h-como" class="h2">${L('Como calculamos o impacto', 'How we calculate impact')}</h2><div class="card tinted" style="display:flex;flex-direction:column;gap:10px;font-size:15px"><p style="margin:0">${L(`Cada distrito recebe uma base pelo seu aviso do IPMA (verde ${BASE.verde}, amarelo ${BASE.amarelo}, laranja ${BASE.laranja}, vermelho ${BASE.vermelho}), considerando os avisos em vigor neste momento. A isso somam-se pontos pelas ocorrências do distrito: peso da fonte × gravidade (1 a 3) × 5. O máximo é 100. Abaixo de 10 não há impacto relevante; 10 a 24 é moderado; 25 a 49 é alto; 50 ou mais é muito alto.`, `Each district gets a base from its IPMA warning (green ${BASE.verde}, yellow ${BASE.amarelo}, orange ${BASE.laranja}, red ${BASE.vermelho}), using the warnings in force right now. Points for the district’s incidents are added: source weight × severity (1 to 3) × 5. The maximum is 100. Below 10 is negligible; 10 to 24 moderate; 25 to 49 high; 50 or more very high.`)}</p><p style="margin:0" class="muted">${L('Pesos das fontes', 'Source weights')}: ${L('governamental', 'government')} ${WEIGHTS.governamental} · ${L('comunicação social', 'news media')} ${WEIGHTS.comunicacao_social} · ${L('redes sociais verificada', 'social media, verified')} ${WEIGHTS.redes_sociais_verificada} · ${L('redes sociais não verificada', 'social media, unverified')} ${WEIGHTS.redes_sociais_nao_verificada}.</p></div></section>`;
@@ -444,6 +495,7 @@ function sourcesPage() {
   <p class="muted" style="margin:0 0 20px;max-width:680px">${L('Cada informação do site indica a categoria da fonte e o link original. Aqui está o que usamos e de onde vem.', 'Every item on the site shows its source category and original link. Here is what we use and where it comes from.')}</p>
   <div class="grid">
     ${block('🌦️', 'IPMA', `<p style="margin:0">${L('Avisos meteorológicos e previsão, lidos em tempo real neste dispositivo, com cópia local se a rede falhar.', 'Weather warnings and forecast, read live on this device, with a local copy if the network fails.')}</p>${sourceBadge(IPMA_SOURCE, { lang: state.lang })}`)}
+    ${block('⏱️', 'Open-Meteo', `<p style="margin:0">${L('Tempo nas próximas 4 horas (temperatura, probabilidade de chuva e rajadas), hora a hora. O IPMA só publica previsão diária em dados abertos.', 'Weather for the next 4 hours (temperature, chance of rain and gusts), hour by hour. IPMA only publishes daily forecasts as open data.')}</p>${ext(OPEN_METEO_SITE, 'open-meteo.com')} <span class="muted">CC BY 4.0</span>`)}
     ${block('🗺️', L('Mapa e distritos', 'Map and districts'), `<p style="margin:0">${L('Contornos dos distritos a partir da Carta Administrativa Oficial de Portugal (CAOP), da Direção-Geral do Território, simplificados para o desenho do mapa.', 'District outlines from the Official Administrative Map of Portugal (CAOP), Directorate-General for the Territory, simplified for the map drawing.')}</p>`)}
     ${block('📍', 'geoapi.pt', `<p style="margin:0">${L('Concelho a partir da localização e contactos da câmara municipal (telefone, email, site, morada).', 'Municipality from your location and town-hall contacts (phone, email, website, address).')}</p>${ext(GEOAPI_SITE, 'geoapi.pt')}`)}
     ${block('💊', 'OpenStreetMap', `<p style="margin:0">${L('Farmácias e quartéis de bombeiros mais próximos. Localizações e telefones dos colaboradores do OpenStreetMap: podem estar incompletos e a farmácia pode não estar de serviço. Em alternativa, procuramos em tempo real com o Photon (Komoot) e o Nominatim.', 'Nearest pharmacies and fire stations. Locations and phones from OpenStreetMap contributors: they may be incomplete and the pharmacy may not be on duty. As a fallback we search live with Photon (Komoot) and Nominatim.')}</p><p style="margin:0">${L('Dados', 'Data')} © ${ext(OSM_COPYRIGHT, L('colaboradores do OpenStreetMap', 'OpenStreetMap contributors'))} (ODbL).</p>`)}
@@ -545,7 +597,15 @@ function onClick(e) {
   if (a === 'lang') { state.lang = v; store.set('lang', v); }
   else if (a === 'region') { state.region = v; }
   else if (a === 'filt') { state.filt[v] = !state.filt[v]; }
-  else if (a === 'cat') { state.cat = v; }
+  else if (a === 'cat') { state.cat = v; state.pg.feed = 1; }
+  else if (a === 'svcf') { state.svc = v; state.pg.serv = 1; }
+  else if (a === 'pg') {
+    const [k, dir] = v.split('-');
+    state.pg[k] = Math.max(1, (state.pg[k] || 1) + (dir === 'next' ? 1 : -1));
+    render();
+    document.getElementById(k === 'serv' ? 'h-serv' : 'h-feed')?.scrollIntoView({ block: 'start' });
+    return;
+  }
   else if (a === 'sit') { state.sit = v; }
   else if (a === 'district') { if (mapDrag.moved) return; state.userPicked = true; state.national = false; state.district = id; state.incidentId = null; }
   else if (a === 'pin') { if (mapDrag.moved) return; const i = data.curated.incidents.find((x) => x.id === id); if (i?.district) state.district = i.district; state.userPicked = true; state.national = false; state.incidentId = id; }
@@ -610,6 +670,7 @@ function setZone(id, { keepDistrict = false, here = null } = {}) {
   const loc = locById(id); const d = loc && DISTRICT_BY_AREA[loc.area];
   if (d && !keepDistrict) state.district = d.id;
   if (loc) resolveContacts(here ?? loc, !!here);
+  if (!here && !state.here) loadWx();
   loadForecast(); render();
 }
 
@@ -637,6 +698,7 @@ function autoLocate() {
   if (!navigator.geolocation) return;
   const go = () => navigator.geolocation.getCurrentPosition((p) => {
     const here = { lat: p.coords.latitude, lon: p.coords.longitude };
+    state.here = here; loadWx();
     const did = districtAt(here.lat, here.lon);
     if (did && !state.userPicked) state.district = did;
     state.locNote = did ? L('Distrito pela sua localização', 'District from your location') : L('Localização fora de Portugal continental', 'Location outside mainland Portugal');
@@ -657,7 +719,7 @@ function locate() {
     const here = { lat: p.coords.latitude, lon: p.coords.longitude };
     const best = data.locations.map((l) => ({ l, km: haversineKm(here, l) })).sort((a, b) => a.km - b.km)[0];
     if (!best || best.km > 120) return say(L('Parece estar fora de Portugal ou longe de qualquer estação do IPMA. Escolha a localidade na lista.', 'You seem to be outside Portugal or far from any IPMA station. Pick a location from the list.'));
-    state.userPicked = true; setZone(best.l.id, { here });
+    state.userPicked = true; state.here = here; setZone(best.l.id, { here });
     const m2 = document.getElementById('geomsg'); if (m2) m2.textContent = `${L('Localidade mais próxima', 'Nearest location')}: ${best.l.name}`;
   }, () => say(L('Não foi possível obter a localização. Escolha a localidade na lista.', 'Could not get your location. Pick a location from the list.')), { timeout: 8000, maximumAge: 300000 });
 }
@@ -711,7 +773,8 @@ export async function start() {
   const sl = locById(state.zoneLoc); if (sl) resolveContacts(sl);
   loadForecast();
   autoLocate();
+  loadWx();
   await loadAll();
   setInterval(tick, 1000);
-  setInterval(async () => { await loadAll(); loadForecast(); }, REFRESH_MS);
+  setInterval(async () => { await loadAll(); loadForecast(); loadWx(); }, REFRESH_MS);
 }
