@@ -3,6 +3,8 @@ import { CATEGORIES, sourceBadge } from './lib/sources.js';
 import { computeImpact, LEVELS, BASE, WEIGHTS } from './lib/impact.js';
 import { countdown, parseLisbon, freshness, formatTime, formatDayTime, formatDay, pad2, STORM_START_LOCAL } from './lib/time.js';
 import { toMap } from './lib/projection.js';
+import { districtAt } from './lib/districtAt.js';
+import { lookupContacts, GEOAPI_SITE } from './data/geoapi.js';
 import { haversineKm } from './lib/geo.js';
 import { DISTRICTS, DISTRICT_BY_ID, DISTRICT_BY_AREA, LAND_PATH } from './data/districts.js';
 import { IPMA, IPMA_SOURCE, WIND_CLASS, PREC_CLASS, normalizeWarnings, normalizeForecast, normalizeWeatherTypes, normalizeLocations, fetchCached } from './data/ipma.js';
@@ -22,7 +24,7 @@ const store = {
 const state = {
   lang: store.get('lang', 'pt') === 'en' ? 'en' : 'pt',
   page: document.body.dataset.page || 'home',
-  win: 'now', region: 'continente', district: 'leiria', incidentId: null,
+  win: 'now', region: 'continente', district: null, userPicked: false, locNote: '', incidentId: null,
   filt: { governamental: true, comunicacao_social: true, redes_sociais: true },
   sit: 'casa', cat: 'todas', zoneLoc: Number(store.get('zoneLoc', '1100900')) || 1100900,
   view: { x: 0, y: 0, w: 640, h: 620 }, now: new Date(),
@@ -30,7 +32,7 @@ const state = {
 const data = {
   curated: { meta: { updatedAt: null }, incidents: [], feed: [], services: [], shelters: [], myths: [] }, curatedErrors: {}, curatedLoaded: false,
   warnings: [], warnErr: null, warnFetchedAt: null, warnCache: false,
-  locations: [], forecast: null, forecastErr: null, forecastLoc: null, weatherTypes: {},
+  contact: null, contactErr: null, locations: [], forecast: null, forecastErr: null, forecastLoc: null, weatherTypes: {},
 };
 
 const L = (pt, en) => (state.lang === 'en' ? en : pt);
@@ -49,6 +51,13 @@ function impact() {
   return computeImpact({ districts: DISTRICTS, warnings: data.warnings, incidents: data.curated.incidents, from, to });
 }
 const rank = (l) => LEVELS.indexOf(l);
+/** Distrito mostrado: o escolhido (ou o da localização); senão o de maior impacto. */
+function curDistrict(imp) {
+  if (state.district) return state.district;
+  let best = null;
+  for (const d of DISTRICTS) { const r = imp.get(d.id); if (!best || r.score > best.score) best = r; }
+  return best.id;
+}
 function highestLevel() {
   const [from, to] = windowRange();
   return data.warnings.filter((w) => w.start <= to && w.end >= from).reduce((m, w) => (rank(w.level) > rank(m) ? w.level : m), 'verde');
@@ -160,9 +169,9 @@ function mapPins() {
 }
 
 function mapSvg(imp) {
-  const v = state.view;
+  const v = state.view; const cur = curDistrict(imp);
   const dists = DISTRICTS.map((d) => {
-    const r = imp.get(d.id); const sel = d.id === state.district;
+    const r = imp.get(d.id); const sel = d.id === cur;
     const tierName = TIER_NAMES[r.tier][state.lang === 'en' ? 1 : 0];
     return `<g class="dist" tabindex="0" role="button" data-a="district" data-id="${d.id}" aria-label="${esc(d.name)}: ${L('impacto', 'impact')} ${tierName}${r.top ? `, ${L('aviso', 'warning')} ${lvName(r.top.level)}` : ''}" style="cursor:pointer"><path d="${d.d}" fill="${TIER_FILL[r.tier]}" stroke="${sel ? '#15202B' : '#fff'}" stroke-width="${sel ? 3.5 : 1.5}"/><text x="${d.lx}" y="${d.ly}" text-anchor="middle" fill="${r.tier === 3 ? '#fff' : '#15202B'}">${esc(d.name)}</text></g>`;
   }).join('');
@@ -192,7 +201,7 @@ function warningLine(w) {
 }
 
 function districtPanel(imp) {
-  const d = DISTRICT_BY_ID[state.district]; const r = imp.get(d.id);
+  const d = DISTRICT_BY_ID[curDistrict(imp)]; const r = imp.get(d.id);
   const list = data.curated.incidents.filter((i) => i.district === d.id).sort((a, b) => Date.parse(b.time) - Date.parse(a.time)).slice(0, 3);
   const shown = r.count === 0 ? L('nenhuma', 'none') : list.length < r.count ? `${L('as', 'the')} ${list.length} ${L('mais recentes de', 'most recent of')} ${r.count}` : `${r.count} ${L('no total', 'in total')}`;
   const tname = TIER_NAMES[r.tier][state.lang === 'en' ? 1 : 0];
@@ -224,7 +233,7 @@ function mapSection(imp) {
   const chips = [['governamental', 'sh-g'], ['comunicacao_social', 'sh-c'], ['redes_sociais', 'sh-r']].map(([k, s]) => `<button class="chip ${state.filt[k] ? 'on' : ''}" aria-pressed="${state.filt[k]}" data-a="filt" data-v="${k}"><span class="shape ${s}"></span>${esc(CATEGORIES[k].label[state.lang])}</button>`).join('');
   const seg = (a, items, cur) => items.map(([v, l]) => `<button class="seg ${cur === v ? 'on' : ''}" aria-pressed="${cur === v}" data-a="${a}" data-v="${v}">${l}</button>`).join('');
   const reg = state.region !== 'continente';
-  return `<section aria-labelledby="h-mapa"><div style="display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;margin-bottom:14px"><h2 id="h-mapa" style="font-size:26px">${L('Mapa de impacto por distrito', 'District impact map')}</h2><p class="muted" style="margin:0;font-size:14px">${L('Clique num distrito para ver o detalhe.', 'Select a district for details.')} <a href="#como">${L('Como calculamos', 'How we calculate')}</a></p></div>
+  return `<section aria-labelledby="h-mapa"><div style="display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;margin-bottom:14px"><h2 id="h-mapa" style="font-size:26px">${L('Mapa de impacto por distrito', 'District impact map')}</h2><p class="muted" style="margin:0;font-size:14px">${state.locNote ? `${esc(state.locNote)} · ` : ''}${L('Clique num distrito para ver o detalhe.', 'Select a district for details.')} <a href="#como">${L('Como calculamos', 'How we calculate')}</a></p></div>
   <div class="maprow"><div class="mapcol">
     <div class="row" style="justify-content:space-between"><div class="row">
       <div style="display:flex" role="group" aria-label="${L('Região', 'Region')}">${seg('region', [['continente', 'Continente'], ['acores', 'Açores'], ['madeira', 'Madeira']], state.region)}</div>
@@ -254,9 +263,34 @@ function zoneSection() {
   <div style="flex:1 1 360px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(170px,100%),1fr));gap:12px;min-width:0">
     <a href="tel:112" style="text-decoration:none;color:#fff;background:#D1242F;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;justify-content:center;min-height:72px"><span class="h" style="font-size:30px;font-weight:700">112</span><span style="font-size:14px">${L('Emergência: bombeiros, INEM, PSP e GNR', 'Emergency: fire, ambulance, police')}</span></a>
     <a href="tel:808242424" class="card tinted" style="text-decoration:none;color:var(--ink);padding:14px 16px"><span class="muted" style="display:block;font-size:13px">SNS 24</span><span class="h num" style="font-size:20px;font-weight:700">808 24 24 24</span></a>
+    ${municipalCard()}
     <a href="${ANEPC.url}" target="_blank" rel="noopener noreferrer" class="card tinted" style="text-decoration:none;color:var(--ink);padding:14px 16px"><span class="muted" style="display:block;font-size:13px">${L('Proteção civil', 'Civil protection')}</span><span style="font-weight:600">${L('Contactos e orientações (ANEPC)', 'Contacts and guidance (ANEPC)')} ↗</span></a>
     <div class="card tinted" style="padding:14px 16px"><span class="muted" style="display:block;font-size:13px">${L('Abrigos no distrito', 'Shelters in the district')}</span>${shelters.length ? shelters.slice(0, 3).map((s) => `<span style="display:block;font-weight:600;font-size:14px">${esc(txt(s.name))}</span>`).join('') : `<span style="font-size:14px">${L('Sem abrigos registados. Siga as indicações da câmara municipal.', 'No shelters recorded. Follow your municipality’s instructions.')}</span>`}</div>
   </div></div></section>`;
+}
+
+function municipalCard() {
+  const label = L('Proteção civil municipal', 'Municipal civil protection');
+  const c = data.contact;
+  const wrap = (inner) => `<div class="card tinted" style="padding:14px 16px;grid-column:1/-1"><span class="muted" style="display:block;font-size:13px">${label}</span>${inner}</div>`;
+  if (!c) {
+    const msg = data.contactErr
+      ? L('Não foi possível obter os contactos do seu concelho. Em emergência ligue 112; para outros assuntos consulte a câmara municipal.', 'Could not load your municipality’s contacts. In an emergency call 112; for other matters contact your town hall.')
+      : L('Use a sua localização para ver os contactos do seu concelho.', 'Use your location to see your municipality’s contacts.');
+    return wrap(`<span style="font-size:14px">${msg}</span>`);
+  }
+  const m = c.municipio;
+  const line = (k, v) => (v ? `<span style="display:block;font-size:14px"><span class="muted">${k}</span> ${v}</span>` : '');
+  const rows = m
+    ? line(L('Telefone', 'Phone'), m.phoneHref ? `<a href="${esc(m.phoneHref)}" style="font-weight:600">${esc(m.phone)}</a>` : '')
+      + line('Email', m.email ? `<a href="mailto:${esc(m.email)}">${esc(m.email)}</a>` : '')
+      + line(L('Site', 'Website'), m.site ? `<a href="${esc(m.site)}" target="_blank" rel="noopener noreferrer">${esc(m.site.replace(/^https?:\/\//, ''))}</a>` : '')
+      + line(L('Morada', 'Address'), m.address ? esc(m.address) : '')
+    : `<span style="font-size:14px">${L('Contactos do município indisponíveis.', 'Municipality contacts unavailable.')}</span>`;
+  return wrap(`<strong style="font-size:17px">${L('Câmara Municipal de', 'Town hall of')} ${esc(c.concelho)}</strong>
+    <span class="muted" style="display:block;font-size:13px;margin-bottom:6px">${L('O presidente da câmara é a autoridade municipal de proteção civil.', 'The mayor is the municipal civil protection authority.')}</span>
+    ${rows}
+    <span class="muted" style="display:block;font-size:12px;margin-top:6px">${c.byUser ? L('Concelho pela sua localização', 'Municipality from your location') : L('Concelho da localidade escolhida; ative a localização para ver o seu', 'Municipality of the chosen location; enable location to see yours')}. ${L('Fonte dos contactos', 'Contacts source')}: <a href="${GEOAPI_SITE}" target="_blank" rel="noopener noreferrer">geoapi.pt</a></span>`);
 }
 
 function forecastSection() {
@@ -377,8 +411,8 @@ function onClick(e) {
   else if (a === 'filt') { state.filt[v] = !state.filt[v]; }
   else if (a === 'cat') { state.cat = v; }
   else if (a === 'sit') { state.sit = v; }
-  else if (a === 'district') { if (mapDrag.moved) return; state.district = id; state.incidentId = null; }
-  else if (a === 'pin') { if (mapDrag.moved) return; const i = data.curated.incidents.find((x) => x.id === id); if (i?.district) state.district = i.district; state.incidentId = id; }
+  else if (a === 'district') { if (mapDrag.moved) return; state.userPicked = true; state.district = id; state.incidentId = null; }
+  else if (a === 'pin') { if (mapDrag.moved) return; const i = data.curated.incidents.find((x) => x.id === id); if (i?.district) state.district = i.district; state.userPicked = true; state.incidentId = id; }
   else if (a === 'incident') { state.incidentId = id; }
   else if (a === 'back') { state.incidentId = null; }
   else if (a === 'zoom') { zoomBy(v === 'in' ? 1.5 : 1 / 1.5); return; }
@@ -426,11 +460,46 @@ function onWheel(e) {
   zoomBy(e.deltaY < 0 ? 1.25 : 0.8, (e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height);
 }
 
-function setZone(id) {
+function setZone(id, { keepDistrict = false, here = null } = {}) {
   state.zoneLoc = id; store.set('zoneLoc', String(id));
   const loc = locById(id); const d = loc && DISTRICT_BY_AREA[loc.area];
-  if (d) state.district = d.id;
+  if (d && !keepDistrict) state.district = d.id;
+  if (loc) resolveContacts(here ?? loc, !!here);
   loadForecast(); render();
+}
+
+let contactSeq = 0;
+/** Concelho e contactos do município para um ponto {lat, lon}. */
+async function resolveContacts(pt, byUser = false) {
+  const seq = ++contactSeq;
+  try {
+    const c = await lookupContacts(pt.lat, pt.lon);
+    if (seq !== contactSeq) return;
+    data.contact = { ...c, byUser }; data.contactErr = null;
+  } catch (e) {
+    if (seq !== contactSeq) return;
+    data.contact = null; data.contactErr = String(e.message || e);
+  }
+  render();
+}
+
+const zoneStored = store.get('zoneLoc', null) !== null;
+/** Ao abrir: escolhe distrito, localidade e contactos pela localização do utilizador (com a sua permissão). */
+function autoLocate() {
+  const noAccess = () => { state.locNote = L('Sem acesso à localização: a mostrar o distrito com maior impacto', 'No location access: showing the district with the highest impact'); render(); };
+  if (!navigator.geolocation) return;
+  const go = () => navigator.geolocation.getCurrentPosition((p) => {
+    const here = { lat: p.coords.latitude, lon: p.coords.longitude };
+    const did = districtAt(here.lat, here.lon);
+    if (did && !state.userPicked) state.district = did;
+    state.locNote = did ? L('Distrito pela sua localização', 'District from your location') : L('Localização fora de Portugal continental', 'Location outside mainland Portugal');
+    const best = data.locations.map((l) => ({ l, km: haversineKm(here, l) })).sort((a, b) => a.km - b.km)[0];
+    if (best && best.km <= 120) { if (!zoneStored) setZone(best.l.id, { keepDistrict: true, here }); else resolveContacts(here, true); }
+    else render();
+  }, noAccess, { timeout: 8000, maximumAge: 300000 });
+  try {
+    navigator.permissions.query({ name: 'geolocation' }).then((r) => (r.state === 'denied' ? noAccess() : go())).catch(go);
+  } catch { go(); }
 }
 function locate() {
   const msg = document.getElementById('geomsg');
@@ -441,7 +510,7 @@ function locate() {
     const here = { lat: p.coords.latitude, lon: p.coords.longitude };
     const best = data.locations.map((l) => ({ l, km: haversineKm(here, l) })).sort((a, b) => a.km - b.km)[0];
     if (!best || best.km > 120) return say(L('Parece estar fora de Portugal ou longe de qualquer estação do IPMA. Escolha a localidade na lista.', 'You seem to be outside Portugal or far from any IPMA station. Pick a location from the list.'));
-    setZone(best.l.id);
+    state.userPicked = true; setZone(best.l.id, { here });
     const m2 = document.getElementById('geomsg'); if (m2) m2.textContent = `${L('Localidade mais próxima', 'Nearest location')}: ${best.l.name}`;
   }, () => say(L('Não foi possível obter a localização. Escolha a localidade na lista.', 'Could not get your location. Pick a location from the list.')), { timeout: 8000, maximumAge: 300000 });
 }
@@ -491,7 +560,9 @@ export async function start() {
   } catch { data.locations = []; }
   fetchCached(IPMA.weatherTypes).then((r) => { data.weatherTypes = normalizeWeatherTypes(r.data); render(); }).catch(() => {});
   render();
+  const sl = locById(state.zoneLoc); if (sl) resolveContacts(sl);
   loadForecast();
+  autoLocate();
   await loadAll();
   setInterval(tick, 1000);
   setInterval(async () => { await loadAll(); loadForecast(); }, REFRESH_MS);

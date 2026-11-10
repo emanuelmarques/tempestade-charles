@@ -11,6 +11,7 @@ Site estático de informação para a população sobre a tempestade Charles em 
 - **Avisos e previsão IPMA:** lidos ao vivo da API aberta do IPMA no browser (CORS aberto), com cópia local se a rede falhar. Não dependem de nenhuma tarefa agendada.
 - **Ocorrências, notícias, serviços, abrigos, boatos:** ficheiros em `public/data/`, mantidos por uma tarefa agendada do Claude e validados por `npm run validate-data`.
 - **Geografia:** os contornos dos distritos vêm do design (`design/`), extraídos com `scripts/extract-geo.mjs` para `src/data/geo.json`.
+- **Localização do visitante (com a sua permissão):** escolhe por omissão o distrito (ponto dentro do contorno do mapa), a localidade IPMA mais próxima e o concelho. Os contactos da câmara municipal (autoridade municipal de proteção civil) vêm da API gratuita geoapi.pt, com cópia local. Sem permissão, o mapa mostra o distrito com maior impacto.
 - **Impacto por distrito:** base do aviso IPMA (0/10/20/30) mais pontos das ocorrências (peso da fonte × gravidade × 5), máximo 100.
 
 ## Comandos

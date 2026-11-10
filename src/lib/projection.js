@@ -14,6 +14,6 @@ function tm(lat, lon) {
 const [, Y0] = tm(lat0, lon0);
 /** lat/lon -> metros em PT-TM06 (origem em lat0/lon0) */
 export function toTM06(lat, lon) { const [X, Y] = tm(lat, lon); return [X, Y - Y0]; }
-export const MAP_OFFSET = { cx: 147.8, cy: 290.4 };
+export const MAP_OFFSET = { cx: 136.7, cy: 297.8 };
 /** lat/lon -> coordenadas do mapa SVG (1 px = 1 km, mesmo referencial do desenho dos distritos). */
 export function toMap(lat, lon, off = MAP_OFFSET) { const [X, Y] = toTM06(lat, lon); return [X / 1000 + off.cx, -Y / 1000 + off.cy]; }
