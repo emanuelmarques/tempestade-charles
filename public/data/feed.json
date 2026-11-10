@@ -1,5 +1,32 @@
 [
   {
+    "id": "f-masto-escolas-11nov",
+    "time": "2026-11-10T09:13:42Z",
+    "verified": false,
+    "title": {
+      "pt": "Relato de um utilizador: escolas encerradas amanhã, segundo anúncio do ministro da Administração Interna (não verificado).",
+      "en": "User report: schools closed tomorrow, per an announcement by the Interior Minister (unverified)."
+    },
+    "source": {
+      "category": "redes_sociais",
+      "name": "@nelsonavatar@masto.pt (Mastodon)",
+      "url": "https://masto.pt/@nelsonavatar/117591377335587151"
+    }
+  },
+  {
+    "id": "f-anepc-aviso-21",
+    "time": "2026-11-09T12:00:00Z",
+    "title": {
+      "pt": "ANEPC, Aviso 21: o IPMA prevê um agravamento significativo das condições meteorológicas em Portugal continental nos próximos dias, associado à passagem da depressão Charles (chuva e vento forte, medidas preventivas).",
+      "en": "ANEPC Notice 21: IPMA forecasts a significant worsening of weather in mainland Portugal in the coming days with the passage of depression Charles (rain and strong wind, preventive measures)."
+    },
+    "source": {
+      "category": "governamental",
+      "name": "ANEPC",
+      "url": "https://prociv.gov.pt/pt/avisos-a-populacao/aviso-21-depressao-charles-agravamento-da-situacao-meteorologica-chuva-e-vento-forte-medidas-preventivas/"
+    }
+  },
+  {
     "id": "f-2026-11-10-madeira-26",
     "time": "2026-11-10T22:42:00Z",
     "title": {
