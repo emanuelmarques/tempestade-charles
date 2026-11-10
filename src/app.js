@@ -333,11 +333,12 @@ function municipalCard() {
 function nearbyCards() {
   const nb = data.nearby;
   const kmTxt = (km) => (km < 1 ? `${Math.round(km * 10) * 100} m` : `${km.toFixed(1).replace('.', state.lang === 'en' ? '.' : ',')} km`);
-  const card = (title, part) => {
+  const find = (q) => `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}" target="_blank" rel="noopener noreferrer" style="display:block;margin-top:6px;font-size:14px;font-weight:600">${L('Procurar perto de si no mapa', 'Search near you on the map')} ↗</a>`;
+  const card = (title, part, q) => {
     let body;
     if (!nb) body = `<span style="font-size:14px" class="muted">${L('A procurar…', 'Searching…')}</span>`;
-    else if (!part || part.error) body = `<span style="font-size:14px">${L('Não foi possível obter este dado. Em emergência ligue 112.', 'Could not load this. In an emergency call 112.')}</span>`;
-    else if (!part.place) body = `<span style="font-size:14px">${L(`Nenhuma encontrada num raio de ${part.radiusKm} km.`, `None found within ${part.radiusKm} km.`)}</span>`;
+    else if (!part || part.error) body = `<span style="font-size:14px">${L('Não foi possível obter este dado. Em emergência ligue 112.', 'Could not load this. In an emergency call 112.')}</span>${find(q)}`;
+    else if (!part.place) body = `<span style="font-size:14px">${L(`Nenhuma encontrada num raio de ${part.radiusKm} km.`, `None found within ${part.radiusKm} km.`)}</span>${find(q)}`;
     else {
       const p = part.place;
       body = `<strong style="display:block;font-size:15px">${esc(p.name || title)}</strong>
@@ -347,7 +348,7 @@ function nearbyCards() {
     }
     return `<div class="card tinted" style="padding:14px 16px"><span class="muted" style="display:block;font-size:13px">${title}</span>${body}</div>`;
   };
-  return `${card(L('Bombeiros mais próximos', 'Nearest fire station'), nb?.fire)}${card(L('Farmácia mais próxima', 'Nearest pharmacy'), nb?.pharmacy)}
+  return `${card(L('Bombeiros mais próximos', 'Nearest fire station'), nb?.fire, 'quartel de bombeiros')}${card(L('Farmácia mais próxima', 'Nearest pharmacy'), nb?.pharmacy, 'farmácia')}
     <p class="muted" style="grid-column:1/-1;margin:0;font-size:12px">${L('Localizações e telefones do OpenStreetMap (podem estar incompletos; a farmácia pode não estar de serviço). Dados ©', 'Locations and phones from OpenStreetMap (may be incomplete; the pharmacy may not be on duty). Data ©')} <a href="${OSM_COPYRIGHT}" target="_blank" rel="noopener noreferrer">OpenStreetMap</a></p>`;
 }
 
