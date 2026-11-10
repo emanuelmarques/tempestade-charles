@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mockup 07 · Carta náutica / isóbaras</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#061a2e;--navy2:#0a2742;--line:#2c6a94;--ice:#cfe9f7;--cy:#5fd4f4;--am:#ffb627;--rd:#ff5a4d;--mut:#7fa6c0;--c:'Barlow Condensed',sans-serif;--b:'Barlow',sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--navy);color:var(--ice);font:400 16px/1.5 var(--b);position:relative}
+.iso{position:fixed;inset:0;z-index:0;opacity:.5;pointer-events:none}
+.w{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:0 28px}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-bottom:1px solid var(--line);gap:16px;flex-wrap:wrap}
+header b{font:800 30px var(--c);letter-spacing:.14em;text-transform:uppercase}header small{display:block;font:600 11px var(--b);letter-spacing:.3em;color:var(--mut);text-transform:uppercase}
+.tel{display:flex;gap:28px;font:700 22px var(--c);letter-spacing:.06em}.tel a{color:var(--ice);text-decoration:none}.tel span{color:var(--rd)}
+.hero{display:grid;grid-template-columns:1fr 340px;gap:40px;padding:44px 0 30px;align-items:center}
+.hero h1{font:800 clamp(52px,8.5vw,118px)/.88 var(--c);text-transform:uppercase;letter-spacing:-.005em;margin:0}.hero h1 em{color:var(--cy);font-style:normal}
+.hero p{max-width:34em;color:var(--mut);font-size:18px}
+.dial{position:relative;width:300px;height:300px;margin:auto}.dial svg{width:100%;height:100%}.dial .in{position:absolute;inset:0;display:grid;place-content:center;text-align:center}.dial b{font:700 52px var(--c);letter-spacing:.04em;font-variant-numeric:tabular-nums}.dial small{font:600 11px var(--b);letter-spacing:.28em;text-transform:uppercase;color:var(--mut)}
+.band{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);background:#0a2742cc}.band div{padding:18px 22px;border-right:1px solid var(--line)}.band div:last-child{border:0}.band small{font:600 11px var(--b);letter-spacing:.24em;text-transform:uppercase;color:var(--mut)}.band b{display:block;font:700 44px/1.05 var(--c);color:#fff}.band b i{font:600 16px var(--b);font-style:normal;color:var(--cy);margin-left:4px}
+.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;padding:40px 0}
+.pan{border:1px solid var(--line);background:#0a2742cc;position:relative}.pan:before,.pan:after{content:"";position:absolute;width:14px;height:14px;border:2px solid var(--cy)}.pan:before{left:-2px;top:-2px;border-right:0;border-bottom:0}.pan:after{right:-2px;bottom:-2px;border-left:0;border-top:0}
+.pan h2{margin:0;padding:14px 20px;border-bottom:1px solid var(--line);font:700 15px var(--c);letter-spacing:.24em;text-transform:uppercase;display:flex;justify-content:space-between}.pan h2 span{color:var(--mut);font:500 12px var(--b);letter-spacing:.1em}
+.pb{padding:20px}
+.mapb svg{width:100%;max-height:600px;display:block}.dist{cursor:pointer;transition:fill-opacity .2s}.dist:hover{fill-opacity:.95!important}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font:600 12px var(--b);letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}.legend i{display:inline-block;width:12px;height:12px;border:2px solid;margin-right:6px;vertical-align:-2px}
+.sea{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}.gauge{width:90px;height:230px;border:2px solid var(--line);position:relative;background:repeating-linear-gradient(#0000 0 22px,#2c6a9440 22px 23px)}.gauge i{position:absolute;left:0;right:0;bottom:0;height:88%;background:linear-gradient(#ff5a4d,#ffb627 50%,#5fd4f4)}.gauge b{position:absolute;left:100%;margin-left:8px;font:700 13px var(--c);letter-spacing:.1em;white-space:nowrap}
+.sea h3{margin:0;font:800 64px/1 var(--c)}.sea p{margin:4px 0 0;color:var(--mut)}
+select{font:700 22px var(--c);letter-spacing:.06em;background:var(--navy);color:var(--ice);border:1px solid var(--line);padding:10px 14px;width:100%;text-transform:uppercase;border-radius:0}
+.res{margin-top:16px;display:flex;align-items:center;gap:16px}.res .lv{font:800 36px var(--c);text-transform:uppercase;padding:4px 18px;color:#000}.res span{color:var(--mut)}
+.row{display:grid;grid-template-columns:54px 1fr;gap:14px;padding:14px 0;border-top:1px dashed var(--line)}.row:first-child{border:0;padding-top:0}.row time{font:700 20px var(--c);color:var(--am);letter-spacing:.04em}.row small{display:block;color:var(--mut);font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+.sv{display:flex;gap:12px;justify-content:space-between;padding:12px 0;border-top:1px dashed var(--line);font-size:15px}.sv:first-child{border:0;padding-top:0}.sv b{font:700 13px var(--c);letter-spacing:.14em;color:var(--rd);text-transform:uppercase;white-space:nowrap}
+.recs{display:grid;grid-template-columns:repeat(4,1fr);gap:0}.recs div{padding:20px;border-right:1px solid var(--line)}.recs div:last-child{border:0}.recs b{font:700 14px var(--c);color:var(--cy);letter-spacing:.24em}.recs h4{font:800 28px var(--c);margin:6px 0;text-transform:uppercase}.recs p{margin:0;color:var(--mut);font-size:14.5px}
+footer{padding:26px 0 50px;border-top:1px solid var(--line);color:var(--mut);font-size:13px;letter-spacing:.06em}
+@media(max-width:960px){.hero,.grid{grid-template-columns:1fr}.band,.recs{grid-template-columns:1fr 1fr}.band div,.recs div{border-bottom:1px solid var(--line)}}
+</style></head><body>
+<svg class="iso" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="none" stroke="#2c6a94" stroke-width="1" id="isos"></g></svg>
+<div class="w">
+  <header><div><b>Tempestade Charles</b><small>Boletim · Portugal continental · 10 NOV 2026</small></div><div class="tel"><a href="tel:112"><span>112</span> Emergência</a><a href="tel:808242424">SNS 24 808 24 24 24</a></div></header>
+  <section class="hero"><div><h1>Depressão<br><em>Charles</em></h1><p>Aviso vermelho para Lisboa, Setúbal e Leiria. Ondas até 10 metros a partir das 06:00, pico da maré às 15:20. Informação com fonte identificada.</p></div>
+    <div class="dial"><svg viewBox="0 0 300 300" aria-hidden="true"><circle cx="150" cy="150" r="140" fill="none" stroke="#2c6a94"/><circle cx="150" cy="150" r="118" fill="none" stroke="#5fd4f4" stroke-width="6" stroke-dasharray="560 742" transform="rotate(-90 150 150)" stroke-linecap="round"/><circle cx="150" cy="150" r="100" fill="none" stroke="#2c6a94" stroke-dasharray="2 6"/><g id="ticks" stroke="#7fa6c0"></g><text x="150" y="22" text-anchor="middle" fill="#ffb627" font-family="Barlow Condensed" font-weight="700" font-size="16">N</text></svg>
+      <div class="in"><small>Início em</small><b data-cd>00:00:00</b><small>00:00 · 11 NOV</small></div></div></section>
+  <div class="band" id="band"></div>
+  <div class="grid">
+    <div style="display:grid;gap:28px;align-content:start">
+      <section class="pan"><h2>Carta de avisos <span>Escala 1 : 4 000 000</span></h2><div class="pb mapb"><div id="map"></div><div class="legend"><span style="color:#ff5a4d"><i></i>Vermelho</span><span style="color:#ffb627"><i></i>Laranja</span><span style="color:#ffe27a"><i></i>Amarelo</span><span><i></i>Sem aviso</span></div></div></section>
+      <section class="pan"><h2>Últimas notícias <span>fontes citadas</span></h2><div class="pb" id="feed"></div></section>
+    </div>
+    <div style="display:grid;gap:28px;align-content:start">
+      <section class="pan"><h2>Estado do mar <span>Autoridade Marítima</span></h2><div class="pb sea"><div class="gauge"><i></i><b style="top:6%">10 m</b><b style="bottom:2%">0</b></div><div><h3>10 m</h3><p>Altura máxima das ondas.<br>A partir das 06:00 de quarta-feira.</p><p style="color:var(--am)">Douro: proibido a embarcações com menos de 12 metros.</p></div></div></section>
+      <section class="pan"><h2>A minha zona</h2><div class="pb"><select id="sel" aria-label="Distrito"></select><div class="res"><span class="lv" id="lv"></span><span id="sc"></span></div></div></section>
+      <section class="pan"><h2>Avisos em vigor <span>IPMA</span></h2><div class="pb" id="warn"></div></section>
+      <section class="pan"><h2>Serviços e estradas</h2><div class="pb" id="svc"></div></section>
+    </div>
+  </div>
+  <section class="pan"><h2>Instruções de segurança</h2><div class="recs" id="recs"></div></section>
+  <footer>Projeto independente · não substitui a Proteção Civil · <a href="#" style="color:var(--cy)">Metodologia</a> · <a href="#" style="color:var(--cy)">Fontes</a></footer>
+</div>
+<script src="data.js"></script><script src="common.js"></script>
+<script>
+const {M,LV,COL,CAT,esc,hm,map,bindMap,byId,counts}=C;
+const isos=document.getElementById('isos');let h='';for(let i=1;i<=16;i++){h+=`<ellipse cx="${300+i*3}" cy="${420-i*2}" rx="${i*62}" ry="${i*34}" transform="rotate(${-14+i*0.9} 300 420)"/>`}for(let i=1;i<=9;i++){h+=`<ellipse cx="980" cy="200" rx="${i*50}" ry="${i*26}" transform="rotate(12 980 200)"/>`}isos.innerHTML=h;
+let tk='';for(let i=0;i<60;i++){const a=i*6*Math.PI/180,r1=i%5?130:124;tk+=`<line x1="${150+Math.sin(a)*140}" y1="${150-Math.cos(a)*140}" x2="${150+Math.sin(a)*r1}" y2="${150-Math.cos(a)*r1}"/>`}document.getElementById('ticks').innerHTML=tk;
+const ST={vermelho:'#ff5a4d',laranja:'#ffb627',amarelo:'#ffe27a',verde:'#2c6a94'};
+const OP={vermelho:.55,laranja:.4,amarelo:.28,verde:.12};
+document.getElementById('map').innerHTML=map({fill:d=>ST[d.level],extra:d=>`fill-opacity="${OP[d.level]}"`,stroke:'#5fd4f4',sw:1,land:'#0a2742',landAttrs:'stroke="#2c6a94"',pad:6});
+const cn=counts();document.getElementById('band').innerHTML=[['Distritos em vermelho',cn.vermelho,''],['Distritos em laranja',cn.laranja,''],['Rajada máx. prevista','120','km/h'],['Ocorrências',M.incidents.length,'regist.']].map(([a,b,c])=>`<div><small>${a}</small><b>${b}<i>${c}</i></b></div>`).join('');
+const sel=document.getElementById('sel');sel.innerHTML=M.districts.map(d=>`<option value="${d.id}">${d.name}</option>`).join('');
+function zone(id){const d=byId(id);sel.value=id;lv.textContent=LV[d.level];lv.style.background=ST[d.level];sc.textContent=`Impacto ${d.score}/100`}
+sel.onchange=()=>zone(sel.value);bindMap(document.getElementById('map'),zone);zone('lisboa');
+document.getElementById('warn').innerHTML=M.warnings.map(w=>`<div class="sv"><span><b style="font:700 18px var(--c);color:${ST[w.lvl]};text-transform:uppercase;letter-spacing:.06em">${LV[w.lvl]}</b> · ${w.what}<br><span style="color:var(--mut);font-size:13px">${w.where} · ${w.from}</span></span></div>`).join('');
+document.getElementById('feed').innerHTML=M.feed.slice(0,6).map(f=>`<div class="row"><time>${hm(f.time)}</time><div>${esc(f.title)}<small>${esc(f.src)} · ${CAT[f.cat]}</small></div></div>`).join('');
+document.getElementById('svc').innerHTML=M.services.slice(0,7).map(s=>`<div class="sv"><span>${esc(s.name.slice(0,90))}${s.name.length>90?'…':''}</span><b>${s.status.replace('_',' ')}</b></div>`).join('');
+document.getElementById('recs').innerHTML=M.recs.map(([a,b],i)=>`<div><b>0${i+1}</b><h4>${a}</h4><p>${b}</p></div>`).join('');
+</script></body></html>

@@ -1,5 +1,5 @@
-import '@fontsource-variable/inter';
-import '@fontsource-variable/space-grotesk';
+import '@fontsource-variable/familjen-grotesk';
+import '@fontsource-variable/martian-mono';
 import './styles/app.css';
 import { start } from './app.js';
 import { inject } from '@vercel/analytics';

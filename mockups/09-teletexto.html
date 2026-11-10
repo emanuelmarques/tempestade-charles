@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mockup 09 · Teletexto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+<style>
+:root{--k:#000;--r:#ff2a2a;--g:#2aff4a;--y:#ffff2a;--b:#3a5bff;--m:#ff2aff;--c:#2affff;--w:#fff}
+*{box-sizing:border-box}body{margin:0;background:#111;color:var(--w);font:400 26px/1.15 'VT323',monospace;min-height:100vh;display:grid;place-items:start center;padding:24px 12px}
+.tv{width:min(960px,100%);background:var(--k);padding:20px 24px 24px;border-radius:26px;border:14px solid #2a2a2e;box-shadow:0 0 0 3px #000,0 30px 80px #000a,inset 0 0 90px #1a1a2e;position:relative;overflow:hidden}
+.tv:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(#0000 0 2px,#0004 2px 3px);pointer-events:none}
+.hd{display:flex;justify-content:space-between;background:var(--w);color:var(--k);padding:0 10px;font-size:28px}.hd b{background:var(--k);color:var(--w);padding:0 10px;margin:2px 0}
+.ttl{display:flex;gap:0;margin:6px 0}.ttl span{display:block;padding:0 12px;font-size:44px;line-height:1.05}
+h1{margin:0;font:inherit;font-size:60px;line-height:1;color:var(--y);letter-spacing:.04em;text-transform:uppercase}
+.dbl{font-size:44px;line-height:1}
+.bk{background:var(--r);color:var(--w);padding:0 10px;display:block}.by{background:var(--y);color:var(--k);padding:0 10px;display:block}.bc{background:var(--c);color:var(--k);padding:0 10px;display:block}.bg{background:var(--g);color:var(--k);padding:0 10px;display:block}.bb{background:var(--b);padding:0 10px;display:block}.bm{background:var(--m);color:var(--k);padding:0 10px;display:block}
+.y{color:var(--y)}.c{color:var(--c)}.g{color:var(--g)}.r{color:var(--r)}.m{color:var(--m)}.pg{display:none}.pg.on{display:block}
+.blink{animation:bl 1s steps(2,jump-none) infinite}@keyframes bl{50%{opacity:0}}
+.fast{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:10px}.fast button{font:inherit;border:0;cursor:pointer;padding:2px 6px;color:var(--k);text-transform:uppercase;font-size:24px}.fast .f1{background:var(--r);color:#fff}.fast .f2{background:var(--g)}.fast .f3{background:var(--y)}.fast .f4{background:var(--c)}
+.mapt{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}.mapt svg{width:100%;max-height:560px;shape-rendering:crispEdges}.dist{cursor:pointer}.dist:hover{stroke:#fff;stroke-width:3}
+.lg{display:grid;gap:2px}.lg span{padding:0 8px}
+.ln{display:grid;grid-template-columns:7ch 1fr;gap:0 10px;margin-bottom:6px}.ln time{color:var(--c)}.ln small{display:block;color:var(--g);font-size:22px}
+.sv{display:grid;grid-template-columns:1fr auto;gap:12px;margin-bottom:4px}.sv b{color:var(--k);background:var(--r);padding:0 8px;font-weight:400;text-transform:uppercase}
+input{font:inherit;font-size:30px;background:var(--k);color:var(--y);border:2px solid var(--y);width:5ch;padding:0 6px;text-align:center}
+select{font:inherit;font-size:28px;background:var(--b);color:#fff;border:0;padding:2px 8px;width:100%;border-radius:0}
+.cdt{font-size:120px;line-height:1;color:var(--w);text-align:center;letter-spacing:.04em}
+@media(max-width:700px){body{font-size:20px}h1{font-size:38px}.ttl span{font-size:28px}.cdt{font-size:68px}.mapt{grid-template-columns:1fr}.hd{font-size:20px}}
+</style></head><body>
+<div class="tv">
+  <div class="hd"><b id="pn">P100</b><span>TEMPESTADE CHARLES</span><span>10 NOV <span id="clk">20:10:00</span></span></div>
+  <div style="text-align:right;margin:2px 0" class="c">Escreva o número da página <input id="go" maxlength="3" inputmode="numeric" placeholder="101" aria-label="Número da página"></div>
+
+  <section class="pg on" id="p100">
+    <div class="ttl"><h1>Charles</h1></div>
+    <span class="bk blink">AVISO VERMELHO · LISBOA SETÚBAL LEIRIA</span>
+    <p class="y" style="margin:10px 0 0">A TEMPESTADE COMEÇA EM</p>
+    <div class="cdt" data-cd>00:00:00</div>
+    <p class="c" style="text-align:center;margin:0 0 12px">ÀS 00:00 DE 11 NOVEMBRO</p>
+    <span class="bb">101 AVISOS ......... 102 MAPA</span>
+    <span class="bb">103 NOTÍCIAS ...... 104 SERVIÇOS</span>
+    <span class="bb">105 O QUE FAZER ... 112 EMERGÊNCIA</span>
+  </section>
+
+  <section class="pg" id="p101"><span class="by dbl">AVISOS IPMA</span><div id="warn" style="margin-top:8px"></div></section>
+
+  <section class="pg" id="p102"><span class="bc dbl">MAPA DE AVISOS</span><div class="mapt" style="margin-top:8px"><div id="map"></div>
+    <div><div class="lg"><span style="background:var(--r);color:#fff">VERMELHO</span><span style="background:#ff8a00;color:#000">LARANJA</span><span style="background:var(--y);color:#000">AMARELO</span><span style="background:#2a2a6a">SEM AVISO</span></div>
+    <p class="y" style="margin:14px 0 4px">A MINHA ZONA:</p><select id="sel" aria-label="Distrito"></select><div id="zr" style="margin-top:10px;font-size:34px"></div></div></div></section>
+
+  <section class="pg" id="p103"><span class="bg dbl">ÚLTIMA HORA</span><div id="feed" style="margin-top:8px"></div></section>
+
+  <section class="pg" id="p104"><span class="bm dbl">ESTRADAS E SERVIÇOS</span><div id="svc" style="margin-top:8px"></div></section>
+
+  <section class="pg" id="p105"><span class="bc dbl">O QUE FAZER</span><div id="recs" style="margin-top:8px"></div></section>
+
+  <section class="pg" id="p112"><span class="bk dbl">EMERGÊNCIA</span>
+    <div class="cdt r" style="font-size:200px;color:var(--r)">112</div><p class="y" style="text-align:center;font-size:36px;margin:0">SNS 24: 808 24 24 24</p>
+    <p class="c" style="text-align:center">EM CASO DE PERIGO PARA A VIDA, LIGUE 112.</p></section>
+
+  <div class="fast"><button class="f1" data-p="100">Início</button><button class="f2" data-p="102">Mapa</button><button class="f3" data-p="103">Notícias</button><button class="f4" data-p="105">Fazer</button></div>
+</div>
+<script src="data.js"></script><script src="common.js"></script>
+<script>
+const {M,LV,COL,CAT,esc,hm,map,bindMap,byId}=C;
+const T={vermelho:'#ff2a2a',laranja:'#ff8a00',amarelo:'#ffff2a',verde:'#2a2a6a'};
+function show(p){const e=document.getElementById('p'+p);if(!e)return;document.querySelectorAll('.pg').forEach(x=>x.classList.toggle('on',x===e));document.getElementById('pn').textContent='P'+p}
+document.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>show(b.dataset.p));
+const go=document.getElementById('go');go.oninput=()=>{if(go.value.length===3){show(go.value);go.value=''}};
+document.getElementById('warn').innerHTML=M.warnings.map(w=>`<div style="margin-bottom:10px"><span style="background:${T[w.lvl]};color:${w.lvl==='vermelho'?'#fff':'#000'};padding:0 8px">${LV[w.lvl].toUpperCase()}</span> <span class="c">${w.what.toUpperCase()}</span><br><span class="g">${w.where.toUpperCase()}</span><br><span class="y">${w.from} &gt; ${w.to}</span></div>`).join('');
+document.getElementById('map').innerHTML=map({fill:d=>T[d.level],land:'#0a0a3a',stroke:'#000',sw:2});
+const sel=document.getElementById('sel');sel.innerHTML=M.districts.map(d=>`<option value="${d.id}">${d.name.toUpperCase()}</option>`).join('');
+function zone(id){const d=byId(id);sel.value=id;document.getElementById('zr').innerHTML=`<span style="background:${T[d.level]};color:${d.level==='vermelho'?'#fff':'#000'};padding:0 10px">${LV[d.level].toUpperCase()}</span> <span class="c">IMPACTO ${d.score}/100</span>`}
+sel.onchange=()=>zone(sel.value);bindMap(document.getElementById('map'),zone);zone('lisboa');
+const cc={governamental:'OFICIAL',comunicacao_social:'IMPRENSA',redes_sociais:'REDES'};
+document.getElementById('feed').innerHTML=M.feed.slice(0,7).map(f=>`<div class="ln"><time>${hm(f.time)}</time><div>${esc(f.title.slice(0,120)).toUpperCase()}${f.title.length>120?'…':''}<small>${esc(f.src).toUpperCase()} · ${cc[f.cat]}</small></div></div>`).join('');
+document.getElementById('svc').innerHTML=M.services.slice(0,9).map(s=>`<div class="sv"><span>${esc(s.name.slice(0,70)).toUpperCase()}…</span><b>${s.status.replace('_',' ')}</b></div>`).join('');
+document.getElementById('recs').innerHTML=M.recs.map(([a,b],i)=>`<p style="margin:0 0 8px"><span class="y">${i+1}. ${a.toUpperCase()}</span><br><span>${b.toUpperCase()}</span></p>`).join('');
+setInterval(()=>{document.getElementById('clk').textContent=new Date(Date.parse('2026-11-10T20:10:00Z')+performance.now()).toISOString().slice(11,19)},1000);
+</script></body></html>

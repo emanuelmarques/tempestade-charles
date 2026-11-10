@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mockups · Tempestade Charles</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#14161a;color:#e8eaee;font:400 16px/1.5 'Inter Tight',system-ui,sans-serif}
+.w{max-width:1280px;margin:0 auto;padding:40px 24px 80px}h1{font-size:44px;letter-spacing:-.03em;margin:0 0 6px}.lead{color:#9aa3b2;max-width:46em;margin:0 0 36px}
+.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:22px}
+a.c{display:block;background:#1d2026;border:1px solid #2a2e37;border-radius:16px;overflow:hidden;color:inherit;text-decoration:none;transition:transform .15s,border-color .15s}a.c:hover{transform:translateY(-3px);border-color:#5b8cff}
+.sh{height:230px;overflow:hidden;position:relative;background:#fff;border-bottom:1px solid #2a2e37}.sh iframe{width:1280px;height:920px;border:0;transform:scale(.28);transform-origin:0 0;pointer-events:none}
+.t{padding:14px 16px 18px}.t b{font-size:19px;display:block}.t em{font-style:normal;color:#7fa2ff;font-size:13px;display:block;margin:2px 0 6px}.t p{margin:0;color:#9aa3b2;font-size:14px}
+</style></head><body><div class="w">
+<h1>10 direções para o site</h1>
+<p class="lead">Todas usam os dados reais do site (feed, serviços, ocorrências, mapa por distrito). Os níveis de aviso por distrito são ilustrativos. Clique para abrir; nos mockups o mapa, o seletor de zona e a contagem decrescente funcionam.</p>
+<h2 style="font-size:28px;letter-spacing:-.02em;margin:0 0 6px">Variações do 03 · Centro de controlo</h2><p class="lead" style="margin-bottom:22px">Cinco explorações a partir do estilo preferido.</p><div class="g" id="g2" style="margin-bottom:56px"></div>
+<h2 style="font-size:28px;letter-spacing:-.02em;margin:0 0 20px">As 10 direções originais</h2><div class="g" id="g"></div></div>
+<script>
+const L=[
+['01-civico','01 · Cívico','gov.uk · IPMA · Meteoalarm','Branco, texto grande, caixa de alerta, tabelas. Máxima legibilidade e acessibilidade.'],
+['02-redacao','02 · Redação ao vivo','Guardian · Público · BBC live','Cronologia vertical com fonte em cada entrada; serifa editorial e barra lateral fixa.'],
+['03-centro-controlo','03 · Centro de controlo','Windy · Zoom Earth · NHC','Mapa em ecrã inteiro, painéis de vidro, barra de tempo e pulsos nos distritos críticos.'],
+['04-cartaz-brutalista','04 · Cartaz brutalista','Sinalética de aviso · neo-brutalismo','Amarelo e preto, tipografia gigante, sombras duras. Impossível de ignorar.'],
+['05-atlas-editorial','05 · Atlas editorial','NYT Graphics · The Economist','Serifa elegante, números grandes, mapa de círculos proporcionais ao impacto.'],
+['06-bento','06 · Bento dashboard','Linear · Vercel · JHU COVID dashboard','Mosaico de cartões: estado, mapa, 112, tempo, feed e serviços numa só vista.'],
+['07-carta-nautica','07 · Carta náutica','Cartas de isóbaras · Autoridade Marítima','Azul-marinho, linhas de isóbara, mostrador de contagem e medidor de ondas.'],
+['08-app-mobile','08 · App móvel primeiro','Citizen · Waze · apps de proteção civil','Ecrã de telemóvel com navegação inferior, botão 112 fixo e checklist.'],
+['09-teletexto','09 · Teletexto','Teletexto RTP/BBC Ceefax','Nostalgia com propósito: páginas numeradas, cores Fastext, ultraleve. Escreva 101–105.'],
+['10-calmo','10 · Calmo e humano','Serviços de saúde · apps de bem-estar','Tons de terra, cantos redondos, linguagem tranquila e checklist interativa.']];
+const V=[
+['03a-controlo-dia','03a · Modo dia','Windy claro · Apple Weather','Mesma estrutura em vidro claro; alterna o mapa entre Avisos e Impacto (escala contínua).'],
+['03b-controlo-radar','03b · Radar fósforo','Radar meteorológico · ecrãs CRT','Verde sobre preto, varrimento animado, anéis de alcance e ranking de impacto.'],
+['03c-controlo-terminal','03c · Terminal denso','Bloomberg · painéis de trading','Três colunas: tabela de distritos, mapa, relatos. Ticker no topo, máxima densidade.'],
+['03d-controlo-movel','03d · Móvel com painel','Apple Maps · Citizen','Mapa em ecrã inteiro e painel deslizante (toque na pega) com relatos, avisos, serviços e ações.'],
+['03e-controlo-tempo','03e · Linha do tempo','Windy · Zoom Earth (animação)','Deslize ou reproduza as próximas 36 h: os distritos mudam de nível e os números acompanham.']];
+V.unshift(['03f-controlo-tempo-movel','03f · Linha do tempo + painel móvel (03e + 03d)','Combinação das duas favoritas','Um só design responsivo: no ecrã grande, painel lateral; no telemóvel, folha deslizante com a linha do tempo no topo.']);
+const card=([f,t,r,d])=>`<a class="c" href="${f}.html"><div class="sh"><iframe src="${f}.html" tabindex="-1" title="${t}"></iframe></div><div class="t"><b>${t}</b><em>${r}</em><p>${d}</p></div></a>`;
+document.getElementById('g2').innerHTML=V.map(card).join('');
+g.innerHTML=L.map(([f,t,r,d])=>`<a class="c" href="${f}.html"><div class="sh"><iframe src="${f}.html" tabindex="-1" title="${t}"></iframe></div><div class="t"><b>${t}</b><em>${r}</em><p>${d}</p></div></a>`).join('');
+</script></body></html>

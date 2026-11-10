@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mockup 03 · Centro de controlo (Windy · Zoom Earth)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@300;400;600&family=Familjen+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070b12;--panel:rgba(14,22,34,.72);--line:rgba(140,180,220,.18);--tx:#dbe7f3;--mut:#7f93a8;--cy:#45e0ff;--font:'Familjen Grotesk',sans-serif;--mono:'Martian Mono',monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:400 16px/1.45 var(--font)}
+.stage{position:relative;height:100vh;min-height:680px;overflow:hidden;background:radial-gradient(1200px 700px at 30% 40%,#0f2236 0%,#070b12 70%)}
+.stage:before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;opacity:.35;mask-image:radial-gradient(circle at 35% 50%,#000,transparent 75%)}
+#map{position:absolute;inset:70px 380px 120px 0;display:grid;place-items:center}#map svg{height:100%;width:100%;filter:drop-shadow(0 0 24px rgba(69,224,255,.12))}
+.dist{cursor:pointer;transition:filter .2s}.dist:hover{filter:brightness(1.5)}.pulse{animation:pu 2.4s ease-out infinite;transform-origin:center;transform-box:fill-box}@keyframes pu{0%{opacity:.7;transform:scale(.3)}100%{opacity:0;transform:scale(1.6)}}
+.bar{position:absolute;left:20px;right:20px;top:16px;display:flex;gap:14px;align-items:center;justify-content:space-between;z-index:3}
+.glass{background:var(--panel);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:14px}
+.brand{padding:10px 16px;display:flex;gap:12px;align-items:center}.brand b{font:700 20px var(--font);letter-spacing:.02em}.brand span{font:300 11px var(--mono);color:var(--mut);letter-spacing:.1em}
+.dot{width:9px;height:9px;border-radius:50%;background:#ff3b4a;box-shadow:0 0 12px #ff3b4a;animation:b 1.4s infinite}@keyframes b{50%{opacity:.3}}
+.chips{display:flex;gap:6px;padding:6px}.chips button{font:400 12px var(--mono);color:var(--mut);background:transparent;border:0;padding:8px 12px;border-radius:9px;cursor:pointer}.chips button.on{background:rgba(69,224,255,.14);color:var(--cy)}
+.tel{padding:10px 16px;display:flex;gap:18px;font:400 13px var(--mono)}.tel a{color:var(--tx);text-decoration:none}.tel b{color:#ff6b78}
+.side{position:absolute;right:20px;top:76px;bottom:20px;width:350px;display:flex;flex-direction:column;gap:12px;z-index:3;overflow:auto}
+.side .glass{padding:16px}
+.big{font:600 46px/1 var(--mono);letter-spacing:-.04em;color:#fff}.big small{font-size:12px;color:var(--mut);letter-spacing:.04em;display:block;margin-top:8px;font-weight:300}
+.lbl{font:400 10.5px var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--mut);margin-bottom:10px;display:flex;justify-content:space-between}
+.zn{font:700 26px var(--font)}.badge{display:inline-block;font:600 11px var(--mono);padding:3px 8px;border-radius:5px;color:#000;margin-left:8px;vertical-align:middle}
+.bars{display:grid;gap:7px;margin-top:12px}.bars div{display:grid;grid-template-columns:90px 1fr 34px;gap:8px;align-items:center;font:400 11px var(--mono);color:var(--mut)}.bars i{height:6px;border-radius:4px;background:rgba(255,255,255,.08);position:relative;overflow:hidden}.bars i:after{content:"";position:absolute;inset:0;width:var(--w);background:var(--c);border-radius:4px}
+.wxr{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;text-align:center;font:400 11px var(--mono);color:var(--mut)}.wxr b{display:block;font:600 20px var(--mono);color:#fff}
+.tlbar{position:absolute;left:20px;right:390px;bottom:20px;padding:14px 18px;z-index:3}
+.track{position:relative;height:36px;margin-top:6px}.track .ln{position:absolute;left:0;right:0;top:16px;height:4px;border-radius:4px;background:linear-gradient(90deg,#45e0ff55,#F4C20D,#EE7B1E,#D1242F,#EE7B1E,#45e0ff55)}
+.track span{position:absolute;top:24px;transform:translateX(-50%);font:300 10.5px var(--mono);color:var(--mut)}.track em{position:absolute;top:8px;left:var(--p);width:4px;height:20px;border-radius:3px;background:#fff;box-shadow:0 0 12px #fff}
+.leg{position:absolute;left:20px;bottom:150px;display:flex;gap:14px;font:400 11px var(--mono);color:var(--mut);z-index:3}.leg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px}
+.below{max-width:1200px;margin:0 auto;padding:56px 24px;display:grid;grid-template-columns:1.2fr .8fr;gap:24px}
+.below h2{font:400 11px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin:0 0 14px}
+.fi{display:grid;grid-template-columns:62px 1fr;gap:14px;padding:14px 0;border-top:1px solid var(--line)}.fi time{font:600 14px var(--mono);color:var(--cy)}.fi small{display:block;color:var(--mut);font:300 11px var(--mono);margin-top:5px}
+.sv{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-top:1px solid var(--line);font-size:14.5px}.sv b{font:600 10.5px var(--mono);color:#ff9a3d;white-space:nowrap;text-transform:uppercase}
+@media(max-width:1000px){.stage{height:auto;min-height:0;padding:80px 12px 12px}#map{position:relative;inset:auto;height:60vh}.side,.tlbar,.leg{position:relative;inset:auto;width:auto;margin-top:12px}.bar{position:absolute;flex-wrap:wrap}.below{grid-template-columns:1fr}.chips{display:none}}
+</style></head><body>
+<section class="stage">
+  <div class="bar"><div class="glass brand"><span class="dot"></span><b>Tempestade Charles</b><span>PT · CONTINENTE · LIVE</span></div>
+    <div class="glass chips" role="tablist"><button class="on">Avisos</button><button>Impacto</button><button>Ocorrências</button><button>Vento</button><button>Ondas</button></div>
+    <div class="glass tel"><a href="tel:112">EMERGÊNCIA <b>112</b></a><a href="tel:808242424">SNS 24 <b>808 24 24 24</b></a></div></div>
+  <div id="map"></div>
+  <div class="leg"><span><i style="background:#D1242F"></i>vermelho</span><span><i style="background:#EE7B1E"></i>laranja</span><span><i style="background:#F4C20D"></i>amarelo</span><span><i style="background:#3b4a5c"></i>sem aviso</span></div>
+  <div class="side">
+    <div class="glass"><div class="lbl"><span>T-MENOS</span><span>00:00 · 11 NOV</span></div><div class="big"><span data-cd>00:00:00</span><small>até ao início da tempestade</small></div></div>
+    <div class="glass" id="zp"></div>
+    <div class="glass"><div class="lbl"><span>Tempo · Lisboa</span><span>Open-Meteo</span></div><div class="wxr" id="wx"></div></div>
+    <div class="glass"><div class="lbl"><span>Últimos relatos</span><span>3</span></div><div id="mini"></div></div>
+  </div>
+  <div class="glass tlbar"><div class="lbl"><span>Janela prevista</span><span>11 NOV 00:00 → 12 NOV 06:00</span></div>
+    <div class="track"><div class="ln"></div><em style="--p:6%"></em><span style="left:6%">agora</span><span style="left:20%">00h</span><span style="left:50%">12h</span><span style="left:80%">00h</span><span style="left:97%">06h</span></div></div>
+</section>
+<section class="below"><div><h2>Atualizações · fonte identificada</h2><div id="feed"></div></div><div><h2>Estradas, transportes e serviços</h2><div id="svc"></div></div></section>
+<script src="data.js"></script><script src="common.js"></script>
+<script>
+const {M,LV,COL,CAT,esc,hm,map,bindMap,byId}=C;
+const dc=l=>l==='verde'?'#3b4a5c':COL[l];
+const pulses=d=>d.level==='vermelho'?`<circle class="pulse" cx="${d.lx}" cy="${d.ly}" r="26" fill="none" stroke="#ff3b4a" stroke-width="1.5"/>`:'';
+document.getElementById('map').innerHTML=map({fill:d=>dc(d.level),land:'#0d1a29',landAttrs:'stroke="#1c3550" stroke-width="1"',stroke:'#070b12',sw:1.6,pad:6,over:M.districts.map(pulses).join('')});
+function zone(id){const d=byId(id);const bars=[['Aviso',d.level==='vermelho'?100:d.level==='laranja'?66:d.level==='amarelo'?33:8],['Ocorrências',Math.min(100,M.incidents.filter(i=>i.district===id).length*25+d.score/3)],['Impacto',d.score]];
+ document.getElementById('zp').innerHTML=`<div class="lbl"><span>Zona selecionada</span><span>${d.score}/100</span></div><div class="zn">${d.name}<span class="badge" style="background:${dc(d.level)}">${LV[d.level].toUpperCase()}</span></div><div class="bars">${bars.map(([a,v])=>`<div><span>${a}</span><i style="--w:${v}%;--c:${dc(d.level)}"></i><span>${Math.round(v)}</span></div>`).join('')}</div>`}
+bindMap(document.getElementById('map'),zone);zone('lisboa');
+document.getElementById('wx').innerHTML=M.wx.map(([h,t,w])=>`<div>${h}<b>${t}°</b>${w} km/h</div>`).join('');
+document.getElementById('mini').innerHTML=M.feed.slice(0,3).map(f=>`<div class="fi" style="padding:9px 0;grid-template-columns:48px 1fr;font-size:13.5px"><time>${hm(f.time)}</time><div>${esc(f.title.slice(0,90))}…</div></div>`).join('');
+document.getElementById('feed').innerHTML=M.feed.map(f=>`<div class="fi"><time>${hm(f.time)}</time><div>${esc(f.title)}<small>${esc(f.src)} · ${CAT[f.cat]}</small></div></div>`).join('');
+document.getElementById('svc').innerHTML=M.services.map(s=>`<div class="sv"><span>${esc(s.name.slice(0,120))}${s.name.length>120?'…':''}</span><b>${s.status.replace('_',' ')}</b></div>`).join('');
+</script></body></html>
