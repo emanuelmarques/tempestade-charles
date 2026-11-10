@@ -32,7 +32,7 @@ const state = {
   page: document.body.dataset.page || 'home',
   win: 'now', here: null, region: 'continente', national: false, district: null, userPicked: false, locNote: '', incidentId: null,
   filt: { governamental: true, comunicacao_social: true, redes_sociais: true },
-  sit: 'casa', cat: 'todas', svc: 'todas', pg: { serv: 1, feed: 1 }, zoneLoc: Number(store.get('zoneLoc', '1100900')) || 1100900,
+  sit: 'casa', cat: 'todas', svc: 'todas', inc: 'all', pg: { serv: 1, feed: 1, inc: 1 }, zoneLoc: Number(store.get('zoneLoc', '1100900')) || 1100900,
   view: { x: 0, y: 0, w: 640, h: 620 }, now: new Date(),
   at: null, tlBase: null, sheet: 0, playing: false, ptab: 'det',
 };
@@ -277,20 +277,16 @@ function warningLine(w) {
 
 function districtPanel(imp) {
   const d = DISTRICT_BY_ID[curDistrict(imp)]; const r = imp.get(d.id);
-  const list = data.curated.incidents.filter((i) => i.district === d.id).sort((a, b) => Date.parse(b.time) - Date.parse(a.time)).slice(0, 3);
-  const shown = r.count === 0 ? L('nenhuma', 'none') : list.length < r.count ? `${L('as', 'the')} ${list.length} ${L('mais recentes de', 'most recent of')} ${r.count}` : `${r.count} ${L('no total', 'in total')}`;
   const tname = TIER_NAMES[r.tier][state.lang === 'en' ? 1 : 0];
   return `<div style="display:flex;flex-direction:column;gap:14px"><div><p class="muted" style="margin:0;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.04em">${L('Distrito', 'District')}</p><h3 style="font-size:28px;line-height:1.15">${esc(d.name)}</h3><button class="tab" data-a="national" style="margin-top:8px;min-height:44px">${L('Ver todo o país', 'See the whole country')}</button></div>
     <div style="display:flex;flex-wrap:wrap;gap:8px"><span class="lv ${TIER_CLASS[r.tier]}">${L('Impacto', 'Impact')} ${tname}</span><span class="lv lv-${r.top ? r.top.level : 'verde'}">${L('Aviso', 'Warning')} ${r.top ? lvName(r.top.level) : L('verde', 'green')}</span></div>
     <div><h4 class="h" style="font-size:16px;margin-bottom:2px">${L('Avisos do IPMA', 'IPMA warnings')}</h4>${r.warnings.length ? r.warnings.map(warningLine).join('') : `<p class="muted" style="margin:6px 0 0;font-size:14px">${L('Sem aviso em vigor neste momento.', 'No warning in force right now.')}</p>`}<div style="margin-top:8px">${sourceBadge(IPMA_SOURCE, { lang: state.lang })}</div></div>
     ${upcomingBlock([d.area])}
-    <div style="display:flex;flex-direction:column;gap:8px"><h4 class="h" style="font-size:16px;margin:0">${L('Ocorrências recentes', 'Recent incidents')} <span class="muted" style="font-weight:500;font-size:14px">· ${shown}</span></h4>
-      ${r.count === 0 ? `<p class="muted" style="margin:0;font-size:14px">${L('Sem ocorrências registadas neste distrito.', 'No incidents recorded in this district.')}</p>` : ''}
-      ${list.map((i) => { const c = CATEGORIES[i.source.category]; return `<button class="item" data-a="incident" data-id="${esc(i.id)}"><span class="muted" style="display:flex;justify-content:space-between;gap:8px;font-size:13px"><span>${esc(i.place || '')}</span><span class="num">${esc(formatTime(new Date(i.time), state.lang))}</span></span><span style="font-weight:600;font-size:15px">${esc(txt(i.title))}</span><span>${sourceChip(i.source, state.lang)}${i.source.category === 'redes_sociais' && !i.verified ? ` <span class="st st-org">${L('Não verificado', 'Unverified')}</span>` : ''}</span></button>`; }).join('')}</div></div>`;
+    <button class="tab" data-a="incgo" data-v="district" style="align-self:flex-start">${r.count === 0 ? L('Sem ocorrências neste distrito', 'No incidents in this district') : `${L('Ver as', 'See the')} ${r.count} ${L('ocorrências abaixo', 'incidents below')} ↓`}</button></div>`;
 }
 
 function nationalPanel(imp) {
-  const rows = DISTRICTS.map((d) => ({ d, r: imp.get(d.id) })).sort((a, b) => b.r.score - a.r.score || a.d.name.localeCompare(b.d.name, 'pt'));
+  const rows = DISTRICTS.map((d) => ({ d, r: imp.get(d.id) }));
   const counts = [0, 0, 0, 0]; rows.forEach((x) => { counts[x.r.tier] += 1; });
   const [from, to] = windowRange();
   const names = TIER_NAMES.map((t) => t[state.lang === 'en' ? 1 : 0]);
@@ -300,15 +296,13 @@ function nationalPanel(imp) {
     const next = upcoming(areas).reduce((m, w) => (rank(w.level) > rank(m) ? w.level : m), 'verde');
     return `<button class="item" data-a="region" data-v="${k}"><span style="display:flex;justify-content:space-between;gap:8px;align-items:center"><strong>${L(pt, en)}</strong><span>${lvPill(now)}</span></span><span class="muted" style="font-size:13px">${next !== 'verde' ? `${L('A seguir, até', 'Coming up, up to')} ${esc(lvName(next))}` : L('Sem avisos previstos nas próximas 48 h', 'No warnings forecast in the next 48 h')}</span></button>`;
   }).join('');
-  const recent = data.curated.incidents.slice().sort((a, b) => Date.parse(b.time) - Date.parse(a.time)).slice(0, 3);
   const nUp = upcoming([...DISTRICTS.map((d) => d.area), ...ISLAND_AREAS.acores, ...ISLAND_AREAS.madeira]).length;
   return `<div style="display:flex;flex-direction:column;gap:14px"><div><p class="muted" style="margin:0;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.04em">${L('Nacional', 'National')}</p><h3 style="font-size:28px;line-height:1.15">${L('Todo o país', 'The whole country')}</h3></div>
     <div style="display:flex;flex-wrap:wrap;gap:8px"><span class="lv lv-${highestLevel()}">${L('Aviso mais alto', 'Highest warning')} ${esc(lvName(highestLevel()))}</span></div>
     <p class="muted" style="margin:0;font-size:14px">${[3, 2, 1, 0].map((t) => `<strong style="color:var(--ink)">${counts[t]}</strong> ${esc(names[t])}`).join(' · ')} (${L('distritos', 'districts')})</p>
     <p class="muted" style="margin:0;font-size:14px">${nUp ? `${nUp} ${L('avisos previstos nas próximas 48 h em todo o país.', 'warnings forecast in the next 48 h nationwide.')}` : L('Sem avisos previstos nas próximas 48 h.', 'No warnings forecast in the next 48 h.')}</p>
-    <div><h4 class="h" style="font-size:16px;margin:0 0 6px">${L('Distritos por impacto', 'Districts by impact')}</h4><div style="display:flex;flex-direction:column;gap:6px">${rows.map(({ d, r }) => `<button class="item" data-a="district" data-id="${d.id}" style="flex-direction:row;align-items:center;justify-content:space-between;gap:8px"><span style="font-weight:600">${esc(d.name)}</span><span style="display:flex;gap:8px;align-items:center"><span class="lv ${TIER_CLASS[r.tier]}">${esc(names[r.tier])}</span></span></button>`).join('')}</div></div>
     <div><h4 class="h" style="font-size:16px;margin:0 0 6px">${L('Regiões autónomas', 'Autonomous regions')}</h4><div style="display:flex;flex-direction:column;gap:6px">${islands}</div></div>
-    ${recent.length ? `<div><h4 class="h" style="font-size:16px;margin:0 0 6px">${L('Ocorrências recentes no país', 'Recent incidents nationwide')}</h4><div style="display:flex;flex-direction:column;gap:6px">${recent.map((i) => `<button class="item" data-a="incident" data-id="${esc(i.id)}"><span class="muted" style="font-size:13px">${esc(i.place || '')} · ${esc(formatTime(new Date(i.time), state.lang))}</span><span style="font-weight:600;font-size:15px">${esc(txt(i.title))}</span></button>`).join('')}</div></div>` : ''}
+    <button class="tab" data-a="incgo" data-v="all" style="align-self:flex-start">${L('Ver as ocorrências', 'See the incidents')} (${data.curated.incidents.length}) ↓</button>
     <div>${sourceBadge(IPMA_SOURCE, { lang: state.lang })}</div></div>`;
 }
 
@@ -518,24 +512,33 @@ function zoneRow(emoji, title, sub, actions) {
   return `<li class="zrow"><span class="zi" aria-hidden="true">${emoji}</span><div class="zt"><strong>${title}</strong>${sub ? `<span class="muted">${sub}</span>` : ''}</div>${actions ? `<div class="za">${actions}</div>` : ''}</li>`;
 }
 
+function incidentsSection(imp) {
+  const all = data.curated.incidents.slice().sort((x, y) => Date.parse(y.time) - Date.parse(x.time));
+  const d = DISTRICT_BY_ID[curDistrict(imp)];
+  const inDist = d ? all.filter((i) => i.district === d.id) : [];
+  const cur = state.inc === 'district' && d ? 'district' : 'all';
+  const list = cur === 'district' ? inDist : all;
+  const p = paginate(list, state.pg.inc, INC_PAGE);
+  state.pg.inc = p.page;
+  const chip = (k, label, n) => `<button class="chip ${cur === k ? 'on' : ''}" aria-pressed="${cur === k}" data-a="incf" data-v="${k}">${label} <span class="num" style="opacity:.75">${n}</span></button>`;
+  const filters = d ? `<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px" role="group" aria-label="${L('Filtrar ocorrências', 'Filter incidents')}">${chip('all', L('Todo o país', 'Whole country'), all.length)}${chip('district', esc(d.name), inDist.length)}</div>` : '';
+  const card = (i) => {
+    const img = i.image && i.image.allowed === true && safeUrl(i.image.url)
+      ? `<figure style="margin:0 0 10px"><img src="${esc(safeUrl(i.image.url))}" alt="" loading="lazy" referrerpolicy="no-referrer" data-hide-on-error style="width:100%;max-height:180px;object-fit:cover;border-radius:8px"><figcaption class="muted" style="font-size:12px;margin-top:4px">${esc(i.image.credit || '')}</figcaption></figure>` : '';
+    const dn = DISTRICT_BY_ID[i.district]?.name;
+    return `<article class="card" style="display:flex;flex-direction:column;gap:8px"><p class="muted" style="margin:0;font-size:13.5px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap"><span>${esc(i.place || dn || '')}</span><time class="num" datetime="${esc(i.time)}">${esc(formatDayTime(new Date(i.time), state.lang))}</time></p>${img}<h3 style="font-size:17px;line-height:1.3">${esc(txt(i.title))}</h3>${i.description ? `<p style="margin:0;font-size:15px">${esc(txt(i.description))}</p>` : ''}<div style="margin-top:auto;padding-top:6px">${sourceBadge(i.source, { verified: i.verified, lang: state.lang })}</div></article>`;
+  };
+  return `<section aria-labelledby="h-inc"><h2 id="h-inc" class="h2">${L('Ocorrências', 'Incidents')}</h2>${filters}${list.length ? `<div class="grid">${p.items.map(card).join('')}</div>${pager('inc', p)}` : emptyList('Sem ocorrências registadas ainda.', 'No incidents recorded yet.')}</section>`;
+}
+
 function zoneSection() {
   const loc = locById(state.zoneLoc);
-  const [from, to] = windowRange();
-  const ws = loc ? data.warnings.filter((w) => w.area === loc.area && w.start <= to && w.end >= from).sort((x, y) => rank(y.level) - rank(x.level)) : [];
   const dist = loc ? DISTRICT_BY_AREA[loc.area] : null;
   const shelters = dist ? data.curated.shelters.filter((x) => x.district === dist.id) : [];
-  const top = ws[0];
-  const next = loc ? upcoming([loc.area])[0] : null;
-  const level = top ? top.level : 'verde';
   const kmTxt = (km) => (km < 1 ? `${Math.round(km * 10) * 100} m` : `${km.toFixed(1).replace('.', state.lang === 'en' ? '.' : ',')} km`);
   const phoneBtn = (p) => (p ? `<a class="zbtn" href="${esc(p.href || p.phoneHref)}"><span aria-hidden="true">📞</span> ${esc(p.display || p.phone)}</a>` : '');
   const mapLink = (url) => `<a class="zlink" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${L('Mapa', 'Map')} ↗</a>`;
   const find = (q) => `<a class="zlink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}" target="_blank" rel="noopener noreferrer">${L('Procurar no mapa', 'Search on map')} ↗</a>`;
-
-  const warn = `<div class="zwarn" style="--lc:${level === 'verde' ? '#8A857A' : `var(--${level})`}">
-    ${top ? `<div style="display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center">${lvPill(top.level)}<strong>${esc(typeName(top.type))} · ${esc(loc.name)}</strong></div><span class="muted" style="font-size:14px">${esc(formatDayTime(top.start, state.lang))} → ${esc(formatDayTime(top.end, state.lang))}</span>` : `<strong>${L('Sem aviso em vigor neste momento', 'No warning in force right now')}</strong>`}
-    ${next ? `<span style="font-size:14px">${L('A seguir', 'Next')}: ${lvPill(next.level)} ${esc(typeName(next.type))} · ${esc(formatDayTime(next.start, state.lang))}</span>` : ''}
-    <span style="margin-top:2px">${sourceBadge(IPMA_SOURCE, { lang: state.lang })}</span></div>`;
 
   /* Câmara municipal */
   const c = data.contact; const m = c?.municipio;
@@ -570,14 +573,13 @@ function zoneSection() {
   const prociv = zoneRow('🛡️', L('Proteção Civil (ANEPC)', 'Civil Protection (ANEPC)'), L('Avisos e orientações oficiais', 'Official warnings and guidance'), `<a class="zlink" href="${ANEPC.url}" target="_blank" rel="noopener noreferrer">prociv.gov.pt ↗</a>`);
   const abrigos = zoneRow('⛺', L('Abrigos no distrito', 'Shelters in the district'), shelters.length ? shelters.slice(0, 3).map((x) => esc(txt(x.name))).join(' · ') : L('Sem abrigos registados. Siga as indicações da câmara municipal.', 'No shelters recorded. Follow your town hall’s instructions.'), '');
 
-  return `<section aria-labelledby="h-zona"><h2 id="h-zona" class="h2">${L('Na sua zona', 'In your area')}</h2>
+  return `<section aria-labelledby="h-zona"><h2 id="h-zona" class="h2">${L('Contactos de emergência', 'Emergency contacts')}</h2>
   <div class="card zone">
     <div class="zbar">
       <div class="field" style="flex:1 1 240px;max-width:380px"><label for="localidade" style="font-size:14px">${L('Localidade', 'Location')}</label><select id="localidade" data-a="zoneSel" data-key="localidade" style="min-height:48px;font-size:16px;width:100%">${locOptions()}</select></div>
       <button class="tab" data-a="geo" id="geo" style="display:inline-flex;align-items:center;gap:10px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M9 1v3M9 14v3M1 9h3M14 9h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>${L('Usar a minha localização', 'Use my location')}</button>
       <p id="geomsg" class="muted" style="margin:0;font-size:13.5px;flex:1 1 100%" role="status"></p>
     </div>
-    ${warn}
     <ul class="zlist">${camara}${fire}${pharmacy}${prociv}${abrigos}</ul>
   </div></section>`;
 }
@@ -604,7 +606,7 @@ function forecastSection() {
 
 function emptyList(pt, en) { return `<div class="empty">${L(pt, en)}</div>`; }
 
-const SERV_PAGE = 5; const FEED_PAGE = 6;
+const SERV_PAGE = 5; const FEED_PAGE = 6; const INC_PAGE = 6;
 
 function pager(key, p) {
   if (p.pages <= 1) return '';
@@ -736,7 +738,7 @@ function pageHtml() {
     return `<a class="skip" href="#stage">${L('Saltar para o conteúdo', 'Skip to content')}</a>${heroStage(imp)}`;
   }
   const main = state.page === 'recs' ? recsPage() : state.page === 'how' ? howPage() : state.page === 'sources' ? sourcesPage() : state.page === 'feedback' ? feedbackPage()
-    : [statusSection(imp), zoneSection(), recsLink(), servicesSection(), feedSection(), forecastSection(), sheltersSection(), mythsSection()].join('');
+    : [statusSection(imp), incidentsSection(imp), zoneSection(), recsLink(), servicesSection(), feedSection(), forecastSection(), sheltersSection(), mythsSection()].join('');
   return `<a class="skip" href="#main">${L('Saltar para o conteúdo', 'Skip to content')}</a>${emergencyBar()}${topbar()}<main id="main" class="sheet">${banners()}${main}</main>${footer()}`;
 }
 
@@ -810,9 +812,12 @@ function onClick(e) {
     const [k, dir] = v.split('-');
     state.pg[k] = Math.max(1, (state.pg[k] || 1) + (dir === 'next' ? 1 : -1));
     render();
-    document.getElementById(k === 'serv' ? 'h-serv' : 'h-feed')?.scrollIntoView({ block: 'start' });
+    document.getElementById(({ serv: 'h-serv', feed: 'h-feed', inc: 'h-inc' })[k])?.scrollIntoView({ block: 'start' });
     return;
   }
+  else if (a === 'incf') { state.inc = v; state.pg.inc = 1; }
+  else if (a === 'incgo' && state.page === 'home') { state.ptab = 'inc'; state.incidentId = null; if (state.sheet === 0) state.sheet = 1; }
+  else if (a === 'incgo') { state.inc = v; state.pg.inc = 1; render(); document.getElementById('h-inc')?.scrollIntoView({ block: 'start' }); return; }
   else if (a === 'sit') { state.sit = v; }
   else if (a === 'ptab') { state.ptab = v; state.incidentId = null; if (state.sheet === 0) state.sheet = 1; }
   else if (a === 'sheet') { state.sheet = (state.sheet + 1) % 3; document.getElementById('stage')?.setAttribute('data-s', String(state.sheet)); return; }

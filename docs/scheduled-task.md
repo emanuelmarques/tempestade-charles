@@ -11,7 +11,7 @@ Os **avisos e a previsão do IPMA não passam por aqui**: o site lê-os ao vivo 
    - Relato de rede social sem confirmação oficial: `source.category: "redes_sociais"` e `verified: false`.
    - `image` só com `allowed: true` quando houver licença ou autorização verificada. Nunca copiar imagens para o repositório; usar o URL da fonte. Sem permissão, omitir `image`.
    - Texto pode ser `string` ou `{ "pt": "...", "en": "..." }`.
-   - Ocorrências: `district` é o id do distrito (`viana`, `braga`, `porto`, `vilareal`, `braganca`, `viseu`, `guarda`, `aveiro`, `coimbra`, `leiria`, `castelobranco`, `santarem`, `lisboa`, `portalegre`, `evora`, `setubal`, `beja`, `faro`) ou `null`; `lat`/`lon` só se o local for conhecido; `severity` 1 a 3.
+   - Ocorrências: `district` é o id do distrito (`viana`, `braga`, `porto`, `vilareal`, `braganca`, `viseu`, `guarda`, `aveiro`, `coimbra`, `leiria`, `castelobranco`, `santarem`, `lisboa`, `portalegre`, `evora`, `setubal`, `beja`, `faro`) ou `null`; toda a ocorrência deve ter `lat`/`lon` (para aparecer no mapa): se a fonte não as der, inferir a localização a partir do texto com o Nominatim (`https://nominatim.openstreetmap.org/search?format=json&countrycodes=pt&q=...`, sem chave, 1 pedido/s, conferir o concelho no resultado) e marcar `locationApprox: true`; só `null` se não houver local identificável; `severity` 1 a 3.
 4. Escrever `meta.json` com `{ "updatedAt": "<hora atual ISO>" }` **só depois** dos outros ficheiros.
 5. Correr `npm run validate-data`. Se falhar, **não** fazer push e deixar os ficheiros anteriores.
 6. `git add public/data`, `git commit -m "data: update <hora>"` e `git push`.
@@ -31,7 +31,7 @@ Os **avisos e a previsão do IPMA não passam por aqui**: o site lê-os ao vivo 
 | Ficheiro | Itens |
 |---|---|
 | `meta.json` | `{ updatedAt: ISO \| null }` |
-| `incidents.json` | `{ id, title, description?, time, place?, district, lat?, lon?, severity: 1-3, verified: boolean, source, image?: { url, credit, allowed } }` |
+| `incidents.json` | `{ id, title, description?, time, place?, district, lat?, lon?, locationApprox?: boolean, severity: 1-3, verified: boolean, source, image?: { url, credit, allowed } }` |
 | `feed.json` | `{ id, time, title, verified?, source }` |
 | `services.json` | `{ id, type: estrada\|comboio\|aeroporto\|escola\|eletricidade\|agua\|comunicacoes, name, status: cortada\|condicionada\|suprimida\|atrasos\|encerrada\|sem_servico, source }` |
 | `shelters.json` | `{ id, name, address?, place?, district?, source }` |
