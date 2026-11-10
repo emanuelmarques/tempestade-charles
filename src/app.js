@@ -336,23 +336,13 @@ function zoneRow(emoji, title, sub, actions) {
 
 function zoneSection() {
   const loc = locById(state.zoneLoc);
-  const [from, to] = windowRange();
-  const ws = loc ? data.warnings.filter((w) => w.area === loc.area && w.start <= to && w.end >= from).sort((x, y) => rank(y.level) - rank(x.level)) : [];
   const dist = loc ? DISTRICT_BY_AREA[loc.area] : null;
   const shelters = dist ? data.curated.shelters.filter((x) => x.district === dist.id) : [];
   const group = (r, name) => `<optgroup label="${name}">${data.locations.filter((l) => l.region === r).map((l) => `<option value="${l.id}" ${l.id === state.zoneLoc ? 'selected' : ''}>${esc(l.name)}</option>`).join('')}</optgroup>`;
-  const top = ws[0];
-  const next = loc ? upcoming([loc.area])[0] : null;
-  const level = top ? top.level : 'verde';
   const kmTxt = (km) => (km < 1 ? `${Math.round(km * 10) * 100} m` : `${km.toFixed(1).replace('.', state.lang === 'en' ? '.' : ',')} km`);
   const phoneBtn = (p) => (p ? `<a class="zbtn" href="${esc(p.href || p.phoneHref)}"><span aria-hidden="true">📞</span> ${esc(p.display || p.phone)}</a>` : '');
   const mapLink = (url) => `<a class="zlink" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${L('Mapa', 'Map')} ↗</a>`;
   const find = (q) => `<a class="zlink" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}" target="_blank" rel="noopener noreferrer">${L('Procurar no mapa', 'Search on map')} ↗</a>`;
-
-  const warn = `<div class="zwarn" style="--lc:${level === 'verde' ? '#8A857A' : `var(--${level})`}">
-    ${top ? `<div style="display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center">${lvPill(top.level)}<strong>${esc(typeName(top.type))} · ${esc(loc.name)}</strong></div><span class="muted" style="font-size:14px">${esc(formatDayTime(top.start, state.lang))} → ${esc(formatDayTime(top.end, state.lang))}</span>` : `<strong>${L('Sem aviso em vigor neste momento', 'No warning in force right now')}</strong>`}
-    ${next ? `<span style="font-size:14px">${L('A seguir', 'Next')}: ${lvPill(next.level)} ${esc(typeName(next.type))} · ${esc(formatDayTime(next.start, state.lang))}</span>` : ''}
-    <span style="margin-top:2px">${sourceBadge(IPMA_SOURCE, { lang: state.lang })}</span></div>`;
 
   /* Câmara municipal */
   const c = data.contact; const m = c?.municipio;
@@ -387,14 +377,13 @@ function zoneSection() {
   const prociv = zoneRow('🛡️', L('Proteção Civil (ANEPC)', 'Civil Protection (ANEPC)'), L('Avisos e orientações oficiais', 'Official warnings and guidance'), `<a class="zlink" href="${ANEPC.url}" target="_blank" rel="noopener noreferrer">prociv.gov.pt ↗</a>`);
   const abrigos = zoneRow('⛺', L('Abrigos no distrito', 'Shelters in the district'), shelters.length ? shelters.slice(0, 3).map((x) => esc(txt(x.name))).join(' · ') : L('Sem abrigos registados. Siga as indicações da câmara municipal.', 'No shelters recorded. Follow your town hall’s instructions.'), '');
 
-  return `<section aria-labelledby="h-zona"><h2 id="h-zona" class="h2">${L('Na sua zona', 'In your area')}</h2>
+  return `<section aria-labelledby="h-zona"><h2 id="h-zona" class="h2">${L('Contactos de emergência', 'Emergency contacts')}</h2>
   <div class="card zone">
     <div class="zbar">
       <div class="field" style="flex:1 1 240px;max-width:380px"><label for="localidade" style="font-size:14px">${L('Localidade', 'Location')}</label><select id="localidade" data-a="zoneSel" data-key="localidade" style="min-height:48px;font-size:16px;width:100%">${group('continente', 'Continente')}${group('madeira', 'Madeira')}${group('acores', 'Açores')}</select></div>
       <button class="tab" data-a="geo" id="geo" style="display:inline-flex;align-items:center;gap:10px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M9 1v3M9 14v3M1 9h3M14 9h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>${L('Usar a minha localização', 'Use my location')}</button>
       <p id="geomsg" class="muted" style="margin:0;font-size:13.5px;flex:1 1 100%" role="status"></p>
     </div>
-    ${warn}
     <ul class="zlist">${camara}${fire}${pharmacy}${prociv}${abrigos}</ul>
   </div></section>`;
 }
