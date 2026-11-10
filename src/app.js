@@ -215,9 +215,9 @@ function pinShape(sev, s, selected, approx) {
   return `${ring}<circle class="halo" r="${r * 1.5}" fill="rgba(69,224,255,.28)"/><circle r="${r}" fill="#45e0ff" stroke="#fff" stroke-width="${2.4 * s}"${approx ? ` stroke-dasharray="${4 * s} ${2.5 * s}"` : ''}/><path d="M0 ${-r * .5}V${r * .1}" stroke="#06222c" stroke-width="${2.4 * s}" stroke-linecap="round"/><circle cy="${r * .48}" r="${1.35 * s}" fill="#06222c"/>`;
 }
 
+const CLUSTER_MIN = 4; // a partir de quantas ocorrências próximas se agrupam
 function mapPins() {
   const hasCoords = (i) => i.lat != null && i.lon != null;
-  // Ocorrências sem coordenadas aparecem junto ao nome do distrito, lado a lado.
   const inc = data.curated.incidents.filter((i) => hasCoords(i) || DISTRICT_BY_ID[i.district]);
   const approxGrp = {};
   for (const i of inc) if (!hasCoords(i)) (approxGrp[i.district] ||= []).push(i.id);
@@ -231,23 +231,40 @@ function mapPins() {
     else [x, y] = toMap(i.lat, i.lon);
     return { i, approx, x, y, x0: x, y0: y };
   });
-  // Afasta pontos que se sobreporiam (mínimo ~28 px no ecrã), sem os deslocar mais de ~40 px do sítio.
+  // Agrupa ocorrências próximas (no ecrã): grupos com CLUSTER_MIN ou mais viram um marcador com o número.
+  const linkD = 30 * s; const parent = pts.map((_, k) => k);
+  const find = (k) => (parent[k] === k ? k : (parent[k] = find(parent[k])));
+  for (let m = 0; m < pts.length; m++) for (let n = m + 1; n < pts.length; n++) if (Math.hypot(pts[m].x0 - pts[n].x0, pts[m].y0 - pts[n].y0) < linkD) parent[find(n)] = find(m);
+  const groups = new Map();
+  pts.forEach((p, k) => { const r = find(k); (groups.get(r) || groups.set(r, []).get(r)).push(p); });
+  const singles = []; const clusters = [];
+  for (const g of groups.values()) {
+    if (g.length >= CLUSTER_MIN) clusters.push({ items: g, x: g.reduce((t, p) => t + p.x0, 0) / g.length, y: g.reduce((t, p) => t + p.y0, 0) / g.length });
+    else singles.push(...g);
+  }
+  // Os restantes afastam-se um pouco para não ficarem sobrepostos.
   const minD = 24 * s; const maxMove = 36 * s;
   for (let it = 0; it < 30; it++) {
-    for (let m = 0; m < pts.length; m++) for (let n = m + 1; n < pts.length; n++) {
-      let dx = pts[n].x - pts[m].x; let dy = pts[n].y - pts[m].y; let d = Math.hypot(dx, dy);
+    for (let m = 0; m < singles.length; m++) for (let n = m + 1; n < singles.length; n++) {
+      let dx = singles[n].x - singles[m].x; let dy = singles[n].y - singles[m].y; let d = Math.hypot(dx, dy);
       if (d >= minD) continue;
       if (d < 1e-6) { dx = (n % 2 ? 1 : -1); dy = 0.5; d = Math.hypot(dx, dy); }
       const push = (minD - d) / 2; const ux = dx / d; const uy = dy / d;
-      pts[m].x -= ux * push; pts[m].y -= uy * push; pts[n].x += ux * push; pts[n].y += uy * push;
+      singles[m].x -= ux * push; singles[m].y -= uy * push; singles[n].x += ux * push; singles[n].y += uy * push;
     }
-    for (const p of pts) { const ox = p.x - p.x0; const oy = p.y - p.y0; const od = Math.hypot(ox, oy); if (od > maxMove) { p.x = p.x0 + (ox / od) * maxMove; p.y = p.y0 + (oy / od) * maxMove; } }
+    for (const p of singles) { const ox = p.x - p.x0; const oy = p.y - p.y0; const od = Math.hypot(ox, oy); if (od > maxMove) { p.x = p.x0 + (ox / od) * maxMove; p.y = p.y0 + (oy / od) * maxMove; } }
   }
-  pts.sort((p, q) => (p.i.severity || 1) - (q.i.severity || 1) || (p.i.id === state.incidentId) - (q.i.id === state.incidentId));
-  return pts.map(({ i, approx, x, y }) => {
+  singles.sort((p, q) => (p.i.severity || 1) - (q.i.severity || 1) || (p.i.id === state.incidentId) - (q.i.id === state.incidentId));
+  const pinHtml = singles.map(({ i, approx, x, y }) => {
     const label = `${L('Ocorrência', 'Incident')}${i.source.category === 'redes_sociais' && i.verified === false ? `, ${L('não verificada', 'unverified')}` : ''}${approx ? `, ${L('localização aproximada', 'approximate location')}` : ''}: ${txt(i.title)}`;
     return `<g class="mappin" transform="translate(${x.toFixed(1)},${y.toFixed(1)})" tabindex="0" role="button" data-a="pin" data-id="${esc(i.id)}" aria-label="${esc(label)}"><circle r="${24 * s}" fill="transparent"/>${pinShape(i.severity, s, state.incidentId === i.id, approx)}</g>`;
   }).join('');
+  const clusterHtml = clusters.map((c) => {
+    const n = c.items.length; const R = (13 + Math.min(9, Math.log2(n) * 2.6)) * s; const sel = c.items.some((p) => p.i.id === state.incidentId);
+    const label = `${n} ${L('ocorrências agrupadas; ative para aproximar', 'incidents grouped; activate to zoom in')}`;
+    return `<g class="mappin cluster" transform="translate(${c.x.toFixed(1)},${c.y.toFixed(1)})" tabindex="0" role="button" data-a="cluster" data-x="${c.x.toFixed(1)}" data-y="${c.y.toFixed(1)}" aria-label="${esc(label)}"><circle r="${R + 8 * s}" fill="transparent"/>${sel ? `<circle class="ring" r="${R + 6 * s}" fill="none" stroke="#fff" stroke-width="${3 * s}"/>` : ''}<circle class="halo" r="${R * 1.5}" fill="rgba(69,224,255,.3)"/><circle r="${R}" fill="#45e0ff" stroke="#fff" stroke-width="${2.6 * s}"/><text y="0" dy=".35em" text-anchor="middle" font-family="'Martian Mono Variable',monospace" font-weight="700" font-size="${R * 0.95}" fill="#06222c" pointer-events="none" style="letter-spacing:-.04em">${n}</text></g>`;
+  }).join('');
+  return pinHtml + clusterHtml;
 }
 
 function mapSvg(imp) {
@@ -270,7 +287,7 @@ function legend(extra = '') {
   const sw = (c, t) => `<span><span class="sw" style="background:${c}"></span>${t}</span>`;
   return `<div class="card legend${extra}"><h4>${L('Impacto no distrito', 'District impact')}</h4><div>
     ${sw('#E5303B', L('Muito alto', 'Very high'))}${sw('#EE7B1E', L('Alto', 'High'))}${sw('#F4C20D', L('Moderado', 'Moderate'))}${sw('#26384d', L('Sem impacto relevante', 'No relevant impact'))}</div>
-    <h4>${L('Ocorrências', 'Incidents')}</h4><div><span><span class="pinsw" aria-hidden="true"></span>${L('Ocorrência registada (maior = mais grave)', 'Recorded incident (bigger = more severe)')}</span></div></div>`;
+    <h4>${L('Ocorrências', 'Incidents')}</h4><div><span><span class="pinsw" aria-hidden="true"></span>${L('Ocorrência registada (maior = mais grave)', 'Recorded incident (bigger = more severe)')}</span><span><span class="pinsw pinsw-n" aria-hidden="true">4</span>${L('Grupo de ocorrências (clique para aproximar)', 'Group of incidents (click to zoom in)')}</span></div></div>`;
 }
 
 function regionPanel(region) {
@@ -812,6 +829,12 @@ function zoomBy(f, cx = 0.5, cy = 0.5) {
   clearTimeout(zoomBy.t); zoomBy.t = setTimeout(refreshMap, 120);
 }
 
+/** Centra o mapa num ponto (coordenadas do desenho) e aproxima. */
+function zoomTo(x, y, f) {
+  const v = state.view; const w = v.w / f; const h = w * (620 / 640);
+  setView({ w, x: x + 60 - w / 2, y: y - h / 2 });
+  clearTimeout(zoomBy.t); zoomBy.t = setTimeout(refreshMap, 120);
+}
 function onClick(e) {
   if (!e.target.closest('.menu, .menubtn')) { document.getElementById('stage')?.classList.remove('menu-open'); document.querySelector('.menubtn')?.setAttribute('aria-expanded', 'false'); }
   const el = e.target.closest('[data-a]');
@@ -836,6 +859,11 @@ function onClick(e) {
   else if (a === 'sit') { state.sit = v; }
   else if (a === 'ptab') { state.ptab = v; state.incidentId = null; if (state.sheet === 0) state.sheet = 1; }
   else if (a === 'menu') { const h = document.getElementById('stage'); const open = !h.classList.contains('menu-open'); h.classList.toggle('menu-open', open); el.setAttribute('aria-expanded', String(open)); return; }
+  else if (a === 'cluster') {
+    if (mapDrag.moved) return;
+    if (state.view.w <= 170) { state.ptab = 'inc'; state.incidentId = null; if (state.sheet === 0) state.sheet = 1; }
+    else { zoomTo(Number(el.dataset.x), Number(el.dataset.y), 2.4); return; }
+  }
   else if (a === 'sheet') { if (sheetDrag.recent) return; state.sheet = [1, 2, 0, 0][state.sheet] ?? 0; document.getElementById('stage')?.setAttribute('data-s', String(state.sheet)); return; }
   else if (a === 'play') { if (state.playing) stopPlay(); else startPlay(); return; }
   else if (a === 'live') { setAtFromValue(0); }
