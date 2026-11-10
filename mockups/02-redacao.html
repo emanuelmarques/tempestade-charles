@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mockup 02 · Redação / Direto (Guardian · Público)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,800;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#fbf8f1;--ink:#1a1a1a;--mut:#6b655a;--rule:#d9d2c3;--red:#c70000;--serif:'Newsreader',Georgia,serif;--sans:'IBM Plex Sans',system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.5 var(--sans)}
+a{color:inherit}
+.strip{border-bottom:1px solid var(--rule);font-size:13px;color:var(--mut)}.strip div{max-width:1180px;margin:0 auto;padding:8px 24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.strip b{color:var(--ink)}
+.mast{text-align:center;padding:26px 24px 14px;border-bottom:3px double var(--ink);max-width:1180px;margin:0 auto}
+.mast h1{font:800 clamp(40px,7vw,84px)/.95 var(--serif);letter-spacing:-.025em;margin:0}
+.mast p{margin:8px 0 0;font:italic 400 19px var(--serif);color:var(--mut)}
+.live{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;font:600 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;padding:4px 10px;margin-bottom:12px}
+.live i{width:8px;height:8px;border-radius:50%;background:#fff;animation:p 1.2s infinite}@keyframes p{50%{opacity:.2}}
+.facts{max-width:1180px;margin:0 auto;display:flex;gap:0;border-bottom:1px solid var(--ink);overflow-x:auto}
+.facts div{flex:1 0 170px;padding:14px 22px;border-right:1px solid var(--rule)}.facts div:last-child{border:0}
+.facts b{display:block;font:800 34px/1 var(--serif)}.facts span{font-size:13px;color:var(--mut)}
+.cols{max-width:1180px;margin:0 auto;padding:30px 24px 60px;display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:48px}
+h2.k{font:600 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--red);border-top:3px solid var(--ink);padding-top:8px;margin:0 0 14px}
+.stand{font:400 24px/1.35 var(--serif);margin:0 0 28px}.stand::first-letter{font-weight:800;font-size:1.6em}
+.tl{position:relative;margin:0;padding:0;list-style:none}.tl:before{content:"";position:absolute;left:78px;top:6px;bottom:0;width:2px;background:var(--rule)}
+.tl li{display:grid;grid-template-columns:62px 1fr;gap:34px;padding:0 0 28px;position:relative}
+.tl li:before{content:"";position:absolute;left:73px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--paper);border:3px solid var(--c,#999)}
+.tl time{font:800 20px var(--serif);text-align:right;padding-top:0}
+.tl h3{font:600 21px/1.28 var(--serif);margin:0 0 6px}.tl .by{font-size:13px;color:var(--mut)}
+.tag{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border:1px solid currentColor;margin-right:8px}
+.gov{--c:#1b4f9c;color:#1b4f9c}.med{--c:#0e6b63;color:#0e6b63}.soc{--c:#8a5200;color:#8a5200}
+.tl li.gov,.tl li.med,.tl li.soc{color:inherit}
+aside .box{border-top:3px solid var(--ink);padding:10px 0 22px;margin-bottom:26px;position:sticky}
+aside .cd{font:800 56px/1 var(--serif);font-variant-numeric:tabular-nums;margin:6px 0}aside .cd small{display:block;font:400 14px var(--sans);color:var(--mut)}
+aside svg{width:100%;max-height:420px}.dist{cursor:pointer}.dist:hover{opacity:.8}
+.w{display:flex;gap:10px;padding:10px 0;border-top:1px solid var(--rule);font-size:15px}.w i{flex:none;width:12px;height:12px;margin-top:6px;border-radius:50%}
+.sel{width:100%;font:inherit;padding:8px;border:1px solid var(--ink);background:#fff;margin:6px 0 10px}
+.call{display:flex;justify-content:space-between;align-items:baseline;background:var(--ink);color:#fff;padding:12px 16px;text-decoration:none;margin-top:8px}.call b{font:800 30px var(--serif)}
+.svc{font-size:15px;margin:0;padding:0;list-style:none}.svc li{padding:9px 0;border-top:1px solid var(--rule)}.svc b{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--red);margin-right:6px}
+@media(max-width:900px){.cols{grid-template-columns:1fr}.tl:before{left:11px}.tl li{grid-template-columns:1fr;gap:4px;padding-left:34px}.tl li:before{left:6px}.tl time{text-align:left}}
+</style></head><body>
+<div class="strip"><div><span><b>Terça-feira, 10 de novembro de 2026</b> · atualizado às 20:02</span><span>Emergência <b>112</b> · SNS 24 <b>808 24 24 24</b></span></div></div>
+<header class="mast"><span class="live"><i></i> Ao vivo</span><h1>Tempestade Charles</h1><p>Tudo o que sabemos, com a fonte de cada informação.</p></header>
+<div class="facts" id="facts"></div>
+<div class="cols">
+  <main>
+    <h2 class="k">Última hora</h2>
+    <p class="stand">Aviso vermelho em Lisboa, Setúbal e Leiria a partir da meia-noite. Escolas encerradas no continente, túneis de Lisboa fechados e ondas até 10 metros previstas na costa.</p>
+    <h2 class="k">Cronologia</h2>
+    <ol class="tl" id="tl"></ol>
+  </main>
+  <aside>
+    <div class="box"><h2 class="k" style="border:0;padding:0">Começa em</h2><div class="cd"><span data-cd>00:00:00</span><small>até às 0h de 11 de novembro</small></div></div>
+    <div class="box"><h2 class="k" style="border:0;padding:0">Mapa de avisos</h2><div id="map"></div>
+      <select class="sel" id="sel" aria-label="Distrito"></select><div id="zone" style="font:600 20px var(--serif)"></div></div>
+    <div class="box"><h2 class="k" style="border:0;padding:0">Avisos IPMA</h2><div id="warn"></div></div>
+    <div class="box"><h2 class="k" style="border:0;padding:0">Serviços afetados</h2><ul class="svc" id="svc"></ul><a class="call" href="tel:112"><span>Em emergência ligue</span><b>112</b></a></div>
+  </aside>
+</div>
+<script src="data.js"></script><script src="common.js"></script>
+<script>
+const {M,LV,COL,CAT,esc,hm,ago,map,bindMap,byId,counts}=C;
+const cn=counts();
+document.getElementById('facts').innerHTML=[[cn.vermelho||0,'distritos em vermelho'],[cn.laranja||0,'em laranja'],[M.incidents.length,'ocorrências registadas'],[M.feed.length,'atualizações com fonte'],['10 m','altura máxima das ondas']].map(([a,b])=>`<div><b>${a}</b><span>${b}</span></div>`).join('');
+const cls={governamental:'gov',comunicacao_social:'med',redes_sociais:'soc'};
+document.getElementById('tl').innerHTML=M.feed.map(f=>`<li class="${cls[f.cat]}"><time>${hm(f.time)}</time><div><h3>${esc(f.title)}</h3><div class="by"><span class="tag ${cls[f.cat]}">${CAT[f.cat]}</span>${esc(f.src)} · ${ago(f.time)}</div></div></li>`).join('');
+document.getElementById('map').innerHTML=map({fill:d=>COL[d.level],land:'#efe9da',stroke:'#fbf8f1',sw:1.4});
+const sel=document.getElementById('sel');sel.innerHTML=M.districts.map(d=>`<option value="${d.id}">${d.name}</option>`).join('');
+function zone(id){const d=byId(id);sel.value=id;document.getElementById('zone').innerHTML=`${d.name}: aviso <span style="color:${d.level==='amarelo'?'#a47f00':COL[d.level]}">${LV[d.level].toLowerCase()}</span>`}
+sel.onchange=()=>zone(sel.value);bindMap(document.getElementById('map'),zone);zone('lisboa');
+document.getElementById('warn').innerHTML=M.warnings.map(w=>`<div class="w"><i style="background:${COL[w.lvl]}"></i><div><b>${w.what}</b><br><span style="color:var(--mut)">${w.where} · até ${w.to}</span></div></div>`).join('');
+document.getElementById('svc').innerHTML=M.services.slice(0,6).map(s=>`<li><b>${s.status.replace('_',' ')}</b>${esc(s.name.slice(0,110))}${s.name.length>110?'…':''}</li>`).join('');
+</script></body></html>

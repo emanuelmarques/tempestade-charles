@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mockup 10 · Calmo e humano</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f6f1e7;--card:#fffdf8;--ink:#2b2a26;--mut:#6f6b60;--sage:#6b8f71;--sagel:#dfe9dc;--clay:#c8643c;--clayl:#f6dccf;--sun:#e9b44c;--sunl:#faedc9;--sea:#5a8aa3;--seal:#d9e8ee;--f:'Figtree',sans-serif;--h:'Young Serif',serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:400 18px/1.55 var(--f)}
+.w{max-width:1120px;margin:0 auto;padding:0 24px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px 0;gap:14px;flex-wrap:wrap}nav b{font:400 24px var(--h)}nav ul{display:flex;gap:6px;list-style:none;margin:0;padding:0}nav a{padding:8px 16px;border-radius:99px;text-decoration:none;color:var(--ink);font-weight:500}nav a.on{background:var(--ink);color:#fff}
+.tel{background:var(--clay);color:#fff;border-radius:99px;padding:10px 20px;text-decoration:none;font-weight:700;display:inline-flex;gap:8px}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;padding:36px 0 20px;align-items:center}
+.hero h1{font:400 clamp(40px,6vw,76px)/1.04 var(--h);margin:0 0 18px;letter-spacing:-.02em}.hero h1 em{font-style:normal;color:var(--clay)}
+.hero p{font-size:21px;color:var(--mut);max-width:30em;margin:0 0 24px}
+.cdb{display:inline-flex;align-items:center;gap:16px;background:var(--card);padding:14px 22px;border-radius:24px;box-shadow:0 8px 30px -14px #6f6b6066}.cdb b{font:400 40px var(--h);font-variant-numeric:tabular-nums}.cdb span{color:var(--mut);line-height:1.2;font-size:15px}
+.blob{background:var(--sagel);border-radius:46% 54% 50% 50%/55% 45% 55% 45%;padding:26px;position:relative}.blob svg{width:100%;max-height:520px;display:block}.dist{cursor:pointer;transition:transform .2s;transform-box:fill-box;transform-origin:center}.dist:hover{transform:scale(1.04)}
+.cap{text-align:center;font-size:14px;color:var(--mut);margin-top:6px}
+.sec{padding:56px 0 0}.sec h2{font:400 clamp(30px,4vw,44px)/1.1 var(--h);margin:0 0 8px}.sec .sub{color:var(--mut);margin:0 0 26px;max-width:36em}
+.ask{background:var(--card);border-radius:36px;padding:34px;display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center;box-shadow:0 10px 40px -22px #6f6b6088}
+.ask label{font:400 28px var(--h);display:block;margin-bottom:12px}.ask select{font:500 20px var(--f);width:100%;padding:16px 20px;border-radius:20px;border:2px solid var(--sagel);background:var(--bg);color:var(--ink)}
+.ans{border-radius:28px;padding:26px;background:var(--c1);transition:background .3s}.ans h3{font:400 32px/1.1 var(--h);margin:0 0 8px}.ans p{margin:0}
+.chk{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.ci{display:flex;gap:16px;background:var(--card);border-radius:28px;padding:22px;cursor:pointer;border:2px solid transparent;transition:all .2s}.ci:hover{border-color:var(--sage)}.ci input{appearance:none;flex:none;width:34px;height:34px;border-radius:50%;border:3px solid var(--sage);display:grid;place-items:center;margin:2px 0 0}.ci input:checked{background:var(--sage)}.ci input:checked:after{content:"";width:8px;height:15px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.ci:has(input:checked){background:var(--sagel)}.ci b{font:400 22px var(--h);display:block}.ci span{color:var(--mut);font-size:16px}
+.prog{height:12px;background:#e9e2d2;border-radius:8px;margin:0 0 20px;overflow:hidden}.prog i{display:block;height:100%;width:0;background:var(--sage);border-radius:8px;transition:width .4s}
+.know{display:grid;grid-template-columns:1.2fr .8fr;gap:24px}
+.li{background:var(--card);border-radius:28px;padding:26px}.li h3{font:400 24px var(--h);margin:0 0 12px}
+.fi{display:flex;gap:16px;padding:14px 0;border-top:1px solid #eee7d6}.fi:first-of-type{border:0}.fi time{flex:none;width:52px;font-weight:700;color:var(--sea)}.fi small{display:block;color:var(--mut);font-size:14px}.pill{display:inline-block;font-size:12px;font-weight:600;padding:1px 10px;border-radius:99px;background:var(--seal);color:#2f5b73;margin-right:6px}.pill.s{background:var(--sunl);color:#7a5200}.pill.m{background:var(--sagel);color:#3d6244}
+.sv{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid #eee7d6;font-size:16px}.sv:first-of-type{border:0}.sv b{font-size:12px;padding:3px 12px;border-radius:99px;background:var(--clayl);color:#8a3a18;white-space:nowrap;align-self:start;text-transform:capitalize}
+.warn{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.wc{border-radius:26px;padding:20px;background:var(--c1)}.wc small{font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:12px}.wc b{display:block;font:400 22px/1.2 var(--h);margin:6px 0}.wc span{font-size:14.5px}
+.fab{position:fixed;right:20px;bottom:20px;z-index:9;box-shadow:0 12px 30px -10px #c8643caa}
+footer{margin-top:80px;background:var(--sagel);padding:40px 0 70px;color:#425a46}footer .w{display:flex;gap:30px;justify-content:space-between;flex-wrap:wrap}footer b{font:400 24px var(--h);color:var(--ink)}
+@media(max-width:900px){.hero,.ask,.know,.chk{grid-template-columns:1fr}.warn{grid-template-columns:1fr 1fr}}
+</style></head><body>
+<div class="w">
+  <nav><b>Tempestade Charles</b><ul><li><a class="on" href="#">Início</a></li><li><a href="#">O que fazer</a></li><li><a href="#">Metodologia</a></li><li><a href="#">Fontes</a></li></ul><a class="tel" href="tel:112">☎ 112 Emergência</a></nav>
+  <section class="hero"><div><h1>Vamos passar<br>esta noite <em>preparados</em>.</h1><p>A tempestade Charles chega à meia-noite. Aqui encontra, de forma simples, o que se sabe, o que está a acontecer perto de si e o que pode fazer agora.</p>
+    <div class="cdb"><b data-cd>00:00:00</b><span>até à meia-noite<br>aviso vermelho em Lisboa, Setúbal e Leiria</span></div></div>
+    <div><div class="blob"><div id="map"></div></div><div class="cap">Toque no seu distrito · atualizado às 20:02</div></div></section>
+
+  <section class="sec"><div class="ask"><div><label for="sel">Onde está neste momento?</label><select id="sel"></select></div><div class="ans" id="ans"></div></div></section>
+
+  <section class="sec"><h2>Antes da meia-noite</h2><p class="sub">Quatro coisas simples. Marque à medida que for fazendo.</p><div class="prog"><i id="pr"></i></div><div class="chk" id="chk"></div></section>
+
+  <section class="sec"><h2>Avisos em vigor</h2><p class="sub">Emitidos pelo IPMA. Quanto mais forte a cor, mais atenção.</p><div class="warn" id="warn"></div></section>
+
+  <section class="sec"><div class="know"><div class="li"><h3>O que se sabe</h3><div id="feed"></div></div><div class="li"><h3>Serviços afetados</h3><div id="svc"></div></div></div></section>
+</div>
+<a class="tel fab" href="tel:112">☎ 112</a>
+<footer><div class="w"><div><b>Estamos consigo.</b><br>Projeto independente, sem fins lucrativos.</div><div>Não substitui a Proteção Civil.<br>SNS 24 · 808 24 24 24</div></div></footer>
+<script src="data.js"></script><script src="common.js"></script>
+<script>
+const {M,LV,COL,CAT,esc,hm,map,bindMap,byId}=C;
+const F={vermelho:'#d96a52',laranja:'#e8a05a',amarelo:'#ecce6a',verde:'#b9cdb5'};
+const BG={vermelho:'#f6d4c9',laranja:'#f8e0c4',amarelo:'#faefc4',verde:'#e4eddf'};
+const MSG={vermelho:['Aviso vermelho','Situação muito perigosa. Fique em casa, evite estradas e siga as indicações da Proteção Civil.'],laranja:['Aviso laranja','Situação de risco. Evite deslocações desnecessárias e proteja o que puder.'],amarelo:['Aviso amarelo','Atenção redobrada. Acompanhe as atualizações e prepare o essencial.'],verde:['Sem aviso','Por agora, sem aviso para a sua zona. Continue a acompanhar.']};
+document.getElementById('map').innerHTML=map({fill:d=>F[d.level],land:false,stroke:'#f6f1e7',sw:3,pad:4});
+const sel=document.getElementById('sel');sel.innerHTML=M.districts.map(d=>`<option value="${d.id}">${d.name}</option>`).join('');
+function zone(id){const d=byId(id);sel.value=id;const a=document.getElementById('ans');a.style.setProperty('--c1',BG[d.level]);a.innerHTML=`<h3>${d.name}: ${MSG[d.level][0].toLowerCase()}</h3><p>${MSG[d.level][1]}</p>`}
+sel.onchange=()=>zone(sel.value);bindMap(document.getElementById('map'),zone);zone('lisboa');
+const items=M.recs.concat([]);
+document.getElementById('chk').innerHTML=items.map(([a,b])=>`<label class="ci"><input type="checkbox"><div><b>${a}</b><span>${b}</span></div></label>`).join('');
+document.getElementById('chk').addEventListener('change',()=>{document.getElementById('pr').style.width=document.querySelectorAll('#chk input:checked').length/items.length*100+'%'});
+document.getElementById('warn').innerHTML=M.warnings.map(w=>`<div class="wc" style="--c1:${BG[w.lvl]}"><small>${LV[w.lvl]}</small><b>${w.what}</b><span>${w.where}<br>até ${w.to}</span></div>`).join('');
+const pc={governamental:'',comunicacao_social:'m',redes_sociais:'s'};
+document.getElementById('feed').innerHTML=M.feed.slice(0,7).map(f=>`<div class="fi"><time>${hm(f.time)}</time><div>${esc(f.title)}<small><span class="pill ${pc[f.cat]}">${CAT[f.cat]}</span>${esc(f.src)}</small></div></div>`).join('');
+document.getElementById('svc').innerHTML=M.services.slice(0,8).map(s=>`<div class="sv"><span>${esc(s.name.slice(0,85))}${s.name.length>85?'…':''}</span><b>${s.status.replace('_',' ')}</b></div>`).join('');
+</script></body></html>

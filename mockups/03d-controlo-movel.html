@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Mockup 03d · Controlo (móvel, painel deslizante)</title>
+<link href="https://fonts.googleapis.com/css2?family=Martian+Mono:wght@300;400;600&family=Familjen+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#070b12;--panel:rgba(14,22,34,.86);--line:rgba(140,180,220,.2);--tx:#dbe7f3;--mut:#7f93a8;--cy:#45e0ff;--font:'Familjen Grotesk',sans-serif;--mono:'Martian Mono',monospace}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{height:100%}body{margin:0;background:#020409;color:var(--tx);font:400 16px/1.4 var(--font);display:grid;place-items:center}
+.app{position:relative;width:min(430px,100%);height:min(900px,100%);overflow:hidden;background:radial-gradient(500px 500px at 50% 35%,#10253b,#070b12 75%);border-radius:0;box-shadow:0 0 0 1px #1c2a3a}
+@media(min-width:500px){.app{height:min(880px,96vh);border-radius:34px}}
+.app:before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:48px 48px;opacity:.28}
+#map{position:absolute;inset:92px 0 0 0;transition:transform .45s cubic-bezier(.3,.8,.3,1);transform-origin:50% 30%}#map svg{width:100%;height:100%;filter:drop-shadow(0 0 20px rgba(69,224,255,.12))}.dist{cursor:pointer}.pulse{animation:pu 2.4s ease-out infinite;transform-box:fill-box;transform-origin:center}@keyframes pu{0%{opacity:.7;transform:scale(.3)}100%{opacity:0;transform:scale(1.6)}}
+.app[data-s="1"] #map{transform:translateY(-60px) scale(.8)}.app[data-s="2"] #map{transform:translateY(-120px) scale(.6)}
+.hd{position:absolute;left:12px;right:12px;top:12px;z-index:5;display:flex;gap:8px}
+.g{background:var(--panel);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:18px}
+.hd .a{flex:1;padding:10px 14px}.hd .a small{font:300 9.5px var(--mono);color:var(--mut);letter-spacing:.16em;display:block}.hd .a b{font:600 26px var(--mono);letter-spacing:-.04em}
+.hd .l{padding:10px 14px;display:flex;flex-direction:column;justify-content:center;font:600 11px var(--mono);color:#ff7a85}.hd .l span{color:var(--mut);font-weight:300;font-size:9.5px}
+.sos{width:64px;border-radius:18px;background:#e5242f;color:#fff;font:700 20px var(--font);display:grid;place-items:center;text-decoration:none;box-shadow:0 0 24px #e5242f66}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:6;border-radius:28px 28px 0 0;height:100%;transform:translateY(calc(100% - 210px));transition:transform .4s cubic-bezier(.3,.8,.3,1);display:flex;flex-direction:column;background:var(--panel);backdrop-filter:blur(20px);border:1px solid var(--line);border-bottom:0}
+.app[data-s="1"] .sheet{transform:translateY(46%)}.app[data-s="2"] .sheet{transform:translateY(96px)}
+.grab{padding:10px 0 4px;display:grid;place-items:center;cursor:pointer;background:none;border:0;width:100%}.grab i{width:44px;height:5px;border-radius:3px;background:#ffffff40}
+.sc{overflow:auto;padding:0 18px 90px;flex:1}
+.zh{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 0 12px}.zh b{font:700 26px var(--font)}.badge{font:600 11px var(--mono);padding:4px 10px;border-radius:7px;color:#000}
+select{width:100%;font:600 18px var(--font);background:#0a1624;color:var(--tx);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.stat{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}.stat div{background:#ffffff0d;border-radius:14px;padding:10px;text-align:center}.stat b{font:600 20px var(--mono);display:block}.stat small{font:300 9.5px var(--mono);color:var(--mut);letter-spacing:.1em;text-transform:uppercase}
+.tabs{display:flex;gap:6px;margin:16px 0 8px;position:sticky;top:0;background:linear-gradient(#0e1622 80%,#0e162200);padding:6px 0;z-index:2}.tabs button{font:400 12px var(--mono);background:#ffffff0d;color:var(--mut);border:0;border-radius:99px;padding:9px 14px;cursor:pointer}.tabs button.on{background:var(--cy);color:#001018;font-weight:600}
+.pn{display:none}.pn.on{display:block}
+.fi{display:grid;grid-template-columns:46px 1fr;gap:10px;padding:12px 0;border-top:1px solid var(--line);font-size:14.5px}.fi time{font:600 12px var(--mono);color:var(--cy)}.fi small{display:block;color:var(--mut);font:300 10.5px var(--mono);margin-top:4px}
+.sv{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-top:1px solid var(--line);font-size:14px}.sv b{font:600 10px var(--mono);color:#ff9a3d;text-transform:uppercase;white-space:nowrap}
+.rc{padding:12px 0;border-top:1px solid var(--line)}.rc b{font:700 17px var(--font);display:block}.rc span{color:var(--mut);font-size:14px}
+</style></head><body>
+<div class="app" id="app" data-s="0">
+  <div class="hd"><div class="g a"><small>T-MENOS · 00:00 11 NOV</small><b data-cd>00:00:00</b></div><div class="g l">VERMELHO<span>LISBOA · SETÚBAL · LEIRIA</span></div><a class="sos" href="tel:112">112</a></div>
+  <div id="map"></div>
+  <section class="sheet" aria-label="Painel">
+    <button class="grab" id="grab" aria-label="Expandir ou recolher painel"><i></i></button>
+    <div class="sc">
+      <div class="zh"><b id="zn">Lisboa</b><span class="badge" id="zb"></span></div>
+      <select id="sel" aria-label="Distrito"></select>
+      <div class="stat"><div><b id="s1">0</b><small>impacto</small></div><div><b id="s2">0</b><small>ocorr.</small></div><div><b>94</b><small>rajada km/h</small></div></div>
+      <div class="tabs" id="tabs"><button class="on" data-t="feed">Relatos</button><button data-t="warn">Avisos</button><button data-t="svc">Serviços</button><button data-t="rec">Fazer</button></div>
+      <div class="pn on" id="feed"></div><div class="pn" id="warn"></div><div class="pn" id="svc"></div><div class="pn" id="rec"></div>
+    </div>
+  </section>
+</div>
+<script src="data.js"></script><script src="common.js"></script>
+<script>
+const {M,LV,COL,CAT,esc,hm,ago,map,bindMap,byId}=C;
+const app=document.getElementById('app');const CL={vermelho:'#ff3b4a',laranja:'#ff8a1f',amarelo:'#f4c20d',verde:'#3b4a5c'};
+const pul=d=>d.level==='vermelho'?`<circle class="pulse" cx="${d.lx}" cy="${d.ly}" r="26" fill="none" stroke="#ff3b4a" stroke-width="1.5"/>`:'';
+document.getElementById('map').innerHTML=map({fill:d=>CL[d.level],land:'#0d1a29',landAttrs:'stroke="#1c3550"',stroke:'#070b12',sw:1.6,pad:6,over:M.districts.map(pul).join('')});
+const sel=document.getElementById('sel');sel.innerHTML=M.districts.map(d=>`<option value="${d.id}">${d.name}</option>`).join('');
+function zone(id){const d=byId(id);sel.value=id;zn.textContent=d.name;zb.textContent=LV[d.level].toUpperCase();zb.style.background=CL[d.level];s1.textContent=d.score;s2.textContent=M.incidents.filter(i=>i.district===id).length;if(app.dataset.s==='2')app.dataset.s='1'}
+sel.onchange=()=>zone(sel.value);bindMap(document.getElementById('map'),zone);zone('lisboa');
+grab.onclick=()=>{app.dataset.s=String((+app.dataset.s+1)%3)};
+tabs.onclick=e=>{const b=e.target.closest('button');if(!b)return;document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('.pn').forEach(p=>p.classList.toggle('on',p.id===b.dataset.t));if(app.dataset.s==='0')app.dataset.s='1'};
+feed.innerHTML=M.feed.map(f=>`<div class="fi"><time>${hm(f.time)}</time><div>${esc(f.title)}<small>${esc(f.src)} · ${CAT[f.cat]} · ${ago(f.time)}</small></div></div>`).join('');
+warn.innerHTML=M.warnings.map(w=>`<div class="fi" style="grid-template-columns:12px 1fr"><i style="width:10px;height:10px;border-radius:3px;background:${CL[w.lvl]};margin-top:6px"></i><div><b>${w.what}</b><small>${w.where} · ${w.from} → ${w.to}</small></div></div>`).join('');
+svc.innerHTML=M.services.map(s=>`<div class="sv"><span>${esc(s.name.slice(0,100))}${s.name.length>100?'…':''}</span><b>${s.status.replace('_',' ')}</b></div>`).join('');
+rec.innerHTML=M.recs.map(([a,b])=>`<div class="rc"><b>${a}</b><span>${b}</span></div>`).join('');
+</script></body></html>
