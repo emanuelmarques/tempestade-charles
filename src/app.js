@@ -22,7 +22,7 @@ const store = {
 const state = {
   lang: store.get('lang', 'pt') === 'en' ? 'en' : 'pt',
   page: document.body.dataset.page || 'home',
-  win: '24h', region: 'continente', district: 'leiria', incidentId: null,
+  win: 'now', region: 'continente', district: 'leiria', incidentId: null,
   filt: { governamental: true, comunicacao_social: true, redes_sociais: true },
   sit: 'casa', cat: 'todas', zoneLoc: Number(store.get('zoneLoc', '1100900')) || 1100900,
   view: { x: 0, y: 0, w: 640, h: 620 }, now: new Date(),
@@ -110,7 +110,7 @@ function banners() {
   const out = [];
   if (data.warnErr && !data.warnFetchedAt) out.push(`<div class="notice bad" role="alert"><strong>${L('Não foi possível obter os avisos do IPMA.', 'Could not load IPMA warnings.')}</strong> ${L('Consulte diretamente', 'Check directly')} <a href="${IPMA.site}" rel="noopener noreferrer">ipma.pt</a>.</div>`);
   else if (data.warnCache) out.push(`<div class="notice warn">${L('Sem ligação ao IPMA: a mostrar a última cópia guardada neste dispositivo.', 'Cannot reach IPMA: showing the last copy saved on this device.')}</div>`);
-  const fr = freshness(data.curated.meta.updatedAt, state.now);
+  const fr = freshness(data.curated.meta.updatedAt, state.now, 150);
   if (data.curatedLoaded) {
     if (fr.state === 'unknown') out.push(`<div class="notice warn">${L('Ocorrências, notícias e serviços: ainda sem dados. Os avisos meteorológicos do IPMA são mostrados em tempo real.', 'Incidents, news and services: no data yet. IPMA weather warnings are shown in real time.')}</div>`);
     else if (fr.state === 'stale') out.push(`<div class="notice warn">${L('Ocorrências e notícias desatualizadas: última atualização há', 'Incidents and news are out of date: last updated')} ${fr.minutesAgo} min${state.lang === 'en' ? ' ago' : ''}.</div>`);
@@ -182,7 +182,7 @@ function regionPanel(region) {
   const [from, to] = windowRange();
   const rows = areas.map((a) => {
     const ws = data.warnings.filter((w) => w.area === a && w.start <= to && w.end >= from).sort((x, y) => rank(y.level) - rank(x.level));
-    return `<div class="card"><h3 style="font-size:18px">${esc(AREA_NAMES[a])}</h3>${ws.length ? ws.map((w) => warningLine(w)).join('') : `<p class="muted" style="margin:8px 0 0">${L('Sem aviso em vigor ou previsto.', 'No warning in force or forecast.')}</p>`}</div>`;
+    return `<div class="card"><h3 style="font-size:18px">${esc(AREA_NAMES[a])}</h3>${ws.length ? ws.map((w) => warningLine(w)).join('') : `<p class="muted" style="margin:8px 0 0">${L('Sem aviso em vigor.', 'No warning in force.')}</p>`}</div>`;
   }).join('');
   return `<div class="grid" style="margin-top:4px">${rows}</div><p class="muted" style="font-size:14px;margin:12px 0 0">${L('O desenho do mapa ainda não inclui Açores e Madeira; os avisos do IPMA são mostrados em lista.', 'The map drawing does not include the Azores and Madeira yet; IPMA warnings are listed instead.')} ${sourceBadge(IPMA_SOURCE, { lang: state.lang })}</p>`;
 }
@@ -201,7 +201,7 @@ function districtPanel(imp) {
     <div><div style="display:flex;justify-content:space-between;align-items:baseline"><span class="h num" style="font-size:34px;font-weight:700;line-height:1">${r.score}<small style="font-size:16px;font-weight:600">/100</small></span><span class="muted" style="font-size:13px">${esc(winLabel())}</span></div>
       <div class="bar"><div class="${TIER_CLASS[r.tier]}" style="width:${r.score}%"></div></div>
       <p class="muted" style="margin:8px 0 0;font-size:13.5px">${L('Aviso IPMA', 'IPMA warning')} <strong style="color:var(--ink)">+${r.base}</strong> · ${L('Ocorrências', 'Incidents')} <strong style="color:var(--ink)">+${r.points}</strong></p></div>
-    <div><h4 class="h" style="font-size:16px;margin-bottom:2px">${L('Avisos do IPMA', 'IPMA warnings')}</h4>${r.warnings.length ? r.warnings.map(warningLine).join('') : `<p class="muted" style="margin:6px 0 0;font-size:14px">${L('Sem aviso em vigor ou previsto neste período.', 'No warning in force or forecast in this period.')}</p>`}<div style="margin-top:8px">${sourceBadge(IPMA_SOURCE, { lang: state.lang })}</div></div>
+    <div><h4 class="h" style="font-size:16px;margin-bottom:2px">${L('Avisos do IPMA', 'IPMA warnings')}</h4>${r.warnings.length ? r.warnings.map(warningLine).join('') : `<p class="muted" style="margin:6px 0 0;font-size:14px">${L('Sem aviso em vigor neste momento.', 'No warning in force right now.')}</p>`}<div style="margin-top:8px">${sourceBadge(IPMA_SOURCE, { lang: state.lang })}</div></div>
     <div style="display:flex;flex-direction:column;gap:8px"><h4 class="h" style="font-size:16px;margin:0">${L('Ocorrências recentes', 'Recent incidents')} <span class="muted" style="font-weight:500;font-size:14px">· ${shown}</span></h4>
       ${r.count === 0 ? `<p class="muted" style="margin:0;font-size:14px">${L('Sem ocorrências registadas neste distrito.', 'No incidents recorded in this district.')}</p>` : ''}
       ${list.map((i) => { const c = CATEGORIES[i.source.category]; return `<button class="item" data-a="incident" data-id="${esc(i.id)}"><span class="muted" style="display:flex;justify-content:space-between;gap:8px;font-size:13px"><span>${esc(i.place || '')}</span><span class="num">${esc(formatTime(new Date(i.time), state.lang))}</span></span><span style="font-weight:600;font-size:15px">${esc(txt(i.title))}</span><span><span class="badge ${c.cls}"><span class="shape ${c.shape}"></span>${esc(c.label[state.lang])}</span>${i.source.category === 'redes_sociais' && !i.verified ? ` <span class="st st-org">${L('Não verificado', 'Unverified')}</span>` : ''}</span></button>`; }).join('')}</div></div>`;
@@ -223,14 +223,12 @@ function incidentPanel() {
 function mapSection(imp) {
   const chips = [['governamental', 'sh-g'], ['comunicacao_social', 'sh-c'], ['redes_sociais', 'sh-r']].map(([k, s]) => `<button class="chip ${state.filt[k] ? 'on' : ''}" aria-pressed="${state.filt[k]}" data-a="filt" data-v="${k}"><span class="shape ${s}"></span>${esc(CATEGORIES[k].label[state.lang])}</button>`).join('');
   const seg = (a, items, cur) => items.map(([v, l]) => `<button class="seg ${cur === v ? 'on' : ''}" aria-pressed="${cur === v}" data-a="${a}" data-v="${v}">${l}</button>`).join('');
-  const opts = DISTRICTS.map((d) => `<option value="${d.id}" ${d.id === state.district ? 'selected' : ''}>${esc(d.name)}</option>`).join('');
   const reg = state.region !== 'continente';
   return `<section aria-labelledby="h-mapa"><div style="display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;margin-bottom:14px"><h2 id="h-mapa" style="font-size:26px">${L('Mapa de impacto por distrito', 'District impact map')}</h2><p class="muted" style="margin:0;font-size:14px">${L('Clique num distrito para ver o detalhe.', 'Select a district for details.')} <a href="#como">${L('Como calculamos', 'How we calculate')}</a></p></div>
   <div class="maprow"><div class="mapcol">
     <div class="row" style="justify-content:space-between"><div class="row">
       <div style="display:flex" role="group" aria-label="${L('Região', 'Region')}">${seg('region', [['continente', 'Continente'], ['acores', 'Açores'], ['madeira', 'Madeira']], state.region)}</div>
-      <div style="display:flex" role="group" aria-label="${L('Período dos avisos', 'Warning period')}">${seg('win', [['now', L('Agora', 'Now')], ['24h', '24 h'], ['48h', '48 h']], state.win)}</div>
-      ${reg ? '' : `<div class="field"><label for="distrito">${L('Distrito', 'District')}</label><select id="distrito" data-a="districtSel" data-key="distrito">${opts}</select></div>`}</div>
+    </div>
       ${reg ? '' : `<div style="display:flex;flex-wrap:wrap;gap:8px" role="group" aria-label="${L('Filtrar ocorrências por categoria de fonte', 'Filter incidents by source category')}">${chips}</div>`}</div>
     ${reg ? regionPanel(state.region) : `<div class="mapbox" id="mapbox">${mapSvg(imp)}<div class="zoom"><button class="ctl" data-a="zoom" data-v="in" aria-label="${L('Aproximar', 'Zoom in')}">+</button><button class="ctl" data-a="zoom" data-v="out" aria-label="${L('Afastar', 'Zoom out')}">−</button></div>${legend()}</div>`}
   </div>
@@ -251,7 +249,7 @@ function zoneSection() {
     <div class="field"><label for="localidade" style="font-size:14px">${L('Localidade (estações IPMA)', 'Location (IPMA stations)')}</label><select id="localidade" data-a="zoneSel" data-key="localidade" style="min-height:48px;font-size:16px">${group('continente', 'Continente')}${group('madeira', 'Madeira')}${group('acores', 'Açores')}</select></div>
     <div><button class="tab" data-a="geo" id="geo" style="display:inline-flex;align-items:center;gap:10px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M9 1v3M9 14v3M1 9h3M14 9h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>${L('Usar a minha localização', 'Use my location')}</button><p id="geomsg" class="muted" style="margin:6px 0 0;font-size:13.5px" role="status"></p></div>
     <div style="background:${top ? '#FDEBD3' : 'var(--frame)'};border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:8px">
-      ${top ? `<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">${lvPill(top.level)}<strong>${esc(typeName(top.type))} · ${esc(loc.name)}</strong></div><p style="margin:0;font-size:14px">${esc(formatDayTime(top.start, state.lang))} → ${esc(formatDayTime(top.end, state.lang))}</p>` : `<strong>${L('Sem aviso em vigor ou previsto', 'No warning in force or forecast')} ${esc(winLabel())}</strong>`}
+      ${top ? `<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">${lvPill(top.level)}<strong>${esc(typeName(top.type))} · ${esc(loc.name)}</strong></div><p style="margin:0;font-size:14px">${esc(formatDayTime(top.start, state.lang))} → ${esc(formatDayTime(top.end, state.lang))}</p>` : `<strong>${L('Sem aviso em vigor neste momento', 'No warning in force right now')}</strong>`}
       ${sourceBadge(IPMA_SOURCE, { lang: state.lang })}</div></div>
   <div style="flex:1 1 360px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(170px,100%),1fr));gap:12px;min-width:0">
     <a href="tel:112" style="text-decoration:none;color:#fff;background:#D1242F;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;justify-content:center;min-height:72px"><span class="h" style="font-size:30px;font-weight:700">112</span><span style="font-size:14px">${L('Emergência: bombeiros, INEM, PSP e GNR', 'Emergency: fire, ambulance, police')}</span></a>
@@ -287,7 +285,7 @@ function warningsSection() {
   const nm = (a) => DISTRICT_BY_AREA[a]?.name || AREA_NAMES[a] || a;
   const line = (w) => `<div class="li"><span class="k">${esc(nm(w.area))}</span><span class="n"><strong>${esc(typeName(w.type))}</strong><span class="muted" style="display:block;font-size:14px">${esc(formatDayTime(w.start, state.lang))} → ${esc(formatDayTime(w.end, state.lang))}</span></span>${lvPill(w.level)}</div>`;
   const head = rows.slice(0, 8).map(line).join(''); const rest = rows.slice(8);
-  const body = rows.length ? `<div class="card list" style="padding:8px 20px">${head}${rest.length ? `<details style="border-top:1px solid var(--rule)"><summary style="cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:600;color:var(--gov)">${L('Mostrar mais', 'Show more')} (${rest.length})</summary>${rest.map(line).join('')}</details>` : ''}</div>` : `<div class="empty">${data.warnErr && !data.warnFetchedAt ? L('Avisos indisponíveis de momento.', 'Warnings unavailable right now.') : L('Sem avisos em vigor ou previstos neste período.', 'No warnings in force or forecast in this period.')}</div>`;
+  const body = rows.length ? `<div class="card list" style="padding:8px 20px">${head}${rest.length ? `<details style="border-top:1px solid var(--rule)"><summary style="cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:600;color:var(--gov)">${L('Mostrar mais', 'Show more')} (${rest.length})</summary>${rest.map(line).join('')}</details>` : ''}</div>` : `<div class="empty">${data.warnErr && !data.warnFetchedAt ? L('Avisos indisponíveis de momento.', 'Warnings unavailable right now.') : L('Sem avisos em vigor neste momento.', 'No warnings in force right now.')}</div>`;
   return `<section aria-labelledby="h-avisos"><div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:14px"><h2 id="h-avisos" style="font-size:26px">${L('Avisos meteorológicos', 'Weather warnings')} · ${esc(winLabel())}</h2>${sourceBadge(IPMA_SOURCE, { lang: state.lang })}</div>${body}</section>`;
 }
 
@@ -312,11 +310,11 @@ function feedSection() {
   ${items.length ? `<div class="card list" style="padding:8px 20px">${items.map((f) => `<article class="li"><time class="num" datetime="${esc(f.time)}">${esc(formatTime(new Date(f.time), state.lang))}</time><span class="n" style="font-weight:600">${esc(txt(f.title))}</span>${sourceBadge(f.source, { verified: f.verified, lang: state.lang })}</article>`).join('')}</div>` : emptyList('Sem informações nesta categoria ainda.', 'No updates in this category yet.')}</section>`;
 }
 function howSection() {
-  return `<section id="como" aria-labelledby="h-como"><h2 id="h-como" class="h2">${L('Como calculamos o impacto', 'How we calculate impact')}</h2><div class="card tinted" style="display:flex;flex-direction:column;gap:10px;font-size:15px"><p style="margin:0">${L(`Cada distrito recebe uma base pelo seu aviso do IPMA (verde ${BASE.verde}, amarelo ${BASE.amarelo}, laranja ${BASE.laranja}, vermelho ${BASE.vermelho}), considerando os avisos em vigor ou previstos no período escolhido. A isso somam-se pontos pelas ocorrências do distrito: peso da fonte × gravidade (1 a 3) × 5. O máximo é 100. Abaixo de 10 não há impacto relevante; 10 a 24 é moderado; 25 a 49 é alto; 50 ou mais é muito alto.`, `Each district gets a base from its IPMA warning (green ${BASE.verde}, yellow ${BASE.amarelo}, orange ${BASE.laranja}, red ${BASE.vermelho}), using warnings in force or forecast in the chosen period. Points for the district’s incidents are added: source weight × severity (1 to 3) × 5. The maximum is 100. Below 10 is negligible; 10 to 24 moderate; 25 to 49 high; 50 or more very high.`)}</p><p style="margin:0" class="muted">${L('Pesos das fontes', 'Source weights')}: ${L('governamental', 'government')} ${WEIGHTS.governamental} · ${L('comunicação social', 'news media')} ${WEIGHTS.comunicacao_social} · ${L('redes sociais verificada', 'social media, verified')} ${WEIGHTS.redes_sociais_verificada} · ${L('redes sociais não verificada', 'social media, unverified')} ${WEIGHTS.redes_sociais_nao_verificada}.</p></div></section>`;
+  return `<section id="como" aria-labelledby="h-como"><h2 id="h-como" class="h2">${L('Como calculamos o impacto', 'How we calculate impact')}</h2><div class="card tinted" style="display:flex;flex-direction:column;gap:10px;font-size:15px"><p style="margin:0">${L(`Cada distrito recebe uma base pelo seu aviso do IPMA (verde ${BASE.verde}, amarelo ${BASE.amarelo}, laranja ${BASE.laranja}, vermelho ${BASE.vermelho}), considerando os avisos em vigor neste momento. A isso somam-se pontos pelas ocorrências do distrito: peso da fonte × gravidade (1 a 3) × 5. O máximo é 100. Abaixo de 10 não há impacto relevante; 10 a 24 é moderado; 25 a 49 é alto; 50 ou mais é muito alto.`, `Each district gets a base from its IPMA warning (green ${BASE.verde}, yellow ${BASE.amarelo}, orange ${BASE.laranja}, red ${BASE.vermelho}), using the warnings in force right now. Points for the district’s incidents are added: source weight × severity (1 to 3) × 5. The maximum is 100. Below 10 is negligible; 10 to 24 moderate; 25 to 49 high; 50 or more very high.`)}</p><p style="margin:0" class="muted">${L('Pesos das fontes', 'Source weights')}: ${L('governamental', 'government')} ${WEIGHTS.governamental} · ${L('comunicação social', 'news media')} ${WEIGHTS.comunicacao_social} · ${L('redes sociais verificada', 'social media, verified')} ${WEIGHTS.redes_sociais_verificada} · ${L('redes sociais não verificada', 'social media, unverified')} ${WEIGHTS.redes_sociais_nao_verificada}.</p></div></section>`;
 }
 function footer() {
   return `<footer class="foot"><div><strong style="color:var(--ink)">${L('Sobre este site', 'About this site')}</strong><p style="margin:6px 0 0">${L('Não é um serviço oficial e não substitui os avisos da Proteção Civil nem do IPMA. Cada informação indica a fonte e o link original. Relatos de redes sociais aparecem sempre como não verificados.', 'This is not an official service and does not replace Civil Protection or IPMA warnings. Every item shows its source and original link. Social media reports always appear as unverified.')}</p></div>
-  <div><strong style="color:var(--ink)">${L('Dados', 'Data')}</strong><p style="margin:6px 0 0">${L('Avisos e previsão: IPMA, lidos em tempo real neste dispositivo. Ocorrências, notícias e serviços: atualizados aproximadamente de 15 em 15 minutos.', 'Warnings and forecast: IPMA, read live on this device. Incidents, news and services: updated roughly every 15 minutes.')}</p></div></footer>`;
+  <div><strong style="color:var(--ink)">${L('Dados', 'Data')}</strong><p style="margin:6px 0 0">${L('Avisos e previsão: IPMA, lidos em tempo real neste dispositivo. Ocorrências, notícias e serviços: atualizados aproximadamente de hora a hora.', 'Warnings and forecast: IPMA, read live on this device. Incidents, news and services: updated roughly every hour.')}</p></div></footer>`;
 }
 
 function recsLink() {
@@ -386,7 +384,6 @@ function onClick(e) {
   const { a, v, id } = el.dataset;
   if (a === 'lang') { state.lang = v; store.set('lang', v); }
   else if (a === 'region') { state.region = v; }
-  else if (a === 'win') { state.win = v; }
   else if (a === 'filt') { state.filt[v] = !state.filt[v]; }
   else if (a === 'cat') { state.cat = v; }
   else if (a === 'sit') { state.sit = v; }
@@ -402,8 +399,7 @@ function onClick(e) {
 function onChange(e) {
   const el = e.target.closest('[data-a]');
   if (!el) return;
-  if (el.dataset.a === 'districtSel') { state.district = el.value; state.incidentId = null; render(); }
-  else if (el.dataset.a === 'zoneSel') { setZone(Number(el.value)); }
+  if (el.dataset.a === 'zoneSel') { setZone(Number(el.value)); }
 }
 function onKey(e) {
   if ((e.key === 'Enter' || e.key === ' ') && e.target.matches?.('g[data-a]')) { e.preventDefault(); e.target.dispatchEvent(new MouseEvent('click', { bubbles: true })); }
