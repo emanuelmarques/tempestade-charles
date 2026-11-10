@@ -504,7 +504,7 @@ function heroStage(imp) {
   ${whenReadout()}
   ${reg ? `<div class="regionwrap" id="regionwrap">${regionPanel(state.region)}</div>` : `<div class="mapbox" id="mapbox"><div class="mapview">${mapSvg(imp)}<div class="zoom"><button class="ctl" data-a="zoom" data-v="in" aria-label="${L('Aproximar', 'Zoom in')}">+</button><button class="ctl" data-a="zoom" data-v="out" aria-label="${L('Afastar', 'Zoom out')}">−</button></div></div>${legend()}</div>`}
   ${timelineDock()}
-  <aside class="card panel" aria-live="${state.playing ? 'off' : 'polite'}" aria-label="${L('Detalhe', 'Details')}"><button class="grab" data-a="sheet" aria-label="${L('Expandir ou recolher o painel de detalhe', 'Expand or collapse the details panel')}"><i></i></button><div class="pc" id="pc">${panelContent(imp)}</div></aside></section>`;
+  <aside class="card panel" aria-live="${state.playing ? 'off' : 'polite'}" aria-label="${L('Detalhe', 'Details')}"><button class="grab" data-a="sheet" aria-label="${L('Expandir ou recolher o painel de detalhe', 'Expand or collapse the details panel')}"><i></i><span class="gl">${L('Toque ou arraste para cima para abrir o painel', 'Tap or drag up to open the panel')}</span></button><div class="pc" id="pc">${panelContent(imp)}</div></aside></section>`;
 }
 
 /* ---------- zona ---------- */
@@ -820,7 +820,7 @@ function onClick(e) {
   else if (a === 'incgo') { state.inc = v; state.pg.inc = 1; render(); document.getElementById('h-inc')?.scrollIntoView({ block: 'start' }); return; }
   else if (a === 'sit') { state.sit = v; }
   else if (a === 'ptab') { state.ptab = v; state.incidentId = null; if (state.sheet === 0) state.sheet = 1; }
-  else if (a === 'sheet') { state.sheet = (state.sheet + 1) % 3; document.getElementById('stage')?.setAttribute('data-s', String(state.sheet)); return; }
+  else if (a === 'sheet') { if (sheetDrag.recent) return; state.sheet = [1, 2, 0, 0][state.sheet] ?? 0; document.getElementById('stage')?.setAttribute('data-s', String(state.sheet)); return; }
   else if (a === 'play') { if (state.playing) stopPlay(); else startPlay(); return; }
   else if (a === 'live') { setAtFromValue(0); }
   else if (a === 'district') { if (mapDrag.moved) return; if (state.sheet === 2) state.sheet = 1; state.userPicked = true; state.national = false; state.district = id; state.incidentId = null; }
@@ -857,6 +857,56 @@ function onKey(e) {
   if ((e.key === 'Enter' || e.key === ' ') && e.target.matches?.('g[data-a]')) { e.preventDefault(); e.target.dispatchEvent(new MouseEvent('click', { bubbles: true })); }
 }
 
+/* Gaveta (telemóvel): arrastar com o dedo e largar no estado mais próximo.
+   Estados: 0 espreitar · 1 meio · 2 aberta · 3 minimizada (só o mapa). Com a gaveta aberta,
+   arrasta-se pela pega, ou para baixo a partir do conteúdo quando este está no topo. */
+const sheetDrag = { on: false, mode: 'free', moved: false, recent: false, y0: 0, top0: 0, vel: 0, lastY: 0, lastT: 0 };
+const SHEET_PEEK = 214; const SHEET_FULL = 160; const SHEET_MINI = 64;
+const sheetTops = (h) => [h - SHEET_PEEK, h * 0.56, SHEET_FULL, h - SHEET_MINI];
+const isMobileSheet = () => window.matchMedia('(max-width: 900px)').matches;
+function sheetBegin(y, target) {
+  if (!isMobileSheet()) return false;
+  const panel = target.closest?.('.panel'); const hero = document.getElementById('stage');
+  if (!panel || !hero) return false;
+  const mode = state.sheet === 2 && !target.closest('.grab') ? 'pending' : 'free';
+  Object.assign(sheetDrag, { on: true, mode, moved: false, y0: y, lastY: y, lastT: performance.now(), vel: 0, top0: panel.getBoundingClientRect().top - hero.getBoundingClientRect().top });
+  return true;
+}
+function sheetMove(y, e) {
+  if (!sheetDrag.on) return;
+  let dy = y - sheetDrag.y0;
+  if (sheetDrag.mode === 'pending') {
+    if (Math.abs(dy) < 6) return;
+    const pc = document.getElementById('pc');
+    if (dy > 0 && pc && pc.scrollTop <= 0) { sheetDrag.mode = 'free'; sheetDrag.y0 = y; dy = 0; } else { sheetDrag.on = false; return; }
+  }
+  if (!sheetDrag.moved && Math.abs(dy) < 6) return;
+  sheetDrag.moved = true;
+  if (e?.cancelable) e.preventDefault();
+  const now = performance.now();
+  sheetDrag.vel = (y - sheetDrag.lastY) / Math.max(1, now - sheetDrag.lastT); sheetDrag.lastY = y; sheetDrag.lastT = now;
+  const hero = document.getElementById('stage'); const panel = document.querySelector('.panel');
+  if (!hero || !panel) return;
+  const tops = sheetTops(hero.clientHeight);
+  const top = Math.min(tops[3], Math.max(tops[2], sheetDrag.top0 + dy));
+  document.body.style.userSelect = 'none';
+  panel.style.transition = 'none'; panel.style.transform = `translateY(${top}px)`;
+}
+function sheetEnd(e) {
+  if (!sheetDrag.on) return;
+  sheetDrag.on = false; document.body.style.userSelect = '';
+  const hero = document.getElementById('stage'); const panel = document.querySelector('.panel');
+  if (!sheetDrag.moved || !hero || !panel) return;
+  if (e?.cancelable) e.preventDefault(); // evita o clique fantasma depois do arrasto
+  sheetDrag.recent = true; setTimeout(() => { sheetDrag.recent = false; }, 80);
+  const tops = sheetTops(hero.clientHeight);
+  const cur = panel.getBoundingClientRect().top - hero.getBoundingClientRect().top;
+  const proj = cur + Math.max(-90, Math.min(90, sheetDrag.vel * 100)); // inércia, limitada
+  let best = 0; tops.forEach((t, i) => { if (Math.abs(t - proj) < Math.abs(tops[best] - proj)) best = i; });
+  state.sheet = best;
+  panel.style.transition = ''; panel.style.transform = '';
+  hero.setAttribute('data-s', String(best));
+}
 const mapDrag = { on: false, moved: false, x: 0, y: 0 };
 function onPointerDown(e) {
   const svg = e.target.closest?.('#mapbox svg');
@@ -986,6 +1036,13 @@ export async function start() {
   app.addEventListener('submit', onSubmit);
   app.addEventListener('keydown', onKey);
   app.addEventListener('pointerdown', onPointerDown);
+  app.addEventListener('touchstart', (e) => { if (e.touches.length === 1) sheetBegin(e.touches[0].clientY, e.target); }, { passive: true });
+  app.addEventListener('touchmove', (e) => sheetMove(e.touches[0].clientY, e), { passive: false });
+  app.addEventListener('touchend', sheetEnd, { passive: false });
+  app.addEventListener('touchcancel', sheetEnd);
+  app.addEventListener('pointerdown', (e) => { if (e.pointerType !== 'touch' && !e.button && e.target.closest?.('.grab')) sheetBegin(e.clientY, e.target); });
+  window.addEventListener('pointermove', (e) => { if (e.pointerType !== 'touch') sheetMove(e.clientY, e); });
+  window.addEventListener('pointerup', (e) => { if (e.pointerType !== 'touch') sheetEnd(e); });
   window.addEventListener('pointermove', onPointerMove);
   window.addEventListener('pointerup', onPointerUp);
   app.addEventListener('wheel', onWheel, { passive: false });
