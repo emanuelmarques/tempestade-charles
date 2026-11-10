@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Como calculamos o impacto da tempestade Charles por distrito</title>
+<meta name="description" content="Metodologia do mapa de impacto: base do aviso do IPMA, pontos das ocorrências por fonte e gravidade, limiares, e de onde vêm os dados.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#F5F3EE">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_PT">
+<meta property="og:site_name" content="Tempestade Charles">
+<meta property="og:title" content="Como calculamos o impacto da tempestade Charles por distrito">
+<meta property="og:description" content="Metodologia do mapa de impacto: base do aviso do IPMA, pontos das ocorrências por fonte e gravidade, limiares, e de onde vêm os dados.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Como calculamos o impacto da tempestade Charles por distrito">
+<meta name="twitter:description" content="Metodologia do mapa de impacto: base do aviso do IPMA, pontos das ocorrências por fonte e gravidade, limiares, e de onde vêm os dados.">
+<link rel="preconnect" href="https://api.ipma.pt" crossorigin>
+<!--seo-head-->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Como calculamos o impacto","description":"Metodologia do mapa de impacto por distrito.","inLanguage":"pt-PT"}</script>
+</head>
+<body data-page="how">
+<div id="app">
+  <main style="max-width:720px;margin:0 auto;padding:24px;font-family:system-ui,sans-serif;line-height:1.5">
+    <p><a href="./">← Voltar ao início</a></p>
+    <h1>Como calculamos o impacto</h1>
+    <p>Cada distrito recebe uma base pelo seu aviso do IPMA (verde 0, amarelo 10, laranja 20, vermelho 30). A isso somam-se pontos pelas ocorrências do distrito: peso da fonte × gravidade (1 a 3) × 5. O máximo é 100.</p>
+    <p>Abaixo de 10 não há impacto relevante; 10 a 24 é moderado; 25 a 49 é alto; 50 ou mais é muito alto.</p>
+    <p>Pesos das fontes: governamental 1, comunicação social 0,7, redes sociais verificada 0,7, redes sociais não verificada 0,3.</p>
+  </main>
+</div>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>

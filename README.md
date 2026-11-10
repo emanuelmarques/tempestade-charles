@@ -12,6 +12,8 @@ Site estático de informação para a população sobre a tempestade Charles em 
 - **Ocorrências, notícias, serviços, abrigos, boatos:** ficheiros em `public/data/`, mantidos por uma tarefa agendada do Claude e validados por `npm run validate-data`.
 - **Geografia:** os contornos dos distritos vêm do design (`design/`), extraídos com `scripts/extract-geo.mjs` para `src/data/geo.json`.
 - **Localização do visitante (com a sua permissão):** escolhe por omissão o distrito (ponto dentro do contorno do mapa), a localidade IPMA mais próxima e o concelho. Os contactos da câmara municipal (autoridade municipal de proteção civil) vêm da API gratuita geoapi.pt, com cópia local. Sem permissão, o mapa mostra o distrito com maior impacto.
+- **Farmácia e bombeiros mais próximos:** `public/data/places.json`, gerado por `node scripts/build-places.mjs` a partir do OpenStreetMap (ODbL); o mais próximo calcula-se no browser, sem serviços externos.
+- **Páginas:** início, `recomendacoes.html` (o que fazer), `metodologia.html` (como se calcula o impacto) e `feedback.html` (abre o email para hello@emanuelsmarques.pt).
 - **Impacto por distrito:** base do aviso IPMA (0/10/20/30) mais pontos das ocorrências (peso da fonte × gravidade × 5), máximo 100.
 
 ## Comandos

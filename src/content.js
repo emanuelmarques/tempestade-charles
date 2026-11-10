@@ -47,3 +47,7 @@ export const TYPE_NAMES = {
   estrada: ['Estrada', 'Road'], comboio: ['Comboio', 'Train'], aeroporto: ['Aeroporto', 'Airport'], escola: ['Escola', 'School'],
   eletricidade: ['Eletricidade', 'Electricity'], agua: ['Água', 'Water'], comunicacoes: ['Comunicações', 'Communications'],
 };
+
+export const TYPE_EMOJI = { estrada: '🛣️', comboio: '🚆', aeroporto: '✈️', escola: '🏫', eletricidade: '⚡', agua: '💧', comunicacoes: '📡' };
+export const REC_EMOJI = { casa: ['🏠', '🪟', '🧰', '🔦', '🌳', '📻'], estrada: ['🚗', '🐢', '🌊', '🅿️'], costa: ['🏖️', '🚫', '⚓', '📻'] };
+export const SIT_EMOJI = { casa: '🏠', estrada: '🚗', costa: '🌊' };

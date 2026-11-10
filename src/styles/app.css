@@ -115,7 +115,7 @@ select { min-height: 44px; font: 600 14px 'Inter Variable', sans-serif; border: 
 .list { display: flex; flex-direction: column; }
 .li { display: flex; flex-wrap: wrap; gap: 6px 20px; align-items: center; padding: 14px 4px; border-top: 1px solid var(--rule); }
 .li:first-child { border-top: 0; }
-.li .k { flex: 0 0 120px; font-size: 13px; font-weight: 600; color: var(--muted); }
+.li .k { flex: 0 0 160px; font-size: 13px; font-weight: 600; color: var(--muted); }
 .li .n { flex: 1 1 260px; min-width: 0; font-weight: 500; }
 .li time { flex: 0 0 56px; font: 700 18px 'Space Grotesk Variable', sans-serif; font-variant-numeric: tabular-nums; }
 .empty { padding: 20px; border: 1px dashed var(--rule); border-radius: 12px; color: var(--muted); font-size: 15px; }
@@ -128,3 +128,8 @@ select { min-height: 44px; font: 600 14px 'Inter Variable', sans-serif; border: 
 .foot { max-width: 1240px; margin: 0 auto; padding: 24px 24px 48px; font-size: 14px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 16px 48px; }
 .foot > div { flex: 1 1 280px; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+input[type=text], textarea { font: 400 16px/1.4 'Inter Variable', Inter, system-ui, sans-serif; border: 1.5px solid var(--ink); border-radius: 8px; padding: 10px 12px; min-height: 44px; background: #fff; color: var(--ink); width: 100%; box-sizing: border-box; }
+textarea { resize: vertical; }
+.rec .n { background: var(--frame); color: inherit; font-size: 22px; border: 1px solid var(--rule); }
+.li .k { white-space: nowrap; }

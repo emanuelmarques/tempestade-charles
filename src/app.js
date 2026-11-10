@@ -5,11 +5,12 @@ import { countdown, parseLisbon, freshness, formatTime, formatDayTime, formatDay
 import { toMap } from './lib/projection.js';
 import { districtAt } from './lib/districtAt.js';
 import { lookupContacts, GEOAPI_SITE } from './data/geoapi.js';
+import { lookupNearby, OSM_COPYRIGHT } from './data/places.js';
 import { haversineKm } from './lib/geo.js';
 import { DISTRICTS, DISTRICT_BY_ID, DISTRICT_BY_AREA, LAND_PATH } from './data/districts.js';
 import { IPMA, IPMA_SOURCE, WIND_CLASS, PREC_CLASS, normalizeWarnings, normalizeForecast, normalizeWeatherTypes, normalizeLocations, fetchCached } from './data/ipma.js';
 import { loadCurated } from './data/curated.js';
-import { RECS, ANEPC, LEVEL_EN, TIER_NAMES, TYPE_EN, AREA_NAMES, ISLAND_AREAS, STATUS_CLASS, STATUS_NAMES, TYPE_NAMES } from './content.js';
+import { TYPE_EMOJI, REC_EMOJI, SIT_EMOJI, RECS, ANEPC, LEVEL_EN, TIER_NAMES, TYPE_EN, AREA_NAMES, ISLAND_AREAS, STATUS_CLASS, STATUS_NAMES, TYPE_NAMES } from './content.js';
 
 const STORM_START = parseLisbon(STORM_START_LOCAL);
 const REFRESH_MS = 5 * 60 * 1000;
@@ -24,7 +25,7 @@ const store = {
 const state = {
   lang: store.get('lang', 'pt') === 'en' ? 'en' : 'pt',
   page: document.body.dataset.page || 'home',
-  win: 'now', region: 'continente', district: null, userPicked: false, locNote: '', incidentId: null,
+  win: 'now', region: 'continente', national: false, district: null, userPicked: false, locNote: '', incidentId: null,
   filt: { governamental: true, comunicacao_social: true, redes_sociais: true },
   sit: 'casa', cat: 'todas', zoneLoc: Number(store.get('zoneLoc', '1100900')) || 1100900,
   view: { x: 0, y: 0, w: 640, h: 620 }, now: new Date(),
@@ -32,7 +33,7 @@ const state = {
 const data = {
   curated: { meta: { updatedAt: null }, incidents: [], feed: [], services: [], shelters: [], myths: [] }, curatedErrors: {}, curatedLoaded: false,
   warnings: [], warnErr: null, warnFetchedAt: null, warnCache: false,
-  contact: null, contactErr: null, locations: [], forecast: null, forecastErr: null, forecastLoc: null, weatherTypes: {},
+  contact: null, contactErr: null, nearby: null, locations: [], forecast: null, forecastErr: null, forecastLoc: null, weatherTypes: {},
 };
 
 const L = (pt, en) => (state.lang === 'en' ? en : pt);
@@ -42,6 +43,17 @@ const typeName = (t) => (state.lang === 'en' ? TYPE_EN[t] || t : t);
 const lvPill = (l, extra = '') => `<span class="lv lv-${l}${extra}">${esc(lvName(l)[0].toUpperCase() + lvName(l).slice(1))}</span>`;
 
 /* ---------- derivados ---------- */
+/** Avisos que ainda vão começar nas próximas `hours` horas, para as áreas dadas. */
+function upcoming(areas, hours = 48) {
+  const t0 = state.now; const t1 = new Date(t0.getTime() + hours * 3600e3); const set = new Set(areas);
+  return data.warnings.filter((w) => set.has(w.area) && w.start > t0 && w.start <= t1).sort((a, b) => a.start - b.start || rank(b.level) - rank(a.level));
+}
+function upcomingBlock(areas, max = 5) {
+  const u = upcoming(areas);
+  if (!u.length) return '';
+  return `<div><h4 class="h" style="font-size:16px;margin-bottom:2px">${L('A seguir (próximas 48 h)', 'Coming up (next 48 h)')}</h4>${u.slice(0, max).map(warningLine).join('')}${u.length > max ? `<p class="muted" style="margin:8px 0 0;font-size:13px">+${u.length - max} ${L('avisos', 'more warnings')}</p>` : ''}</div>`;
+}
+
 function windowRange() {
   const h = state.win === 'now' ? 0 : state.win === '24h' ? 24 : 48;
   return [state.now, new Date(state.now.getTime() + h * 3600e3)];
@@ -169,7 +181,7 @@ function mapPins() {
 }
 
 function mapSvg(imp) {
-  const v = state.view; const cur = curDistrict(imp);
+  const v = state.view; const cur = state.national ? null : curDistrict(imp);
   const dists = DISTRICTS.map((d) => {
     const r = imp.get(d.id); const sel = d.id === cur;
     const tierName = TIER_NAMES[r.tier][state.lang === 'en' ? 1 : 0];
@@ -191,9 +203,9 @@ function regionPanel(region) {
   const [from, to] = windowRange();
   const rows = areas.map((a) => {
     const ws = data.warnings.filter((w) => w.area === a && w.start <= to && w.end >= from).sort((x, y) => rank(y.level) - rank(x.level));
-    return `<div class="card"><h3 style="font-size:18px">${esc(AREA_NAMES[a])}</h3>${ws.length ? ws.map((w) => warningLine(w)).join('') : `<p class="muted" style="margin:8px 0 0">${L('Sem aviso em vigor.', 'No warning in force.')}</p>`}</div>`;
+    return `<div class="card"><h3 style="font-size:18px">${esc(AREA_NAMES[a])}</h3>${ws.length ? ws.map((w) => warningLine(w)).join('') : `<p class="muted" style="margin:8px 0 0">${L('Sem aviso em vigor neste momento.', 'No warning in force right now.')}</p>`}${upcomingBlock([a], 4)}</div>`;
   }).join('');
-  return `<div class="grid" style="margin-top:4px">${rows}</div><p class="muted" style="font-size:14px;margin:12px 0 0">${L('O desenho do mapa ainda não inclui Açores e Madeira; os avisos do IPMA são mostrados em lista.', 'The map drawing does not include the Azores and Madeira yet; IPMA warnings are listed instead.')} ${sourceBadge(IPMA_SOURCE, { lang: state.lang })}</p>`;
+  return `<div class="grid" style="margin-top:4px">${rows}</div><p class="muted" style="font-size:14px;margin:12px 0 0">${L('Avisos do IPMA para as regiões autónomas: em vigor agora e previstos para as próximas 48 horas. O mapa desenhado cobre só o continente.', 'IPMA warnings for the autonomous regions: in force now and forecast for the next 48 hours. The drawn map covers the mainland only.')} ${sourceBadge(IPMA_SOURCE, { lang: state.lang })}</p>`;
 }
 
 function warningLine(w) {
@@ -205,15 +217,39 @@ function districtPanel(imp) {
   const list = data.curated.incidents.filter((i) => i.district === d.id).sort((a, b) => Date.parse(b.time) - Date.parse(a.time)).slice(0, 3);
   const shown = r.count === 0 ? L('nenhuma', 'none') : list.length < r.count ? `${L('as', 'the')} ${list.length} ${L('mais recentes de', 'most recent of')} ${r.count}` : `${r.count} ${L('no total', 'in total')}`;
   const tname = TIER_NAMES[r.tier][state.lang === 'en' ? 1 : 0];
-  return `<div style="display:flex;flex-direction:column;gap:14px"><div><p class="muted" style="margin:0;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.04em">${L('Distrito', 'District')}</p><h3 style="font-size:28px;line-height:1.15">${esc(d.name)}</h3></div>
+  return `<div style="display:flex;flex-direction:column;gap:14px"><div><p class="muted" style="margin:0;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.04em">${L('Distrito', 'District')}</p><h3 style="font-size:28px;line-height:1.15">${esc(d.name)}</h3><button class="tab" data-a="national" style="margin-top:8px;min-height:44px">${L('Ver todo o país', 'See the whole country')}</button></div>
     <div style="display:flex;flex-wrap:wrap;gap:8px"><span class="lv ${TIER_CLASS[r.tier]}">${L('Impacto', 'Impact')} ${tname}</span><span class="lv lv-${r.top ? r.top.level : 'verde'}">${L('Aviso', 'Warning')} ${r.top ? lvName(r.top.level) : L('verde', 'green')}</span></div>
     <div><div style="display:flex;justify-content:space-between;align-items:baseline"><span class="h num" style="font-size:34px;font-weight:700;line-height:1">${r.score}<small style="font-size:16px;font-weight:600">/100</small></span><span class="muted" style="font-size:13px">${esc(winLabel())}</span></div>
       <div class="bar"><div class="${TIER_CLASS[r.tier]}" style="width:${r.score}%"></div></div>
       <p class="muted" style="margin:8px 0 0;font-size:13.5px">${L('Aviso IPMA', 'IPMA warning')} <strong style="color:var(--ink)">+${r.base}</strong> · ${L('Ocorrências', 'Incidents')} <strong style="color:var(--ink)">+${r.points}</strong></p></div>
     <div><h4 class="h" style="font-size:16px;margin-bottom:2px">${L('Avisos do IPMA', 'IPMA warnings')}</h4>${r.warnings.length ? r.warnings.map(warningLine).join('') : `<p class="muted" style="margin:6px 0 0;font-size:14px">${L('Sem aviso em vigor neste momento.', 'No warning in force right now.')}</p>`}<div style="margin-top:8px">${sourceBadge(IPMA_SOURCE, { lang: state.lang })}</div></div>
+    ${upcomingBlock([d.area])}
     <div style="display:flex;flex-direction:column;gap:8px"><h4 class="h" style="font-size:16px;margin:0">${L('Ocorrências recentes', 'Recent incidents')} <span class="muted" style="font-weight:500;font-size:14px">· ${shown}</span></h4>
       ${r.count === 0 ? `<p class="muted" style="margin:0;font-size:14px">${L('Sem ocorrências registadas neste distrito.', 'No incidents recorded in this district.')}</p>` : ''}
       ${list.map((i) => { const c = CATEGORIES[i.source.category]; return `<button class="item" data-a="incident" data-id="${esc(i.id)}"><span class="muted" style="display:flex;justify-content:space-between;gap:8px;font-size:13px"><span>${esc(i.place || '')}</span><span class="num">${esc(formatTime(new Date(i.time), state.lang))}</span></span><span style="font-weight:600;font-size:15px">${esc(txt(i.title))}</span><span><span class="badge ${c.cls}"><span class="shape ${c.shape}"></span>${esc(c.label[state.lang])}</span>${i.source.category === 'redes_sociais' && !i.verified ? ` <span class="st st-org">${L('Não verificado', 'Unverified')}</span>` : ''}</span></button>`; }).join('')}</div></div>`;
+}
+
+function nationalPanel(imp) {
+  const rows = DISTRICTS.map((d) => ({ d, r: imp.get(d.id) })).sort((a, b) => b.r.score - a.r.score || a.d.name.localeCompare(b.d.name, 'pt'));
+  const counts = [0, 0, 0, 0]; rows.forEach((x) => { counts[x.r.tier] += 1; });
+  const [from, to] = windowRange();
+  const names = TIER_NAMES.map((t) => t[state.lang === 'en' ? 1 : 0]);
+  const islands = [['acores', 'Açores', 'Azores'], ['madeira', 'Madeira', 'Madeira']].map(([k, pt, en]) => {
+    const areas = ISLAND_AREAS[k];
+    const now = data.warnings.filter((w) => areas.includes(w.area) && w.start <= to && w.end >= from).reduce((m, w) => (rank(w.level) > rank(m) ? w.level : m), 'verde');
+    const next = upcoming(areas).reduce((m, w) => (rank(w.level) > rank(m) ? w.level : m), 'verde');
+    return `<button class="item" data-a="region" data-v="${k}"><span style="display:flex;justify-content:space-between;gap:8px;align-items:center"><strong>${L(pt, en)}</strong><span>${lvPill(now)}</span></span><span class="muted" style="font-size:13px">${next !== 'verde' ? `${L('A seguir, até', 'Coming up, up to')} ${esc(lvName(next))}` : L('Sem avisos previstos nas próximas 48 h', 'No warnings forecast in the next 48 h')}</span></button>`;
+  }).join('');
+  const recent = data.curated.incidents.slice().sort((a, b) => Date.parse(b.time) - Date.parse(a.time)).slice(0, 3);
+  const nUp = upcoming([...DISTRICTS.map((d) => d.area), ...ISLAND_AREAS.acores, ...ISLAND_AREAS.madeira]).length;
+  return `<div style="display:flex;flex-direction:column;gap:14px"><div><p class="muted" style="margin:0;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.04em">${L('Nacional', 'National')}</p><h3 style="font-size:28px;line-height:1.15">${L('Todo o país', 'The whole country')}</h3></div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px"><span class="lv lv-${highestLevel()}">${L('Aviso mais alto', 'Highest warning')} ${esc(lvName(highestLevel()))}</span></div>
+    <p class="muted" style="margin:0;font-size:14px">${[3, 2, 1, 0].map((t) => `<strong style="color:var(--ink)">${counts[t]}</strong> ${esc(names[t])}`).join(' · ')} (${L('distritos', 'districts')})</p>
+    <p class="muted" style="margin:0;font-size:14px">${nUp ? `${nUp} ${L('avisos previstos nas próximas 48 h em todo o país.', 'warnings forecast in the next 48 h nationwide.')}` : L('Sem avisos previstos nas próximas 48 h.', 'No warnings forecast in the next 48 h.')}</p>
+    <div><h4 class="h" style="font-size:16px;margin:0 0 6px">${L('Distritos por impacto', 'Districts by impact')}</h4><div style="display:flex;flex-direction:column;gap:6px">${rows.map(({ d, r }) => `<button class="item" data-a="district" data-id="${d.id}" style="flex-direction:row;align-items:center;justify-content:space-between;gap:8px"><span style="font-weight:600">${esc(d.name)}</span><span style="display:flex;gap:8px;align-items:center"><span class="num muted" style="font-size:13px">${r.score}/100</span><span class="lv ${TIER_CLASS[r.tier]}">${esc(names[r.tier])}</span></span></button>`).join('')}</div></div>
+    <div><h4 class="h" style="font-size:16px;margin:0 0 6px">${L('Regiões autónomas', 'Autonomous regions')}</h4><div style="display:flex;flex-direction:column;gap:6px">${islands}</div></div>
+    ${recent.length ? `<div><h4 class="h" style="font-size:16px;margin:0 0 6px">${L('Ocorrências recentes no país', 'Recent incidents nationwide')}</h4><div style="display:flex;flex-direction:column;gap:6px">${recent.map((i) => `<button class="item" data-a="incident" data-id="${esc(i.id)}"><span class="muted" style="font-size:13px">${esc(i.place || '')} · ${esc(formatTime(new Date(i.time), state.lang))}</span><span style="font-weight:600;font-size:15px">${esc(txt(i.title))}</span></button>`).join('')}</div></div>` : ''}
+    <div>${sourceBadge(IPMA_SOURCE, { lang: state.lang })}</div></div>`;
 }
 
 function incidentPanel() {
@@ -233,7 +269,7 @@ function mapSection(imp) {
   const chips = [['governamental', 'sh-g'], ['comunicacao_social', 'sh-c'], ['redes_sociais', 'sh-r']].map(([k, s]) => `<button class="chip ${state.filt[k] ? 'on' : ''}" aria-pressed="${state.filt[k]}" data-a="filt" data-v="${k}"><span class="shape ${s}"></span>${esc(CATEGORIES[k].label[state.lang])}</button>`).join('');
   const seg = (a, items, cur) => items.map(([v, l]) => `<button class="seg ${cur === v ? 'on' : ''}" aria-pressed="${cur === v}" data-a="${a}" data-v="${v}">${l}</button>`).join('');
   const reg = state.region !== 'continente';
-  return `<section aria-labelledby="h-mapa"><div style="display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;margin-bottom:14px"><h2 id="h-mapa" style="font-size:26px">${L('Mapa de impacto por distrito', 'District impact map')}</h2><p class="muted" style="margin:0;font-size:14px">${state.locNote ? `${esc(state.locNote)} · ` : ''}${L('Clique num distrito para ver o detalhe.', 'Select a district for details.')} <a href="#como">${L('Como calculamos', 'How we calculate')}</a></p></div>
+  return `<section aria-labelledby="h-mapa"><div style="display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;margin-bottom:14px"><h2 id="h-mapa" style="font-size:26px">${L('Mapa de impacto por distrito', 'District impact map')}</h2><p class="muted" style="margin:0;font-size:14px">${state.locNote ? `${esc(state.locNote)} · ` : ''}${L('Clique num distrito para ver o detalhe.', 'Select a district for details.')} <a href="metodologia.html">${L('Como calculamos', 'How we calculate')}</a></p></div>
   <div class="maprow"><div class="mapcol">
     <div class="row" style="justify-content:space-between"><div class="row">
       <div style="display:flex" role="group" aria-label="${L('Região', 'Region')}">${seg('region', [['continente', 'Continente'], ['acores', 'Açores'], ['madeira', 'Madeira']], state.region)}</div>
@@ -241,7 +277,7 @@ function mapSection(imp) {
       ${reg ? '' : `<div style="display:flex;flex-wrap:wrap;gap:8px" role="group" aria-label="${L('Filtrar ocorrências por categoria de fonte', 'Filter incidents by source category')}">${chips}</div>`}</div>
     ${reg ? regionPanel(state.region) : `<div class="mapbox" id="mapbox"><div class="mapview">${mapSvg(imp)}<div class="zoom"><button class="ctl" data-a="zoom" data-v="in" aria-label="${L('Aproximar', 'Zoom in')}">+</button><button class="ctl" data-a="zoom" data-v="out" aria-label="${L('Afastar', 'Zoom out')}">−</button></div></div>${legend()}</div>`}
   </div>
-  <aside class="card panel" aria-live="polite" aria-label="${L('Detalhe', 'Details')}">${state.incidentId ? incidentPanel() : districtPanel(imp)}</aside></div></section>`;
+  <aside class="card panel" aria-live="polite" aria-label="${L('Detalhe', 'Details')}">${state.incidentId ? incidentPanel() : state.national ? nationalPanel(imp) : districtPanel(imp)}</aside></div></section>`;
 }
 
 /* ---------- zona ---------- */
@@ -253,17 +289,18 @@ function zoneSection() {
   const shelters = dist ? data.curated.shelters.filter((s) => s.district === dist.id) : [];
   const group = (r, name) => `<optgroup label="${name}">${data.locations.filter((l) => l.region === r).map((l) => `<option value="${l.id}" ${l.id === state.zoneLoc ? 'selected' : ''}>${esc(l.name)}</option>`).join('')}</optgroup>`;
   const top = ws[0];
+  const next = loc ? upcoming([loc.area])[0] : null;
   return `<section aria-labelledby="h-zona"><h2 id="h-zona" class="h2">${L('Na sua zona', 'In your area')}</h2>
   <div class="card" style="display:flex;flex-wrap:wrap;gap:28px"><div style="flex:1 1 320px;display:flex;flex-direction:column;gap:14px;min-width:0">
     <div class="field"><label for="localidade" style="font-size:14px">${L('Localidade (estações IPMA)', 'Location (IPMA stations)')}</label><select id="localidade" data-a="zoneSel" data-key="localidade" style="min-height:48px;font-size:16px">${group('continente', 'Continente')}${group('madeira', 'Madeira')}${group('acores', 'Açores')}</select></div>
     <div><button class="tab" data-a="geo" id="geo" style="display:inline-flex;align-items:center;gap:10px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M9 1v3M9 14v3M1 9h3M14 9h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>${L('Usar a minha localização', 'Use my location')}</button><p id="geomsg" class="muted" style="margin:6px 0 0;font-size:13.5px" role="status"></p></div>
     <div style="background:${top ? '#FDEBD3' : 'var(--frame)'};border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:8px">
-      ${top ? `<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">${lvPill(top.level)}<strong>${esc(typeName(top.type))} · ${esc(loc.name)}</strong></div><p style="margin:0;font-size:14px">${esc(formatDayTime(top.start, state.lang))} → ${esc(formatDayTime(top.end, state.lang))}</p>` : `<strong>${L('Sem aviso em vigor neste momento', 'No warning in force right now')}</strong>`}
+      ${top ? `<div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center">${lvPill(top.level)}<strong>${esc(typeName(top.type))} · ${esc(loc.name)}</strong></div><p style="margin:0;font-size:14px">${esc(formatDayTime(top.start, state.lang))} → ${esc(formatDayTime(top.end, state.lang))}</p>` : `<strong>${L('Sem aviso em vigor neste momento', 'No warning in force right now')}</strong>${next ? `<p style="margin:0;font-size:14px">${L('A seguir:', 'Next:')} ${lvPill(next.level)} ${esc(typeName(next.type))} · ${esc(formatDayTime(next.start, state.lang))}</p>` : ''}`}
       ${sourceBadge(IPMA_SOURCE, { lang: state.lang })}</div></div>
   <div style="flex:1 1 360px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(170px,100%),1fr));gap:12px;min-width:0">
     <a href="tel:112" style="text-decoration:none;color:#fff;background:#D1242F;border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;justify-content:center;min-height:72px"><span class="h" style="font-size:30px;font-weight:700">112</span><span style="font-size:14px">${L('Emergência: bombeiros, INEM, PSP e GNR', 'Emergency: fire, ambulance, police')}</span></a>
     <a href="tel:808242424" class="card tinted" style="text-decoration:none;color:var(--ink);padding:14px 16px"><span class="muted" style="display:block;font-size:13px">SNS 24</span><span class="h num" style="font-size:20px;font-weight:700">808 24 24 24</span></a>
-    ${municipalCard()}
+    ${municipalCard()}${nearbyCards()}
     <a href="${ANEPC.url}" target="_blank" rel="noopener noreferrer" class="card tinted" style="text-decoration:none;color:var(--ink);padding:14px 16px"><span class="muted" style="display:block;font-size:13px">${L('Proteção civil', 'Civil protection')}</span><span style="font-weight:600">${L('Contactos e orientações (ANEPC)', 'Contacts and guidance (ANEPC)')} ↗</span></a>
     <div class="card tinted" style="padding:14px 16px"><span class="muted" style="display:block;font-size:13px">${L('Abrigos no distrito', 'Shelters in the district')}</span>${shelters.length ? shelters.slice(0, 3).map((s) => `<span style="display:block;font-weight:600;font-size:14px">${esc(txt(s.name))}</span>`).join('') : `<span style="font-size:14px">${L('Sem abrigos registados. Siga as indicações da câmara municipal.', 'No shelters recorded. Follow your municipality’s instructions.')}</span>`}</div>
   </div></div></section>`;
@@ -293,6 +330,27 @@ function municipalCard() {
     <span class="muted" style="display:block;font-size:12px;margin-top:6px">${c.byUser ? L('Concelho pela sua localização', 'Municipality from your location') : L('Concelho da localidade escolhida; ative a localização para ver o seu', 'Municipality of the chosen location; enable location to see yours')}. ${L('Fonte dos contactos', 'Contacts source')}: <a href="${GEOAPI_SITE}" target="_blank" rel="noopener noreferrer">geoapi.pt</a></span>`);
 }
 
+function nearbyCards() {
+  const nb = data.nearby;
+  const kmTxt = (km) => (km < 1 ? `${Math.round(km * 10) * 100} m` : `${km.toFixed(1).replace('.', state.lang === 'en' ? '.' : ',')} km`);
+  const card = (title, part) => {
+    let body;
+    if (!nb) body = `<span style="font-size:14px" class="muted">${L('A procurar…', 'Searching…')}</span>`;
+    else if (!part || part.error) body = `<span style="font-size:14px">${L('Não foi possível obter este dado. Em emergência ligue 112.', 'Could not load this. In an emergency call 112.')}</span>`;
+    else if (!part.place) body = `<span style="font-size:14px">${L(`Nenhuma encontrada num raio de ${part.radiusKm} km.`, `None found within ${part.radiusKm} km.`)}</span>`;
+    else {
+      const p = part.place;
+      body = `<strong style="display:block;font-size:15px">${esc(p.name || title)}</strong>
+        <span class="muted num" style="display:block;font-size:13px">${esc(kmTxt(p.km))} ${nb.byUser ? L('de si', 'from you') : L('da localidade escolhida', 'from the chosen location')}${p.address ? ` · ${esc(p.address)}` : ''}</span>
+        ${p.phone ? `<a href="${esc(p.phone.href)}" style="font-weight:600;font-size:14px">${esc(p.phone.display)}</a>` : ''}
+        <a href="${esc(p.mapUrl)}" target="_blank" rel="noopener noreferrer" style="display:inline-block;font-size:14px;margin-left:${p.phone ? '12px' : '0'}">${L('Ver no mapa', 'View on map')} ↗</a>`;
+    }
+    return `<div class="card tinted" style="padding:14px 16px"><span class="muted" style="display:block;font-size:13px">${title}</span>${body}</div>`;
+  };
+  return `${card(L('Bombeiros mais próximos', 'Nearest fire station'), nb?.fire)}${card(L('Farmácia mais próxima', 'Nearest pharmacy'), nb?.pharmacy)}
+    <p class="muted" style="grid-column:1/-1;margin:0;font-size:12px">${L('Localizações e telefones do OpenStreetMap (podem estar incompletos; a farmácia pode não estar de serviço). Dados ©', 'Locations and phones from OpenStreetMap (may be incomplete; the pharmacy may not be on duty). Data ©')} <a href="${OSM_COPYRIGHT}" target="_blank" rel="noopener noreferrer">OpenStreetMap</a></p>`;
+}
+
 function forecastSection() {
   const loc = locById(state.zoneLoc);
   const f = data.forecast && data.forecastLoc === state.zoneLoc ? data.forecast.slice(0, 3) : null;
@@ -317,7 +375,7 @@ function emptyList(pt, en) { return `<div class="empty">${L(pt, en)}</div>`; }
 
 function servicesSection() {
   const s = data.curated.services;
-  return `<section aria-labelledby="h-serv"><h2 id="h-serv" class="h2">${L('Estradas, transportes e serviços', 'Roads, transport and services')}</h2>${s.length ? `<div class="card list" style="padding:8px 20px">${s.map((x) => `<div class="li"><span class="k">${esc(TYPE_NAMES[x.type]?.[state.lang === 'en' ? 1 : 0] || x.type)}</span><span class="n">${esc(txt(x.name))}</span><span class="st ${STATUS_CLASS[x.status] || 'st-gry'}">${esc(STATUS_NAMES[x.status]?.[state.lang === 'en' ? 1 : 0] || x.status)}</span>${sourceBadge(x.source, { lang: state.lang })}</div>`).join('')}</div>` : emptyList('Sem cortes ou condicionamentos registados ainda.', 'No closures or restrictions recorded yet.')}</section>`;
+  return `<section aria-labelledby="h-serv"><h2 id="h-serv" class="h2">${L('Estradas, transportes e serviços', 'Roads, transport and services')}</h2>${s.length ? `<div class="card list" style="padding:8px 20px">${s.map((x) => `<div class="li"><span class="k"><span aria-hidden="true">${TYPE_EMOJI[x.type] || '📌'}</span> ${esc(TYPE_NAMES[x.type]?.[state.lang === 'en' ? 1 : 0] || x.type)}</span><span class="n">${esc(txt(x.name))}</span><span class="st ${STATUS_CLASS[x.status] || 'st-gry'}">${esc(STATUS_NAMES[x.status]?.[state.lang === 'en' ? 1 : 0] || x.status)}</span>${sourceBadge(x.source, { lang: state.lang })}</div>`).join('')}</div>` : emptyList('Sem cortes ou condicionamentos registados ainda.', 'No closures or restrictions recorded yet.')}</section>`;
 }
 function sheltersSection() {
   const s = data.curated.shelters;
@@ -336,9 +394,37 @@ function feedSection() {
 function howSection() {
   return `<section id="como" aria-labelledby="h-como"><h2 id="h-como" class="h2">${L('Como calculamos o impacto', 'How we calculate impact')}</h2><div class="card tinted" style="display:flex;flex-direction:column;gap:10px;font-size:15px"><p style="margin:0">${L(`Cada distrito recebe uma base pelo seu aviso do IPMA (verde ${BASE.verde}, amarelo ${BASE.amarelo}, laranja ${BASE.laranja}, vermelho ${BASE.vermelho}), considerando os avisos em vigor neste momento. A isso somam-se pontos pelas ocorrências do distrito: peso da fonte × gravidade (1 a 3) × 5. O máximo é 100. Abaixo de 10 não há impacto relevante; 10 a 24 é moderado; 25 a 49 é alto; 50 ou mais é muito alto.`, `Each district gets a base from its IPMA warning (green ${BASE.verde}, yellow ${BASE.amarelo}, orange ${BASE.laranja}, red ${BASE.vermelho}), using the warnings in force right now. Points for the district’s incidents are added: source weight × severity (1 to 3) × 5. The maximum is 100. Below 10 is negligible; 10 to 24 moderate; 25 to 49 high; 50 or more very high.`)}</p><p style="margin:0" class="muted">${L('Pesos das fontes', 'Source weights')}: ${L('governamental', 'government')} ${WEIGHTS.governamental} · ${L('comunicação social', 'news media')} ${WEIGHTS.comunicacao_social} · ${L('redes sociais verificada', 'social media, verified')} ${WEIGHTS.redes_sociais_verificada} · ${L('redes sociais não verificada', 'social media, unverified')} ${WEIGHTS.redes_sociais_nao_verificada}.</p></div></section>`;
 }
+const FEEDBACK_EMAIL = 'hello@emanuelsmarques.pt';
+const backLink = () => `<a href="./" style="display:inline-flex;align-items:center;min-height:44px;font-weight:600">← ${L('Voltar ao início', 'Back to home')}</a>`;
+
+function howPage() {
+  const src = (n, d) => `<li><strong>${n}</strong>: ${d}</li>`;
+  return `<div>${backLink()}${howSection()}
+    <section aria-labelledby="h-fontes" style="margin-top:32px"><h2 id="h-fontes" class="h2">${L('De onde vêm os dados', 'Where the data comes from')}</h2><div class="card tinted"><ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:15px">
+      ${src('IPMA', L('avisos meteorológicos e previsão, lidos em tempo real neste dispositivo.', 'weather warnings and forecast, read live on this device.'))}
+      ${src(L('Ocorrências, notícias e serviços', 'Incidents, news and services'), L('recolhidos de hora a hora de fontes oficiais, imprensa e redes sociais; cada item indica a categoria da fonte e o link original.', 'collected hourly from official sources, the press and social media; each item shows its source category and original link.'))}
+      ${src('geoapi.pt', L('concelho e contactos da câmara municipal a partir da localização.', 'municipality and town-hall contacts from your location.'))}
+      ${src('OpenStreetMap', L('farmácias e quartéis de bombeiros mais próximos (podem estar incompletos).', 'nearest pharmacies and fire stations (may be incomplete).'))}
+    </ul></div></section></div>`;
+}
+
+function feedbackPage() {
+  const opt = (v, pt, en) => `<option value="${v}">${L(pt, en)}</option>`;
+  return `<section aria-labelledby="h-fb">${backLink()}
+  <h2 id="h-fb" style="font-size:34px;margin:8px 0 6px">${L('Feedback e erros', 'Feedback and errors')}</h2>
+  <p class="muted" style="margin:0 0 18px;max-width:640px">${L('Encontrou um erro nos dados, no mapa ou no site, ou tem uma sugestão? Preencha abaixo: abre-se a sua aplicação de email com a mensagem pronta para', 'Found an error in the data, the map or the site, or have a suggestion? Fill in below: your email app opens with the message ready for')} <a href="mailto:${FEEDBACK_EMAIL}">${FEEDBACK_EMAIL}</a>. ${L('Nada é enviado automaticamente.', 'Nothing is sent automatically.')}</p>
+  <form id="fb" class="card" style="display:flex;flex-direction:column;gap:16px;max-width:640px">
+    <div class="field"><label for="fb-type" style="font-size:14px">${L('Tipo', 'Type')}</label><select id="fb-type" name="type" style="width:100%">${opt('erro-dados', 'Erro nos dados (aviso, ocorrência, contacto)', 'Data error (warning, incident, contact)')}${opt('erro-site', 'Erro no site (não funciona, aspeto)', 'Site error (not working, appearance)')}${opt('sugestao', 'Sugestão', 'Suggestion')}${opt('outro', 'Outro', 'Other')}</select></div>
+    <div class="field"><label for="fb-where" style="font-size:14px">${L('Onde (página, distrito ou endereço)', 'Where (page, district or address)')}</label><input id="fb-where" name="where" type="text" autocomplete="off"></div>
+    <div class="field"><label for="fb-msg" style="font-size:14px">${L('O que se passa', 'What is wrong')}</label><textarea id="fb-msg" name="msg" rows="6" required></textarea></div>
+    <div><button class="tab on" type="submit">${L('Abrir email', 'Open email')}</button></div>
+  </form></section>`;
+}
+
 function footer() {
   return `<footer class="foot"><div><strong style="color:var(--ink)">${L('Sobre este site', 'About this site')}</strong><p style="margin:6px 0 0">${L('Não é um serviço oficial e não substitui os avisos da Proteção Civil nem do IPMA. Cada informação indica a fonte e o link original. Relatos de redes sociais aparecem sempre como não verificados.', 'This is not an official service and does not replace Civil Protection or IPMA warnings. Every item shows its source and original link. Social media reports always appear as unverified.')}</p></div>
-  <div><strong style="color:var(--ink)">${L('Dados', 'Data')}</strong><p style="margin:6px 0 0">${L('Avisos e previsão: IPMA, lidos em tempo real neste dispositivo. Ocorrências, notícias e serviços: atualizados aproximadamente de hora a hora.', 'Warnings and forecast: IPMA, read live on this device. Incidents, news and services: updated roughly every hour.')}</p></div></footer>`;
+  <div><strong style="color:var(--ink)">${L('Dados', 'Data')}</strong><p style="margin:6px 0 0">${L('Avisos e previsão: IPMA, lidos em tempo real neste dispositivo. Ocorrências, notícias e serviços: atualizados aproximadamente de hora a hora.', 'Warnings and forecast: IPMA, read live on this device. Incidents, news and services: updated roughly every hour.')}</p></div>
+  <div><strong style="color:var(--ink)">${L('Mais', 'More')}</strong><p style="margin:6px 0 0"><a href="metodologia.html">${L('Como calculamos o impacto', 'How we calculate impact')}</a><br><a href="feedback.html">${L('Feedback e reportar um erro', 'Feedback and report an error')}</a></p></div></footer>`;
 }
 
 function recsLink() {
@@ -354,16 +440,16 @@ function recsPage() {
   return `<section aria-labelledby="h-r"><a href="./" style="display:inline-flex;align-items:center;min-height:44px;font-weight:600">← ${L('Voltar ao início', 'Back to home')}</a>
   <h2 id="h-r" style="font-size:34px;margin:8px 0 6px">${L('O que fazer', 'What to do')}</h2>
   <p style="margin:0 0 18px;display:flex;flex-wrap:wrap;gap:8px;align-items:center">${L('Nível em vigor na sua zona', 'Current level in your area')} (${esc(loc?.name || '—')}): ${lvPill(lvl)}</p>
-  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px" role="group" aria-label="${L('Situação', 'Situation')}">${tabs.map(([k, l]) => `<button class="tab ${state.sit === k ? 'on' : ''}" aria-pressed="${state.sit === k}" data-a="sit" data-v="${k}">${l}</button>`).join('')}</div>
-  <div class="grid">${RECS[state.sit].map((r, i) => `<div class="card rec"><span class="n">${i + 1}</span><span><strong style="display:block;font-size:17px">${esc(r[0][state.lang === 'en' ? 1 : 0])}</strong><span class="muted">${esc(r[1][state.lang === 'en' ? 1 : 0])}</span></span></div>`).join('')}</div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px" role="group" aria-label="${L('Situação', 'Situation')}">${tabs.map(([k, l]) => `<button class="tab ${state.sit === k ? 'on' : ''}" aria-pressed="${state.sit === k}" data-a="sit" data-v="${k}"><span aria-hidden="true">${SIT_EMOJI[k]}</span> ${l}</button>`).join('')}</div>
+  <div class="grid">${RECS[state.sit].map((r, i) => `<div class="card rec"><span class="n" aria-hidden="true">${REC_EMOJI[state.sit][i] || i + 1}</span><span><strong style="display:block;font-size:17px">${esc(r[0][state.lang === 'en' ? 1 : 0])}</strong><span class="muted">${esc(r[1][state.lang === 'en' ? 1 : 0])}</span></span></div>`).join('')}</div>
   <p style="margin:20px 0 0">${L('Conselhos de', 'Advice from')}: ${sourceBadge(ANEPC, { lang: state.lang })}</p></section>`;
 }
 
 /* ---------- página ---------- */
 function pageHtml() {
   const imp = impact();
-  const main = state.page === 'recs' ? recsPage()
-    : [statusSection(imp), mapSection(imp), zoneSection(), recsLink(), servicesSection(), feedSection(), forecastSection(), sheltersSection(), mythsSection(), howSection()].join('');
+  const main = state.page === 'recs' ? recsPage() : state.page === 'how' ? howPage() : state.page === 'feedback' ? feedbackPage()
+    : [statusSection(imp), mapSection(imp), zoneSection(), recsLink(), servicesSection(), feedSection(), forecastSection(), sheltersSection(), mythsSection()].join('');
   return `<a class="skip" href="#main">${L('Saltar para o conteúdo', 'Skip to content')}</a>${emergencyBar()}${topbar()}<main id="main" class="sheet">${banners()}${main}</main>${footer()}`;
 }
 
@@ -372,9 +458,12 @@ export function render() {
   const a = document.activeElement;
   const key = a && app.contains(a) ? (a.dataset.key || (a.dataset.a ? `${a.dataset.a}:${a.dataset.v ?? a.dataset.id ?? ''}` : null)) : null;
   const y = window.scrollY;
+  const fb = document.getElementById('fb');
+  const saved = fb ? Object.fromEntries(new FormData(fb)) : null;
   document.documentElement.lang = state.lang === 'en' ? 'en' : 'pt-PT';
   app.innerHTML = pageHtml();
   window.scrollTo(0, y);
+  if (saved) for (const [k, v] of Object.entries(saved)) { const el = app.querySelector(`#fb [name="${k}"]`); if (el) el.value = v; }
   if (key) {
     const el = [...app.querySelectorAll('[data-key],[data-a]')].find((e) => (e.dataset.key || `${e.dataset.a}:${e.dataset.v ?? e.dataset.id ?? ''}`) === key);
     el?.focus({ preventScroll: true });
@@ -411,14 +500,23 @@ function onClick(e) {
   else if (a === 'filt') { state.filt[v] = !state.filt[v]; }
   else if (a === 'cat') { state.cat = v; }
   else if (a === 'sit') { state.sit = v; }
-  else if (a === 'district') { if (mapDrag.moved) return; state.userPicked = true; state.district = id; state.incidentId = null; }
-  else if (a === 'pin') { if (mapDrag.moved) return; const i = data.curated.incidents.find((x) => x.id === id); if (i?.district) state.district = i.district; state.userPicked = true; state.incidentId = id; }
-  else if (a === 'incident') { state.incidentId = id; }
+  else if (a === 'district') { if (mapDrag.moved) return; state.userPicked = true; state.national = false; state.district = id; state.incidentId = null; }
+  else if (a === 'pin') { if (mapDrag.moved) return; const i = data.curated.incidents.find((x) => x.id === id); if (i?.district) state.district = i.district; state.userPicked = true; state.national = false; state.incidentId = id; }
+  else if (a === 'incident') { state.national = false; state.incidentId = id; }
+  else if (a === 'national') { state.national = true; state.incidentId = null; }
   else if (a === 'back') { state.incidentId = null; }
   else if (a === 'zoom') { zoomBy(v === 'in' ? 1.5 : 1 / 1.5); return; }
   else if (a === 'geo') { return locate(); }
   else return;
   render();
+}
+function onSubmit(e) {
+  if (e.target.id !== 'fb') return;
+  e.preventDefault();
+  const f = Object.fromEntries(new FormData(e.target));
+  const subject = `[Tempestade Charles] ${f.type || 'feedback'}`;
+  const body = `${f.msg || ''}\n\n---\nOnde: ${f.where || '-'}\nIdioma: ${state.lang}\nPágina: ${document.referrer || location.origin}`;
+  window.location.href = `mailto:${FEEDBACK_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 function onChange(e) {
   const el = e.target.closest('[data-a]');
@@ -472,6 +570,8 @@ let contactSeq = 0;
 /** Concelho e contactos do município para um ponto {lat, lon}. */
 async function resolveContacts(pt, byUser = false) {
   const seq = ++contactSeq;
+  data.nearby = null;
+  lookupNearby(pt).then((n) => { if (seq === contactSeq) { data.nearby = { ...n, byUser }; render(); } });
   try {
     const c = await lookupContacts(pt.lat, pt.lon);
     if (seq !== contactSeq) return;
@@ -549,6 +649,7 @@ export async function start() {
   const app = document.getElementById('app');
   app.addEventListener('click', onClick);
   app.addEventListener('change', onChange);
+  app.addEventListener('submit', onSubmit);
   app.addEventListener('keydown', onKey);
   app.addEventListener('pointerdown', onPointerDown);
   window.addEventListener('pointermove', onPointerMove);
