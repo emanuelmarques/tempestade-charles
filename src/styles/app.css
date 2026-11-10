@@ -48,6 +48,7 @@ a:focus-visible, button:focus-visible, select:focus-visible, [tabindex]:focus-vi
 .countdown { display: flex; flex-direction: column; gap: 0; padding: 8px 16px; border: 1px solid var(--ink); border-radius: 10px; background: #fff; }
 .countdown .t { font: 700 26px/1.1 'Space Grotesk Variable', sans-serif; font-variant-numeric: tabular-nums; letter-spacing: .01em; }
 .countdown .l { font-size: 12.5px; color: var(--muted); }
+@media (min-width: 1240px) { .countdown .l { white-space: nowrap; } .brand > span { min-width: 0; } .brand .muted { white-space: nowrap; } }
 .countdown.live { background: var(--vermelho); border-color: var(--vermelho); color: #fff; }
 .countdown.live .l { color: #fff; }
 .tools { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
@@ -173,12 +174,19 @@ textarea { resize: vertical; }
 @media (max-width: 720px) { .pager .num { order: -1; flex: 1 1 100%; text-align: center; } .pager .tab { flex: 1 1 0; } }
 
 /* Widget do tempo no cabeçalho (compacto, ao nível do contador) */
-.wx { display: flex; flex-direction: column; gap: 0; padding: 8px 14px; border: 1px solid var(--ink); border-radius: 10px; background: #fff; min-width: 0; }
-.wxt { font-size: 12.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 260px; }
+.wx { display: flex; flex-direction: column; justify-content: center; gap: 2px; padding: 8px 14px; border: 1px solid var(--ink); border-radius: 10px; background: #fff; min-width: 0; }
+.wxt { font-size: 12.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 230px; }
 .wxt a { color: var(--muted); }
 .wxm { font-size: 13px; }
-.wxh { list-style: none; margin: 0; padding: 0; display: flex; gap: 12px; }
-.wxh li { display: flex; align-items: baseline; gap: 4px; font-size: 12.5px; line-height: 1.3; }
-.wxh strong { font: 700 16px/1.2 'Space Grotesk Variable', sans-serif; }
-.wxe { font-size: 16px; line-height: 1; }
-@media (max-width: 720px) { .wx { flex: 1 1 100%; } .wxt { max-width: none; } .wxh { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; } .wxh li { flex-direction: column; align-items: center; gap: 0; } }
+.wxh { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(46px, 1fr)); gap: 6px; text-align: center; }
+.wxh li { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; column-gap: 3px; font-size: 12px; line-height: 1.25; }
+.wxh li > .num.muted { flex-basis: 100%; }
+.wxh strong { font: 700 15px/1.2 'Space Grotesk Variable', sans-serif; }
+.wxe { font-size: 15px; line-height: 1.2; }
+@media (min-width: 1240px) {
+  .top { flex-wrap: nowrap; }
+  .tools { flex-wrap: nowrap; justify-content: flex-end; align-items: stretch; gap: 12px; }
+  .tools .countdown { justify-content: center; }
+  .tools > div:last-child { justify-content: center; } .tools > div:last-child p { white-space: nowrap; }
+}
+@media (max-width: 720px) { .wx { flex: 1 1 100%; } .wxt { max-width: none; } }
