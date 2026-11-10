@@ -1,5 +1,47 @@
 [
   {
+    "id": "f-2026-11-10-anepc-aviso21",
+    "time": "2026-11-10T15:17:32Z",
+    "verified": false,
+    "title": {
+      "pt": "Partilhada a ligação para o Aviso 21 da ANEPC: \"Depressão Charles: agravamento da situação meteorológica, chuva e vento forte, medidas preventivas\" (conteúdo do aviso não lido nesta recolha)",
+      "en": "Link shared to ANEPC Notice 21: \"Depression Charles: worsening weather, heavy rain and strong wind, preventive measures\" (notice content not read in this run)"
+    },
+    "source": {
+      "category": "redes_sociais",
+      "name": "@brunomiguel@masto.pt (Mastodon)",
+      "url": "https://masto.pt/@brunomiguel/117592808029752517"
+    }
+  },
+  {
+    "id": "f-2026-11-10-despacho-alerta",
+    "time": "2026-11-10T13:47:45Z",
+    "verified": false,
+    "title": {
+      "pt": "Publicado em Diário da República o Despacho n.º 13773-A/2026, de 10 de novembro, que declara a situação de alerta para todo o dia 11 de novembro em todo o território continental",
+      "en": "Order no. 13773-A/2026 of 10 November published in the Diário da República, declaring the alert situation for all of 11 November across mainland Portugal"
+    },
+    "source": {
+      "category": "redes_sociais",
+      "name": "@jt_rebelo@ciberlandia.pt (Mastodon)",
+      "url": "https://ciberlandia.pt/@jt_rebelo/117592454978666779"
+    }
+  },
+  {
+    "id": "f-2026-11-10-usembassy",
+    "time": "2026-11-10T13:43:05Z",
+    "verified": false,
+    "title": {
+      "pt": "Embaixada dos EUA em Lisboa: a Bruna afeta o continente com chuva, vento forte e mar agitado até 13 de novembro; a Charles deverá chegar ao continente na quarta-feira",
+      "en": "U.S. Embassy Lisbon: Bruna is affecting the mainland with rain, strong wind and rough seas through 13 November; Charles is expected to reach the mainland on Wednesday"
+    },
+    "source": {
+      "category": "redes_sociais",
+      "name": "@USEmbPortugal (X)",
+      "url": "https://x.com/USEmbPortugal/status/2120150254402109816"
+    }
+  },
+  {
     "id": "f-2026-11-10-rtp-medidas",
     "time": "2026-11-10T17:00:00Z",
     "title": {

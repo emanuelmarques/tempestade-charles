@@ -1,5 +1,51 @@
 [
   {
+    "id": "i-lisboa-bratislava",
+    "district": "lisboa",
+    "place": "Lisboa (Avenida Cidade de Bratislava)",
+    "lat": null,
+    "lon": null,
+    "time": "2026-11-10T10:33:52Z",
+    "severity": 1,
+    "verified": false,
+    "title": {
+      "pt": "Inundação na Avenida Cidade de Bratislava, perto dos estúdios da RTP e do ISEL",
+      "en": "Flooding on Avenida Cidade de Bratislava, near the RTP studios and ISEL"
+    },
+    "description": {
+      "pt": "Relato numa rede social que remete para o registo em fogos.pt; não confirmado oficialmente.",
+      "en": "Social media report pointing to a fogos.pt entry; not officially confirmed."
+    },
+    "source": {
+      "category": "redes_sociais",
+      "name": "@jt_rebelo@ciberlandia.pt (Mastodon)",
+      "url": "https://ciberlandia.pt/@jt_rebelo/117591692591663759"
+    }
+  },
+  {
+    "id": "i-lisboa-vila-maia",
+    "district": "lisboa",
+    "place": "Lisboa (Vila Maia, Estrela)",
+    "lat": null,
+    "lon": null,
+    "time": "2026-11-10T10:32:15Z",
+    "severity": 1,
+    "verified": false,
+    "title": {
+      "pt": "Inundação na Vila Maia, na Estrela",
+      "en": "Flooding at Vila Maia, Estrela"
+    },
+    "description": {
+      "pt": "Relato numa rede social que remete para o registo em fogos.pt; não confirmado oficialmente.",
+      "en": "Social media report pointing to a fogos.pt entry; not officially confirmed."
+    },
+    "source": {
+      "category": "redes_sociais",
+      "name": "@jt_rebelo@ciberlandia.pt (Mastodon)",
+      "url": "https://ciberlandia.pt/@jt_rebelo/117591686217622367"
+    }
+  },
+  {
     "id": "i-lisboa-sapadores-130",
     "district": "lisboa",
     "place": "Lisboa",
