@@ -1,0 +1,224 @@
+{
+ "incidents": [
+  {
+   "id": "s1",
+   "district": "aveiro",
+   "place": "Aveiro",
+   "lat": 40.64,
+   "lon": -8.65,
+   "time": "2026-11-10T12:40:00Z",
+   "severity": 2,
+   "verified": true,
+   "title": "[Exemplo] Inundação em vias urbanas",
+   "description": "Exemplo de ocorrência oficial.",
+   "source": {
+    "category": "governamental",
+    "name": "[Entidade governamental]",
+    "url": "https://prociv.gov.pt"
+   }
+  },
+  {
+   "id": "s2",
+   "district": "leiria",
+   "place": "Leiria",
+   "lat": 39.74,
+   "lon": -8.81,
+   "time": "2026-11-10T13:48:00Z",
+   "severity": 3,
+   "verified": true,
+   "title": "[Exemplo] Queda de árvores condiciona estrada",
+   "description": "Exemplo.",
+   "source": {
+    "category": "governamental",
+    "name": "[Entidade governamental]",
+    "url": "https://prociv.gov.pt"
+   }
+  },
+  {
+   "id": "s3",
+   "district": "leiria",
+   "place": "Marinha Grande",
+   "lat": 39.75,
+   "lon": -8.93,
+   "time": "2026-11-10T13:30:00Z",
+   "severity": 2,
+   "verified": true,
+   "title": "[Exemplo] Falha de eletricidade em várias freguesias",
+   "description": "Exemplo segundo um meio local.",
+   "source": {
+    "category": "comunicacao_social",
+    "name": "[Meio de comunicação]",
+    "url": "https://exemplo.pt/noticia"
+   }
+  },
+  {
+   "id": "s4",
+   "district": "leiria",
+   "place": "Peniche",
+   "lat": 39.36,
+   "lon": -9.38,
+   "time": "2026-11-10T13:05:00Z",
+   "severity": 2,
+   "verified": false,
+   "title": "[Exemplo] Relato de telhado levantado pelo vento",
+   "description": "Publicação sem confirmação oficial.",
+   "source": {
+    "category": "redes_sociais",
+    "name": "[Rede social]",
+    "url": "https://exemplo.pt/post"
+   }
+  },
+  {
+   "id": "s5",
+   "district": "porto",
+   "place": "Porto",
+   "lat": 41.15,
+   "lon": -8.61,
+   "time": "2026-11-10T14:12:00Z",
+   "severity": 2,
+   "verified": false,
+   "title": "[Exemplo] Relato de queda de telhado",
+   "description": "Sem confirmação.",
+   "source": {
+    "category": "redes_sociais",
+    "name": "[Rede social]",
+    "url": "https://exemplo.pt/post"
+   }
+  },
+  {
+   "id": "s6",
+   "district": "lisboa",
+   "place": "Lisboa",
+   "lat": 38.72,
+   "lon": -9.14,
+   "time": "2026-11-10T14:00:00Z",
+   "severity": 2,
+   "verified": true,
+   "title": "[Exemplo] Inundação em arruamento",
+   "description": "Exemplo.",
+   "source": {
+    "category": "comunicacao_social",
+    "name": "[Meio de comunicação]",
+    "url": "https://exemplo.pt/noticia"
+   }
+  }
+ ],
+ "feed": [
+  {
+   "id": "f0",
+   "time": "2026-11-10T12:40:00Z",
+   "title": "[Exemplo] Inundação em vias urbanas",
+   "verified": true,
+   "source": {
+    "category": "governamental",
+    "name": "[Entidade governamental]",
+    "url": "https://prociv.gov.pt"
+   }
+  },
+  {
+   "id": "f1",
+   "time": "2026-11-10T13:48:00Z",
+   "title": "[Exemplo] Queda de árvores condiciona estrada",
+   "verified": true,
+   "source": {
+    "category": "governamental",
+    "name": "[Entidade governamental]",
+    "url": "https://prociv.gov.pt"
+   }
+  },
+  {
+   "id": "f2",
+   "time": "2026-11-10T13:30:00Z",
+   "title": "[Exemplo] Falha de eletricidade em várias freguesias",
+   "verified": true,
+   "source": {
+    "category": "comunicacao_social",
+    "name": "[Meio de comunicação]",
+    "url": "https://exemplo.pt/noticia"
+   }
+  },
+  {
+   "id": "f3",
+   "time": "2026-11-10T13:05:00Z",
+   "title": "[Exemplo] Relato de telhado levantado pelo vento",
+   "verified": false,
+   "source": {
+    "category": "redes_sociais",
+    "name": "[Rede social]",
+    "url": "https://exemplo.pt/post"
+   }
+  },
+  {
+   "id": "f4",
+   "time": "2026-11-10T14:12:00Z",
+   "title": "[Exemplo] Relato de queda de telhado",
+   "verified": false,
+   "source": {
+    "category": "redes_sociais",
+    "name": "[Rede social]",
+    "url": "https://exemplo.pt/post"
+   }
+  },
+  {
+   "id": "f5",
+   "time": "2026-11-10T14:00:00Z",
+   "title": "[Exemplo] Inundação em arruamento",
+   "verified": true,
+   "source": {
+    "category": "comunicacao_social",
+    "name": "[Meio de comunicação]",
+    "url": "https://exemplo.pt/noticia"
+   }
+  }
+ ],
+ "services": [
+  {
+   "id": "v1",
+   "type": "estrada",
+   "name": "[Exemplo] Estrada nacional cortada",
+   "status": "cortada",
+   "source": {
+    "category": "governamental",
+    "name": "[Entidade]",
+    "url": "https://prociv.gov.pt"
+   }
+  },
+  {
+   "id": "v2",
+   "type": "comboio",
+   "name": "[Exemplo] Ligações Lisboa – Porto",
+   "status": "atrasos",
+   "source": {
+    "category": "comunicacao_social",
+    "name": "[Meio de comunicação]",
+    "url": "https://exemplo.pt/noticia"
+   }
+  }
+ ],
+ "shelters": [
+  {
+   "id": "a1",
+   "district": "leiria",
+   "place": "Leiria",
+   "name": "[Exemplo] Pavilhão Municipal",
+   "address": "[morada]",
+   "source": {
+    "category": "governamental",
+    "name": "[Câmara Municipal]",
+    "url": "https://prociv.gov.pt"
+   }
+  }
+ ],
+ "myths": [
+  {
+   "id": "b1",
+   "claim": "[Exemplo] Vão ser suspensas todas as aulas no país.",
+   "fact": "Não há decisão nacional; cada escola informa pelos canais oficiais.",
+   "source": {
+    "category": "governamental",
+    "name": "[Entidade]",
+    "url": "https://prociv.gov.pt"
+   }
+  }
+ ]
+}
