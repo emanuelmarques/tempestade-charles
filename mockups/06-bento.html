@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mockup 06 · Bento dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e9ecf1;--card:#fff;--ink:#12151c;--mut:#667085;--line:#eceff4;--acc:#4f46e5;--f:'Bricolage Grotesque',system-ui,sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.45 var(--f)}
+.shell{max-width:1320px;margin:0 auto;padding:18px}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:6px 8px 18px;flex-wrap:wrap}
+.nav b{font-weight:800;font-size:22px;letter-spacing:-.03em;display:flex;align-items:center;gap:10px}.logo{width:34px;height:34px;border-radius:11px;background:var(--ink);display:grid;place-items:center;color:#fff;font-size:18px}
+.pills{display:flex;gap:4px;background:#fff;padding:4px;border-radius:999px}.pills a{padding:8px 16px;border-radius:999px;text-decoration:none;font-weight:600;font-size:14px;color:var(--mut)}.pills a.on{background:var(--ink);color:#fff}
+.live{font-size:13px;color:var(--mut);display:flex;gap:8px;align-items:center}.live i{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 4px #22c55e33}
+.bento{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:minmax(110px,auto);gap:14px}
+.t{background:var(--card);border-radius:26px;padding:22px;position:relative;overflow:hidden}
+.t h3{margin:0 0 12px;font-size:13px;font-weight:600;color:var(--mut);letter-spacing:.02em;display:flex;justify-content:space-between;align-items:center}
+.hero{grid-column:span 7;grid-row:span 2;background:linear-gradient(135deg,#1c1b3a,#2b1650 55%,#5b1f4a);color:#fff;display:flex;flex-direction:column;justify-content:space-between;min-height:300px}
+.hero h1{font-size:clamp(40px,5.2vw,76px);line-height:.95;margin:0;letter-spacing:-.045em;font-weight:800}.hero p{margin:12px 0 0;opacity:.75;max-width:30em}
+.hero .cd{display:flex;gap:10px;margin-top:22px}.hero .cd div{background:#ffffff1a;backdrop-filter:blur(6px);border-radius:18px;padding:12px 18px;min-width:84px}.hero .cd b{font-size:42px;line-height:1;font-weight:800;font-variant-numeric:tabular-nums;display:block;letter-spacing:-.04em}.hero .cd span{font-size:11px;opacity:.65;letter-spacing:.1em;text-transform:uppercase}
+.hero .tag{align-self:flex-start;background:#ff4d5a;color:#fff;font-size:12px;font-weight:800;padding:6px 12px;border-radius:999px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;display:inline-block}
+.sos{grid-column:span 5;background:#e11d48;color:#fff;display:flex;flex-direction:column;justify-content:space-between}.sos a{color:#fff;text-decoration:none}.sos .n{font-size:clamp(70px,9vw,120px);font-weight:800;line-height:.85;letter-spacing:-.06em}.sos small{opacity:.85;font-size:14px}
+.map{grid-column:span 5;grid-row:span 4}.map svg{width:100%;height:460px;display:block}.dist{cursor:pointer;transition:opacity .15s}.dist:hover{opacity:.75}.map .leg{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--mut);margin-top:6px}.leg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
+.kpi{grid-column:span 2}.kpi b{font-size:54px;font-weight:800;letter-spacing:-.05em;line-height:1;display:block}.kpi span{font-size:13px;color:var(--mut)}
+.zone{grid-column:span 7}.zone .row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.zone select{font:600 18px var(--f);padding:10px 14px;border-radius:14px;border:1.5px solid var(--line);background:#f7f8fb}
+.zone .lvl{font-size:30px;font-weight:800;letter-spacing:-.03em;padding:6px 16px;border-radius:14px}
+.bar{height:10px;background:var(--line);border-radius:6px;margin-top:14px;overflow:hidden}.bar i{display:block;height:100%;border-radius:6px}
+.wx{grid-column:span 3;background:#0d2b45;color:#fff}.wx h3{color:#9fc1e0}.wx .big{font-size:60px;font-weight:800;letter-spacing:-.05em;line-height:1}.wx .hrs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:14px;font-size:12px;text-align:center}.wx .hrs div{background:#ffffff14;border-radius:12px;padding:8px 2px}.wx .hrs b{display:block;font-size:16px}
+.warn{grid-column:span 4}.w{display:flex;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:14px}.w i{width:10px;height:10px;border-radius:3px;margin-top:6px;flex:none}
+.feed{grid-column:span 7;grid-row:span 3}.feed .sc{max-height:560px;overflow:auto;margin:0 -8px;padding:0 8px}.fi{padding:14px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:54px 1fr;gap:12px;font-size:15px}.fi time{font-weight:800;font-size:14px;color:var(--acc)}.fi small{display:inline-block;margin-top:6px;font-size:11px;font-weight:600;padding:2px 9px;border-radius:999px;background:#eef2ff;color:#4338ca}.fi small.m{background:#e6f6f3;color:#0e6b63}.fi small.s{background:#fdf1dc;color:#8a5200}
+.svc{grid-column:span 5;grid-row:span 3}.sv{display:flex;gap:10px;justify-content:space-between;padding:11px 0;border-top:1px solid var(--line);font-size:14px}.sv b{font-size:11px;padding:3px 9px;border-radius:999px;background:#fde8e8;color:#9b1c1c;white-space:nowrap;align-self:start;text-transform:uppercase;letter-spacing:.04em}
+.recs{grid-column:span 12;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;background:transparent;padding:0}.recs .r{background:var(--card);border-radius:26px;padding:22px}.recs b{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--ink);color:#fff;margin-bottom:12px}.recs h4{margin:0 0 6px;font-size:20px;letter-spacing:-.02em}.recs p{margin:0;color:var(--mut);font-size:14px}
+@media(max-width:1000px){.bento>*{grid-column:span 12!important;grid-row:auto!important}.kpi{grid-column:span 6!important}.recs{grid-template-columns:1fr 1fr}.map svg{height:420px}}
+</style></head><body><div class="shell">
+<div class="nav"><b><span class="logo">⛈</span>Charles</b><nav class="pills"><a class="on" href="#">Início</a><a href="#">O que fazer</a><a href="#">Metodologia</a><a href="#">Fontes</a></nav><span class="live"><i></i>Atualizado às 20:02</span></div>
+<div class="bento">
+  <section class="t hero"><div><span class="tag">Aviso vermelho · Lisboa, Setúbal, Leiria</span><h1>Tempestade<br>Charles</h1><p>Avisos do IPMA, impacto por distrito e o que fazer, com a fonte de cada informação.</p></div>
+    <div class="cd"><div><b data-cd-h>00</b><span>horas</span></div><div><b data-cd-m>00</b><span>min</span></div><div><b data-cd-s>00</b><span>seg</span></div></div></section>
+  <section class="t sos"><div><h3 style="color:#ffd1da">Emergência</h3><a href="tel:112" class="n">112</a></div><small>SNS 24 · <a href="tel:808242424"><b>808 24 24 24</b></a></small></section>
+  <section class="t map"><h3>Mapa de avisos <span>toque num distrito</span></h3><div id="map"></div><div class="leg"><span><i style="background:#D1242F"></i>Vermelho</span><span><i style="background:#EE7B1E"></i>Laranja</span><span><i style="background:#F4C20D"></i>Amarelo</span><span><i style="background:#cfd5de"></i>Sem aviso</span></div></section>
+  <section class="t kpi"><h3>Em vermelho</h3><b id="k1">0</b><span>distritos</span></section>
+  <section class="t kpi"><h3>Em laranja</h3><b id="k2">0</b><span>distritos</span></section>
+  <section class="t zone"><h3>Na sua zona</h3><div class="row"><select id="sel" aria-label="Distrito"></select><span class="lvl" id="lvl"></span><span id="sc" style="color:var(--mut)"></span></div><div class="bar"><i id="bar"></i></div></section>
+  <section class="t wx"><h3>Lisboa · próximas horas</h3><div class="big">14°</div><div style="opacity:.7;font-size:14px">Rajadas até 94 km/h às 06h</div><div class="hrs" id="wx"></div></section>
+  <section class="t warn" id="warnT"><h3>Avisos IPMA</h3><div id="warn"></div></section>
+  <section class="t feed"><h3>Últimas atualizações</h3><div class="sc" id="feed"></div></section>
+  <section class="t svc"><h3>Estradas, transportes e serviços</h3><div class="sc" id="svc" style="max-height:560px;overflow:auto"></div></section>
+  <div class="recs" id="recs"></div>
+</div></div>
+<script src="data.js"></script><script src="common.js"></script>
+<script>
+const {M,LV,COL,CAT,esc,hm,map,bindMap,byId,counts}=C;
+const FL={vermelho:'#D1242F',laranja:'#EE7B1E',amarelo:'#F4C20D',verde:'#cfd5de'};
+document.getElementById('map').innerHTML=map({fill:d=>FL[d.level],land:false,stroke:'#fff',sw:2,pad:4});
+const cn=counts();k1.textContent=cn.vermelho;k2.textContent=cn.laranja;
+const sel=document.getElementById('sel');sel.innerHTML=M.districts.map(d=>`<option value="${d.id}">${d.name}</option>`).join('');
+function zone(id){const d=byId(id);sel.value=id;lvl.textContent=LV[d.level];lvl.style.background=FL[d.level];lvl.style.color=d.level==='vermelho'?'#fff':'#12151c';sc.textContent=`Impacto ${d.score}/100`;bar.style.width=d.score+'%';bar.style.background=FL[d.level]}
+sel.onchange=()=>zone(sel.value);bindMap(document.getElementById('map'),zone);zone('lisboa');
+document.getElementById('wx').innerHTML=M.wx.map(([h,t,w])=>`<div>${h}<b>${t}°</b>${w} km/h</div>`).join('');
+document.getElementById('warn').innerHTML=M.warnings.map(w=>`<div class="w"><i style="background:${FL[w.lvl]}"></i><div><b>${w.what}</b><br><span style="color:var(--mut)">${w.where}</span></div></div>`).join('');
+const k={governamental:'',comunicacao_social:'m',redes_sociais:'s'};
+document.getElementById('feed').innerHTML=M.feed.map(f=>`<div class="fi"><time>${hm(f.time)}</time><div>${esc(f.title)}<br><small class="${k[f.cat]}">${esc(f.src)} · ${CAT[f.cat]}</small></div></div>`).join('');
+document.getElementById('svc').innerHTML=M.services.map(s=>`<div class="sv"><span>${esc(s.name.slice(0,110))}${s.name.length>110?'…':''}</span><b>${s.status.replace('_',' ')}</b></div>`).join('');
+document.getElementById('recs').innerHTML=M.recs.map(([a,b],i)=>`<div class="r"><b>${i+1}</b><h4>${a}</h4><p>${b}</p></div>`).join('');
+</script></body></html>

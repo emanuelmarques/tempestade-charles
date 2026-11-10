@@ -1,6 +1,6 @@
 import { escapeHtml as esc, safeUrl } from './lib/safe.js';
 import { CATEGORIES, sourceBadge, sourceChip } from './lib/sources.js';
-import { computeImpact, LEVELS, BASE, WEIGHTS } from './lib/impact.js';
+import { computeImpact, warningsIn, LEVELS, BASE, WEIGHTS } from './lib/impact.js';
 import { countdown, parseLisbon, freshness, formatTime, formatDayTime, formatDay, pad2, STORM_START_LOCAL } from './lib/time.js';
 import { toMap } from './lib/projection.js';
 import { districtAt } from './lib/districtAt.js';
@@ -16,7 +16,10 @@ import { TYPE_EMOJI, REC_EMOJI, SIT_EMOJI, RECS, ANEPC, LEVEL_EN, TIER_NAMES, TY
 
 const STORM_START = parseLisbon(STORM_START_LOCAL);
 const REFRESH_MS = 5 * 60 * 1000;
-const TIER_FILL = ['#F7F5EE', '#F4C20D', '#EE7B1E', '#D1242F'];
+const TIER_FILL = ['#26384d', '#F4C20D', '#EE7B1E', '#E5303B'];
+/** [cor do texto, cor do contorno do texto] por nível de impacto. */
+const TIER_LABEL = [['#cfe0f2', '#26384d'], ['#15202B', '#F4C20D'], ['#15202B', '#EE7B1E'], ['#fff', '#7F1020']];
+const TL_HOURS = 48;
 const TIER_CLASS = ['lv-none', 'lv-amarelo', 'lv-laranja', 'lv-vermelho'];
 
 const store = {
@@ -31,6 +34,7 @@ const state = {
   filt: { governamental: true, comunicacao_social: true, redes_sociais: true },
   sit: 'casa', cat: 'todas', svc: 'todas', inc: 'all', pg: { serv: 1, feed: 1, inc: 1 }, zoneLoc: Number(store.get('zoneLoc', '1100900')) || 1100900,
   view: { x: 0, y: 0, w: 640, h: 620 }, now: new Date(),
+  at: null, tlBase: null, sheet: 0, playing: false, ptab: 'det',
 };
 const data = {
   curated: { meta: { updatedAt: null }, incidents: [], feed: [], services: [], shelters: [], myths: [] }, curatedErrors: {}, curatedLoaded: false,
@@ -47,7 +51,7 @@ const lvPill = (l, extra = '') => `<span class="lv lv-${l}${extra}">${esc(lvName
 /* ---------- derivados ---------- */
 /** Avisos que ainda vão começar nas próximas `hours` horas, para as áreas dadas. */
 function upcoming(areas, hours = 48) {
-  const t0 = state.now; const t1 = new Date(t0.getTime() + hours * 3600e3); const set = new Set(areas);
+  const t0 = state.at ?? state.now; const t1 = new Date(t0.getTime() + hours * 3600e3); const set = new Set(areas);
   return data.warnings.filter((w) => set.has(w.area) && w.start > t0 && w.start <= t1).sort((a, b) => a.start - b.start || rank(b.level) - rank(a.level));
 }
 function upcomingBlock(areas, max = 5) {
@@ -57,6 +61,7 @@ function upcomingBlock(areas, max = 5) {
 }
 
 function windowRange() {
+  if (state.at) return [state.at, state.at];
   const h = state.win === 'now' ? 0 : state.win === '24h' ? 24 : 48;
   return [state.now, new Date(state.now.getTime() + h * 3600e3)];
 }
@@ -77,7 +82,7 @@ function highestLevel() {
   return data.warnings.filter((w) => w.start <= to && w.end >= from).reduce((m, w) => (rank(w.level) > rank(m) ? w.level : m), 'verde');
 }
 const locById = (id) => data.locations.find((l) => l.id === id);
-const winLabel = () => (state.win === 'now' ? L('agora', 'now') : state.win === '24h' ? L('nas próximas 24 h', 'in the next 24 h') : L('nas próximas 48 h', 'in the next 48 h'));
+const winLabel = () => (state.at ? `${L('às', 'at')} ${formatDayTime(state.at, state.lang)}` : state.win === 'now' ? L('agora', 'now') : state.win === '24h' ? L('nas próximas 24 h', 'in the next 24 h') : L('nas próximas 48 h', 'in the next 48 h'));
 
 /* ---------- blocos ---------- */
 function emergencyBar() {
@@ -111,13 +116,14 @@ function freshnessInfo() {
 
 const NAV = [
   ['home', './', ['Início', 'Home']],
+  ['detail', 'situacao.html', ['Situação', 'Situation']],
   ['recs', 'recomendacoes.html', ['O que fazer', 'What to do']],
   ['how', 'metodologia.html', ['Metodologia', 'Methodology']],
   ['sources', 'fontes.html', ['Fontes', 'Sources']],
   ['feedback', 'feedback.html', ['Feedback', 'Feedback']],
 ];
-function navBar() {
-  return `<nav class="mainnav" aria-label="${L('Navegação principal', 'Main navigation')}">${NAV.map(([k, href, [pt, en]]) => `<a href="${href}"${state.page === k ? ' aria-current="page"' : ''}>${L(pt, en)}</a>`).join('')}</nav>`;
+function navBar(cls = 'mainnav') {
+  return `<nav class="${cls}" aria-label="${L('Navegação principal', 'Main navigation')}">${NAV.map(([k, href, [pt, en]]) => `<a href="${href}"${state.page === k ? ' aria-current="page"' : ''}>${L(pt, en)}</a>`).join('')}</nav>`;
 }
 
 /** Ponto para o tempo: a localização do visitante, ou a localidade escolhida. */
@@ -153,15 +159,15 @@ function topbar() {
   const f = freshnessInfo();
   return `<header class="top">
     <a class="brand" href="./">
-      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true"><rect width="44" height="44" rx="10" fill="#15202B"/><path d="M12 22c0-4 3.4-7 7.5-7 3 0 5.6 1.6 6.8 4 3.5.2 6.2 2.7 6.2 6 0 3.4-3 6-6.600 6H17c-2.800 0-5-2.200-5-5z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><path d="M23 27l-3 5h4l-2 5" stroke="#F4C20D" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true"><rect width="44" height="44" rx="10" fill="#12304a" stroke="#45e0ff" stroke-opacity=".5"/><path d="M12 22c0-4 3.4-7 7.5-7 3 0 5.6 1.6 6.8 4 3.5.2 6.2 2.7 6.2 6 0 3.4-3 6-6.600 6H17c-2.800 0-5-2.200-5-5z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><path d="M23 27l-3 5h4l-2 5" stroke="#F4C20D" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
       <span><h1 class="h" style="display:block;font-size:24px;font-weight:700;line-height:1.1">${L('Tempestade Charles', 'Storm Charles')}</h1>
       <span class="muted" style="display:block;font-size:14px">${L('Informação para a população · Portugal', 'Public information · Portugal')}</span></span>
     </a>
     <div class="tools">
       ${countdownBox()}
       ${wxWidget()}
-      <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start">
-        <p style="margin:0;display:inline-flex;align-items:center;gap:8px;font-size:14px"><span style="width:10px;height:10px;border-radius:50%;background:${f.dot};flex:none"></span>${esc(f.text)}</p>
+      <div class="statusbox">
+        <p><span style="width:10px;height:10px;border-radius:50%;background:${f.dot};flex:none"></span>${esc(f.text)}</p>
         <div style="display:flex" role="group" aria-label="${L('Idioma', 'Language')}">
           <button class="seg ${state.lang === 'pt' ? 'on' : ''}" aria-pressed="${state.lang === 'pt'}" data-a="lang" data-v="pt" lang="pt">PT</button>
           <button class="seg ${state.lang === 'en' ? 'on' : ''}" aria-pressed="${state.lang === 'en'}" data-a="lang" data-v="en" lang="en">EN</button>
@@ -204,21 +210,29 @@ function statusSection(imp) {
 /* ---------- mapa ---------- */
 function pinShape(cat, s, selected) {
   const r = 8 * s;
-  const ring = selected ? `<circle class="ring" r="${15 * s}" fill="none" stroke="#15202B" stroke-width="${2.5 * s}"/>` : '<circle class="ring" r="0" fill="none"/>';
-  if (cat === 'governamental') return `${ring}<rect x="${-r}" y="${-r}" width="${2 * r}" height="${2 * r}" rx="${2 * s}" fill="#1B4F9C" stroke="#fff" stroke-width="${2 * s}"/>`;
-  if (cat === 'comunicacao_social') return `${ring}<circle r="${r}" fill="#0E6B63" stroke="#fff" stroke-width="${2 * s}"/>`;
-  return `${ring}<rect x="${-r * .85}" y="${-r * .85}" width="${r * 1.7}" height="${r * 1.7}" transform="rotate(45)" fill="#FBEBCF" stroke="#8A5200" stroke-width="${2 * s}" stroke-dasharray="${3 * s} ${2 * s}"/>`;
+  const ring = selected ? `<circle class="ring" r="${15 * s}" fill="none" stroke="#fff" stroke-width="${2.5 * s}"/>` : '<circle class="ring" r="0" fill="none"/>';
+  if (cat === 'governamental') return `${ring}<rect x="${-r}" y="${-r}" width="${2 * r}" height="${2 * r}" rx="${2 * s}" fill="#8ab8ff" stroke="#0b1a2b" stroke-width="${2 * s}"/>`;
+  if (cat === 'comunicacao_social') return `${ring}<circle r="${r}" fill="#3dd6b8" stroke="#0b1a2b" stroke-width="${2 * s}"/>`;
+  return `${ring}<rect x="${-r * .85}" y="${-r * .85}" width="${r * 1.7}" height="${r * 1.7}" transform="rotate(45)" fill="#3a2a0c" stroke="#ffb224" stroke-width="${2 * s}" stroke-dasharray="${3 * s} ${2 * s}"/>`;
 }
 
 function mapPins() {
-  const inc = data.curated.incidents.filter((i) => i.lat != null && i.lon != null && state.filt[i.source.category]);
+  const hasCoords = (i) => i.lat != null && i.lon != null;
+  // Ocorrências sem coordenadas (ex.: relatos de redes sociais) aparecem junto ao nome do distrito, lado a lado.
+  const inc = data.curated.incidents.filter((i) => state.filt[i.source.category] && (hasCoords(i) || DISTRICT_BY_ID[i.district]));
+  const approx = {};
+  for (const i of inc) if (!hasCoords(i)) (approx[i.district] ||= []).push(i.id);
   const box = document.querySelector('#mapbox svg');
   const ppu = box ? Math.min(box.clientWidth / state.view.w, box.clientHeight / state.view.h) || 1 : 1;
   const s = 1 / ppu;
   return inc.map((i) => {
-    const [x, y] = toMap(i.lat, i.lon);
+    let x; let y; const approxHere = !hasCoords(i);
+    if (approxHere) {
+      const d = DISTRICT_BY_ID[i.district]; const grp = approx[i.district]; const k = grp.indexOf(i.id);
+      x = d.lx + (k - (grp.length - 1) / 2) * 22 * s; y = d.ly + 20 * s;
+    } else [x, y] = toMap(i.lat, i.lon);
     const cat = CATEGORIES[i.source.category];
-    const label = `${cat.label[state.lang]}${i.verified === false && i.source.category === 'redes_sociais' ? `, ${L('não verificado', 'unverified')}` : ''}: ${txt(i.title)}`;
+    const label = `${cat.label[state.lang]}${i.verified === false && i.source.category === 'redes_sociais' ? `, ${L('não verificado', 'unverified')}` : ''}${approxHere ? `, ${L('localização aproximada', 'approximate location')}` : ''}: ${txt(i.title)}`;
     return `<g class="mappin" transform="translate(${x.toFixed(1)},${y.toFixed(1)})" tabindex="0" role="button" data-a="pin" data-id="${esc(i.id)}" aria-label="${esc(label)}"><circle r="${22 * s}" fill="transparent"/>${pinShape(i.source.category, s, state.incidentId === i.id)}</g>`;
   }).join('');
 }
@@ -230,20 +244,20 @@ function mapSvg(imp) {
   const paths = ordered.map((d) => {
     const r = imp.get(d.id); const sel = d.id === cur;
     const tierName = TIER_NAMES[r.tier][state.lang === 'en' ? 1 : 0];
-    return `<g class="dist" tabindex="0" role="button" data-a="district" data-id="${d.id}" aria-label="${esc(d.name)}: ${L('impacto', 'impact')} ${tierName}${r.top ? `, ${L('aviso', 'warning')} ${lvName(r.top.level)}` : ''}" style="cursor:pointer"><path d="${d.d}" fill="${TIER_FILL[r.tier]}" stroke="${sel ? '#15202B' : '#fff'}" stroke-width="${sel ? 3.5 : 1.5}"/></g>`;
+    return `<g class="dist" tabindex="0" role="button" data-a="district" data-id="${d.id}" aria-label="${esc(d.name)}: ${L('impacto', 'impact')} ${tierName}${r.top ? `, ${L('aviso', 'warning')} ${lvName(r.top.level)}` : ''}" style="cursor:pointer"><path d="${d.d}" fill="${TIER_FILL[r.tier]}" stroke="${sel ? '#fff' : '#070b12'}" stroke-width="${sel ? 3.5 : 1.5}"/></g>`;
   }).join('');
   const labels = DISTRICTS.map((d) => {
-    const r = imp.get(d.id); const dark = r.tier === 3;
-    return `<text x="${d.lx}" y="${d.ly}" text-anchor="middle" fill="${dark ? '#fff' : '#15202B'}" stroke="${dark ? '#7F1020' : TIER_FILL[r.tier]}" stroke-width="3" paint-order="stroke" stroke-linejoin="round">${esc(d.name)}</text>`;
+    const r = imp.get(d.id); const [tc, ts] = TIER_LABEL[r.tier];
+    return `<text x="${d.lx}" y="${d.ly}" text-anchor="middle" fill="${tc}" stroke="${ts}" stroke-width="3" paint-order="stroke" stroke-linejoin="round">${esc(d.name)}</text>`;
   }).join('');
-  return `<svg viewBox="${v.x} ${v.y} ${v.w} ${v.h}" role="group" aria-label="${L('Mapa de Portugal continental por distrito', 'Map of mainland Portugal by district')}"><g transform="translate(60,0)"><path d="${LAND_PATH}" fill="#F0EEE6" stroke="none"/><text x="262" y="368" font-family="'Inter Variable',sans-serif" font-size="13" letter-spacing="4" fill="#4A5663" font-weight="600">ESPANHA</text>${paths}<g class="labels" pointer-events="none">${labels}</g>${mapPins()}</g></svg>`;
+  return `<svg data-cur="${cur || ''}" viewBox="${v.x} ${v.y} ${v.w} ${v.h}" role="group" aria-label="${L('Mapa de Portugal continental por distrito', 'Map of mainland Portugal by district')}"><g transform="translate(60,0)"><path d="${LAND_PATH}" fill="#0d1a29" stroke="#1c3550"/><text x="262" y="368" font-family="'Familjen Grotesk Variable',sans-serif" font-size="13" letter-spacing="4" fill="#4b6580" font-weight="600">ESPANHA</text>${paths}<g class="labels" pointer-events="none">${labels}</g>${mapPins()}</g></svg>`;
 }
 
-function legend() {
+function legend(extra = '') {
   const sw = (c, t) => `<span><span class="sw" style="background:${c}"></span>${t}</span>`;
   const sh = (c, t) => `<span><span class="shape ${c}"></span>${t}</span>`;
-  return `<div class="card legend"><h4>${L('Impacto no distrito', 'District impact')}</h4><div>
-    ${sw('#D1242F', L('Muito alto', 'Very high'))}${sw('#EE7B1E', L('Alto', 'High'))}${sw('#F4C20D', L('Moderado', 'Moderate'))}${sw('#F7F5EE', L('Sem impacto relevante', 'No relevant impact'))}</div>
+  return `<div class="card legend${extra}"><h4>${L('Impacto no distrito', 'District impact')}</h4><div>
+    ${sw('#E5303B', L('Muito alto', 'Very high'))}${sw('#EE7B1E', L('Alto', 'High'))}${sw('#F4C20D', L('Moderado', 'Moderate'))}${sw('#26384d', L('Sem impacto relevante', 'No relevant impact'))}</div>
     <h4>${L('Ocorrências', 'Incidents')}</h4><div>${sh('sh-g', L('Governamental, oficial', 'Government, official'))}${sh('sh-c', L('Comunicação social', 'News media'))}${sh('sh-r', L('Redes sociais, não verificado', 'Social media, unverified'))}</div></div>`;
 }
 
@@ -266,9 +280,6 @@ function districtPanel(imp) {
   const tname = TIER_NAMES[r.tier][state.lang === 'en' ? 1 : 0];
   return `<div style="display:flex;flex-direction:column;gap:14px"><div><p class="muted" style="margin:0;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.04em">${L('Distrito', 'District')}</p><h3 style="font-size:28px;line-height:1.15">${esc(d.name)}</h3><button class="tab" data-a="national" style="margin-top:8px;min-height:44px">${L('Ver todo o país', 'See the whole country')}</button></div>
     <div style="display:flex;flex-wrap:wrap;gap:8px"><span class="lv ${TIER_CLASS[r.tier]}">${L('Impacto', 'Impact')} ${tname}</span><span class="lv lv-${r.top ? r.top.level : 'verde'}">${L('Aviso', 'Warning')} ${r.top ? lvName(r.top.level) : L('verde', 'green')}</span></div>
-    <div><div style="display:flex;justify-content:space-between;align-items:baseline"><span class="h num" style="font-size:34px;font-weight:700;line-height:1">${r.score}<small style="font-size:16px;font-weight:600">/100</small></span><span class="muted" style="font-size:13px">${esc(winLabel())}</span></div>
-      <div class="bar"><div class="${TIER_CLASS[r.tier]}" style="width:${r.score}%"></div></div>
-      <p class="muted" style="margin:8px 0 0;font-size:13.5px">${L('Aviso IPMA', 'IPMA warning')} <strong style="color:var(--ink)">+${r.base}</strong> · ${L('Ocorrências', 'Incidents')} <strong style="color:var(--ink)">+${r.points}</strong></p></div>
     <div><h4 class="h" style="font-size:16px;margin-bottom:2px">${L('Avisos do IPMA', 'IPMA warnings')}</h4>${r.warnings.length ? r.warnings.map(warningLine).join('') : `<p class="muted" style="margin:6px 0 0;font-size:14px">${L('Sem aviso em vigor neste momento.', 'No warning in force right now.')}</p>`}<div style="margin-top:8px">${sourceBadge(IPMA_SOURCE, { lang: state.lang })}</div></div>
     ${upcomingBlock([d.area])}
     <button class="tab" data-a="incgo" data-v="district" style="align-self:flex-start">${r.count === 0 ? L('Sem ocorrências neste distrito', 'No incidents in this district') : `${L('Ver as', 'See the')} ${r.count} ${L('ocorrências abaixo', 'incidents below')} ↓`}</button></div>`;
@@ -308,19 +319,192 @@ function incidentPanel() {
     <div style="margin-top:auto;padding-top:12px;border-top:1px solid var(--rule);display:flex;flex-direction:column;gap:6px">${sourceBadge(i.source, { verified: i.verified, lang: state.lang })}</div></div>`;
 }
 
-function mapSection(imp) {
-  const chips = [['governamental', 'sh-g'], ['comunicacao_social', 'sh-c'], ['redes_sociais', 'sh-r']].map(([k, s]) => `<button class="chip ${state.filt[k] ? 'on' : ''}" aria-pressed="${state.filt[k]}" data-a="filt" data-v="${k}"><span class="shape ${s}"></span>${esc(CATEGORIES[k].label[state.lang])}</button>`).join('');
+/* ---------- linha do tempo ---------- */
+const tlBase = () => state.tlBase || state.now;
+const tlValue = () => (state.at ? Math.min(1000, Math.max(0, Math.round(((state.at - tlBase()) / (TL_HOURS * 3600e3)) * 1000))) : 0);
+function setAtFromValue(v) {
+  if (v <= 0) { state.at = null; state.tlBase = null; return; }
+  if (!state.tlBase) state.tlBase = new Date(state.now.getTime());
+  state.at = new Date(state.tlBase.getTime() + (v / 1000) * TL_HOURS * 3600e3);
+}
+const intl = () => (state.lang === 'en' ? 'en-GB' : 'pt-PT');
+function hourDay(d) {
+  const p = Object.fromEntries(new Intl.DateTimeFormat(intl(), { timeZone: 'Europe/Lisbon', weekday: 'short', hour: '2-digit', hourCycle: 'h23' }).formatToParts(d).map((x) => [x.type, x.value]));
+  return `${String(p.weekday).replace('.', '')} ${p.hour}h`;
+}
+const dayShort = (d) => new Intl.DateTimeFormat(intl(), { timeZone: 'Europe/Lisbon', weekday: 'short', day: 'numeric', month: 'short' }).format(d);
+const PROF_COLOR = ['rgba(69,224,255,.35)', '#F4C20D', '#EE7B1E', '#E5303B'];
+let profCache = { key: '', bars: [] };
+/** Para cada meia hora das próximas 48 h: quantos distritos têm aviso e o nível mais alto. */
+function timelineProfile() {
+  const base = tlBase();
+  const key = `${data.warnings.length}|${Math.floor(base.getTime() / 600000)}`;
+  if (profCache.key === key) return profCache.bars;
+  const N = 96; const bars = [];
+  for (let i = 0; i < N; i++) {
+    const t = new Date(base.getTime() + ((i + 0.5) / N) * TL_HOURS * 3600e3);
+    let n = 0; let top = 0;
+    for (const d of DISTRICTS) { const ws = warningsIn(data.warnings, d.area, t, t); if (ws.length) { n += 1; top = Math.max(top, ...ws.map((w) => rank(w.level))); } }
+    bars.push({ n, top });
+  }
+  profCache = { key, bars };
+  return bars;
+}
+function timelineDock() {
+  const at = state.at; const base = tlBase();
+  const bars = timelineProfile();
+  const prof = bars.map((b, i) => { const h = b.n ? Math.max(3, (b.n / DISTRICTS.length) * 26) : 1.2; return `<rect x="${i}" y="${(28 - h).toFixed(1)}" width=".85" height="${h.toFixed(1)}" fill="${PROF_COLOR[b.top]}"/>`; }).join('');
+  const ticks = [0, 0.25, 0.5, 0.75, 1].map((p) => `<span>${p === 0 ? esc(L('Agora', 'Now')) : esc(hourDay(new Date(base.getTime() + p * TL_HOURS * 3600e3)))}</span>`).join('');
+  const label = L('Simular os avisos do IPMA nas próximas 48 horas', 'Simulate IPMA warnings over the next 48 hours');
+  return `<div class="card dock" id="dock" role="group" aria-label="${label}">
+    <button class="play" data-a="play" aria-pressed="${state.playing}" aria-label="${L('Reproduzir a evolução dos avisos', 'Play warning evolution')}">${state.playing ? '❚❚' : '▶'}</button>
+    <div class="tm"><b id="tl-t">${at ? esc(formatTime(at, state.lang)) : esc(L('Agora', 'Now'))}</b><small id="tl-d">${at ? esc(dayShort(at)) : esc(L('em direto', 'live'))}</small></div>
+    <div class="sw2"><svg class="prof" viewBox="0 0 96 28" preserveAspectRatio="none" aria-hidden="true">${prof}</svg>
+      <input class="tlr" id="tl" type="range" min="0" max="1000" step="1" value="${tlValue()}" data-key="tl" aria-label="${label}" aria-valuetext="${at ? esc(formatDayTime(at, state.lang)) : esc(L('Agora', 'Now'))}">
+      <div class="ticks" aria-hidden="true">${ticks}</div></div>
+    <button class="tab" data-a="live" id="tl-live"${at ? '' : ' hidden'}>${L('Voltar a agora', 'Back to now')}</button></div>`;
+}
+function simNote() {
+  if (!state.at) return '';
+  return `<p class="simnote" role="status">${L('Simulação: a mostrar os avisos do IPMA previstos para', 'Simulation: showing the IPMA warnings forecast for')} <strong>${esc(formatDayTime(state.at, state.lang))}</strong>. ${L('As ocorrências já registadas mantêm-se.', 'Incidents already recorded stay in place.')}</p>`;
+}
+const LOGO = '<svg width="40" height="40" viewBox="0 0 44 44" fill="none" aria-hidden="true"><rect width="44" height="44" rx="10" fill="#12304a" stroke="#45e0ff" stroke-opacity=".5"/><path d="M12 22c0-4 3.4-7 7.5-7 3 0 5.6 1.6 6.8 4 3.5.2 6.2 2.7 6.2 6 0 3.4-3 6-6.600 6H17c-2.800 0-5-2.200-5-5z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><path d="M23 27l-3 5h4l-2 5" stroke="#F4C20D" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>';
+function langToggle() {
+  return `<div class="langtog" role="group" aria-label="${L('Idioma', 'Language')}"><button class="seg ${state.lang === 'pt' ? 'on' : ''}" aria-pressed="${state.lang === 'pt'}" data-a="lang" data-v="pt" lang="pt">PT</button><button class="seg ${state.lang === 'en' ? 'on' : ''}" aria-pressed="${state.lang === 'en'}" data-a="lang" data-v="en" lang="en">EN</button></div>`;
+}
+function locOptions() {
+  const group = (r, name) => `<optgroup label="${name}">${data.locations.filter((l) => l.region === r).map((l) => `<option value="${l.id}" ${l.id === state.zoneLoc ? 'selected' : ''}>${esc(l.name)}</option>`).join('')}</optgroup>`;
+  return `${group('continente', 'Continente')}${group('madeira', 'Madeira')}${group('acores', 'Açores')}`;
+}
+
+/* ---------- ecrã principal (centro de controlo) ---------- */
+function stageHeader() {
+  return `<header class="hd"><a class="glass brand" href="./">${LOGO}<span><h1 class="h"><span class="full">${L('Tempestade Charles', 'Storm Charles')}</span><span class="short" aria-hidden="true">Charles</span></h1><span class="muted sub">${L('Informação para a população · Portugal', 'Public information · Portugal')}</span></span></a>
+    ${navBar('hd-nav glass')}
+    <span class="sp"></span>
+    ${countdownBox()}
+    <div class="glass tel"><a href="tel:112"><span class="muted">${L('Emergência', 'Emergency')}</span> <b>112</b></a><a href="tel:808242424"><span class="muted">SNS 24</span> <b>808 24 24 24</b></a></div>
+    ${langToggle()}
+    <a class="sos" href="tel:112" aria-label="${L('Emergência 112', 'Emergency 112')}">112</a></header>`;
+}
+function whenParts() {
+  const t = state.at || state.now;
+  const c = countdown(t, STORM_START);
+  const rel = c.done ? `${L('em curso desde', 'under way since')} ${formatDayTime(STORM_START, state.lang)}` : `${L('faltam', 'in')} ${c.days ? `${c.days}d ` : ''}${pad2(c.hours)}h${pad2(c.minutes)} ${L('para o início', 'until the storm')}`;
+  const day = new Intl.DateTimeFormat(intl(), { timeZone: 'Europe/Lisbon', weekday: 'long', day: 'numeric', month: 'short' }).format(t).toUpperCase();
+  return { day, time: formatTime(t, state.lang), rel };
+}
+function whenReadout() {
+  const w = whenParts();
+  return `<div class="when" aria-hidden="true"><small id="wh-d">${esc(w.day)}</small><b id="wh-t">${esc(w.time)}</b><span id="wh-r">${esc(w.rel)}</span></div>`;
+}
+function updateWhen() {
+  const w = whenParts();
+  const set = (id, v) => { const e = document.getElementById(id); if (e && e.textContent !== v) e.textContent = v; };
+  set('wh-d', w.day); set('wh-t', w.time); set('wh-r', w.rel);
+}
+
+function panelStats(imp) {
+  const cur = DISTRICT_BY_ID[curDistrict(imp)]; const r = imp.get(cur.id);
+  const reds = DISTRICTS.filter((d) => imp.get(d.id).top?.level === 'vermelho').length;
+  const tile = (v, l) => `<div><b class="num">${v}</b><small>${l}</small></div>`;
+  const counts = [3, 2, 1].map((t) => `<div><b class="num" style="color:${TIER_FILL[t]}">${DISTRICTS.filter((d) => imp.get(d.id).tier === t).length}</b><small>${esc(TIER_NAMES[t][state.lang === 'en' ? 1 : 0])}</small></div>`).join('');
+  return `<div class="stat">${tile(r.count, L('ocorrências', 'incidents'))}${tile(r.warnings.length, L('avisos no distrito', 'district warnings'))}${tile(reds, L('distritos em vermelho', 'districts on red'))}</div>
+    <div><p class="lbl">${L('Distritos por impacto', 'Districts by impact')} · ${esc(winLabel())}</p><div class="cnt">${counts}</div></div>`;
+}
+function miniFeed() {
+  const rows = data.curated.feed.slice().sort((a, b) => Date.parse(b.time) - Date.parse(a.time)).slice(0, 6);
+  if (!rows.length) return emptyList('Sem informações ainda.', 'No updates yet.');
+  return `${rows.map((f) => `<article class="mini"><time class="num" datetime="${esc(f.time)}">${esc(formatTime(new Date(f.time), state.lang))}</time><div><span>${esc(txt(f.title))}</span>${sourceBadge(f.source, { verified: f.verified, lang: state.lang })}</div></article>`).join('')}<a class="more" href="situacao.html#h-feed">${L('Ver todas as informações', 'See all updates')} ↓</a>`;
+}
+function miniServices() {
+  const idx = state.lang === 'en' ? 1 : 0;
+  const rows = data.curated.services.slice(0, 6);
+  if (!rows.length) return emptyList('Sem cortes ou condicionamentos registados ainda.', 'No closures or restrictions recorded yet.');
+  return `${rows.map((x) => `<article class="mini"><span class="ico" aria-hidden="true">${TYPE_EMOJI[x.type] || '📌'}</span><div><span>${esc(txt(x.name))}</span><span class="st ${STATUS_CLASS[x.status] || 'st-gry'}">${esc(STATUS_NAMES[x.status]?.[idx] || x.status)}</span> ${sourceBadge(x.source, { lang: state.lang })}</div></article>`).join('')}<a class="more" href="situacao.html#h-serv">${L('Ver todos os serviços', 'See all services')} (${data.curated.services.length}) ↓</a>`;
+}
+function miniIncidents() {
+  const rows = data.curated.incidents.slice().sort((x, y) => Date.parse(y.time) - Date.parse(x.time));
+  if (!rows.length) return emptyList('Sem ocorrências registadas ainda.', 'No incidents recorded yet.');
+  return rows.map((i) => `<button class="item" data-a="incident" data-id="${esc(i.id)}"><span class="muted" style="display:flex;justify-content:space-between;gap:8px;font-size:13px"><span>${esc(i.place || DISTRICT_BY_ID[i.district]?.name || '')}</span><span class="num">${esc(formatTime(new Date(i.time), state.lang))}</span></span><span style="font-weight:600;font-size:15px">${esc(txt(i.title))}</span><span>${sourceChip(i.source, state.lang)}${i.source.category === 'redes_sociais' && !i.verified ? ` <span class="st st-org">${L('Não verificado', 'Unverified')}</span>` : ''}</span></button>`).join('');
+}
+function panelBody(imp) {
+  if (state.incidentId) return incidentPanel();
+  if (state.ptab === 'feed') return miniFeed();
+  if (state.ptab === 'svc') return miniServices();
+  if (state.ptab === 'inc') return miniIncidents();
+  return state.national ? nationalPanel(imp) : districtPanel(imp);
+}
+function panelContent(imp) {
+  const tabs = [['det', L('Detalhe', 'Details')], ['feed', L('Notícias', 'News')], ['svc', L('Serviços', 'Services')], ['inc', L('Ocorrências', 'Incidents')]];
+  const cur = state.incidentId ? 'det' : state.ptab;
+  return `<div class="pm">${navBar('panel-nav')}<div class="pm2"><span class="pm-lang">${langToggle()}</span><a class="pm-tel" href="tel:808242424">SNS 24 <b>808 24 24 24</b></a></div></div>
+    <div class="field"><label for="loc-p">${L('Localidade', 'Location')}</label><select id="loc-p" data-a="zoneSel" data-key="loc-p">${locOptions()}</select></div>
+    ${panelStats(imp)}
+    ${state.region === 'continente' ? wxWidget() : ''}
+    ${simNote()}${banners()}
+    <div class="tabs" role="group" aria-label="${L('Secções do painel', 'Panel sections')}">${tabs.map(([k, l]) => `<button class="${cur === k ? 'on' : ''}" aria-pressed="${cur === k}" data-a="ptab" data-v="${k}">${l}</button>`).join('')}</div>
+    <div class="pbody">${panelBody(imp)}</div>
+    <p class="pfoot muted">${state.locNote ? `${esc(state.locNote)} · ` : ''}${L('Clique num distrito para ver o detalhe.', 'Select a district for details.')} <a href="metodologia.html">${L('Como calculamos', 'How we calculate')}</a></p>
+    <p class="pfoot muted">${L('Não é um serviço oficial e não substitui os avisos da Proteção Civil nem do IPMA. Cada informação indica a fonte.', 'This is not an official service and does not replace Civil Protection or IPMA warnings. Every item shows its source.')}</p>
+    <a class="more" href="situacao.html">${L('Ver a situação em detalhe (zona, serviços, previsão, abrigos)', 'See the situation in detail (area, services, forecast, shelters)')} →</a>
+    ${state.region === 'continente' ? legend(' legend-pn') : ''}`;
+}
+/** Atualização leve (sem reconstruir a página) ao arrastar ou reproduzir a linha do tempo. */
+function refreshTimeline(full = true) {
+  const imp = impact();
+  if (!updateMapInPlace(imp)) refreshMap();
+  if (full) {
+    const pc = document.getElementById('pc');
+    if (pc) { const st = pc.scrollTop; pc.innerHTML = panelContent(imp); pc.scrollTop = st; }
+    const rw = document.getElementById('regionwrap');
+    if (rw) rw.innerHTML = regionPanel(state.region);
+  }
+  const at = state.at;
+  const t = document.getElementById('tl-t'); if (t) t.textContent = at ? formatTime(at, state.lang) : L('Agora', 'Now');
+  const d = document.getElementById('tl-d'); if (d) d.textContent = at ? dayShort(at) : L('em direto', 'live');
+  const lv = document.getElementById('tl-live'); if (lv) lv.hidden = !at;
+  const sl = document.getElementById('tl'); if (sl) sl.setAttribute('aria-valuetext', at ? formatDayTime(at, state.lang) : L('Agora', 'Now'));
+  updateWhen();
+}
+let playTimer = null;
+const PLAY_MS = 26000; // percorrer as 48 h em ~26 s
+function stopPlay(rerender = true) {
+  if (playTimer) { clearInterval(playTimer); playTimer = null; }
+  const was = state.playing; state.playing = false;
+  if (rerender && was) render();
+}
+function startPlay() {
+  let v = tlValue(); if (v >= 1000) v = 0;
+  state.playing = true;
+  document.querySelector('.panel')?.setAttribute('aria-live', 'off');
+  const b = document.querySelector('[data-a="play"]');
+  if (b) { b.textContent = '❚❚'; b.setAttribute('aria-pressed', 'true'); }
+  let last = performance.now(); let lastPanel = 0;
+  const step = () => {
+    if (!state.playing) return;
+    const now = performance.now();
+    v = Math.min(1000, v + (now - last) * (1000 / PLAY_MS)); last = now;
+    setAtFromValue(v);
+    const sl = document.getElementById('tl'); if (sl) sl.value = String(v);
+    const full = now - lastPanel > 350 || v >= 1000;
+    if (full) lastPanel = now;
+    refreshTimeline(full);
+    if (v >= 1000) stopPlay();
+  };
+  playTimer = setInterval(step, 40);
+}
+
+function heroStage(imp) {
   const seg = (a, items, cur) => items.map(([v, l]) => `<button class="seg ${cur === v ? 'on' : ''}" aria-pressed="${cur === v}" data-a="${a}" data-v="${v}">${l}</button>`).join('');
   const reg = state.region !== 'continente';
-  return `<section aria-labelledby="h-mapa"><div style="display:flex;flex-wrap:wrap;gap:8px 24px;align-items:baseline;justify-content:space-between;margin-bottom:14px"><h2 id="h-mapa" style="font-size:26px">${L('Mapa de impacto por distrito', 'District impact map')}</h2><p class="muted" style="margin:0;font-size:14px">${state.locNote ? `${esc(state.locNote)} · ` : ''}${L('Clique num distrito para ver o detalhe.', 'Select a district for details.')} <a href="metodologia.html">${L('Como calculamos', 'How we calculate')}</a></p></div>
-  <div class="maprow"><div class="mapcol">
-    <div class="row" style="justify-content:space-between"><div class="row">
-      <div style="display:flex" role="group" aria-label="${L('Região', 'Region')}">${seg('region', [['continente', 'Continente'], ['acores', 'Açores'], ['madeira', 'Madeira']], state.region)}</div>
-    </div>
-      ${reg ? '' : `<div style="display:flex;flex-wrap:wrap;gap:8px" role="group" aria-label="${L('Filtrar ocorrências por categoria de fonte', 'Filter incidents by source category')}">${chips}</div>`}</div>
-    ${reg ? regionPanel(state.region) : `<div class="mapbox" id="mapbox"><div class="mapview">${mapSvg(imp)}<div class="zoom"><button class="ctl" data-a="zoom" data-v="in" aria-label="${L('Aproximar', 'Zoom in')}">+</button><button class="ctl" data-a="zoom" data-v="out" aria-label="${L('Afastar', 'Zoom out')}">−</button></div></div>${legend()}</div>`}
-  </div>
-  <aside class="card panel" aria-live="polite" aria-label="${L('Detalhe', 'Details')}">${state.incidentId ? incidentPanel() : state.national ? nationalPanel(imp) : districtPanel(imp)}</aside></div></section>`;
+  return `<section class="hero" id="stage" data-s="${state.sheet}" aria-labelledby="h-mapa"><h2 id="h-mapa" class="sr">${L('Mapa de impacto por distrito', 'District impact map')}</h2>
+  ${stageHeader()}
+  <div class="mapctl"><div style="display:flex" role="group" aria-label="${L('Região', 'Region')}">${seg('region', [['continente', 'Continente'], ['acores', 'Açores'], ['madeira', 'Madeira']], state.region)}</div></div>
+  ${whenReadout()}
+  ${reg ? `<div class="regionwrap" id="regionwrap">${regionPanel(state.region)}</div>` : `<div class="mapbox" id="mapbox"><div class="mapview">${mapSvg(imp)}<div class="zoom"><button class="ctl" data-a="zoom" data-v="in" aria-label="${L('Aproximar', 'Zoom in')}">+</button><button class="ctl" data-a="zoom" data-v="out" aria-label="${L('Afastar', 'Zoom out')}">−</button></div></div>${legend()}</div>`}
+  ${timelineDock()}
+  <aside class="card panel" aria-live="${state.playing ? 'off' : 'polite'}" aria-label="${L('Detalhe', 'Details')}"><button class="grab" data-a="sheet" aria-label="${L('Expandir ou recolher o painel de detalhe', 'Expand or collapse the details panel')}"><i></i></button><div class="pc" id="pc">${panelContent(imp)}</div></aside></section>`;
 }
 
 /* ---------- zona ---------- */
@@ -351,7 +535,6 @@ function zoneSection() {
   const loc = locById(state.zoneLoc);
   const dist = loc ? DISTRICT_BY_AREA[loc.area] : null;
   const shelters = dist ? data.curated.shelters.filter((x) => x.district === dist.id) : [];
-  const group = (r, name) => `<optgroup label="${name}">${data.locations.filter((l) => l.region === r).map((l) => `<option value="${l.id}" ${l.id === state.zoneLoc ? 'selected' : ''}>${esc(l.name)}</option>`).join('')}</optgroup>`;
   const kmTxt = (km) => (km < 1 ? `${Math.round(km * 10) * 100} m` : `${km.toFixed(1).replace('.', state.lang === 'en' ? '.' : ',')} km`);
   const phoneBtn = (p) => (p ? `<a class="zbtn" href="${esc(p.href || p.phoneHref)}"><span aria-hidden="true">📞</span> ${esc(p.display || p.phone)}</a>` : '');
   const mapLink = (url) => `<a class="zlink" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${L('Mapa', 'Map')} ↗</a>`;
@@ -393,7 +576,7 @@ function zoneSection() {
   return `<section aria-labelledby="h-zona"><h2 id="h-zona" class="h2">${L('Contactos de emergência', 'Emergency contacts')}</h2>
   <div class="card zone">
     <div class="zbar">
-      <div class="field" style="flex:1 1 240px;max-width:380px"><label for="localidade" style="font-size:14px">${L('Localidade', 'Location')}</label><select id="localidade" data-a="zoneSel" data-key="localidade" style="min-height:48px;font-size:16px;width:100%">${group('continente', 'Continente')}${group('madeira', 'Madeira')}${group('acores', 'Açores')}</select></div>
+      <div class="field" style="flex:1 1 240px;max-width:380px"><label for="localidade" style="font-size:14px">${L('Localidade', 'Location')}</label><select id="localidade" data-a="zoneSel" data-key="localidade" style="min-height:48px;font-size:16px;width:100%">${locOptions()}</select></div>
       <button class="tab" data-a="geo" id="geo" style="display:inline-flex;align-items:center;gap:10px"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M9 1v3M9 14v3M1 9h3M14 9h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>${L('Usar a minha localização', 'Use my location')}</button>
       <p id="geomsg" class="muted" style="margin:0;font-size:13.5px;flex:1 1 100%" role="status"></p>
     </div>
@@ -527,7 +710,7 @@ function feedbackPage() {
 function footer() {
   return `<footer class="foot"><div><strong style="color:var(--ink)">${L('Sobre este site', 'About this site')}</strong><p style="margin:6px 0 0">${L('Não é um serviço oficial e não substitui os avisos da Proteção Civil nem do IPMA. Cada informação indica a fonte e o link original. Relatos de redes sociais aparecem sempre como não verificados.', 'This is not an official service and does not replace Civil Protection or IPMA warnings. Every item shows its source and original link. Social media reports always appear as unverified.')}</p></div>
   <div><strong style="color:var(--ink)">${L('Dados', 'Data')}</strong><p style="margin:6px 0 0">${L('Avisos e previsão: IPMA, lidos em tempo real neste dispositivo. Ocorrências, notícias e serviços: atualizados aproximadamente de hora a hora.', 'Warnings and forecast: IPMA, read live on this device. Incidents, news and services: updated roughly every hour.')}</p></div>
-  <div><strong style="color:var(--ink)">${L('Mais', 'More')}</strong><p style="margin:6px 0 0"><a href="metodologia.html">${L('Como calculamos o impacto', 'How we calculate impact')}</a><br><a href="fontes.html">${L('Fontes dos dados', 'Data sources')}</a><br><a href="feedback.html">${L('Feedback e reportar um erro', 'Feedback and report an error')}</a></p></div></footer>`;
+  <div><strong style="color:var(--ink)">${L('Mais', 'More')}</strong><p style="margin:6px 0 0"><a href="situacao.html">${L('Situação em detalhe', 'Situation in detail')}</a><br><a href="metodologia.html">${L('Como calculamos o impacto', 'How we calculate impact')}</a><br><a href="fontes.html">${L('Fontes dos dados', 'Data sources')}</a><br><a href="feedback.html">${L('Feedback e reportar um erro', 'Feedback and report an error')}</a></p></div></footer>`;
 }
 
 function recsLink() {
@@ -551,8 +734,11 @@ function recsPage() {
 /* ---------- página ---------- */
 function pageHtml() {
   const imp = impact();
+  if (state.page === 'home') {
+    return `<a class="skip" href="#stage">${L('Saltar para o conteúdo', 'Skip to content')}</a>${heroStage(imp)}`;
+  }
   const main = state.page === 'recs' ? recsPage() : state.page === 'how' ? howPage() : state.page === 'sources' ? sourcesPage() : state.page === 'feedback' ? feedbackPage()
-    : [statusSection(imp), mapSection(imp), incidentsSection(imp), zoneSection(), recsLink(), servicesSection(), feedSection(), forecastSection(), sheltersSection(), mythsSection()].join('');
+    : [statusSection(imp), incidentsSection(imp), zoneSection(), recsLink(), servicesSection(), feedSection(), forecastSection(), sheltersSection(), mythsSection()].join('');
   return `<a class="skip" href="#main">${L('Saltar para o conteúdo', 'Skip to content')}</a>${emergencyBar()}${topbar()}<main id="main" class="sheet">${banners()}${main}</main>${footer()}`;
 }
 
@@ -574,6 +760,24 @@ export function render() {
   app.querySelectorAll('img[data-hide-on-error]').forEach((img) => img.addEventListener('error', () => img.closest('figure')?.remove()));
 }
 
+/** Atualiza só as cores dos distritos e dos nomes, sem recriar o SVG: assim as transições CSS suavizam a mudança. */
+function updateMapInPlace(imp) {
+  const svg = document.querySelector('#mapbox svg');
+  if (!svg) return false;
+  const cur = state.national ? '' : curDistrict(imp);
+  if ((svg.dataset.cur || '') !== cur) return false;
+  DISTRICTS.forEach((d, i) => {
+    const r = imp.get(d.id);
+    const g = svg.querySelector(`.dist[data-id="${d.id}"]`);
+    if (!g) return;
+    g.querySelector('path').setAttribute('fill', TIER_FILL[r.tier]);
+    const tierName = TIER_NAMES[r.tier][state.lang === 'en' ? 1 : 0];
+    g.setAttribute('aria-label', `${d.name}: ${L('impacto', 'impact')} ${tierName}${r.top ? `, ${L('aviso', 'warning')} ${lvName(r.top.level)}` : ''}`);
+    const t = svg.querySelectorAll('.labels text')[i];
+    if (t) { const [tc, ts] = TIER_LABEL[r.tier]; t.setAttribute('fill', tc); t.setAttribute('stroke', ts); }
+  });
+  return true;
+}
 function refreshMap() {
   const box = document.getElementById('mapbox');
   if (!box) return;
@@ -598,6 +802,7 @@ function onClick(e) {
   const el = e.target.closest('[data-a]');
   if (!el) return;
   const { a, v, id } = el.dataset;
+  if (state.playing && a !== 'play' && a !== 'sheet') stopPlay(false);
   if (a === 'lang') { state.lang = v; store.set('lang', v); }
   else if (a === 'region') { state.region = v; }
   else if (a === 'filt') { state.filt[v] = !state.filt[v]; }
@@ -611,10 +816,15 @@ function onClick(e) {
     return;
   }
   else if (a === 'incf') { state.inc = v; state.pg.inc = 1; }
+  else if (a === 'incgo' && state.page === 'home') { state.ptab = 'inc'; state.incidentId = null; if (state.sheet === 0) state.sheet = 1; }
   else if (a === 'incgo') { state.inc = v; state.pg.inc = 1; render(); document.getElementById('h-inc')?.scrollIntoView({ block: 'start' }); return; }
   else if (a === 'sit') { state.sit = v; }
-  else if (a === 'district') { if (mapDrag.moved) return; state.userPicked = true; state.national = false; state.district = id; state.incidentId = null; }
-  else if (a === 'pin') { if (mapDrag.moved) return; const i = data.curated.incidents.find((x) => x.id === id); if (i?.district) state.district = i.district; state.userPicked = true; state.national = false; state.incidentId = id; }
+  else if (a === 'ptab') { state.ptab = v; state.incidentId = null; if (state.sheet === 0) state.sheet = 1; }
+  else if (a === 'sheet') { state.sheet = (state.sheet + 1) % 3; document.getElementById('stage')?.setAttribute('data-s', String(state.sheet)); return; }
+  else if (a === 'play') { if (state.playing) stopPlay(); else startPlay(); return; }
+  else if (a === 'live') { setAtFromValue(0); }
+  else if (a === 'district') { if (mapDrag.moved) return; if (state.sheet === 2) state.sheet = 1; state.userPicked = true; state.national = false; state.district = id; state.incidentId = null; }
+  else if (a === 'pin') { if (mapDrag.moved) return; if (state.sheet === 2) state.sheet = 1; const i = data.curated.incidents.find((x) => x.id === id); if (i?.district) state.district = i.district; state.userPicked = true; state.national = false; state.incidentId = id; }
   else if (a === 'incident') { state.national = false; state.incidentId = id; }
   else if (a === 'national') { state.national = true; state.incidentId = null; }
   else if (a === 'back') { state.incidentId = null; }
@@ -631,7 +841,14 @@ function onSubmit(e) {
   const body = `${f.msg || ''}\n\n---\nOnde: ${f.where || '-'}\nIdioma: ${state.lang}\nPágina: ${document.referrer || location.origin}`;
   window.location.href = `mailto:${FEEDBACK_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
+function onInput(e) {
+  if (e.target.id !== 'tl') return;
+  if (state.playing) stopPlay(false);
+  setAtFromValue(Number(e.target.value));
+  refreshTimeline();
+}
 function onChange(e) {
+  if (e.target.id === 'tl') { render(); return; }
   const el = e.target.closest('[data-a]');
   if (!el) return;
   if (el.dataset.a === 'zoneSel') { setZone(Number(el.value)); }
@@ -758,12 +975,14 @@ function tick() {
   const t = document.getElementById('cd-t');
   if (t && !c.done) t.textContent = `${c.days ? `${c.days}d ` : ''}${pad2(c.hours)}:${pad2(c.minutes)}:${pad2(c.seconds)}`;
   else if (c.done && !document.getElementById('cd')?.classList.contains('live')) render();
+  if (!state.at) updateWhen();
 }
 
 export async function start() {
   const app = document.getElementById('app');
   app.addEventListener('click', onClick);
   app.addEventListener('change', onChange);
+  app.addEventListener('input', onInput);
   app.addEventListener('submit', onSubmit);
   app.addEventListener('keydown', onKey);
   app.addEventListener('pointerdown', onPointerDown);

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mockup 03c · Controlo (terminal denso)</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Familjen+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0d12;--p:#10151d;--p2:#151b25;--line:#222b38;--tx:#d5dde8;--mut:#6c7a8e;--am:#ffb224;--cy:#4cc9f0;--rd:#ff4d5e;--mono:'JetBrains Mono',monospace;--f:'Familjen Grotesk',sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:400 13px/1.4 var(--mono)}
+.top{display:flex;align-items:center;gap:0;border-bottom:1px solid var(--line);background:var(--p);height:46px;overflow:hidden}
+.top .b{padding:0 18px;font:700 17px var(--f);height:100%;display:flex;align-items:center;gap:10px;border-right:1px solid var(--line);white-space:nowrap}.top .b i{width:8px;height:8px;border-radius:50%;background:var(--rd);animation:p 1.2s infinite}@keyframes p{50%{opacity:.25}}
+.tick{flex:1;overflow:hidden;white-space:nowrap;color:var(--am)}.tick div{display:inline-block;animation:mq 70s linear infinite;padding-left:20px}@keyframes mq{to{transform:translateX(-50%)}}
+.top .e{padding:0 16px;border-left:1px solid var(--line);height:100%;display:flex;align-items:center;gap:10px;white-space:nowrap}.top .e a{color:var(--tx);text-decoration:none}.top .e b{color:var(--rd)}
+.grid{display:grid;grid-template-columns:330px minmax(0,1fr) 380px;height:calc(100vh - 46px);min-height:700px}
+.col{border-right:1px solid var(--line);overflow:auto;display:flex;flex-direction:column}.col:last-child{border:0}
+.h{padding:9px 14px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);background:var(--p);border-bottom:1px solid var(--line);border-top:1px solid var(--line);display:flex;justify-content:space-between;position:sticky;top:0;z-index:2}.h:first-child{border-top:0}
+.cdb{padding:16px 14px;display:flex;align-items:baseline;gap:12px;border-bottom:1px solid var(--line)}.cdb b{font:700 40px/1 var(--mono);letter-spacing:-.04em;color:#fff}.cdb span{color:var(--mut);font-size:11.5px}
+table{width:100%;border-collapse:collapse}td,th{padding:6px 14px;text-align:left;border-bottom:1px solid #161d28;white-space:nowrap}th{color:var(--mut);font-weight:500;font-size:11px;position:sticky;top:33px;background:var(--bg)}
+tr.d{cursor:pointer}tr.d:hover,tr.d.on{background:var(--p2)}tr.d.on td:first-child{box-shadow:inset 3px 0 var(--cy)}
+.pill{display:inline-block;width:62px;text-align:center;padding:1px 0;border-radius:3px;font-size:10.5px;font-weight:700;color:#000;text-transform:uppercase}
+.bar{display:inline-block;width:70px;height:6px;background:#1c2431;border-radius:3px;vertical-align:middle;margin-right:8px;position:relative;overflow:hidden}.bar i{position:absolute;inset:0;width:var(--w);background:var(--c)}
+.mid{display:grid;grid-template-rows:minmax(0,1fr) auto;background:radial-gradient(900px 600px at 50% 40%,#101b2b,#0a0d12)}
+.mapw{position:relative;min-height:0;padding:10px}.mapw{overflow:hidden}.mapw svg{position:absolute;left:10px;top:10px;width:calc(100% - 20px);height:calc(100% - 20px)}.dist{cursor:pointer;transition:filter .2s}.dist:hover{filter:brightness(1.35)}
+.sel{position:absolute;left:16px;top:14px;background:#10151dd9;backdrop-filter:blur(8px);border:1px solid var(--line);padding:12px 16px;border-radius:8px;min-width:240px}.sel b{font:700 24px var(--f);display:block}.sel .pill{margin-top:6px}
+.kp{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);background:var(--p)}.kp div{padding:12px 16px;border-right:1px solid var(--line)}.kp div:last-child{border:0}.kp small{display:block;color:var(--mut);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase}.kp b{font:700 26px var(--f)}
+.fi{display:grid;grid-template-columns:48px 1fr;gap:10px;padding:10px 14px;border-bottom:1px solid #161d28}.fi time{color:var(--cy)}.fi small{display:block;color:var(--mut);font-size:11px;margin-top:3px}.tag{display:inline-block;font-size:9.5px;padding:0 5px;border:1px solid;border-radius:3px;margin-right:6px;text-transform:uppercase}.t1{color:#6ea8ff}.t2{color:#3dd6b8}.t3{color:#ffb224}
+.sv{display:flex;justify-content:space-between;gap:10px;padding:8px 14px;border-bottom:1px solid #161d28}.sv b{color:var(--rd);font-size:10.5px;text-transform:uppercase;white-space:nowrap}
+@media(max-width:1100px){.grid{grid-template-columns:1fr;height:auto}.col{border:0}.mapw{height:75vh}.kp{grid-template-columns:repeat(2,1fr)}}
+</style></head><body>
+<header class="top"><div class="b"><i></i>CHARLES<span style="color:var(--mut);font:400 11px var(--mono)">/ PT-CONT</span></div><div class="tick"><div id="tk"></div></div><div class="e"><a href="tel:112">112 <b>EMERGÊNCIA</b></a><a href="tel:808242424">SNS24 <b>808 24 24 24</b></a></div></header>
+<div class="grid">
+  <aside class="col"><div class="cdb"><b data-cd>00:00:00</b><span>até ao início<br>00:00 · 11 NOV</span></div>
+    <div class="h"><span>Distritos</span><span>18 · por impacto</span></div>
+    <table><thead><tr><th>Distrito</th><th>Aviso</th><th>Impacto</th></tr></thead><tbody id="tb"></tbody></table></aside>
+  <main class="mid"><div class="mapw"><div id="map" style="height:100%"></div><div class="sel" id="sel"></div></div>
+    <div class="kp" id="kp"></div></main>
+  <aside class="col"><div class="h"><span>Avisos IPMA</span><span id="nw"></span></div><div id="warn"></div>
+    <div class="h"><span>Relatos · fonte identificada</span><span id="nf"></span></div><div id="feed"></div>
+    <div class="h"><span>Serviços</span><span>estado</span></div><div id="svc"></div></aside>
+</div>
+<script src="data.js"></script><script src="common.js"></script>
+<script>
+const {M,LV,COL,CAT,esc,hm,map,bindMap,byId,counts}=C;
+const CL={vermelho:'#ff4d5e',laranja:'#ff9a2e',amarelo:'#ffd21f',verde:'#3a4a60'};
+document.getElementById('map').innerHTML=map({fill:d=>CL[d.level],land:'#0d1520',landAttrs:'stroke="#1b2a3d"',stroke:'#0a0d12',sw:1.6,pad:4,labels:d=>d.name.split(' ')[0],labelAttrs:'font-size="7.5" font-family="JetBrains Mono" fill="#0a0d12" font-weight="700" opacity=".75"'});
+document.getElementById('map').firstChild.style.height='100%';
+const rows=[...M.districts].sort((a,b)=>b.score-a.score);
+tb.innerHTML=rows.map(d=>`<tr class="d" data-id="${d.id}"><td>${d.name}</td><td><span class="pill" style="background:${CL[d.level]}">${d.level==='verde'?'—':LV[d.level].slice(0,5)}</span></td><td><span class="bar"><i style="--w:${d.score}%;--c:${CL[d.level]}"></i></span>${d.score}</td></tr>`).join('');
+function zone(id){const d=byId(id);document.querySelectorAll('tr.d').forEach(r=>r.classList.toggle('on',r.dataset.id===id));sel.innerHTML=`<small style="color:var(--mut);letter-spacing:.14em;font-size:10.5px">ZONA</small><b>${d.name}</b><span class="pill" style="background:${CL[d.level]}">${LV[d.level]}</span> <span style="color:var(--mut)">impacto ${d.score}/100 · ${M.incidents.filter(i=>i.district===id).length} ocorr.</span>`}
+tb.onclick=e=>{const r=e.target.closest('tr.d');if(r)zone(r.dataset.id)};bindMap(document.getElementById('map'),zone);zone('lisboa');
+const cn=counts();kp.innerHTML=[['Vermelho',cn.vermelho,CL.vermelho],['Laranja',cn.laranja,CL.laranja],['Amarelo',cn.amarelo,CL.amarelo],['Ocorrências',M.incidents.length,'#fff'],['Rajada máx.','120 km/h','#4cc9f0']].map(([a,b,c])=>`<div><small>${a}</small><b style="color:${c}">${b}</b></div>`).join('');
+warn.innerHTML=M.warnings.map(w=>`<div class="sv"><span><span class="pill" style="background:${CL[w.lvl]}">${LV[w.lvl].slice(0,5)}</span> ${w.what}<br><span style="color:var(--mut);font-size:11.5px">${w.where} · ${w.from}</span></span></div>`).join('');nw.textContent=M.warnings.length;
+const tc={governamental:['t1','OFIC'],comunicacao_social:['t2','IMPR'],redes_sociais:['t3','REDE']};
+feed.innerHTML=M.feed.map(f=>`<div class="fi"><time>${hm(f.time)}</time><div>${esc(f.title)}<small><span class="tag ${tc[f.cat][0]}">${tc[f.cat][1]}</span>${esc(f.src)}</small></div></div>`).join('');nf.textContent=M.feed.length;
+svc.innerHTML=M.services.map(s=>`<div class="sv"><span>${esc(s.name.slice(0,80))}${s.name.length>80?'…':''}</span><b>${s.status.replace('_',' ')}</b></div>`).join('');
+const t=M.feed.map(f=>`${hm(f.time)} ${f.title.slice(0,100)}`).join('  ▪  ');tk.textContent=t+'  ▪  '+t;
+</script></body></html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mockup 03b · Controlo (radar fósforo)</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Chakra+Petch:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#02080a;--g:#3dff8c;--g2:#1a8f4d;--g3:#0b3a22;--am:#ffb02e;--rd:#ff4545;--mono:'Share Tech Mono',monospace;--h:'Chakra Petch',sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--g);font:400 15px/1.35 var(--mono);text-transform:uppercase;letter-spacing:.04em}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(#0000 0 2px,#0006 2px 3px);z-index:20}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,#0000 55%,#000c 100%);z-index:19}
+.hud{display:grid;grid-template-columns:300px 1fr 330px;grid-template-rows:auto 1fr auto;gap:0;height:100vh;min-height:760px;border:1px solid var(--g2)}
+.hud>*{border:1px solid var(--g3);padding:14px;min-width:0}
+.hd{grid-column:1/4;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;background:#04140c}
+.hd b{font:700 22px var(--h);letter-spacing:.2em;color:var(--g)}.hd span{color:var(--g2)}.hd a{color:var(--am);text-decoration:none}
+.k{color:var(--g2);font-size:12px;margin-bottom:8px;display:flex;justify-content:space-between}.k:before{content:"▌";color:var(--g);margin-right:6px}.k span{margin-left:auto}
+.cd{font:700 56px/1 var(--h);letter-spacing:.04em;text-shadow:0 0 14px var(--g);font-variant-numeric:tabular-nums;color:#c9ffe0}
+.left,.right{overflow:auto}.left>div,.right>div{margin-bottom:18px}
+.radar{position:relative;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 50%,#062514,#02080a 70%)}
+.radar svg.m{position:absolute;inset:3%;width:94%;height:94%}.dist{cursor:pointer;transition:fill-opacity .2s}.dist:hover{fill-opacity:.9!important}
+.rings{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.sweep{position:absolute;width:150vmax;height:150vmax;left:50%;top:50%;margin:-75vmax 0 0 -75vmax;background:conic-gradient(from 0deg,#3dff8c00 0deg,#3dff8c00 300deg,#3dff8c33 350deg,#3dff8c88 360deg);animation:sw 6s linear infinite;pointer-events:none;mix-blend-mode:screen}@keyframes sw{to{transform:rotate(360deg)}}
+.leg{position:absolute;left:14px;bottom:12px;font-size:12px;display:grid;gap:3px}.leg i{display:inline-block;width:10px;height:10px;margin-right:8px;border:1px solid}
+.sel{width:100%;background:#031a0f;color:var(--g);border:1px solid var(--g2);font:inherit;font-size:18px;padding:8px;text-transform:uppercase;border-radius:0}
+.lv{display:inline-block;padding:2px 12px;color:#000;font:700 22px var(--h);margin:10px 0 6px}
+.row{display:grid;grid-template-columns:54px 1fr;gap:10px;padding:8px 0;border-top:1px dashed var(--g3);font-size:13px}.row time{color:var(--am)}.row small{display:block;color:var(--g2)}
+.rk{display:grid;grid-template-columns:22px 1fr 36px;gap:8px;align-items:center;padding:4px 0;cursor:pointer;font-size:13px}.rk:hover{color:#fff}.rk i{height:6px;background:var(--g3);position:relative}.rk i:after{content:"";position:absolute;inset:0;width:var(--w);background:var(--c)}
+.ft{grid-column:1/4;display:flex;gap:30px;overflow:hidden;white-space:nowrap;background:#04140c;padding:8px 14px;color:var(--am)}.ft div{display:inline-block;animation:mq 60s linear infinite}@keyframes mq{to{transform:translateX(-50%)}}
+@media(max-width:1000px){.hud{grid-template-columns:1fr;height:auto}.hd,.ft{grid-column:auto}.radar{height:90vw;min-height:420px}}
+</style></head><body>
+<div class="hud">
+  <header class="hd"><b>CHARLES // RADAR</b><span>PT-CONT · 10 NOV 2026 · <span id="clk">20:10:00</span>Z</span><a href="tel:112">▶ EMERGÊNCIA 112</a><a href="tel:808242424">▶ SNS 24 808 24 24 24</a></header>
+  <aside class="left">
+    <div><div class="k">T-MENOS <span>00:00 11NOV</span></div><div class="cd" data-cd>00:00:00</div></div>
+    <div><div class="k">ZONA <span id="zs"></span></div><select class="sel" id="sel" aria-label="Distrito"></select><div id="zr"></div></div>
+    <div><div class="k">RANKING DE IMPACTO <span>0–100</span></div><div id="rk"></div></div>
+  </aside>
+  <main class="radar"><div class="sweep"></div>
+    <svg class="rings" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="#1a8f4d" stroke-width=".15"><circle cx="50" cy="50" r="12"/><circle cx="50" cy="50" r="24"/><circle cx="50" cy="50" r="36"/><circle cx="50" cy="50" r="48"/><path d="M50 0V100M0 50H100" stroke-dasharray=".6 .8"/></g></svg>
+    <div id="map" style="position:absolute;inset:0"></div>
+    <div class="leg"><span style="color:var(--rd)"><i></i>VERMELHO</span><span style="color:var(--am)"><i></i>LARANJA</span><span style="color:#e8ff4a"><i></i>AMARELO</span><span><i></i>SEM AVISO</span></div></main>
+  <aside class="right">
+    <div><div class="k">AVISOS IPMA <span id="nw"></span></div><div id="warn"></div></div>
+    <div><div class="k">TRÁFEGO DE INFORMAÇÃO <span>FONTE ID.</span></div><div id="feed"></div></div>
+    <div><div class="k">SERVIÇOS <span>ESTADO</span></div><div id="svc"></div></div>
+  </aside>
+  <footer class="ft"><div id="tk"></div></footer>
+</div>
+<script src="data.js"></script><script src="common.js"></script>
+<script>
+const {M,LV,COL,CAT,esc,hm,map,bindMap,byId}=C;
+const CL={vermelho:'#ff4545',laranja:'#ffb02e',amarelo:'#e8ff4a',verde:'#1a8f4d'},OP={vermelho:.55,laranja:.42,amarelo:.3,verde:.12};
+const mp=document.getElementById('map');mp.innerHTML=map({fill:d=>CL[d.level],extra:d=>`fill-opacity="${OP[d.level]}"`,land:false,stroke:'#3dff8c',sw:.9,pad:2});mp.querySelector('svg').classList.add('m');mp.querySelector('svg').style.cssText='position:absolute;inset:3%;width:94%;height:94%';
+const sel=document.getElementById('sel');sel.innerHTML=M.districts.map(d=>`<option value="${d.id}">${d.name}</option>`).join('');
+function zone(id){const d=byId(id);sel.value=id;zs.textContent=d.score+'/100';zr.innerHTML=`<span class="lv" style="background:${CL[d.level]}">${LV[d.level]}</span><div>OCORRÊNCIAS: ${M.incidents.filter(i=>i.district===id).length}</div>`;document.querySelectorAll('.dist').forEach(p=>p.setAttribute('stroke-width',p.dataset.id===id?'2.6':'.9'))}
+sel.onchange=()=>zone(sel.value);bindMap(mp,zone);zone('lisboa');
+rk.innerHTML=[...M.districts].sort((a,b)=>b.score-a.score).slice(0,8).map((d,i)=>`<div class="rk" data-id="${d.id}"><span>${i+1}</span><span>${d.name}<i style="--w:${d.score}%;--c:${CL[d.level]}"></i></span><span>${d.score}</span></div>`).join('');
+rk.onclick=e=>{const r=e.target.closest('.rk');if(r)zone(r.dataset.id)};
+warn.innerHTML=M.warnings.map(w=>`<div class="row" style="grid-template-columns:90px 1fr"><b style="color:${CL[w.lvl]}">${LV[w.lvl]}</b><span>${w.what}<small>${w.where}</small></span></div>`).join('');nw.textContent=M.warnings.length+' ATIVOS';
+feed.innerHTML=M.feed.slice(0,6).map(f=>`<div class="row"><time>${hm(f.time)}</time><div>${esc(f.title.slice(0,110))}…<small>${esc(f.src)} · ${CAT[f.cat]}</small></div></div>`).join('');
+svc.innerHTML=M.services.slice(0,6).map(s=>`<div class="row" style="grid-template-columns:1fr auto"><span>${esc(s.name.slice(0,60))}…</span><b style="color:var(--rd)">${s.status.replace('_',' ')}</b></div>`).join('');
+const t=M.feed.map(f=>`${hm(f.time)} ${f.title.slice(0,90)}`).join('   ///   ');tk.textContent=t+'   ///   '+t;
+setInterval(()=>{clk.textContent=new Date(Date.parse('2026-11-10T20:10:00Z')+performance.now()).toISOString().slice(11,19)},1000);
+</script></body></html>

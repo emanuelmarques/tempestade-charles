@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mockup 01 · Cívico (gov.uk)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0b0c0c;--mut:#505a5f;--line:#b1b4b6;--bg:#fff;--grey:#f3f2f1;--blue:#1d70b8;--focus:#ffdd00;--red:#d4351c;--font:'Atkinson Hyperlegible Next',Arial,sans-serif}
+*{box-sizing:border-box}body{margin:0;font:400 19px/1.45 var(--font);color:var(--ink);background:var(--bg)}
+a{color:var(--blue)}a:focus,button:focus,select:focus,.dist:focus{outline:3px solid var(--focus);outline-offset:0;background:var(--focus);color:var(--ink)}
+.wrap{max-width:1020px;margin:0 auto;padding:0 20px}
+.top{background:var(--ink);color:#fff;border-bottom:10px solid var(--blue)}.top .wrap{display:flex;gap:20px;align-items:center;justify-content:space-between;padding:12px 20px;flex-wrap:wrap}
+.top b{font-size:24px;letter-spacing:-.01em}.top .tel{display:flex;gap:24px;font-weight:700}.top .tel a{color:#fff;text-decoration:none;border-bottom:3px solid var(--focus)}
+.phase{border-bottom:1px solid var(--line);padding:10px 20px;font-size:16px;max-width:1020px;margin:0 auto}.phase span{background:var(--blue);color:#fff;font-weight:700;padding:2px 8px;margin-right:10px;text-transform:uppercase;font-size:14px;letter-spacing:.05em}
+nav.sub{border-bottom:1px solid var(--line)}nav.sub .wrap{display:flex;gap:28px;flex-wrap:wrap}nav.sub a{padding:12px 0;color:var(--ink);font-weight:700;text-decoration:none;border-bottom:5px solid transparent}nav.sub a[aria-current]{border-color:var(--blue)}nav.sub a:hover{text-decoration:underline}
+h1{font-size:48px;line-height:1.1;margin:36px 0 16px;font-weight:800;letter-spacing:-.02em}
+h2{font-size:32px;margin:48px 0 16px;font-weight:800;line-height:1.15}h3{font-size:24px;margin:0 0 8px}
+.lead{font-size:24px;max-width:36em;line-height:1.35}
+.alert{border:5px solid var(--red);padding:22px 24px;margin:28px 0;display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}
+.alert .ex{background:var(--red);color:#fff;font-weight:800;font-size:34px;width:56px;height:56px;border-radius:50%;display:grid;place-items:center}
+.alert h2{margin:0 0 6px;font-size:28px}.alert p{margin:0}
+.cd{display:flex;gap:12px;align-items:baseline;margin-top:6px}.cd b{font-size:44px;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.two{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:start}
+.map{background:var(--grey);padding:14px;border-top:5px solid var(--ink)}.map svg{width:100%;max-height:640px;display:block}.dist{cursor:pointer}.dist:hover{stroke:var(--ink);stroke-width:2.4}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin:10px 0 0;font-size:16px;list-style:none;padding:0}.legend i{display:inline-block;width:18px;height:18px;margin-right:6px;vertical-align:-3px;border:1px solid var(--ink)}
+label{font-weight:700;display:block;margin-bottom:6px}select{font:inherit;padding:10px 12px;border:2px solid var(--ink);width:100%;background:#fff}
+.zone{border-left:10px solid var(--c,#999);padding:4px 0 4px 18px;margin-top:20px}.zone strong{font-size:30px}
+.btn{display:inline-block;background:#00703c;color:#fff;font:700 19px var(--font);padding:12px 20px;box-shadow:0 2px 0 #002d18;text-decoration:none;border:0;cursor:pointer}.btn:hover{background:#005a30}
+table{border-collapse:collapse;width:100%;font-size:17px}th,td{text-align:left;padding:12px 14px 12px 0;border-bottom:1px solid var(--line);vertical-align:top}th{font-weight:700}
+.tag{display:inline-block;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.04em;padding:3px 9px;color:#fff;background:var(--c)}.tag.y{color:var(--ink)}
+.feed{list-style:none;margin:0;padding:0}.feed li{padding:18px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:90px 1fr;gap:10px 18px}.feed time{font-weight:800;font-size:22px}
+.feed small{display:block;color:var(--mut);font-size:16px;margin-top:4px}.src{font-weight:700}
+.sum dl{margin:0}.sum div{display:grid;grid-template-columns:34% 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.sum dt{font-weight:700}.sum dd{margin:0}
+.recs{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}.recs div{border-top:5px solid var(--blue);background:var(--grey);padding:16px 18px}
+footer{margin-top:64px;background:var(--grey);border-top:1px solid var(--line);padding:32px 0 56px;font-size:16px}footer .wrap{display:flex;gap:40px;flex-wrap:wrap}
+@media(max-width:800px){h1{font-size:36px}.two,.recs{grid-template-columns:1fr}.alert{grid-template-columns:1fr}.feed li{grid-template-columns:1fr}}
+</style></head><body>
+<div class="top"><div class="wrap"><b>Tempestade Charles</b><div class="tel"><a href="tel:112">Emergência 112</a><a href="tel:808242424">SNS 24 · 808 24 24 24</a></div></div></div>
+<div class="phase"><span>Em curso</span>Dados atualizados às 20:02 · fontes oficiais e comunicação social, sempre identificadas.</div>
+<nav class="sub" aria-label="Principal"><div class="wrap"><a href="#" aria-current="page">Início</a><a href="#">O que fazer</a><a href="#">Metodologia</a><a href="#">Fontes</a><a href="#">Feedback</a></div></nav>
+<main class="wrap">
+  <h1>Tempestade Charles em Portugal</h1>
+  <p class="lead">Avisos do IPMA, impacto por distrito e o que fazer, num só lugar.</p>
+  <section class="alert" role="alert"><div class="ex" aria-hidden="true">!</div><div>
+    <h2>Aviso vermelho para Lisboa, Setúbal e Leiria</h2>
+    <p>A tempestade começa à meia-noite. Evite deslocações desnecessárias.</p>
+    <div class="cd"><span>Começa em</span><b data-cd>00:00:00</b></div></div></section>
+
+  <div class="two">
+    <section><h2 style="margin-top:0">Mapa de avisos</h2><div class="map" id="map"></div>
+      <ul class="legend"><li><i style="background:#D1242F"></i>Vermelho</li><li><i style="background:#EE7B1E"></i>Laranja</li><li><i style="background:#F4C20D"></i>Amarelo</li><li><i style="background:#9AA5A0"></i>Sem aviso</li></ul></section>
+    <section><h2 style="margin-top:0">Na sua zona</h2>
+      <label for="sel">Escolha o distrito</label><select id="sel"></select>
+      <div class="zone" id="zone"></div>
+      <p style="margin-top:22px"><a class="btn" href="#">Ver o que fazer</a></p>
+      <div class="sum" style="margin-top:20px"><dl id="kv"></dl></div></section>
+  </div>
+
+  <h2>Avisos em vigor</h2>
+  <table><thead><tr><th>Nível</th><th>Fenómeno</th><th>Onde</th><th>Período</th></tr></thead><tbody id="warn"></tbody></table>
+
+  <h2>Estradas, transportes e serviços</h2>
+  <table><thead><tr><th>Estado</th><th>Serviço</th><th>Fonte</th></tr></thead><tbody id="svc"></tbody></table>
+
+  <h2>O que fazer</h2>
+  <div class="recs" id="recs"></div>
+
+  <h2>Últimas atualizações</h2>
+  <ol class="feed" id="feed"></ol>
+</main>
+<footer><div class="wrap"><div><b>Sem fins lucrativos.</b><br>Projeto independente; não substitui as indicações da Proteção Civil.</div><div><a href="#">Metodologia</a> · <a href="#">Fontes</a> · <a href="#">Reportar um erro</a></div></div></footer>
+<script src="data.js"></script><script src="common.js"></script>
+<script>
+const {M,LV,COL,CAT,esc,hm,map,bindMap,byId}=C;
+document.getElementById('map').innerHTML=map({fill:d=>COL[d.level],land:'#fff',landAttrs:'stroke="#b1b4b6"',stroke:'#0b0c0c',sw:.8,labels:d=>d.name,labelAttrs:'font-size="9.5" font-weight="700" fill="#0b0c0c" stroke="#fff" stroke-width="2.5" paint-order="stroke"'});
+const sel=document.getElementById('sel');sel.innerHTML=M.districts.map(d=>`<option value="${d.id}">${d.name}</option>`).join('');
+function zone(id){const d=byId(id);sel.value=id;const z=document.getElementById('zone');z.style.setProperty('--c',COL[d.level]);
+ z.innerHTML=`<strong>${d.name}</strong><br>Aviso <b>${LV[d.level]}</b> · impacto estimado ${d.score}/100`;
+ document.getElementById('kv').innerHTML=[['Ocorrências',M.incidents.filter(i=>i.district===id).length||'Nenhuma registada'],['Escolas','Encerradas a 11 nov'],['Hospitais','Cuidados não urgentes suspensos']].map(([a,b])=>`<div><dt>${a}</dt><dd>${b}</dd></div>`).join('');}
+sel.onchange=()=>zone(sel.value);bindMap(document.getElementById('map'),zone);zone('lisboa');
+document.getElementById('warn').innerHTML=M.warnings.map(w=>`<tr><td><span class="tag ${w.lvl==='amarelo'?'y':''}" style="--c:${COL[w.lvl]}">${LV[w.lvl]}</span></td><td>${w.what}</td><td>${w.where}</td><td>${w.from} → ${w.to}</td></tr>`).join('');
+document.getElementById('svc').innerHTML=M.services.slice(0,8).map(s=>`<tr><td><b>${s.status.replace('_',' ')}</b></td><td>${esc(s.name)}</td><td>${esc(s.src)}</td></tr>`).join('');
+document.getElementById('recs').innerHTML=M.recs.map(([a,b])=>`<div><h3>${a}</h3><p style="margin:0">${b}</p></div>`).join('');
+document.getElementById('feed').innerHTML=M.feed.slice(0,8).map(f=>`<li><time>${hm(f.time)}</time><div>${esc(f.title)}<small><span class="src">${esc(f.src)}</span> · ${CAT[f.cat]}</small></div></li>`).join('');
+</script></body></html>
