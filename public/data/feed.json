@@ -1,67 +1,67 @@
 [
   {
-    "id": "f-2026-11-10-healthnews-avisos",
-    "time": "2026-11-10T19:50:00Z",
+    "id": "f-2026-11-10-prontidao",
+    "time": "2026-11-10T07:56:00Z",
     "title": {
-      "pt": "A depressão Bruna fica quase estacionária a noroeste da Península até sexta-feira (13) e pode acumular cerca de 200 mm de chuva até ao fim da semana, sobretudo no Norte e Centro",
-      "en": "Depression Bruna stays almost stationary north-west of the Peninsula until Friday (13) and may accumulate about 200 mm of rain by the end of the week, mainly in the North and Centre"
+      "pt": "Proteção Civil eleva a prontidão ao nível mais alto e o Governo pede prudência máxima: só saia se for mesmo necessário",
+      "en": "Civil Protection raises readiness to its highest level and the Government urges maximum caution: only go out if essential"
     },
     "source": {
       "category": "comunicacao_social",
-      "name": "Health News",
-      "url": "https://healthnews.pt/2026/11/10/depressao-charles-seis-distritos-em-aviso-laranja-e-protecao-civil-apela-a-prevencao/"
+      "name": "Euronews",
+      "url": "https://pt.euronews.com/2026/11/10/depressao-charles-traz-chuva-e-vento-forte-governo-pede-prudencia-maxima-so-saia-se-for-me"
     }
   },
   {
-    "id": "f-2026-11-10-alvalade",
-    "time": "2026-11-10T20:00:00Z",
+    "id": "f-2026-11-10-orla",
+    "time": "2026-11-10T07:56:00Z",
     "title": {
-      "pt": "Junta de Freguesia de Alvalade (Lisboa): a 11 de novembro encerram o atendimento presencial, parques e espaços verdes, além das escolas e serviços públicos não essenciais decretados pelo Governo",
-      "en": "Alvalade parish council (Lisbon): on 11 November in-person service, parks and green spaces close, besides the schools and non-essential public services closed by the Government"
-    },
-    "source": {
-      "category": "governamental",
-      "name": "Junta de Freguesia de Alvalade",
-      "url": "https://jf-alvalade.pt/depressao-charles-encerramento-de-servicos-e-equipamentos-em-alvalade-no-dia-11-de-novembro/"
-    }
-  },
-  {
-    "id": "f-2026-11-10-publico-saude",
-    "time": "2026-11-10T18:30:00Z",
-    "title": {
-      "pt": "Cuidados programados não urgentes suspensos em vários hospitais e centros de saúde, incluindo Hospital Beatriz Ângelo e as ULS de Leiria, Lezíria, Alto Alentejo, Baixo Alentejo, Coimbra, Gaia e Espinho; estações de Metro de Lisboa ficam abertas para abrigar sem-abrigo",
-      "en": "Non-urgent scheduled care suspended at several hospitals and health centres, including Hospital Beatriz Ângelo and the Leiria, Lezíria, Alto Alentejo, Baixo Alentejo, Coimbra, Gaia and Espinho health units; Lisbon Metro stations stay open to shelter homeless people"
+      "pt": "Proibida a circulação em parques, jardins e matas com risco de queda de árvores, e o acesso à orla marítima e a zonas ribeirinhas ou inundáveis",
+      "en": "Access banned to parks, gardens and woodland at risk of falling trees, and to the seafront and flood-prone or riverside areas"
     },
     "source": {
       "category": "comunicacao_social",
-      "name": "Público",
-      "url": "https://www.publico.pt/2026/11/10/sociedade/noticia/mau-tempo-governo-pede-apenas-deslocacoes-necessarias-periodos-chuva-intensa-2194385"
+      "name": "Euronews",
+      "url": "https://pt.euronews.com/2026/11/10/depressao-charles-traz-chuva-e-vento-forte-governo-pede-prudencia-maxima-so-saia-se-for-me"
     }
   },
   {
-    "id": "f-2026-11-10-dn-mar",
-    "time": "2026-11-10T17:58:00Z",
+    "id": "f-2026-11-10-vermelho",
+    "time": "2026-11-10T08:36:00Z",
     "title": {
-      "pt": "Autoridade Marítima prevê ondas até 10 metros a partir das 06:00 de quarta-feira, com pico da maré às 15:20; navegação no Douro proibida a embarcações com menos de 12 metros",
-      "en": "Maritime Authority forecasts waves up to 10 metres from 06:00 on Wednesday, with the tide peaking at 15:20; boats under 12 metres banned from the Douro"
+      "pt": "IPMA agrava aviso para vermelho em Beja, Évora, Faro, Leiria, Lisboa, Portalegre, Santarém e Setúbal na quarta-feira até às 21:00; rajadas podem passar os 130 km/h",
+      "en": "IPMA raises warning to red in Beja, Évora, Faro, Leiria, Lisbon, Portalegre, Santarém and Setúbal on Wednesday until 21:00; gusts may exceed 130 km/h"
     },
     "source": {
       "category": "comunicacao_social",
-      "name": "Diário de Notícias",
-      "url": "https://www.dn.pt/sociedade/proteo-civil-alerta-para-chuva-forte-e-rajadas-at-120-kmh-governo-pede-que-se-evitem-sadas-de-casa"
+      "name": "Executive Digest",
+      "url": "https://executivedigest.sapo.pt/depressao-charles-ipma-agrava-alerta-para-vermelho-em-oito-distritos-vento-pode-ultrapassar-os-130-km-h/"
     }
   },
   {
-    "id": "f-2026-11-10-dn-saude",
-    "time": "2026-11-10T17:58:00Z",
+    "id": "f-2026-11-10-escolas",
+    "time": "2026-11-10T09:08:00Z",
     "title": {
-      "pt": "Hospitais do Sul e algumas unidades de Lisboa adiam consultas e exames não urgentes; cada ULS decide; USF do Arco (Lisboa) encerrada por danos",
-      "en": "Southern hospitals and some Lisbon units postpone non-urgent appointments and tests; each local health unit decides; USF do Arco (Lisbon) closed due to damage"
+      "pt": "Escolas e serviços públicos não essenciais encerrados na quarta-feira em todo o continente; eventos ao ar livre suspensos",
+      "en": "Schools and non-essential public services closed on Wednesday across the mainland; outdoor events suspended"
     },
     "source": {
       "category": "comunicacao_social",
-      "name": "Diário de Notícias",
-      "url": "https://www.dn.pt/sociedade/proteo-civil-alerta-para-chuva-forte-e-rajadas-at-120-kmh-governo-pede-que-se-evitem-sadas-de-casa"
+      "name": "Correio da Manhã",
+      "url": "https://www.cmjornal.pt/sociedade/detalhe/chuva-vento-forte-e-agitacao-maritima-mau-tempo-deixa-pais-em-alerta"
+    }
+  },
+  {
+    "id": "f-2026-11-10-madeira",
+    "time": "2026-11-10T09:08:00Z",
+    "title": {
+      "pt": "Madeira: Proteção Civil regional pede que se evitem deslocações entre as 21:00 de terça e as 06:00 de quarta; escolas fecham de manhã e percursos pedestres fecham todo o dia",
+      "en": "Madeira: regional Civil Protection asks people to avoid travel between 21:00 Tuesday and 06:00 Wednesday; schools close in the morning and hiking trails all day"
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Correio da Manhã",
+      "url": "https://www.cmjornal.pt/sociedade/detalhe/chuva-vento-forte-e-agitacao-maritima-mau-tempo-deixa-pais-em-alerta"
     }
   },
   {
@@ -78,17 +78,41 @@
     }
   },
   {
-    "id": "f-2026-11-10-anepc-aviso21",
-    "time": "2026-11-10T15:17:32Z",
+    "id": "f-2026-11-10-vost",
+    "time": "2026-11-10T09:28:22Z",
+    "title": "#FMA_Charles Amanhã, quarta-feira, 11 de novembro de 2026 Portugal Continental - Fica em casa e evita deslocações desnecessárias Existe o risco de inundações urbanas, queda de árvores, ramos e estruturas móveis, bem como interrupções localizadas de eletricidade e comunicações.",
+    "verified": false,
+    "source": {
+      "category": "redes_sociais",
+      "name": "@VOSTPT (X)",
+      "url": "https://x.com/VOSTPT/status/2120086149976780825"
+    }
+  },
+  {
+    "id": "f-2026-11-10-gov-alerta",
+    "time": "2026-11-10T10:33:00Z",
+    "title": {
+      "pt": "Comunicado do Governo: situação de alerta a 11 de novembro com encerramento de escolas e serviços públicos não essenciais, suspensão de atividades ao ar livre e apelo a que a população fique em casa; INEM e saúde pública ativados",
+      "en": "Government statement: state of alert on 11 November with schools and non-essential public services closed, outdoor activities suspended and an appeal to stay home; INEM and public health activated"
+    },
+    "source": {
+      "category": "governamental",
+      "name": "Portal do Governo",
+      "url": "https://portugal.gov.pt/gc25/comunicacao/noticias/mau-tempo-governo-declara-situacao-alerta-"
+    }
+  },
+  {
+    "id": "f-2026-11-10-usembassy",
+    "time": "2026-11-10T13:43:05Z",
     "verified": false,
     "title": {
-      "pt": "Partilhada a ligação para o Aviso 21 da ANEPC: \"Depressão Charles: agravamento da situação meteorológica, chuva e vento forte, medidas preventivas\" (conteúdo do aviso não lido nesta recolha)",
-      "en": "Link shared to ANEPC Notice 21: \"Depression Charles: worsening weather, heavy rain and strong wind, preventive measures\" (notice content not read in this run)"
+      "pt": "Embaixada dos EUA em Lisboa: a Bruna afeta o continente com chuva, vento forte e mar agitado até 13 de novembro; a Charles deverá chegar ao continente na quarta-feira",
+      "en": "U.S. Embassy Lisbon: Bruna is affecting the mainland with rain, strong wind and rough seas through 13 November; Charles is expected to reach the mainland on Wednesday"
     },
     "source": {
       "category": "redes_sociais",
-      "name": "@brunomiguel@masto.pt (Mastodon)",
-      "url": "https://masto.pt/@brunomiguel/117592808029752517"
+      "name": "@USEmbPortugal (X)",
+      "url": "https://x.com/USEmbPortugal/status/2120150254402109816"
     }
   },
   {
@@ -106,17 +130,43 @@
     }
   },
   {
-    "id": "f-2026-11-10-usembassy",
-    "time": "2026-11-10T13:43:05Z",
+    "id": "f-2026-11-10-moedas",
+    "time": "2026-11-10T14:16:00Z",
+    "title": {
+      "pt": "Lisboa: mais de 300 ocorrências desde a madrugada; túneis, escolas e parques fecham a partir da meia-noite e a Web Summit deverá não decorrer na quarta-feira (decisão final do Ministro da Administração Interna)",
+      "en": "Lisbon: more than 300 incidents since early morning; tunnels, schools and parks close from midnight and the Web Summit probably cannot run on Wednesday (final decision rests with the Internal Administration Minister)"
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/2026/11/10/websummit-em-risco-tuneis-encerrados-e-o-mercado-de-natal-que-se-vai-manter-no-rossio-as-medidas-de-moedas-para-a-depressao-charles/"
+    }
+  },
+  {
+    "id": "f-2026-11-10-anepc-aviso21",
+    "time": "2026-11-10T15:17:32Z",
     "verified": false,
     "title": {
-      "pt": "Embaixada dos EUA em Lisboa: a Bruna afeta o continente com chuva, vento forte e mar agitado até 13 de novembro; a Charles deverá chegar ao continente na quarta-feira",
-      "en": "U.S. Embassy Lisbon: Bruna is affecting the mainland with rain, strong wind and rough seas through 13 November; Charles is expected to reach the mainland on Wednesday"
+      "pt": "Partilhada a ligação para o Aviso 21 da ANEPC: \"Depressão Charles: agravamento da situação meteorológica, chuva e vento forte, medidas preventivas\" (conteúdo do aviso não lido nesta recolha)",
+      "en": "Link shared to ANEPC Notice 21: \"Depression Charles: worsening weather, heavy rain and strong wind, preventive measures\" (notice content not read in this run)"
     },
     "source": {
       "category": "redes_sociais",
-      "name": "@USEmbPortugal (X)",
-      "url": "https://x.com/USEmbPortugal/status/2120150254402109816"
+      "name": "@brunomiguel@masto.pt (Mastodon)",
+      "url": "https://masto.pt/@brunomiguel/117592808029752517"
+    }
+  },
+  {
+    "id": "f-2026-11-10-alerta",
+    "time": "2026-11-10T15:22:00Z",
+    "title": {
+      "pt": "Governo declara situação de alerta em Portugal continental para quarta-feira, 11 de novembro, das 00:00 às 23:59",
+      "en": "Government declares a state of alert for mainland Portugal on Wednesday 11 November, from 00:00 to 23:59"
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Correio da Manhã",
+      "url": "https://www.cmjornal.pt/sociedade/detalhe/chuva-vento-forte-e-agitacao-maritima-mau-tempo-deixa-pais-em-alerta"
     }
   },
   {
@@ -159,118 +209,81 @@
     }
   },
   {
-    "id": "f-2026-11-10-vost",
-    "time": "2026-11-10T09:28:22Z",
-    "title": "#FMA_Charles Amanhã, quarta-feira, 11 de novembro de 2026 Portugal Continental - Fica em casa e evita deslocações desnecessárias Existe o risco de inundações urbanas, queda de árvores, ramos e estruturas móveis, bem como interrupções localizadas de eletricidade e comunicações.",
-    "verified": false,
-    "source": {
-      "category": "redes_sociais",
-      "name": "@VOSTPT (X)",
-      "url": "https://x.com/VOSTPT/status/2120086149976780825"
-    }
-  },
-  {
-    "id": "f-2026-11-10-moedas",
-    "time": "2026-11-10T14:16:00Z",
+    "id": "f-2026-11-10-dn-mar",
+    "time": "2026-11-10T17:58:00Z",
     "title": {
-      "pt": "Lisboa: mais de 300 ocorrências desde a madrugada; túneis, escolas e parques fecham a partir da meia-noite e a Web Summit deverá não decorrer na quarta-feira (decisão final do Ministro da Administração Interna)",
-      "en": "Lisbon: more than 300 incidents since early morning; tunnels, schools and parks close from midnight and the Web Summit probably cannot run on Wednesday (final decision rests with the Internal Administration Minister)"
+      "pt": "Autoridade Marítima prevê ondas até 10 metros a partir das 06:00 de quarta-feira, com pico da maré às 15:20; navegação no Douro proibida a embarcações com menos de 12 metros",
+      "en": "Maritime Authority forecasts waves up to 10 metres from 06:00 on Wednesday, with the tide peaking at 15:20; boats under 12 metres banned from the Douro"
     },
     "source": {
       "category": "comunicacao_social",
-      "name": "Observador",
-      "url": "https://observador.pt/2026/11/10/websummit-em-risco-tuneis-encerrados-e-o-mercado-de-natal-que-se-vai-manter-no-rossio-as-medidas-de-moedas-para-a-depressao-charles/"
+      "name": "Diário de Notícias",
+      "url": "https://www.dn.pt/sociedade/proteo-civil-alerta-para-chuva-forte-e-rajadas-at-120-kmh-governo-pede-que-se-evitem-sadas-de-casa"
     }
   },
   {
-    "id": "f-2026-11-10-vermelho",
-    "time": "2026-11-10T08:36:00Z",
+    "id": "f-2026-11-10-dn-saude",
+    "time": "2026-11-10T17:58:00Z",
     "title": {
-      "pt": "IPMA agrava aviso para vermelho em Beja, Évora, Faro, Leiria, Lisboa, Portalegre, Santarém e Setúbal na quarta-feira até às 21:00; rajadas podem passar os 130 km/h",
-      "en": "IPMA raises warning to red in Beja, Évora, Faro, Leiria, Lisbon, Portalegre, Santarém and Setúbal on Wednesday until 21:00; gusts may exceed 130 km/h"
+      "pt": "Hospitais do Sul e algumas unidades de Lisboa adiam consultas e exames não urgentes; cada ULS decide; USF do Arco (Lisboa) encerrada por danos",
+      "en": "Southern hospitals and some Lisbon units postpone non-urgent appointments and tests; each local health unit decides; USF do Arco (Lisbon) closed due to damage"
     },
     "source": {
       "category": "comunicacao_social",
-      "name": "Executive Digest",
-      "url": "https://executivedigest.sapo.pt/depressao-charles-ipma-agrava-alerta-para-vermelho-em-oito-distritos-vento-pode-ultrapassar-os-130-km-h/"
+      "name": "Diário de Notícias",
+      "url": "https://www.dn.pt/sociedade/proteo-civil-alerta-para-chuva-forte-e-rajadas-at-120-kmh-governo-pede-que-se-evitem-sadas-de-casa"
     }
   },
   {
-    "id": "f-2026-11-10-gov-alerta",
-    "time": "2026-11-10T10:33:00Z",
+    "id": "f-2026-11-10-publico-saude",
+    "time": "2026-11-10T18:30:00Z",
     "title": {
-      "pt": "Comunicado do Governo: situação de alerta a 11 de novembro com encerramento de escolas e serviços públicos não essenciais, suspensão de atividades ao ar livre e apelo a que a população fique em casa; INEM e saúde pública ativados",
-      "en": "Government statement: state of alert on 11 November with schools and non-essential public services closed, outdoor activities suspended and an appeal to stay home; INEM and public health activated"
+      "pt": "Cuidados programados não urgentes suspensos em vários hospitais e centros de saúde, incluindo Hospital Beatriz Ângelo e as ULS de Leiria, Lezíria, Alto Alentejo, Baixo Alentejo, Coimbra, Gaia e Espinho; estações de Metro de Lisboa ficam abertas para abrigar sem-abrigo",
+      "en": "Non-urgent scheduled care suspended at several hospitals and health centres, including Hospital Beatriz Ângelo and the Leiria, Lezíria, Alto Alentejo, Baixo Alentejo, Coimbra, Gaia and Espinho health units; Lisbon Metro stations stay open to shelter homeless people"
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Público",
+      "url": "https://www.publico.pt/2026/11/10/sociedade/noticia/mau-tempo-governo-pede-apenas-deslocacoes-necessarias-periodos-chuva-intensa-2194385"
+    }
+  },
+  {
+    "id": "f-2026-11-10-healthnews-avisos",
+    "time": "2026-11-10T19:50:00Z",
+    "title": {
+      "pt": "A depressão Bruna fica quase estacionária a noroeste da Península até sexta-feira (13) e pode acumular cerca de 200 mm de chuva até ao fim da semana, sobretudo no Norte e Centro",
+      "en": "Depression Bruna stays almost stationary north-west of the Peninsula until Friday (13) and may accumulate about 200 mm of rain by the end of the week, mainly in the North and Centre"
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Health News",
+      "url": "https://healthnews.pt/2026/11/10/depressao-charles-seis-distritos-em-aviso-laranja-e-protecao-civil-apela-a-prevencao/"
+    }
+  },
+  {
+    "id": "f-2026-11-10-alvalade",
+    "time": "2026-11-10T20:00:00Z",
+    "title": {
+      "pt": "Junta de Freguesia de Alvalade (Lisboa): a 11 de novembro encerram o atendimento presencial, parques e espaços verdes, além das escolas e serviços públicos não essenciais decretados pelo Governo",
+      "en": "Alvalade parish council (Lisbon): on 11 November in-person service, parks and green spaces close, besides the schools and non-essential public services closed by the Government"
     },
     "source": {
       "category": "governamental",
-      "name": "Portal do Governo",
-      "url": "https://portugal.gov.pt/gc25/comunicacao/noticias/mau-tempo-governo-declara-situacao-alerta-"
+      "name": "Junta de Freguesia de Alvalade",
+      "url": "https://jf-alvalade.pt/depressao-charles-encerramento-de-servicos-e-equipamentos-em-alvalade-no-dia-11-de-novembro/"
     }
   },
   {
-    "id": "f-2026-11-10-alerta",
-    "time": "2026-11-10T15:22:00Z",
+    "id": "f-2026-11-10-rr-trajetoria",
+    "time": "2026-11-10T20:00:00Z",
     "title": {
-      "pt": "Governo declara situação de alerta em Portugal continental para quarta-feira, 11 de novembro, das 00:00 às 23:59",
-      "en": "Government declares a state of alert for mainland Portugal on Wednesday 11 November, from 00:00 to 23:59"
+      "pt": "Renascença: a depressão Charles desvia-se para sul e poderá entrar em Portugal pelo Algarve",
+      "en": "Renascença: depression Charles shifts south and may enter Portugal via the Algarve"
     },
     "source": {
       "category": "comunicacao_social",
-      "name": "Correio da Manhã",
-      "url": "https://www.cmjornal.pt/sociedade/detalhe/chuva-vento-forte-e-agitacao-maritima-mau-tempo-deixa-pais-em-alerta"
-    }
-  },
-  {
-    "id": "f-2026-11-10-escolas",
-    "time": "2026-11-10T09:08:00Z",
-    "title": {
-      "pt": "Escolas e serviços públicos não essenciais encerrados na quarta-feira em todo o continente; eventos ao ar livre suspensos",
-      "en": "Schools and non-essential public services closed on Wednesday across the mainland; outdoor events suspended"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Correio da Manhã",
-      "url": "https://www.cmjornal.pt/sociedade/detalhe/chuva-vento-forte-e-agitacao-maritima-mau-tempo-deixa-pais-em-alerta"
-    }
-  },
-  {
-    "id": "f-2026-11-10-prontidao",
-    "time": "2026-11-10T07:56:00Z",
-    "title": {
-      "pt": "Proteção Civil eleva a prontidão ao nível mais alto e o Governo pede prudência máxima: só saia se for mesmo necessário",
-      "en": "Civil Protection raises readiness to its highest level and the Government urges maximum caution: only go out if essential"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Euronews",
-      "url": "https://pt.euronews.com/2026/11/10/depressao-charles-traz-chuva-e-vento-forte-governo-pede-prudencia-maxima-so-saia-se-for-me"
-    }
-  },
-  {
-    "id": "f-2026-11-10-madeira",
-    "time": "2026-11-10T09:08:00Z",
-    "title": {
-      "pt": "Madeira: Proteção Civil regional pede que se evitem deslocações entre as 21:00 de terça e as 06:00 de quarta; escolas fecham de manhã e percursos pedestres fecham todo o dia",
-      "en": "Madeira: regional Civil Protection asks people to avoid travel between 21:00 Tuesday and 06:00 Wednesday; schools close in the morning and hiking trails all day"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Correio da Manhã",
-      "url": "https://www.cmjornal.pt/sociedade/detalhe/chuva-vento-forte-e-agitacao-maritima-mau-tempo-deixa-pais-em-alerta"
-    }
-  },
-  {
-    "id": "f-2026-11-10-orla",
-    "time": "2026-11-10T07:56:00Z",
-    "title": {
-      "pt": "Proibida a circulação em parques, jardins e matas com risco de queda de árvores, e o acesso à orla marítima e a zonas ribeirinhas ou inundáveis",
-      "en": "Access banned to parks, gardens and woodland at risk of falling trees, and to the seafront and flood-prone or riverside areas"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Euronews",
-      "url": "https://pt.euronews.com/2026/11/10/depressao-charles-traz-chuva-e-vento-forte-governo-pede-prudencia-maxima-so-saia-se-for-me"
+      "name": "Renascença",
+      "url": "https://rr.pt/noticia/pais/2026/11/10/depressao-charles-desvia-se-para-sul-e-podera-entrar-em-portugal-pelo-algarve/493004/"
     }
   },
   {
@@ -297,6 +310,20 @@
       "category": "comunicacao_social",
       "name": "RTP",
       "url": "https://www.rtp.pt/noticias/pais/pais-vai-ser-posto-a-prova-governo-declara-situacao-de-alerta-para-quarta-feira_e1778024"
+    }
+  },
+  {
+    "id": "f-2026-11-10-sms-lisboa",
+    "time": "2026-11-10T20:36:33Z",
+    "verified": false,
+    "title": {
+      "pt": "Relato de um residente: novo SMS da Proteção Civil Municipal de Lisboa para 11 de novembro, «Depressão Charles - Vento e Chuva forte e persistente. Proteja-se», com ligação a lisboa.pt/mau-tempo-recomendacoes",
+      "en": "Resident report: new SMS from Lisbon Municipal Civil Protection for 11 November, \"Depression Charles - strong and persistent wind and rain. Protect yourself\", linking to lisboa.pt/mau-tempo-recomendacoes"
+    },
+    "source": {
+      "category": "redes_sociais",
+      "name": "@jt_rebelo@ciberlandia.pt (Mastodon)",
+      "url": "https://ciberlandia.pt/@jt_rebelo/117594062438294900"
     }
   }
 ]
