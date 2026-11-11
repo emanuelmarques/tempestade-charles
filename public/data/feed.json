@@ -1,5 +1,33 @@
 [
   {
+    "id": "f-masto-117597297354156557",
+    "time": "2026-11-11T10:19:14Z",
+    "title": {
+      "pt": "Lisboa: queda de elementos de construção na Rua Bombeiro Catana Ramos (relato numa rede social, não confirmado oficialmente)",
+      "en": "Lisbon: building elements fell on Rua Bombeiro Catana Ramos (social media report, not officially confirmed)"
+    },
+    "verified": false,
+    "source": {
+      "category": "redes_sociais",
+      "name": "@jt_rebelo@ciberlandia.pt (Mastodon)",
+      "url": "https://ciberlandia.pt/@jt_rebelo/117597297354156557"
+    }
+  },
+  {
+    "id": "f-eu-1156-cp-ponte",
+    "time": "2026-11-11T11:56:00Z",
+    "title": {
+      "pt": "CP suprime quatro comboios que atravessam a ponte 25 de Abril: Intercidades de Faro (9h15) e de Évora (11h30) para Lisboa-Oriente, e Oriente–Évora (13h35) e Oriente–Faro (14h02)",
+      "en": "CP cancels four trains crossing the 25 de Abril bridge: Intercidades from Faro (9:15) and Évora (11:30) to Lisboa-Oriente, and Oriente–Évora (13:35) and Oriente–Faro (14:02)"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Euronews",
+      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
+    }
+  },
+  {
     "id": "f-eu-1127-ren",
     "time": "2026-11-11T11:27:00Z",
     "title": {
@@ -782,28 +810,6 @@
       "category": "comunicacao_social",
       "name": "Observador",
       "url": "https://observador.pt/2026/11/10/websummit-em-risco-tuneis-encerrados-e-o-mercado-de-natal-que-se-vai-manter-no-rossio-as-medidas-de-moedas-para-a-depressao-charles/"
-    }
-  },
-  {
-    "id": "x-2120153855711224139",
-    "time": "2026-11-10T13:57:24.000Z",
-    "title": "A very dangerous storm #Charles is moving in from the Atlantic towards the Iberian Peninsula and then further into the Mediterranean. ⚠️⚠️ Parts of Portugal and Spain are expected to receive over 200 mm of rain, while rainfall totals could exceed 300 mm in Tuscany and Croatia.",
-    "verified": false,
-    "source": {
-      "category": "redes_sociais",
-      "name": "@Ventuskycom (X)",
-      "url": "https://x.com/Ventuskycom/status/2120153855711224139"
-    }
-  },
-  {
-    "id": "x-2120153518057091229",
-    "time": "2026-11-10T13:56:03.000Z",
-    "title": "Portugal: Storm Bruna is currently affecting mainland Portugal with rain, strong winds, and rough seas forecast through November 13. A second storm, Charles, is expected to reach the mainland on November 11 and will bring heavy rain, winds of up to 140 km/h, rough seas, and the",
-    "verified": true,
-    "source": {
-      "category": "governamental",
-      "name": "@TravelGov (X)",
-      "url": "https://x.com/TravelGov/status/2120153518057091229"
     }
   }
 ]

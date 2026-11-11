@@ -1,5 +1,29 @@
 [
   {
+    "id": "i-lisboa-catana-ramos",
+    "title": {
+      "pt": "Queda de elementos de construção na Rua Bombeiro Catana Ramos",
+      "en": "Building elements fall on Rua Bombeiro Catana Ramos"
+    },
+    "description": {
+      "pt": "Relato numa rede social que remete para o registo em fogos.pt; não confirmado oficialmente.",
+      "en": "Social media report pointing to a fogos.pt entry; not officially confirmed."
+    },
+    "time": "2026-11-11T10:19:14Z",
+    "place": "Lisboa (Campolide)",
+    "district": "lisboa",
+    "lat": 38.7216,
+    "lon": -9.1666,
+    "locationApprox": true,
+    "severity": 2,
+    "verified": false,
+    "source": {
+      "category": "redes_sociais",
+      "name": "@jt_rebelo@ciberlandia.pt (Mastodon)",
+      "url": "https://ciberlandia.pt/@jt_rebelo/117597297354156557"
+    }
+  },
+  {
     "id": "i-madeira-funchal-desaparecido",
     "district": null,
     "place": "Funchal, Madeira",
