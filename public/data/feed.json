@@ -1,5 +1,89 @@
 [
   {
+    "id": "f-obs-1827-algarve",
+    "time": "2026-11-11T18:27:00Z",
+    "title": {
+      "pt": "Algarve: a chuva parou no sotavento e o vento diminuiu; o núcleo da depressão Charles passou a sul da costa algarvia, com impacto menor do que o previsto",
+      "en": "Algarve: rain has stopped in the east and wind has eased; the core of Charles passed south of the Algarve coast, with less impact than forecast"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1819-funchal",
+    "time": "2026-11-11T18:19:00Z",
+    "title": {
+      "pt": "Madeira: a marina do Funchal e alguns pontões sofreram danos significativos; o Porto do Funchal deverá estar operacional na quinta-feira",
+      "en": "Madeira: Funchal marina and some piers suffered significant damage; Funchal Port should be operational on Thursday"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1809-avisos",
+    "time": "2026-11-11T18:09:00Z",
+    "title": {
+      "pt": "Faro passou de aviso vermelho a laranja (agitação marítima até às 21:00); Portugal já não tem avisos vermelhos",
+      "en": "Faro dropped from red to orange warning (rough seas until 21:00); Portugal no longer has any red warnings"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1806-santarem",
+    "time": "2026-11-11T18:06:00Z",
+    "title": {
+      "pt": "Médio Tejo (Santarém): 74 ocorrências entre as 00:00 e as 17:00, sobretudo inundações (32); sem vítimas nem desalojados",
+      "en": "Médio Tejo (Santarém): 74 incidents between 00:00 and 17:00, mostly floods (32); no victims or displaced people"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1804-vfx",
+    "time": "2026-11-11T18:04:00Z",
+    "title": {
+      "pt": "Vila Franca de Xira: mais de 90 ocorrências, mais de 70 inundações; quatro estradas cortadas e a rua da estação de Alverca fechada; sem feridos",
+      "en": "Vila Franca de Xira: over 90 incidents, over 70 floods; four roads cut and the street at Alverca station closed; no injuries"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-vost-1753",
+    "time": "2026-11-11T17:53:00Z",
+    "title": {
+      "pt": "VOST Portugal: entre as 15h e as 17h foram registadas 1602 ocorrências em Portugal; Lisboa, Setúbal e Faro são os distritos com mais registos (inundações, limpeza de vias e quedas de árvores)",
+      "en": "VOST Portugal: 1,602 incidents recorded in Portugal between 15:00 and 17:00; Lisbon, Setúbal and Faro have the most (floods, road clearing and fallen trees)"
+    },
+    "verified": false,
+    "source": {
+      "category": "redes_sociais",
+      "name": "@vostpt@trombas.vost.pt (Mastodon)",
+      "url": "https://trombas.vost.pt/@vostpt/117599082178328079"
+    }
+  },
+  {
     "id": "f-obs-1728-normalizada",
     "time": "2026-11-11T17:28:00Z",
     "title": {
@@ -751,90 +835,6 @@
     "source": {
       "category": "comunicacao_social",
       "name": "Euronews (liveblog)",
-      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
-    }
-  },
-  {
-    "id": "f-eu-1215-uls-alentejano",
-    "time": "2026-11-11T12:15:00Z",
-    "title": {
-      "pt": "ULS do Litoral Alentejano suspende cuidados programados não urgentes (consultas, exames, tratamentos não prioritários); urgências mantêm-se e centros de saúde abertos até às 13h00 para doença aguda",
-      "en": "ULS Litoral Alentejano suspends non-urgent scheduled care (outpatient visits, exams, non-priority treatments); emergency care continues and health centres stay open until 13:00 for acute illness"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Euronews",
-      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
-    }
-  },
-  {
-    "id": "f-eu-1208-transtejo",
-    "time": "2026-11-11T12:08:00Z",
-    "title": {
-      "pt": "Transtejo/Soflusa não prevê cancelar travessias do Tejo; o serviço deve manter-se até ao fim do dia se as condições o permitirem, com menos passageiros",
-      "en": "Transtejo/Soflusa does not plan to cancel Tagus crossings; service should continue through the day if conditions allow, with fewer passengers"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Euronews",
-      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
-    }
-  },
-  {
-    "id": "f-obs-1202-lisboa-50",
-    "time": "2026-11-11T12:02:00Z",
-    "title": {
-      "pt": "Lisboa registou cerca de 50 ocorrências entre as 00h00 e as 10h00, sobretudo inundações; os bombeiros municipais dizem que não houve vítimas",
-      "en": "Lisbon logged about 50 incidents between 00:00 and 10:00, mostly flooding; municipal firefighters say there were no casualties"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador (liveblog)",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-obs-1201-baixo-alentejo",
-    "time": "2026-11-11T12:01:00Z",
-    "title": {
-      "pt": "Várias corporações de bombeiros do Baixo Alentejo não estão disponíveis para reforços fora da região, por pagamentos em atraso do apoio na depressão Kristin",
-      "en": "Several Baixo Alentejo fire brigades are unavailable for reinforcements outside the region due to late payments for support during storm Kristin"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador (liveblog)",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-obs-1259-autoeuropa",
-    "time": "2026-11-11T11:59:00Z",
-    "title": {
-      "pt": "Autoeuropa suspende a produção: a fábrica de Palmela parou os três turnos diários",
-      "en": "Autoeuropa suspends production: the Palmela plant halted its three daily shifts"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador (liveblog)",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-eu-1156-cp-ponte",
-    "time": "2026-11-11T11:56:00Z",
-    "title": {
-      "pt": "CP suprime quatro comboios que atravessam a ponte 25 de Abril: Intercidades de Faro (9h15) e de Évora (11h30) para Lisboa-Oriente, e Oriente–Évora (13h35) e Oriente–Faro (14h02)",
-      "en": "CP cancels four trains crossing the 25 de Abril bridge: Intercidades from Faro (9:15) and Évora (11:30) to Lisboa-Oriente, and Oriente–Évora (13:35) and Oriente–Faro (14:02)"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Euronews",
       "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
     }
   }
