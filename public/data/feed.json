@@ -1,5 +1,61 @@
 [
   {
+    "id": "f-obs-1552-grande-lisboa",
+    "time": "2026-11-11T15:52:00Z",
+    "title": {
+      "pt": "Amadora, Cascais e Sintra com centenas de ocorrências mas sem danos pessoais: Cascais 93 desde a noite de terça-feira (sobretudo inundações) e Amadora 50 entre as 22:00 de segunda e as 12:00 de hoje",
+      "en": "Amadora, Cascais and Sintra report hundreds of incidents but no injuries: Cascais 93 since Tuesday night (mostly floods) and Amadora 50 between 22:00 Monday and 12:00 today"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1538-gnr",
+    "time": "2026-11-11T15:38:00Z",
+    "title": {
+      "pt": "GNR confirma cortes às 15:00: EN246-1 (Marvão) nos dois sentidos, faixa esquerda da A1 (norte-sul) no km 5,1 junto a Vialonga e EN251 no km 53,7 junto ao Couço, com circulação alternada; apela a evitar deslocações desnecessárias",
+      "en": "GNR confirms closures at 15:00: EN246-1 (Marvão) both ways, left lane of the A1 (southbound) at km 5.1 near Vialonga and EN251 at km 53.7 near Couço, with alternating traffic; urges avoiding unnecessary travel"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1535-sesimbra",
+    "time": "2026-11-11T15:35:00Z",
+    "title": {
+      "pt": "Sesimbra: 19 ocorrências desde a madrugada e Marginal encerrada entre a Praia da Califórnia e a fortaleza de Santiago; comandante dos bombeiros diz que \"não podemos dizer que o pior já passou\"",
+      "en": "Sesimbra: 19 incidents since dawn and the Marginal closed between Praia da Califórnia and Santiago fortress; fire chief says \"we cannot say the worst has passed\""
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1529-estradas-14h",
+    "time": "2026-11-11T15:29:00Z",
+    "title": {
+      "pt": "Infraestruturas de Portugal: às 14:00, oito estradas nacionais condicionadas, incluindo IP7 (Eixo Norte-Sul) em Lisboa, EN6 (Oeiras), EN1 (Vila Franca de Xira), EN10-1 (Seixal), EN246-1 (Marvão), EN338 (Seia), EN338-1 (Manteigas–Guarda) e EN378 (Setúbal)",
+      "en": "Infraestruturas de Portugal: at 14:00, eight national roads restricted, including IP7 in Lisbon, EN6 (Oeiras), EN1 (Vila Franca de Xira), EN10-1 (Seixal), EN246-1 (Marvão), EN338 (Seia), EN338-1 (Manteigas–Guarda) and EN378 (Setúbal)"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "f-obs-1528-sintra",
     "time": "2026-11-11T15:28:00Z",
     "title": {
@@ -780,62 +836,6 @@
       "category": "comunicacao_social",
       "name": "Observador",
       "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-obs-0903-dois-nucleos",
-    "time": "2026-11-11T09:03:00Z",
-    "title": {
-      "pt": "Segundo o IPMA, a Charles dividiu-se em dois núcleos: o primeiro deve entrar na zona de Lisboa por volta das 15h00 (rajadas de 90 a 100 km/h) e o segundo mais tarde, provavelmente pelo Algarve (rajadas de 100 a 120 km/h)",
-      "en": "According to IPMA, Charles split into two cores: the first should reach the Lisbon area around 15:00 (gusts of 90-100 km/h) and the second later, probably via the Algarve (gusts of 100-120 km/h)"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-obs-0846-avisos-vermelhos",
-    "time": "2026-11-11T08:46:00Z",
-    "title": {
-      "pt": "IPMA baixa o aviso de vento para laranja em Lisboa, Setúbal e Beja, mas mantém aviso vermelho por chuva (9h00-21h00); Faro tem aviso vermelho por chuva e vento; Leiria, Santarém, Castelo Branco e Portalegre têm aviso vermelho por chuva (12h00-18h00)",
-      "en": "IPMA lowers the wind warning to orange in Lisbon, Setúbal and Beja but keeps a red rain warning (09:00-21:00); Faro has red warnings for rain and wind; Leiria, Santarém, Castelo Branco and Portalegre have a red rain warning (12:00-18:00)"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-obs-0811-mar",
-    "time": "2026-11-11T08:11:00Z",
-    "title": {
-      "pt": "Autoridade Marítima alerta para agravamento do mar no continente até às 12h00 de quinta-feira; às 7h30 havia 18 barras fechadas e a ondulação pode chegar aos 6 m (máxima 10 m)",
-      "en": "Maritime Authority warns of worsening seas on the mainland until 12:00 Thursday; 18 harbour bars were closed at 07:30 and swell may reach 6 m (maximum 10 m)"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-dn-0749-madeira-179",
-    "time": "2026-11-11T07:49:00Z",
-    "title": {
-      "pt": "Madeira: Proteção Civil regional soma 179 ocorrências (mais de 50 inundações, 45 movimentos de árvores, 29 quedas de árvores); Santa Cruz quase 50, Funchal 32, Machico 31, Câmara de Lobos 23; sem vítimas referidas",
-      "en": "Madeira: regional Civil Protection counts 179 incidents (over 50 floods, 45 tree movements, 29 tree falls); Santa Cruz nearly 50, Funchal 32, Machico 31, Câmara de Lobos 23; no casualties reported"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "DNoticias",
-      "url": "https://www.dnoticias.pt/2026/11/11/512499-proteccao-civil-da-madeira-soma-179-ocorrencias-decorrentes-da-depressao-charles/"
     }
   }
 ]

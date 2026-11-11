@@ -1,5 +1,101 @@
 [
   {
+    "id": "i-marvao-en246",
+    "title": {
+      "pt": "Marvão: EN246-1 cortada nos dois sentidos",
+      "en": "Marvão: EN246-1 closed both ways"
+    },
+    "description": {
+      "pt": "Corte confirmado pela GNR às 15:00 junto a São Salvador da Aramenha.",
+      "en": "Closure confirmed by GNR at 15:00 near São Salvador da Aramenha."
+    },
+    "time": "2026-11-11T15:38:00Z",
+    "place": "São Salvador da Aramenha, Marvão",
+    "district": "portalegre",
+    "lat": 39.3749,
+    "lon": -7.3893,
+    "locationApprox": true,
+    "severity": 2,
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "i-a1-vialonga",
+    "title": {
+      "pt": "A1: faixa esquerda cortada no sentido norte-sul junto a Vialonga",
+      "en": "A1: left lane closed southbound near Vialonga"
+    },
+    "description": {
+      "pt": "Corte no km 5,1, confirmado pela GNR às 15:00.",
+      "en": "Closure at km 5.1, confirmed by GNR at 15:00."
+    },
+    "time": "2026-11-11T15:38:00Z",
+    "place": "Vialonga, Vila Franca de Xira",
+    "district": "lisboa",
+    "lat": 38.8736,
+    "lon": -9.0786,
+    "locationApprox": true,
+    "severity": 1,
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "i-couco-en251",
+    "title": {
+      "pt": "EN251 cortada junto ao Couço, com circulação alternada",
+      "en": "EN251 closed near Couço, alternating traffic"
+    },
+    "description": {
+      "pt": "Corte no km 53,7, confirmado pela GNR às 15:00.",
+      "en": "Closure at km 53.7, confirmed by GNR at 15:00."
+    },
+    "time": "2026-11-11T15:38:00Z",
+    "place": "Couço, Coruche",
+    "district": "santarem",
+    "lat": 38.9875,
+    "lon": -8.2869,
+    "locationApprox": true,
+    "severity": 1,
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "i-sesimbra-marginal",
+    "title": {
+      "pt": "Sesimbra: Marginal encerrada entre a Praia da Califórnia e a fortaleza de Santiago",
+      "en": "Sesimbra: Marginal closed between Praia da Califórnia and Santiago fortress"
+    },
+    "description": {
+      "pt": "19 ocorrências desde a madrugada, segundo a Proteção Civil e os Bombeiros Voluntários de Sesimbra.",
+      "en": "19 incidents since dawn, per Civil Protection and Sesimbra volunteer firefighters."
+    },
+    "time": "2026-11-11T15:35:00Z",
+    "place": "Sesimbra",
+    "district": "setubal",
+    "lat": 38.442,
+    "lon": -9.0952,
+    "locationApprox": true,
+    "severity": 1,
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "i-loures-en250",
     "title": {
       "pt": "Loures: EN250 cortada por derrocada e N8 cortada na Flamenga",
