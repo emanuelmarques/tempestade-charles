@@ -1,5 +1,18 @@
 [
   {
+    "id": "f-eur-1418-lisboa",
+    "time": "2026-11-11T14:18:00Z",
+    "title": {
+      "pt": "Lisboa: 136 ocorrências até às 12:00, sobretudo inundações (120); 58 continuavam ativas e Alvalade lidera com 12",
+      "en": "Lisbon: 136 incidents by 12:00, mostly floods (120); 58 still active and Alvalade leads with 12"
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Euronews (liveblog)",
+      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
+    }
+  },
+  {
     "id": "f-obs-1400-madeira",
     "time": "2026-11-11T14:00:00Z",
     "title": {
@@ -823,20 +836,6 @@
       "category": "comunicacao_social",
       "name": "DNOTICIAS.PT",
       "url": "https://www.dnoticias.pt/2026/11/11/512460-santa-cruz-soma-15-ocorrencias-sem-registo-de-vitimas/"
-    }
-  },
-  {
-    "id": "f-obs-00h-madeira",
-    "time": "2026-11-11T00:16:00Z",
-    "title": {
-      "pt": "Efeitos da Depressão Charles já se sentem na Madeira",
-      "en": "Effects of depression Charles are already being felt in Madeira"
-    },
-    "verified": true,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador",
-      "url": "https://observador.pt/programas/noticiario/as-noticias-das-00h-2470/"
     }
   }
 ]
