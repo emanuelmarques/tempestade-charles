@@ -1,5 +1,18 @@
 [
   {
+    "id": "f-2026-11-10-madeira-26",
+    "time": "2026-11-10T22:42:00Z",
+    "title": {
+      "pt": "Madeira: Charles provocou 26 ocorrências até às 22:30, segundo a Proteção Civil regional; toda a ilha sob aviso vermelho de chuva até às 06:00",
+      "en": "Madeira: Charles caused 26 incidents by 22:30, per regional Civil Protection; whole island under red rain warning until 06:00"
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "DNOTICIAS.PT",
+      "url": "https://www.dnoticias.pt/2026/11/10/512448-charles-provocou-26-ocorrencias-ate-as-22h30/"
+    }
+  },
+  {
     "id": "f-2026-11-10-obs-mai-casa",
     "time": "2026-11-10T22:17:00Z",
     "title": {
@@ -36,46 +49,6 @@
       "category": "comunicacao_social",
       "name": "Observador",
       "url": "https://observador.pt/programas/noticiario/as-noticias-das-22h-1895/"
-    }
-  },
-  {
-    "id": "f-masto-escolas-11nov",
-    "time": "2026-11-10T09:13:42Z",
-    "verified": false,
-    "title": {
-      "pt": "Relato de um utilizador: escolas encerradas amanhã, segundo anúncio do ministro da Administração Interna (não verificado).",
-      "en": "User report: schools closed tomorrow, per an announcement by the Interior Minister (unverified)."
-    },
-    "source": {
-      "category": "redes_sociais",
-      "name": "@nelsonavatar@masto.pt (Mastodon)",
-      "url": "https://masto.pt/@nelsonavatar/117591377335587151"
-    }
-  },
-  {
-    "id": "f-anepc-aviso-21",
-    "time": "2026-11-09T12:00:00Z",
-    "title": {
-      "pt": "ANEPC, Aviso 21: o IPMA prevê um agravamento significativo das condições meteorológicas em Portugal continental nos próximos dias, associado à passagem da depressão Charles (chuva e vento forte, medidas preventivas).",
-      "en": "ANEPC Notice 21: IPMA forecasts a significant worsening of weather in mainland Portugal in the coming days with the passage of depression Charles (rain and strong wind, preventive measures)."
-    },
-    "source": {
-      "category": "governamental",
-      "name": "ANEPC",
-      "url": "https://prociv.gov.pt/pt/avisos-a-populacao/aviso-21-depressao-charles-agravamento-da-situacao-meteorologica-chuva-e-vento-forte-medidas-preventivas/"
-    }
-  },
-  {
-    "id": "f-2026-11-10-madeira-26",
-    "time": "2026-11-10T22:42:00Z",
-    "title": {
-      "pt": "Madeira: Charles provocou 26 ocorrências até às 22:30, segundo a Proteção Civil regional; toda a ilha sob aviso vermelho de chuva até às 06:00",
-      "en": "Madeira: Charles caused 26 incidents by 22:30, per regional Civil Protection; whole island under red rain warning until 06:00"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "DNOTICIAS.PT",
-      "url": "https://www.dnoticias.pt/2026/11/10/512448-charles-provocou-26-ocorrencias-ate-as-22h30/"
     }
   },
   {
@@ -290,6 +263,28 @@
     }
   },
   {
+    "id": "x-2120153855711224139",
+    "time": "2026-11-10T13:57:24.000Z",
+    "title": "A very dangerous storm #Charles is moving in from the Atlantic towards the Iberian Peninsula and then further into the Mediterranean. ⚠️⚠️ Parts of Portugal and Spain are expected to receive over 200 mm of rain, while rainfall totals could exceed 300 mm in Tuscany and Croatia.",
+    "verified": false,
+    "source": {
+      "category": "redes_sociais",
+      "name": "@Ventuskycom (X)",
+      "url": "https://x.com/Ventuskycom/status/2120153855711224139"
+    }
+  },
+  {
+    "id": "x-2120153518057091229",
+    "time": "2026-11-10T13:56:03.000Z",
+    "title": "Portugal: Storm Bruna is currently affecting mainland Portugal with rain, strong winds, and rough seas forecast through November 13. A second storm, Charles, is expected to reach the mainland on November 11 and will bring heavy rain, winds of up to 140 km/h, rough seas, and the",
+    "verified": false,
+    "source": {
+      "category": "redes_sociais",
+      "name": "@TravelGov (X)",
+      "url": "https://x.com/TravelGov/status/2120153518057091229"
+    }
+  },
+  {
     "id": "f-2026-11-10-despacho-alerta",
     "time": "2026-11-10T13:47:45Z",
     "verified": false,
@@ -339,6 +334,20 @@
       "category": "redes_sociais",
       "name": "@VOSTPT (X)",
       "url": "https://x.com/VOSTPT/status/2120086149976780825"
+    }
+  },
+  {
+    "id": "f-masto-escolas-11nov",
+    "time": "2026-11-10T09:13:42Z",
+    "verified": false,
+    "title": {
+      "pt": "Relato de um utilizador: escolas encerradas amanhã, segundo anúncio do ministro da Administração Interna (não verificado).",
+      "en": "User report: schools closed tomorrow, per an announcement by the Interior Minister (unverified)."
+    },
+    "source": {
+      "category": "redes_sociais",
+      "name": "@nelsonavatar@masto.pt (Mastodon)",
+      "url": "https://masto.pt/@nelsonavatar/117591377335587151"
     }
   },
   {
@@ -431,6 +440,19 @@
       "category": "redes_sociais",
       "name": "@VOSTPT (X)",
       "url": "https://x.com/VOSTPT/status/2119825404613509600"
+    }
+  },
+  {
+    "id": "f-anepc-aviso-21",
+    "time": "2026-11-09T12:00:00Z",
+    "title": {
+      "pt": "ANEPC, Aviso 21: o IPMA prevê um agravamento significativo das condições meteorológicas em Portugal continental nos próximos dias, associado à passagem da depressão Charles (chuva e vento forte, medidas preventivas).",
+      "en": "ANEPC Notice 21: IPMA forecasts a significant worsening of weather in mainland Portugal in the coming days with the passage of depression Charles (rain and strong wind, preventive measures)."
+    },
+    "source": {
+      "category": "governamental",
+      "name": "ANEPC",
+      "url": "https://prociv.gov.pt/pt/avisos-a-populacao/aviso-21-depressao-charles-agravamento-da-situacao-meteorologica-chuva-e-vento-forte-medidas-preventivas/"
     }
   }
 ]
