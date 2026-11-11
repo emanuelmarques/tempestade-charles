@@ -1,5 +1,19 @@
 [
   {
+    "id": "f-dnoticias-madeira-47",
+    "time": "2026-11-11T00:30:00Z",
+    "title": {
+      "pt": "Madeira: Proteção Civil Regional contabiliza 47 ocorrências desde as 20h de terça-feira (balanço das 00h30), sobretudo inundações; seis quedas de árvores",
+      "en": "Madeira: regional civil protection counts 47 incidents since 20:00 on Tuesday (00:30 update), mostly flooding; six fallen trees"
+    },
+    "verified": true,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "DNOTICIAS.PT",
+      "url": "https://www.dnoticias.pt/2026/11/11/512462-novo-balanco-aponta-para-47-ocorrencias/"
+    }
+  },
+  {
     "id": "f-cnn-fluvial-lisboa",
     "time": "2026-11-11T00:36:00Z",
     "title": {
