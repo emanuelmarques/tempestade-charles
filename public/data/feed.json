@@ -1,5 +1,19 @@
 [
   {
+    "id": "f-dnoticias-madeira-71",
+    "time": "2026-11-11T02:10:00Z",
+    "title": {
+      "pt": "Madeira: Charles soma 71 ocorrências desde as 20h de terça-feira (Machico 20, Santa Cruz 18, Câmara de Lobos e Funchal 10 cada); sem feridos nem mortos referidos. IPMA admite horas mais críticas entre as 3h e as 6h",
+      "en": "Madeira: Charles has caused 71 incidents since 8pm Tuesday (Machico 20, Santa Cruz 18, Câmara de Lobos and Funchal 10 each); no injuries or deaths reported. IPMA says the most critical hours may be 3am-6am"
+    },
+    "verified": true,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "DNOTICIAS.PT",
+      "url": "https://www.dnoticias.pt/2026/11/11/512470-depressao-charles-soma-71-ocorrencias-ate-as-2h00-na-madeira/"
+    }
+  },
+  {
     "id": "f-cnn-algarve-faro",
     "time": "2026-11-11T01:16:00Z",
     "title": {
@@ -95,6 +109,20 @@
       "category": "comunicacao_social",
       "name": "DNOTICIAS.PT",
       "url": "https://www.dnoticias.pt/2026/11/11/512462-novo-balanco-aponta-para-47-ocorrencias/"
+    }
+  },
+  {
+    "id": "f-dnoticias-santacruz-15",
+    "time": "2026-11-11T00:23:00Z",
+    "title": {
+      "pt": "Santa Cruz (Madeira): 15 ocorrências até às 23h59 de terça-feira, sem vítimas; Estrada da Ribeirinha (Camacha), Estrada do Pomar Batista e túnel da Avenida 25 de Julho encerrados preventivamente",
+      "en": "Santa Cruz (Madeira): 15 incidents up to 11:59pm Tuesday, no casualties; Estrada da Ribeirinha (Camacha), Estrada do Pomar Batista and the Avenida 25 de Julho tunnel closed as a precaution"
+    },
+    "verified": true,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "DNOTICIAS.PT",
+      "url": "https://www.dnoticias.pt/2026/11/11/512460-santa-cruz-soma-15-ocorrencias-sem-registo-de-vitimas/"
     }
   },
   {
