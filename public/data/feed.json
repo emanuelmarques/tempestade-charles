@@ -1,5 +1,75 @@
 [
   {
+    "id": "f-obs-0903-dois-nucleos",
+    "time": "2026-11-11T09:03:00Z",
+    "title": {
+      "pt": "Segundo o IPMA, a Charles dividiu-se em dois núcleos: o primeiro deve entrar na zona de Lisboa por volta das 15h00 (rajadas de 90 a 100 km/h) e o segundo mais tarde, provavelmente pelo Algarve (rajadas de 100 a 120 km/h)",
+      "en": "According to IPMA, Charles split into two cores: the first should reach the Lisbon area around 15:00 (gusts of 90-100 km/h) and the second later, probably via the Algarve (gusts of 100-120 km/h)"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-0846-avisos-vermelhos",
+    "time": "2026-11-11T08:46:00Z",
+    "title": {
+      "pt": "IPMA baixa o aviso de vento para laranja em Lisboa, Setúbal e Beja, mas mantém aviso vermelho por chuva (9h00-21h00); Faro tem aviso vermelho por chuva e vento; Leiria, Santarém, Castelo Branco e Portalegre têm aviso vermelho por chuva (12h00-18h00)",
+      "en": "IPMA lowers the wind warning to orange in Lisbon, Setúbal and Beja but keeps a red rain warning (09:00-21:00); Faro has red warnings for rain and wind; Leiria, Santarém, Castelo Branco and Portalegre have a red rain warning (12:00-18:00)"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-0811-mar",
+    "time": "2026-11-11T08:11:00Z",
+    "title": {
+      "pt": "Autoridade Marítima alerta para agravamento do mar no continente até às 12h00 de quinta-feira; às 7h30 havia 18 barras fechadas e a ondulação pode chegar aos 6 m (máxima 10 m)",
+      "en": "Maritime Authority warns of worsening seas on the mainland until 12:00 Thursday; 18 harbour bars were closed at 07:30 and swell may reach 6 m (maximum 10 m)"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-0701-continente-70",
+    "time": "2026-11-11T07:01:00Z",
+    "title": {
+      "pt": "Proteção Civil registava cerca de 70 ocorrências no continente às 7h00, nenhuma significativa: inundações na Grande Lisboa, Odivelas, Península de Setúbal e Montemor-o-Novo, quedas de árvores em Sintra e despistes em Loures e Mafra",
+      "en": "Civil Protection recorded about 70 incidents on the mainland at 07:00, none significant: flooding in Greater Lisbon, Odivelas, the Setúbal Peninsula and Montemor-o-Novo, fallen trees in Sintra and road accidents in Loures and Mafra"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-0650-madeira-137",
+    "time": "2026-11-11T06:50:00Z",
+    "title": {
+      "pt": "Madeira: 137 ocorrências entre as 20h00 de terça e as 6h30, sobretudo inundações, sem vítimas; Charles deixa a ilha com rajadas de cerca de 130 km/h e o IPMA diz que a pior parte já passou",
+      "en": "Madeira: 137 incidents between 20:00 Tuesday and 06:30, mostly flooding, no casualties; Charles leaves the island with gusts of about 130 km/h and IPMA says the worst has passed"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "f-dnoticias-madeira-96",
     "time": "2026-11-11T04:01:00Z",
     "title": {
@@ -721,55 +791,6 @@
       "category": "comunicacao_social",
       "name": "Euronews",
       "url": "https://pt.euronews.com/2026/11/10/depressao-charles-traz-chuva-e-vento-forte-governo-pede-prudencia-maxima-so-saia-se-for-me"
-    }
-  },
-  {
-    "id": "x-2120053561866305652",
-    "time": "2026-11-10T07:18:52.000Z",
-    "title": "Urgent update on Storm #Charles (November 10) It’s becoming clear that we’re facing a serious situation in Madeira, continental Portugal, and Spain. Here’s what I can say with certainty: • Strong to potentially damaging wind and heavy rain in the Madeira archipelago As of",
-    "verified": false,
-    "source": {
-      "category": "redes_sociais",
-      "name": "@WXWatcher07 (X)",
-      "url": "https://x.com/WXWatcher07/status/2120053561866305652"
-    }
-  },
-  {
-    "id": "x-2119935171012989269",
-    "time": "2026-11-09T23:28:25.000Z",
-    "title": "☔ De acordo com a informação do Instituto Português do Mar e da Atmosfera (IPMA) prevê, para os próximos dias, um agravamento significativo das condições meteorológicas em Portugal continental.",
-    "verified": true,
-    "source": {
-      "category": "governamental",
-      "name": "@govpt (X)",
-      "url": "https://x.com/govpt/status/2119935171012989269"
-    }
-  },
-  {
-    "id": "x-2119825404613509600",
-    "time": "2026-11-09T16:12:15.000Z",
-    "title": {
-      "pt": "VOST Portugal, resumo do comunicado do IPMA: o IPMA atribuiu o nome Charles a uma depressão perto da Madeira que deverá deslocar-se em direção ao Continente; na Madeira, chuva persistente e por vezes forte entre o final do dia 10 e a manhã do dia 11",
-      "en": "VOST Portugal, summary of the IPMA statement: IPMA named a depression near Madeira Charles, expected to move towards the mainland; in Madeira, persistent and at times heavy rain between late on the 10th and the morning of the 11th"
-    },
-    "verified": true,
-    "source": {
-      "category": "governamental",
-      "name": "@VOSTPT (X)",
-      "url": "https://x.com/VOSTPT/status/2119825404613509600"
-    }
-  },
-  {
-    "id": "f-anepc-aviso-21",
-    "time": "2026-11-09T12:00:00Z",
-    "title": {
-      "pt": "ANEPC, Aviso 21: o IPMA prevê um agravamento significativo das condições meteorológicas em Portugal continental nos próximos dias, associado à passagem da depressão Charles (chuva e vento forte, medidas preventivas).",
-      "en": "ANEPC Notice 21: IPMA forecasts a significant worsening of weather in mainland Portugal in the coming days with the passage of depression Charles (rain and strong wind, preventive measures)."
-    },
-    "source": {
-      "category": "governamental",
-      "name": "ANEPC",
-      "url": "https://prociv.gov.pt/pt/avisos-a-populacao/aviso-21-depressao-charles-agravamento-da-situacao-meteorologica-chuva-e-vento-forte-medidas-preventivas/"
     }
   }
 ]
