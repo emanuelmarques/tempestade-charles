@@ -1,5 +1,61 @@
 [
   {
+    "id": "f-obs-2016-douro",
+    "time": "2026-11-11T20:16:00Z",
+    "title": {
+      "pt": "Linha do Douro: circulação restabelecida entre Tua e Pocinho, cortada às 18:00 por uma ocorrência na via; a CP confirmou às 19:40 a retoma do serviço.",
+      "en": "Douro line: service restored between Tua and Pocinho, cut at 18:00 due to an incident on the track; CP confirmed at 19:40 that service resumed."
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-2010-castroverde",
+    "time": "2026-11-11T20:10:00Z",
+    "title": {
+      "pt": "Castro Verde (Beja): quatro estradas municipais fechadas desde terça-feira devido ao mau tempo foram reabertas.",
+      "en": "Castro Verde (Beja): four municipal roads closed since Tuesday due to bad weather have reopened."
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-2003-alverca",
+    "time": "2026-11-11T20:03:00Z",
+    "title": {
+      "pt": "Alverca (Vila Franca de Xira): três pessoas desalojadas após inundações na zona baixa; até às 17:00 o município registou 91 ocorrências, 72 delas inundações.",
+      "en": "Alverca (Vila Franca de Xira): three people displaced after flooding in the lower town; by 17:00 the municipality had recorded 91 occurrences, 72 of them floods."
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-2002-eredes",
+    "time": "2026-11-11T20:02:00Z",
+    "title": {
+      "pt": "E-Redes prevê normalizar o fornecimento elétrico nas próximas horas; ao final do dia havia ainda algumas centenas de clientes sem energia.",
+      "en": "E-Redes expects to normalise power supply in the coming hours; at the end of the day a few hundred customers were still without electricity."
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "f-obs-1936-voos",
     "time": "2026-11-11T19:36:00Z",
     "title": {
@@ -774,62 +830,6 @@
     "title": {
       "pt": "Alcácer do Sal: dez moradores do Bairro da Graça aconselhados a sair de casa por precaução, devido a uma encosta instável sob o castelo",
       "en": "Alcácer do Sal: ten residents of Bairro da Graça advised to leave home as a precaution due to an unstable slope below the castle"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador (liveblog)",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-obs-1343-setubal",
-    "time": "2026-11-11T13:43:00Z",
-    "title": {
-      "pt": "Setúbal: 90 ocorrências até às 12:45, metade inundações; caiu um muro de um complexo desportivo e há três estradas cortadas",
-      "en": "Setúbal: 90 incidents up to 12:45, half floods; a sports complex wall collapsed and three roads are closed"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador (liveblog)",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-obs-1335-estradas",
-    "time": "2026-11-11T13:35:00Z",
-    "title": {
-      "pt": "Seis estradas nacionais com restrições às 13:00, sobretudo por inundações (EN378, EN10-1, EN246-1, EN338, EN338-1)",
-      "en": "Six national roads with restrictions at 13:00, mostly due to flooding (EN378, EN10-1, EN246-1, EN338, EN338-1)"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador (liveblog)",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-obs-1321-ic1",
-    "time": "2026-11-11T13:21:00Z",
-    "title": {
-      "pt": "IC1 (Alcácer do Sal–Palma): circulação restabelecida após a queda de um pinheiro",
-      "en": "IC1 (Alcácer do Sal–Palma): traffic restored after a pine tree fell"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador (liveblog)",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-obs-1319-albufeira",
-    "time": "2026-11-11T13:19:00Z",
-    "title": {
-      "pt": "Albufeira: relatos nas redes sociais de novas quedas de árvores nas Açoteias e em Paderne",
-      "en": "Albufeira: social media reports of more fallen trees in Açoteias and Paderne"
     },
     "verified": false,
     "source": {

@@ -1,5 +1,29 @@
 [
   {
+    "id": "i-vfx-alverca",
+    "title": {
+      "pt": "Alverca (Vila Franca de Xira): inundações deixam três desalojados",
+      "en": "Alverca (Vila Franca de Xira): floods leave three displaced"
+    },
+    "description": {
+      "pt": "Três pessoas desalojadas após inundações na zona baixa de Alverca. Até às 17:00, o município registou 91 ocorrências, 72 delas inundações.",
+      "en": "Three people displaced after flooding in Alverca lower town. By 17:00 the municipality had recorded 91 occurrences, 72 of them floods."
+    },
+    "time": "2026-11-11T20:03:00Z",
+    "place": "Alverca, Vila Franca de Xira",
+    "district": "lisboa",
+    "lat": 38.8935,
+    "lon": -9.0381,
+    "locationApprox": true,
+    "severity": 2,
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "i-silves-armacao-pera",
     "title": {
       "pt": "Armação de Pera (Silves): apartamento inundado deixa quatro desalojados",
