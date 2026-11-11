@@ -1,5 +1,53 @@
 [
   {
+    "id": "i-oeiras-ribeira-laje",
+    "title": {
+      "pt": "Oeiras: Ribeira da Laje transbordou e danificou pavilhão desportivo",
+      "en": "Oeiras: Ribeira da Laje overflowed and damaged a sports hall"
+    },
+    "description": {
+      "pt": "Chuva intensa com maré alta; a água alagou parques e ruas e danificou o pavilhão da Associação Desportiva de Oeiras.",
+      "en": "Heavy rain at high tide; water flooded parks and streets and damaged the Associação Desportiva de Oeiras hall."
+    },
+    "time": "2026-11-11T16:54:00Z",
+    "place": "Oeiras",
+    "district": "lisboa",
+    "lat": 38.6979,
+    "lon": -9.3078,
+    "locationApprox": true,
+    "severity": 2,
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "i-cabanas-tavira-estrada",
+    "title": {
+      "pt": "Cabanas de Tavira: estrada abateu sob viatura dos Bombeiros",
+      "en": "Cabanas de Tavira: road collapsed under a fire brigade vehicle"
+    },
+    "description": {
+      "pt": "A viatura dos Bombeiros Sapadores de Tavira, que regressava de uma ocorrência, ficou imobilizada; a GNR cortou a estrada. Sem vítimas referidas.",
+      "en": "The Tavira fire brigade vehicle, returning from a call-out, was immobilised; GNR closed the road. No casualties reported."
+    },
+    "time": "2026-11-11T16:47:00Z",
+    "place": "Cabanas de Tavira, Tavira",
+    "district": "faro",
+    "lat": 37.1355,
+    "lon": -7.5997,
+    "locationApprox": true,
+    "severity": 2,
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "i-lisboa-julio-matos",
     "title": {
       "pt": "Lisboa: cave do Hospital Júlio de Matos inundada",
@@ -144,30 +192,6 @@
     }
   },
   {
-    "id": "i-setubal-muro",
-    "title": {
-      "pt": "Setúbal: queda de um muro de um complexo desportivo",
-      "en": "Setúbal: sports complex wall collapses"
-    },
-    "description": {
-      "pt": "O muro danificou três ecopontos e um automóvel e põe em risco pelo menos uma casa; três estradas cortadas no concelho.",
-      "en": "The wall damaged three recycling bins and a car and puts at least one house at risk; three roads closed in the municipality."
-    },
-    "time": "2026-11-11T13:43:00Z",
-    "place": "Setúbal",
-    "district": "setubal",
-    "lat": 38.5242,
-    "lon": -8.8932,
-    "locationApprox": true,
-    "severity": 2,
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador (liveblog)",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
     "id": "i-alcacer-bairro-graca",
     "title": {
       "pt": "Alcácer do Sal: moradores do Bairro da Graça aconselhados a sair por encosta instável",
@@ -182,6 +206,30 @@
     "district": "setubal",
     "lat": 38.3725,
     "lon": -8.5151,
+    "locationApprox": true,
+    "severity": 2,
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "i-setubal-muro",
+    "title": {
+      "pt": "Setúbal: queda de um muro de um complexo desportivo",
+      "en": "Setúbal: sports complex wall collapses"
+    },
+    "description": {
+      "pt": "O muro danificou três ecopontos e um automóvel e põe em risco pelo menos uma casa; três estradas cortadas no concelho.",
+      "en": "The wall damaged three recycling bins and a car and puts at least one house at risk; three roads closed in the municipality."
+    },
+    "time": "2026-11-11T13:43:00Z",
+    "place": "Setúbal",
+    "district": "setubal",
+    "lat": 38.5242,
+    "lon": -8.8932,
     "locationApprox": true,
     "severity": 2,
     "verified": false,
@@ -262,6 +310,30 @@
     "lon": null
   },
   {
+    "id": "i-lisboa-sapadores-130",
+    "district": "lisboa",
+    "place": "Lisboa",
+    "lat": 38.7077,
+    "lon": -9.1366,
+    "time": "2026-11-10T14:16:00Z",
+    "severity": 1,
+    "verified": true,
+    "title": {
+      "pt": "Mais de 300 ocorrências em Lisboa desde a madrugada, segundo o presidente da Câmara",
+      "en": "More than 300 incidents in Lisbon since early morning, according to the mayor"
+    },
+    "description": {
+      "pt": "O Regimento de Sapadores Bombeiros registou 130 ocorrências entre as 00:00 e as 06:00 (Euronews); o presidente da Câmara referiu depois 304 (Observador).",
+      "en": "The Lisbon Fire Brigade logged 130 incidents between 00:00 and 06:00 (Euronews); the mayor later cited 304 (Observador)."
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/2026/11/10/websummit-em-risco-tuneis-encerrados-e-o-mercado-de-natal-que-se-vai-manter-no-rossio-as-medidas-de-moedas-para-a-depressao-charles/"
+    },
+    "locationApprox": true
+  },
+  {
     "id": "i-lisboa-bratislava",
     "district": "lisboa",
     "place": "Lisboa (Avenida Cidade de Bratislava)",
@@ -306,30 +378,6 @@
       "category": "redes_sociais",
       "name": "@jt_rebelo@ciberlandia.pt (Mastodon)",
       "url": "https://ciberlandia.pt/@jt_rebelo/117591686217622367"
-    },
-    "locationApprox": true
-  },
-  {
-    "id": "i-lisboa-sapadores-130",
-    "district": "lisboa",
-    "place": "Lisboa",
-    "lat": 38.7077,
-    "lon": -9.1366,
-    "time": "2026-11-10T14:16:00Z",
-    "severity": 1,
-    "verified": true,
-    "title": {
-      "pt": "Mais de 300 ocorrências em Lisboa desde a madrugada, segundo o presidente da Câmara",
-      "en": "More than 300 incidents in Lisbon since early morning, according to the mayor"
-    },
-    "description": {
-      "pt": "O Regimento de Sapadores Bombeiros registou 130 ocorrências entre as 00:00 e as 06:00 (Euronews); o presidente da Câmara referiu depois 304 (Observador).",
-      "en": "The Lisbon Fire Brigade logged 130 incidents between 00:00 and 06:00 (Euronews); the mayor later cited 304 (Observador)."
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador",
-      "url": "https://observador.pt/2026/11/10/websummit-em-risco-tuneis-encerrados-e-o-mercado-de-natal-que-se-vai-manter-no-rossio-as-medidas-de-moedas-para-a-depressao-charles/"
     },
     "locationApprox": true
   },

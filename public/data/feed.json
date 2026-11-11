@@ -1,5 +1,131 @@
 [
   {
+    "id": "f-obs-1658-fa",
+    "time": "2026-11-11T16:58:00Z",
+    "title": {
+      "pt": "Forças Armadas em prontidão, sem mobilização: o EMGFA diz que não foi requerida qualquer mobilização; o Exército suspendeu o exercício Fénix em Coimbra",
+      "en": "Armed Forces on standby, not mobilised: the EMGFA says no mobilisation was requested; the Army suspended the Fénix exercise in Coimbra"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1654-oeiras",
+    "time": "2026-11-11T16:54:00Z",
+    "title": {
+      "pt": "Oeiras: a Ribeira da Laje transbordou com a maré alta e danificou o pavilhão da Associação Desportiva de Oeiras; o presidente da câmara fala em \"no máximo, uma dúzia de ocorrências\" e as escolas deverão reabrir amanhã",
+      "en": "Oeiras: the Ribeira da Laje overflowed at high tide and damaged the Associação Desportiva de Oeiras sports hall; the mayor reports \"at most a dozen incidents\" and schools should reopen tomorrow"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1647-cabanas",
+    "time": "2026-11-11T16:47:00Z",
+    "title": {
+      "pt": "Cabanas de Tavira: a estrada abateu sob um veículo dos Bombeiros Sapadores de Tavira; a GNR cortou a estrada e não há vítimas referidas",
+      "en": "Cabanas de Tavira: the road collapsed under a Tavira fire brigade vehicle; GNR closed the road and no casualties were reported"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1645-alentejo",
+    "time": "2026-11-11T16:45:00Z",
+    "title": {
+      "pt": "Alentejo: 154 ocorrências até às 15:30, 54 em Portalegre (31 inundações) e 43 no Alentejo Litoral",
+      "en": "Alentejo: 154 incidents up to 15:30, 54 in Portalegre (31 floods) and 43 in Alentejo Litoral"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1641-setubal",
+    "time": "2026-11-11T16:41:00Z",
+    "title": {
+      "pt": "Península de Setúbal: 173 ocorrências até às 16:20, 57 só no concelho de Setúbal",
+      "en": "Setúbal peninsula: 173 incidents up to 16:20, 57 in Setúbal municipality alone"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1636-algarve-estradas",
+    "time": "2026-11-11T16:36:00Z",
+    "title": {
+      "pt": "Algarve: cortes em ruas de Faro (incluindo acesso à Praia de Faro), CM1081 interdito em Portimão, EN270 condicionada em Loulé e cortes por inundações em Lagoa",
+      "en": "Algarve: street closures in Faro (including access to Praia de Faro), CM1081 closed in Portimão, EN270 restricted in Loulé and flood closures in Lagoa"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1635-algarve",
+    "time": "2026-11-11T16:35:00Z",
+    "title": {
+      "pt": "Algarve: 120 ocorrências desde as 00:00 (41 quedas de árvores, 35 alagamentos, 14 quedas de estruturas), sem feridos nem desalojados",
+      "en": "Algarve: 120 incidents since 00:00 (41 fallen trees, 35 floods, 14 structure collapses), no injured or displaced"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1631-ipma",
+    "time": "2026-11-11T16:31:00Z",
+    "title": {
+      "pt": "IPMA: \"aparentemente o pior já passou\"; só Faro mantém aviso laranja de vento, até às 18:00, e os avisos de precipitação desceram para amarelo",
+      "en": "IPMA: \"apparently the worst has passed\"; only Faro keeps an orange wind warning until 18:00, and rain warnings dropped to yellow"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1631-vfx",
+    "time": "2026-11-11T16:31:00Z",
+    "title": {
+      "pt": "Vila Franca de Xira: 95 ocorrências até às 16:00, com inundações na baixa de Alverca e cortes de estradas",
+      "en": "Vila Franca de Xira: 95 incidents up to 16:00, with flooding in downtown Alverca and road closures"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "f-obs-1621-tavira",
     "time": "2026-11-11T16:21:00Z",
     "title": {
@@ -704,132 +830,6 @@
     "title": {
       "pt": "ANA: 222 voos cancelados nos aeroportos de Lisboa (208) e Faro (14), dados das 09h20",
       "en": "ANA: 222 flights cancelled at Lisbon (208) and Faro (14) airports, data as of 09:20"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Euronews",
-      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
-    }
-  },
-  {
-    "id": "f-obs-1109-alcantara",
-    "time": "2026-11-11T11:09:00Z",
-    "title": {
-      "pt": "Lisboa: chuva persistente forma lençóis de água em Alcântara e na Avenida da Índia; preia-mar prevista para as 16h00",
-      "en": "Lisbon: persistent rain forms sheets of water in Alcântara and Avenida da Índia; high tide expected at 16:00"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-obs-1105-algarve-barras",
-    "time": "2026-11-11T11:05:00Z",
-    "title": {
-      "pt": "Autoridade Marítima: Algarve é a zona mais preocupante, com todas as barras fechadas; portos de Lisboa, Setúbal e Sines mantêm-se abertos",
-      "en": "Maritime Authority: the Algarve is the main concern, with all bars closed; Lisbon, Setúbal and Sines ports remain open"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-eu-1100-madeira-139",
-    "time": "2026-11-11T11:00:00Z",
-    "title": {
-      "pt": "Madeira: Proteção Civil regional regista 139 ocorrências entre as 20h00 de terça-feira e as 08h30, na maioria inundações, movimentos de massa e queda de árvores; sem mortos",
-      "en": "Madeira: regional Civil Protection logs 139 incidents between 20:00 Tuesday and 08:30, mostly floods, mass movements and fallen trees; no fatalities"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Euronews",
-      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
-    }
-  },
-  {
-    "id": "f-eu-1032-nucleos",
-    "time": "2026-11-11T10:32:00Z",
-    "title": {
-      "pt": "Modelo europeu do IPMA divide a Charles em dois núcleos: o primeiro chega a Lisboa por volta das 15h00 com ventos de 90 a 100 km/h; o segundo entra pelo Algarve mais tarde, com rajadas de 100 a 120 km/h",
-      "en": "IPMA European model splits Charles into two cores: the first reaches Lisbon around 15:00 with winds of 90-100 km/h; the second enters via the Algarve later, with gusts of 100-120 km/h"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Euronews",
-      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
-    }
-  },
-  {
-    "id": "f-obs-1027-entrecampos",
-    "time": "2026-11-11T10:27:00Z",
-    "title": {
-      "pt": "Túnel de Entrecampos cortado no sentido sul para limpeza de sumidouros",
-      "en": "Entrecampos tunnel closed southbound for drain cleaning"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-masto-117597297354156557",
-    "time": "2026-11-11T10:19:14Z",
-    "title": {
-      "pt": "Lisboa: queda de elementos de construção na Rua Bombeiro Catana Ramos (relato numa rede social, não confirmado oficialmente)",
-      "en": "Lisbon: building elements fell on Rua Bombeiro Catana Ramos (social media report, not officially confirmed)"
-    },
-    "verified": false,
-    "source": {
-      "category": "redes_sociais",
-      "name": "@jt_rebelo@ciberlandia.pt (Mastodon)",
-      "url": "https://ciberlandia.pt/@jt_rebelo/117597297354156557"
-    }
-  },
-  {
-    "id": "f-eu-1017-avisos",
-    "time": "2026-11-11T10:17:00Z",
-    "title": {
-      "pt": "IPMA: Lisboa, Setúbal e Beja deixam o aviso vermelho de vento (passam a laranja, rajadas até 120 km/h) mas mantêm vermelho para chuva até às 21h00; Faro mantém vermelho de chuva e vento (rajadas até 140 km/h) até às 21h00; Leiria, Santarém, Castelo Branco e Portalegre com aviso vermelho de chuva das 12h00 às 18h00",
-      "en": "IPMA: Lisbon, Setúbal and Beja drop from red to orange wind warnings (gusts up to 120 km/h) but stay red for rain until 21:00; Faro keeps red rain and wind warnings (gusts up to 140 km/h) until 21:00; Leiria, Santarém, Castelo Branco and Portalegre have red rain warnings from 12:00 to 18:00"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Euronews",
-      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
-    }
-  },
-  {
-    "id": "f-eu-0954-mar",
-    "time": "2026-11-11T09:54:00Z",
-    "title": {
-      "pt": "Autoridade Marítima: agitação marítima significativa no continente até ao meio-dia de quinta-feira, ondas até 6 m (máximo 10 m); 18 barras fechadas às 07h30",
-      "en": "Maritime Authority: significant sea agitation on the mainland until noon Thursday, waves up to 6 m (max 10 m); 18 harbour bars closed by 07:30"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Euronews",
-      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
-    }
-  },
-  {
-    "id": "f-eu-0932-funchal",
-    "time": "2026-11-11T09:32:00Z",
-    "title": {
-      "pt": "Funchal: homem de 78 anos desaparecido após galgamento de uma ribeira no Caminho da Igreja Velha foi resgatado com vida e levado ao hospital para observação",
-      "en": "Funchal: a 78-year-old man missing after a stream overflowed on Caminho da Igreja Velha was rescued alive and taken to hospital for checks"
     },
     "verified": false,
     "source": {
