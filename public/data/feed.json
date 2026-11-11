@@ -1,5 +1,19 @@
 [
   {
+    "id": "f-obs-1259-autoeuropa",
+    "time": "2026-11-11T11:59:00Z",
+    "title": {
+      "pt": "Autoeuropa suspende a produção: a fábrica de Palmela parou os três turnos diários",
+      "en": "Autoeuropa suspends production: the Palmela plant halted its three daily shifts"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "f-eu-1223-alges",
     "time": "2026-11-11T12:23:00Z",
     "title": {
@@ -812,19 +826,6 @@
       "category": "governamental",
       "name": "Junta de Freguesia de Alvalade",
       "url": "https://jf-alvalade.pt/depressao-charles-encerramento-de-servicos-e-equipamentos-em-alvalade-no-dia-11-de-novembro/"
-    }
-  },
-  {
-    "id": "f-2026-11-10-rr-trajetoria",
-    "time": "2026-11-10T20:00:00Z",
-    "title": {
-      "pt": "Renascença: a depressão Charles desvia-se para sul e poderá entrar em Portugal pelo Algarve",
-      "en": "Renascença: depression Charles shifts south and may enter Portugal via the Algarve"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Renascença",
-      "url": "https://rr.pt/noticia/pais/2026/11/10/depressao-charles-desvia-se-para-sul-e-podera-entrar-em-portugal-pelo-algarve/493004/"
     }
   }
 ]
