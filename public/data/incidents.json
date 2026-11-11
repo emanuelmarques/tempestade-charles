@@ -1,5 +1,29 @@
 [
   {
+    "id": "i-loures-en250",
+    "title": {
+      "pt": "Loures: EN250 cortada por derrocada e N8 cortada na Flamenga",
+      "en": "Loures: EN250 closed by a landslide and N8 closed at Flamenga"
+    },
+    "description": {
+      "pt": "56 ocorrências até às 14:30, sobretudo inundações e quedas de árvores; a Ribeira da Póvoa está no limite. EN250 cortada entre Catujal e Sacavém e junto à ETAR de Frielas.",
+      "en": "56 incidents by 14:30, mostly floods and fallen trees; Ribeira da Póvoa at its limit. EN250 closed between Catujal and Sacavém and near the Frielas wastewater plant."
+    },
+    "time": "2026-11-11T14:52:00Z",
+    "place": "Loures",
+    "district": "lisboa",
+    "lat": 38.8309,
+    "lon": -9.1685,
+    "locationApprox": true,
+    "severity": 2,
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "i-setubal-muro",
     "title": {
       "pt": "Setúbal: queda de um muro de um complexo desportivo",
