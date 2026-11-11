@@ -1,5 +1,75 @@
 [
   {
+    "id": "f-obs-1727-lx",
+    "time": "2026-11-11T17:27:00Z",
+    "title": {
+      "pt": "Bombeiros Sapadores de Lisboa: 275 ocorrências desde as 00:00, 75 ainda ativas às 16:30, sem vítimas; 183 em propriedade privada, 43 inundações na via pública, 7 quedas de árvores",
+      "en": "Lisbon firefighters: 275 incidents since 00:00, 75 still active at 16:30, no victims; 183 on private property, 43 street floods, 7 fallen trees"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1726-oeste",
+    "time": "2026-11-11T17:26:00Z",
+    "title": {
+      "pt": "Oeste (Lusa): 41 ocorrências desde as 00:00, incluindo um muro de suporte em Torres Vedras; duas famílias evacuadas por precaução em Peniche e Óbidos",
+      "en": "West region (Lusa): 41 incidents since 00:00, including a retaining wall in Torres Vedras; two families evacuated as a precaution in Peniche and Óbidos"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1717-mad",
+    "time": "2026-11-11T17:17:00Z",
+    "title": {
+      "pt": "Madeira: 300 ocorrências, sobretudo no Funchal, Santa Cruz, Câmara de Lobos e Machico (80 movimentos de massa, 74 inundações, 48 quedas de árvores)",
+      "en": "Madeira: 300 incidents, mostly in Funchal, Santa Cruz, Câmara de Lobos and Machico (80 mass movements, 74 floods, 48 fallen trees)"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1711-palmela",
+    "time": "2026-11-11T17:11:00Z",
+    "title": {
+      "pt": "Palmela (Lusa): 12 pessoas saíram de casa após inundações e foram realojadas; três casas ficaram inabitáveis",
+      "en": "Palmela (Lusa): 12 people left their homes after flooding and were rehoused; three homes are uninhabitable"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1709-vento",
+    "time": "2026-11-11T17:09:00Z",
+    "title": {
+      "pt": "Rajada máxima no continente até agora: 123 km/h na Foia, Monchique (IPMA); Cabo da Roca 104 km/h",
+      "en": "Strongest mainland gust so far: 123 km/h at Foia, Monchique (IPMA); Cabo da Roca 104 km/h"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "f-obs-1658-fa",
     "time": "2026-11-11T16:58:00Z",
     "title": {
@@ -766,76 +836,6 @@
       "category": "comunicacao_social",
       "name": "Observador (liveblog)",
       "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-eu-1127-ren",
-    "time": "2026-11-11T11:27:00Z",
-    "title": {
-      "pt": "REN: sem perturbações relevantes nas infraestruturas de energia durante a noite; plano de emergência mantém-se ativo até ao fim de quarta-feira",
-      "en": "REN: no relevant disruptions to energy infrastructure overnight; emergency plan stays active until the end of Wednesday"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Euronews",
-      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
-    }
-  },
-  {
-    "id": "f-obs-1122-continente-189",
-    "time": "2026-11-11T11:22:00Z",
-    "title": {
-      "pt": "Proteção Civil: 189 ocorrências no continente às 11h00 (inundações e queda de árvores), com 514 operacionais e 189 meios mobilizados",
-      "en": "Civil Protection: 189 incidents on the mainland at 11:00 (floods and fallen trees), with 514 personnel and 189 vehicles deployed"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-obs-1121-alcacer",
-    "time": "2026-11-11T11:21:00Z",
-    "title": {
-      "pt": "Alcácer do Sal: noite mais calma do que o esperado; famílias do Bairro da Graça foram retiradas por precaução e a Avenida dos Aviadores continua fechada",
-      "en": "Alcácer do Sal: calmer night than expected; families from Bairro da Graça moved out as a precaution and Avenida dos Aviadores remains closed"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-eu-1120-madeira-200",
-    "time": "2026-11-11T11:20:00Z",
-    "title": {
-      "pt": "Madeira: Proteção Civil regista mais de 200 ocorrências (balanço das 08h45), com 529 operacionais e 210 meios mobilizados; Funchal, Santa Cruz e Machico mais afetados; sem mortos",
-      "en": "Madeira: Civil Protection logs over 200 incidents (as of 08:45), with 529 personnel and 210 vehicles deployed; Funchal, Santa Cruz and Machico worst hit; no deaths"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Euronews",
-      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
-    }
-  },
-  {
-    "id": "f-eu-1115-voos",
-    "time": "2026-11-11T11:15:00Z",
-    "title": {
-      "pt": "ANA: 222 voos cancelados nos aeroportos de Lisboa (208) e Faro (14), dados das 09h20",
-      "en": "ANA: 222 flights cancelled at Lisbon (208) and Faro (14) airports, data as of 09:20"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Euronews",
-      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
     }
   }
 ]

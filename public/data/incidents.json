@@ -1,5 +1,29 @@
 [
   {
+    "id": "i-palmela-inundacoes",
+    "title": {
+      "pt": "Palmela: inundações deixam três casas inabitáveis",
+      "en": "Palmela: flooding leaves three homes uninhabitable"
+    },
+    "description": {
+      "pt": "12 pessoas saíram de casa por infiltrações e inundações e foram realojadas; duas casas no centro histórico e uma em Pinhal Novo ficaram inabitáveis.",
+      "en": "12 people left their homes after leaks and flooding and were rehoused; two homes in the historic centre and one in Pinhal Novo are uninhabitable."
+    },
+    "time": "2026-11-11T17:11:00Z",
+    "place": "Palmela",
+    "district": "setubal",
+    "lat": 38.5686,
+    "lon": -8.9012,
+    "locationApprox": true,
+    "severity": 2,
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "i-oeiras-ribeira-laje",
     "title": {
       "pt": "Oeiras: Ribeira da Laje transbordou e danificou pavilhão desportivo",
