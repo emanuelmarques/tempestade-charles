@@ -1,16 +1,142 @@
 [
   {
-    "id": "f-obs-1259-autoeuropa",
-    "time": "2026-11-11T11:59:00Z",
+    "id": "f-obs-1321-ic1",
+    "time": "2026-11-11T13:21:00Z",
     "title": {
-      "pt": "Autoeuropa suspende a produção: a fábrica de Palmela parou os três turnos diários",
-      "en": "Autoeuropa suspends production: the Palmela plant halted its three daily shifts"
+      "pt": "IC1 (Alcácer do Sal–Palma): circulação restabelecida após a queda de um pinheiro",
+      "en": "IC1 (Alcácer do Sal–Palma): traffic restored after a pine tree fell"
     },
     "verified": false,
     "source": {
       "category": "comunicacao_social",
       "name": "Observador (liveblog)",
       "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1319-albufeira",
+    "time": "2026-11-11T13:19:00Z",
+    "title": {
+      "pt": "Albufeira: relatos nas redes sociais de novas quedas de árvores nas Açoteias e em Paderne",
+      "en": "Albufeira: social media reports of more fallen trees in Açoteias and Paderne"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1318-setubal",
+    "time": "2026-11-11T13:18:00Z",
+    "title": {
+      "pt": "Setúbal: vereador da Proteção Civil teme que a chuva intensa da tarde coincida com a preia-mar das 15:53 no Sado",
+      "en": "Setúbal: civil protection councillor fears afternoon heavy rain will coincide with the 15:53 high tide on the Sado"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1316-portalegre",
+    "time": "2026-11-11T13:16:00Z",
+    "title": {
+      "pt": "ULS Alto Alentejo: os 16 centros de saúde do distrito de Portalegre fecharam às 13:00 e reabrem na quinta-feira; em caso de doença aguda, SNS 24",
+      "en": "ULS Alto Alentejo: the 16 health centres in Portalegre district closed at 13:00 and reopen Thursday; for acute illness call SNS 24"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1316-oeiras",
+    "time": "2026-11-11T13:16:00Z",
+    "title": {
+      "pt": "Oeiras: Isaltino Morais diz ter \"centenas\" de operacionais na rua; pontos críticos na Ribeira de Algés, Ribeira da Lage e Ribeira de Massamá",
+      "en": "Oeiras: mayor says \"hundreds\" of personnel are on the street; critical points are Ribeira de Algés, Ribeira da Lage and Ribeira de Massamá"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1314-seixal",
+    "time": "2026-11-11T13:14:00Z",
+    "title": {
+      "pt": "Seixal: EN378 fechada no sentido Fogueteiro–Fernão Ferro; a câmara fechou também outras ruas do concelho",
+      "en": "Seixal: EN378 closed towards Fernão Ferro; the council also closed other streets"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1309-portimao",
+    "time": "2026-11-11T13:09:00Z",
+    "title": {
+      "pt": "Portimão: tudo fechado, incluindo centros comerciais e hipermercados; só serviços mínimos, chuva moderada desde as 05:00",
+      "en": "Portimão: everything closed, including malls and hypermarkets; minimum services only, moderate rain since 05:00"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1307-vfx",
+    "time": "2026-11-11T13:07:00Z",
+    "title": {
+      "pt": "Vila Franca de Xira: autarca alerta para a subida da maré do Tejo e dificuldades de drenagem; escolas fechadas",
+      "en": "Vila Franca de Xira: mayor warns of rising Tagus tide and drainage difficulties; schools closed"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1306-a2",
+    "time": "2026-11-11T13:06:00Z",
+    "title": {
+      "pt": "A2 (sentido Setúbal): rajadas fazem os carros oscilar e formam-se lençóis de água",
+      "en": "A2 (towards Setúbal): gusts sway cars and water sheets form"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-eu-1251-pico",
+    "time": "2026-11-11T12:51:00Z",
+    "title": {
+      "pt": "Governo: \"ainda nem chegou o pior\"; o pico da Charles no continente é esperado entre o meio-dia e as 18h00, com foco na chuva forte e no risco de inundações (fonte oficial citada pelo Euronews)",
+      "en": "Government source: the worst has not yet arrived; Charles is expected to peak on the mainland between noon and 6 pm, with heavy rain and flood risk the main concern"
+    },
+    "verified": true,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Euronews (liveblog)",
+      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
     }
   },
   {
@@ -24,6 +150,34 @@
     "source": {
       "category": "comunicacao_social",
       "name": "Euronews (liveblog)",
+      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
+    }
+  },
+  {
+    "id": "f-eu-1215-uls-alentejano",
+    "time": "2026-11-11T12:15:00Z",
+    "title": {
+      "pt": "ULS do Litoral Alentejano suspende cuidados programados não urgentes (consultas, exames, tratamentos não prioritários); urgências mantêm-se e centros de saúde abertos até às 13h00 para doença aguda",
+      "en": "ULS Litoral Alentejano suspends non-urgent scheduled care (outpatient visits, exams, non-priority treatments); emergency care continues and health centres stay open until 13:00 for acute illness"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Euronews",
+      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
+    }
+  },
+  {
+    "id": "f-eu-1208-transtejo",
+    "time": "2026-11-11T12:08:00Z",
+    "title": {
+      "pt": "Transtejo/Soflusa não prevê cancelar travessias do Tejo; o serviço deve manter-se até ao fim do dia se as condições o permitirem, com menos passageiros",
+      "en": "Transtejo/Soflusa does not plan to cancel Tagus crossings; service should continue through the day if conditions allow, with fewer passengers"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Euronews",
       "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
     }
   },
@@ -56,16 +210,30 @@
     }
   },
   {
-    "id": "f-eu-1251-pico",
-    "time": "2026-11-11T12:51:00Z",
+    "id": "f-obs-1259-autoeuropa",
+    "time": "2026-11-11T11:59:00Z",
     "title": {
-      "pt": "Governo: \"ainda nem chegou o pior\"; o pico da Charles no continente é esperado entre o meio-dia e as 18h00, com foco na chuva forte e no risco de inundações (fonte oficial citada pelo Euronews)",
-      "en": "Government source: the worst has not yet arrived; Charles is expected to peak on the mainland between noon and 6 pm, with heavy rain and flood risk the main concern"
+      "pt": "Autoeuropa suspende a produção: a fábrica de Palmela parou os três turnos diários",
+      "en": "Autoeuropa suspends production: the Palmela plant halted its three daily shifts"
     },
-    "verified": true,
+    "verified": false,
     "source": {
       "category": "comunicacao_social",
-      "name": "Euronews (liveblog)",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-eu-1156-cp-ponte",
+    "time": "2026-11-11T11:56:00Z",
+    "title": {
+      "pt": "CP suprime quatro comboios que atravessam a ponte 25 de Abril: Intercidades de Faro (9h15) e de Évora (11h30) para Lisboa-Oriente, e Oriente–Évora (13h35) e Oriente–Faro (14h02)",
+      "en": "CP cancels four trains crossing the 25 de Abril bridge: Intercidades from Faro (9:15) and Évora (11:30) to Lisboa-Oriente, and Oriente–Évora (13:35) and Oriente–Faro (14:02)"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Euronews",
       "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
     }
   },
@@ -81,48 +249,6 @@
       "category": "comunicacao_social",
       "name": "Observador (liveblog)",
       "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-eu-1215-uls-alentejano",
-    "time": "2026-11-11T12:15:00Z",
-    "title": {
-      "pt": "ULS do Litoral Alentejano suspende cuidados programados não urgentes (consultas, exames, tratamentos não prioritários); urgências mantêm-se e centros de saúde abertos até às 13h00 para doença aguda",
-      "en": "ULS Litoral Alentejano suspends non-urgent scheduled care (outpatient visits, exams, non-priority treatments); emergency care continues and health centres stay open until 13:00 for acute illness"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Euronews",
-      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
-    }
-  },
-  {
-    "id": "f-eu-1208-transtejo",
-    "time": "2026-11-11T12:08:00Z",
-    "title": {
-      "pt": "Transtejo/Soflusa não prevê cancelar travessias do Tejo; o serviço deve manter-se até ao fim do dia se as condições o permitirem, com menos passageiros",
-      "en": "Transtejo/Soflusa does not plan to cancel Tagus crossings; service should continue through the day if conditions allow, with fewer passengers"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Euronews",
-      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
-    }
-  },
-  {
-    "id": "f-eu-1156-cp-ponte",
-    "time": "2026-11-11T11:56:00Z",
-    "title": {
-      "pt": "CP suprime quatro comboios que atravessam a ponte 25 de Abril: Intercidades de Faro (9h15) e de Évora (11h30) para Lisboa-Oriente, e Oriente–Évora (13h35) e Oriente–Faro (14h02)",
-      "en": "CP cancels four trains crossing the 25 de Abril bridge: Intercidades from Faro (9:15) and Évora (11:30) to Lisboa-Oriente, and Oriente–Évora (13:35) and Oriente–Faro (14:02)"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Euronews",
-      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
     }
   },
   {
@@ -706,126 +832,6 @@
       "category": "comunicacao_social",
       "name": "Observador",
       "url": "https://observador.pt/programas/noticiario/as-noticias-das-22h-1895/"
-    }
-  },
-  {
-    "id": "f-2026-11-10-obs-pingodoce",
-    "time": "2026-11-10T22:17:00Z",
-    "title": {
-      "pt": "Pingo Doce vai fechar todas as lojas na quarta-feira, 11 de novembro.",
-      "en": "Pingo Doce will close all stores on Wednesday, 11 November."
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador",
-      "url": "https://observador.pt/programas/noticiario/as-noticias-das-22h-1895/"
-    }
-  },
-  {
-    "id": "f-2026-11-10-obs-sagres",
-    "time": "2026-11-10T22:17:00Z",
-    "title": {
-      "pt": "Sagres: Barra de Sagres fechada desde as 18:00, com reabertura prevista às 08:00 de quarta-feira após avaliação; Sines não exclui evacuações e prepara abrigo temporário em instalações municipais.",
-      "en": "Sagres: Barra de Sagres closed from 18:00, reopening 08:00 Wednesday after assessment; Sines does not rule out evacuations and is preparing temporary shelter in municipal facilities."
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador",
-      "url": "https://observador.pt/programas/noticiario/as-noticias-das-22h-1895/"
-    }
-  },
-  {
-    "id": "f-2026-11-10-ventusky-sul",
-    "time": "2026-11-10T21:57:49Z",
-    "verified": false,
-    "title": {
-      "pt": "Relato de um residente: segundo o Ventusky, os modelos desviam agora a Charles mais para sul de Lisboa, sobretudo de Setúbal a Sines e Grândola (não oficial).",
-      "en": "Resident report: according to Ventusky, models now shift Charles further south of Lisbon, mainly from Setúbal to Sines and Grândola (unofficial)."
-    },
-    "source": {
-      "category": "redes_sociais",
-      "name": "@jt_rebelo@ciberlandia.pt (Mastodon)",
-      "url": "https://ciberlandia.pt/@jt_rebelo/117594381971538505"
-    }
-  },
-  {
-    "id": "f-cnn-ulsas-adiamentos",
-    "time": "2026-11-10T21:19:00Z",
-    "title": {
-      "pt": "ULS Amadora-Sintra adia consultas presenciais, exames e cirurgias na quarta-feira (exceto oncologia); visitas ao domicílio suspensas, salvo urgências",
-      "en": "ULS Amadora-Sintra postpones in-person consultations, exams and surgeries on Wednesday (except oncology); home visits suspended except urgent cases"
-    },
-    "verified": true,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "CNN Portugal (Mau tempo ao minuto)",
-      "url": "https://cnnportugal.iol.pt/aominuto/6af2d07dd34e5a653d7338e2"
-    }
-  },
-  {
-    "id": "f-2026-11-10-sms-lisboa",
-    "time": "2026-11-10T20:36:33Z",
-    "verified": false,
-    "title": {
-      "pt": "Relato de um residente: novo SMS da Proteção Civil Municipal de Lisboa para 11 de novembro, «Depressão Charles - Vento e Chuva forte e persistente. Proteja-se», com ligação a lisboa.pt/mau-tempo-recomendacoes",
-      "en": "Resident report: new SMS from Lisbon Municipal Civil Protection for 11 November, \"Depression Charles - strong and persistent wind and rain. Protect yourself\", linking to lisboa.pt/mau-tempo-recomendacoes"
-    },
-    "source": {
-      "category": "redes_sociais",
-      "name": "@jt_rebelo@ciberlandia.pt (Mastodon)",
-      "url": "https://ciberlandia.pt/@jt_rebelo/117594062438294900"
-    }
-  },
-  {
-    "id": "f-2026-11-10-rtp-recursos",
-    "time": "2026-11-10T20:30:00Z",
-    "title": {
-      "pt": "GNR com cerca de 1.100 militares em prontidão; Forças Armadas em prontidão; 101 municípios sinalizados pela APA com risco de cheias urbanas; Leiria declara situação de alerta e Nível de Prontidão 4 desde a meia-noite de quarta-feira",
-      "en": "GNR has about 1,100 personnel on standby; Armed Forces on standby; 101 municipalities flagged by APA for urban flood risk; Leiria declares alert and Readiness Level 4 from midnight Wednesday"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "RTP",
-      "url": "https://www.rtp.pt/noticias/pais/pais-vai-ser-posto-a-prova-governo-declara-situacao-de-alerta-para-quarta-feira_e1778024"
-    }
-  },
-  {
-    "id": "f-2026-11-10-rtp-websummit",
-    "time": "2026-11-10T20:30:00Z",
-    "title": {
-      "pt": "Web Summit: o segundo dia (quarta-feira) não se realiza; o terceiro dia (quinta-feira) mantém-se. Parlamento em teletrabalho na quarta-feira",
-      "en": "Web Summit: day two (Wednesday) will not take place; day three (Thursday) stays. Parliament works remotely on Wednesday"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "RTP",
-      "url": "https://www.rtp.pt/noticias/pais/pais-vai-ser-posto-a-prova-governo-declara-situacao-de-alerta-para-quarta-feira_e1778024"
-    }
-  },
-  {
-    "id": "f-2026-11-10-lpp-lisboa-300",
-    "time": "2026-11-10T20:20:00Z",
-    "title": {
-      "pt": "Lisboa: mais de 300 ocorrências no concelho ao longo de terça-feira (ainda da tempestade Bruna); túneis rodoviários fecham à meia-noite e Metro abre espaços de acolhimento nas noites de 10 e 11",
-      "en": "Lisbon: over 300 incidents in the municipality on Tuesday (still from storm Bruna); road tunnels close at midnight and Metro opens shelter spaces on the nights of 10 and 11"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Lisboa para Pessoas",
-      "url": "https://lisboaparapessoas.pt/2026/11/10/tempestade-charles-lisboa-setubal/"
-    }
-  },
-  {
-    "id": "f-2026-11-10-alvalade",
-    "time": "2026-11-10T20:00:00Z",
-    "title": {
-      "pt": "Junta de Freguesia de Alvalade (Lisboa): a 11 de novembro encerram o atendimento presencial, parques e espaços verdes, além das escolas e serviços públicos não essenciais decretados pelo Governo",
-      "en": "Alvalade parish council (Lisbon): on 11 November in-person service, parks and green spaces close, besides the schools and non-essential public services closed by the Government"
-    },
-    "source": {
-      "category": "governamental",
-      "name": "Junta de Freguesia de Alvalade",
-      "url": "https://jf-alvalade.pt/depressao-charles-encerramento-de-servicos-e-equipamentos-em-alvalade-no-dia-11-de-novembro/"
     }
   }
 ]

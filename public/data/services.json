@@ -278,5 +278,19 @@
       "name": "Euronews",
       "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
     }
+  },
+  {
+    "id": "s-ob-seixal-en378",
+    "type": "estrada",
+    "name": {
+      "pt": "Seixal: EN378 fechada entre os km 5 e 8,9, no sentido Fogueteiro–Fernão Ferro, e outras seis estradas encerradas preventivamente",
+      "en": "Seixal: EN378 closed between km 5 and 8.9 towards Fernão Ferro, plus other roads closed as a precaution"
+    },
+    "status": "cortada",
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
   }
 ]
