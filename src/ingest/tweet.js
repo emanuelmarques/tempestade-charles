@@ -10,6 +10,8 @@ export const OFFICIAL_ACCOUNTS = [
   'Infra_PT', // Infraestruturas de Portugal
   'CamaraLisboa', // Câmara Municipal de Lisboa
   'metro_lisboa', // Metropolitano de Lisboa
+  'GNRepublicana', // GNR
+  'PSP_Portugal', // PSP
   'VOSTPT', // VOST Portugal (apoio digital à Proteção Civil)
   'USEmbPortugal', // Embaixada dos EUA em Lisboa
   'TravelGov', // Departamento de Estado dos EUA (avisos de viagem)
