@@ -1,5 +1,33 @@
 [
   {
+    "id": "f-cnn-fluvial-lisboa",
+    "time": "2026-11-11T00:36:00Z",
+    "title": {
+      "pt": "Ligação fluvial Porto Brandão–Trafaria–Pedrouços/Algés suspensa na quarta-feira; alternativa Trafaria–Porto Brandão–Belém",
+      "en": "Porto Brandão–Trafaria–Pedrouços/Algés river link suspended on Wednesday; alternative Trafaria–Porto Brandão–Belém"
+    },
+    "verified": true,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "CNN Portugal (Mau tempo ao minuto)",
+      "url": "https://cnnportugal.iol.pt/aominuto/6af2d07dd34e5a653d7338e2"
+    }
+  },
+  {
+    "id": "f-cnn-1240-ocorrencias",
+    "time": "2026-11-11T00:34:00Z",
+    "title": {
+      "pt": "Portugal continental registou 1.240 ocorrências na terça-feira (Grande Lisboa 642, Península de Setúbal 127): 743 inundações e 190 quedas de árvores; situação de alerta em vigor das 00:00 às 23:59 de quarta-feira",
+      "en": "Mainland Portugal logged 1,240 incidents on Tuesday (Greater Lisbon 642, Setúbal Peninsula 127): 743 floods and 190 fallen trees; state of alert in force 00:00–23:59 on Wednesday"
+    },
+    "verified": true,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "CNN Portugal (Mau tempo ao minuto)",
+      "url": "https://cnnportugal.iol.pt/aominuto/6af2d07dd34e5a653d7338e2"
+    }
+  },
+  {
     "id": "x-masto-117594916889891466",
     "time": "2026-11-11T00:13:51Z",
     "title": "Começou o #AlertaVermelho. O carro está estacionado, as janelas e persianas fechadas. Power banks e pilhas carregados. Frigorífico aprovisionado. Aguardemos.",
@@ -8,6 +36,34 @@
       "category": "redes_sociais",
       "name": "@diraquel@masto.pt (Mastodon)",
       "url": "https://masto.pt/@diraquel/117594916889891466"
+    }
+  },
+  {
+    "id": "f-cnn-madeira-albuquerque",
+    "time": "2026-11-10T23:56:00Z",
+    "title": {
+      "pt": "Madeira: Miguel Albuquerque diz que as ocorrências \"não são significativas\"; 37 registadas até às 23:20 e pico da depressão previsto para as 04:00",
+      "en": "Madeira: Miguel Albuquerque says incidents are \"not significant\"; 37 recorded by 23:20 and peak expected at 04:00"
+    },
+    "verified": true,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "CNN Portugal (Mau tempo ao minuto)",
+      "url": "https://cnnportugal.iol.pt/aominuto/6af2d07dd34e5a653d7338e2"
+    }
+  },
+  {
+    "id": "f-cnn-cp-suprimidos",
+    "time": "2026-11-10T23:11:00Z",
+    "title": {
+      "pt": "CP suprime quatro comboios que atravessam a ponte 25 de Abril na quarta-feira (IC 670, IC 698, IC 790, IC 572), sem alternativa rodoviária",
+      "en": "CP cancels four trains crossing the 25 de Abril bridge on Wednesday (IC 670, IC 698, IC 790, IC 572), with no road alternative"
+    },
+    "verified": true,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "CNN Portugal (Mau tempo ao minuto)",
+      "url": "https://cnnportugal.iol.pt/aominuto/6af2d07dd34e5a653d7338e2"
     }
   },
   {

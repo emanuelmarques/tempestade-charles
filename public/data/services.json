@@ -208,5 +208,33 @@
       "name": "Observador",
       "url": "https://observador.pt/programas/noticiario/as-noticias-das-22h-1895/"
     }
+  },
+  {
+    "id": "s-cnn-cp-ic-ponte",
+    "type": "comboio",
+    "name": {
+      "pt": "CP: IC 670 (Faro), IC 698 (Évora), IC 790 e IC 572 (Lisboa-Oriente) suprimidos na quarta-feira por causa da ponte 25 de Abril",
+      "en": "CP: IC 670 (Faro), IC 698 (Évora), IC 790 and IC 572 (Lisboa-Oriente) cancelled on Wednesday because of the 25 de Abril bridge"
+    },
+    "status": "suprimida",
+    "source": {
+      "category": "comunicacao_social",
+      "name": "CNN Portugal (Mau tempo ao minuto)",
+      "url": "https://cnnportugal.iol.pt/aominuto/6af2d07dd34e5a653d7338e2"
+    }
+  },
+  {
+    "id": "s-cnn-fluvial-trafaria",
+    "type": "estrada",
+    "name": {
+      "pt": "Ligação fluvial Porto Brandão–Trafaria–Pedrouços/Algés suspensa na quarta-feira (Passeio Marítimo de Algés encerrado)",
+      "en": "Porto Brandão–Trafaria–Pedrouços/Algés river link suspended on Wednesday (Algés seafront closed)"
+    },
+    "status": "sem_servico",
+    "source": {
+      "category": "comunicacao_social",
+      "name": "CNN Portugal (Mau tempo ao minuto)",
+      "url": "https://cnnportugal.iol.pt/aominuto/6af2d07dd34e5a653d7338e2"
+    }
   }
 ]
