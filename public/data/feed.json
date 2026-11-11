@@ -1,5 +1,47 @@
 [
   {
+    "id": "f-cnn-barreiro-tcb",
+    "time": "2026-11-11T01:07:00Z",
+    "title": {
+      "pt": "Barreiro: Transportes Coletivos do Barreiro com serviço reduzido; até às 12h horário de dias úteis, sem as linhas Expresso 4 e 8",
+      "en": "Barreiro: local bus operator on reduced service; weekday timetable until noon, Expresso lines 4 and 8 not running"
+    },
+    "verified": true,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "CNN Portugal (Mau tempo ao minuto)",
+      "url": "https://cnnportugal.iol.pt/aominuto/6af2d07dd34e5a653d7338e2"
+    }
+  },
+  {
+    "id": "f-cnn-portosanto-eletricidade",
+    "time": "2026-11-11T01:02:00Z",
+    "title": {
+      "pt": "Porto Santo: começam a registar-se cortes de energia e alguns problemas de comunicações",
+      "en": "Porto Santo: power cuts and some communication problems beginning"
+    },
+    "verified": true,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "CNN Portugal (Mau tempo ao minuto)",
+      "url": "https://cnnportugal.iol.pt/aominuto/6af2d07dd34e5a653d7338e2"
+    }
+  },
+  {
+    "id": "f-masto-117595032992557276",
+    "time": "2026-11-11T00:43:23Z",
+    "title": {
+      "pt": "Relato: chuva batida a vento na zona oriental de Lisboa, comparada à noite da chegada da Kristin",
+      "en": "Report: wind-driven rain over eastern Lisbon, compared to the night Kristin arrived"
+    },
+    "verified": false,
+    "source": {
+      "category": "redes_sociais",
+      "name": "@jt_rebelo@ciberlandia.pt (Mastodon)",
+      "url": "https://ciberlandia.pt/@jt_rebelo/117595032992557276"
+    }
+  },
+  {
     "id": "f-cnn-fluvial-lisboa",
     "time": "2026-11-11T00:36:00Z",
     "title": {
