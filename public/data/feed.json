@@ -1,5 +1,75 @@
 [
   {
+    "id": "f-obs-1400-madeira",
+    "time": "2026-11-11T14:00:00Z",
+    "title": {
+      "pt": "Madeira: Proteção Civil regional regista 285 ocorrências até às 13:10 (78 deslizamentos, 72 inundações, 42 quedas de árvores); Funchal com mais (73)",
+      "en": "Madeira: regional civil protection logs 285 incidents up to 13:10 (78 landslides, 72 floods, 42 fallen trees); Funchal worst hit (73)"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1359-mediotejo",
+    "time": "2026-11-11T13:59:00Z",
+    "title": {
+      "pt": "ULS Médio Tejo: centros de saúde reabrem parcialmente a partir das 14:00, só para doença súbita que exija avaliação no próprio dia",
+      "en": "ULS Médio Tejo: health centres partially reopen from 14:00, only for sudden illness needing same-day assessment"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1357-alcacer",
+    "time": "2026-11-11T13:57:00Z",
+    "title": {
+      "pt": "Alcácer do Sal: dez moradores do Bairro da Graça aconselhados a sair de casa por precaução, devido a uma encosta instável sob o castelo",
+      "en": "Alcácer do Sal: ten residents of Bairro da Graça advised to leave home as a precaution due to an unstable slope below the castle"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1343-setubal",
+    "time": "2026-11-11T13:43:00Z",
+    "title": {
+      "pt": "Setúbal: 90 ocorrências até às 12:45, metade inundações; caiu um muro de um complexo desportivo e há três estradas cortadas",
+      "en": "Setúbal: 90 incidents up to 12:45, half floods; a sports complex wall collapsed and three roads are closed"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1335-estradas",
+    "time": "2026-11-11T13:35:00Z",
+    "title": {
+      "pt": "Seis estradas nacionais com restrições às 13:00, sobretudo por inundações (EN378, EN10-1, EN246-1, EN338, EN338-1)",
+      "en": "Six national roads with restrictions at 13:00, mostly due to flooding (EN378, EN10-1, EN246-1, EN338, EN338-1)"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "f-obs-1321-ic1",
     "time": "2026-11-11T13:21:00Z",
     "title": {
@@ -123,6 +193,20 @@
       "category": "comunicacao_social",
       "name": "Observador (liveblog)",
       "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-masto-117597944760333550",
+    "time": "2026-11-11T13:03:53Z",
+    "title": {
+      "pt": "VOST Portugal (Mastodon) divulga ponto de situação da Proteção Civil: 538 ocorrências em Portugal até às 12h; chuva a intensificar-se a partir das 13h, sobretudo entre as 15h e as 18h",
+      "en": "VOST Portugal (Mastodon) shares civil protection update: 538 incidents in Portugal up to 12:00; rain to intensify from 13:00, mainly 15:00–18:00"
+    },
+    "verified": false,
+    "source": {
+      "category": "redes_sociais",
+      "name": "@vostpt@trombas.vost.pt (Mastodon)",
+      "url": "https://trombas.vost.pt/@vostpt/117597944760333550"
     }
   },
   {
@@ -753,85 +837,6 @@
       "category": "comunicacao_social",
       "name": "Observador",
       "url": "https://observador.pt/programas/noticiario/as-noticias-das-00h-2470/"
-    }
-  },
-  {
-    "id": "x-masto-117594916889891466",
-    "time": "2026-11-11T00:13:51Z",
-    "title": "Começou o #AlertaVermelho. O carro está estacionado, as janelas e persianas fechadas. Power banks e pilhas carregados. Frigorífico aprovisionado. Aguardemos.",
-    "verified": false,
-    "source": {
-      "category": "redes_sociais",
-      "name": "@diraquel@masto.pt (Mastodon)",
-      "url": "https://masto.pt/@diraquel/117594916889891466"
-    }
-  },
-  {
-    "id": "f-cnn-madeira-albuquerque",
-    "time": "2026-11-10T23:56:00Z",
-    "title": {
-      "pt": "Madeira: Miguel Albuquerque diz que as ocorrências \"não são significativas\"; 37 registadas até às 23:20 e pico da depressão previsto para as 04:00",
-      "en": "Madeira: Miguel Albuquerque says incidents are \"not significant\"; 37 recorded by 23:20 and peak expected at 04:00"
-    },
-    "verified": true,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "CNN Portugal (Mau tempo ao minuto)",
-      "url": "https://cnnportugal.iol.pt/aominuto/6af2d07dd34e5a653d7338e2"
-    }
-  },
-  {
-    "id": "f-cnn-cp-suprimidos",
-    "time": "2026-11-10T23:11:00Z",
-    "title": {
-      "pt": "CP suprime quatro comboios que atravessam a ponte 25 de Abril na quarta-feira (IC 670, IC 698, IC 790, IC 572), sem alternativa rodoviária",
-      "en": "CP cancels four trains crossing the 25 de Abril bridge on Wednesday (IC 670, IC 698, IC 790, IC 572), with no road alternative"
-    },
-    "verified": true,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "CNN Portugal (Mau tempo ao minuto)",
-      "url": "https://cnnportugal.iol.pt/aominuto/6af2d07dd34e5a653d7338e2"
-    }
-  },
-  {
-    "id": "f-obs-23h-trajetoria",
-    "time": "2026-11-10T23:00:00Z",
-    "title": {
-      "pt": "IPMA admite que a Depressão Charles deverá entrar em Portugal Continental mais a sul do que inicialmente previsto",
-      "en": "IPMA says depression Charles may enter mainland Portugal further south than first forecast"
-    },
-    "verified": true,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador",
-      "url": "https://observador.pt/programas/noticiario/as-noticias-das-23h-2206/"
-    }
-  },
-  {
-    "id": "f-2026-11-10-madeira-26",
-    "time": "2026-11-10T22:42:00Z",
-    "title": {
-      "pt": "Madeira: Charles provocou 26 ocorrências até às 22:30, segundo a Proteção Civil regional; toda a ilha sob aviso vermelho de chuva até às 06:00",
-      "en": "Madeira: Charles caused 26 incidents by 22:30, per regional Civil Protection; whole island under red rain warning until 06:00"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "DNOTICIAS.PT",
-      "url": "https://www.dnoticias.pt/2026/11/10/512448-charles-provocou-26-ocorrencias-ate-as-22h30/"
-    }
-  },
-  {
-    "id": "f-2026-11-10-obs-mai-casa",
-    "time": "2026-11-10T22:17:00Z",
-    "title": {
-      "pt": "MAI Luís Neves apela a que as pessoas fiquem em casa: a depressão chega ao continente ao fim da manhã de quarta-feira; o Governo pede teletrabalho sempre que possível.",
-      "en": "Interior Minister Luís Neves urges people to stay home: the depression reaches the mainland late Wednesday morning; the government asks for teleworking where possible."
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador",
-      "url": "https://observador.pt/programas/noticiario/as-noticias-das-22h-1895/"
     }
   }
 ]

@@ -1,5 +1,53 @@
 [
   {
+    "id": "i-setubal-muro",
+    "title": {
+      "pt": "Setúbal: queda de um muro de um complexo desportivo",
+      "en": "Setúbal: sports complex wall collapses"
+    },
+    "description": {
+      "pt": "O muro danificou três ecopontos e um automóvel e põe em risco pelo menos uma casa; três estradas cortadas no concelho.",
+      "en": "The wall damaged three recycling bins and a car and puts at least one house at risk; three roads closed in the municipality."
+    },
+    "time": "2026-11-11T13:43:00Z",
+    "place": "Setúbal",
+    "district": "setubal",
+    "lat": 38.5242,
+    "lon": -8.8932,
+    "locationApprox": true,
+    "severity": 2,
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "i-alcacer-bairro-graca",
+    "title": {
+      "pt": "Alcácer do Sal: moradores do Bairro da Graça aconselhados a sair por encosta instável",
+      "en": "Alcácer do Sal: Bairro da Graça residents advised to leave due to unstable slope"
+    },
+    "description": {
+      "pt": "Dez moradores aconselhados a sair de casa por precaução devido a uma encosta instável sob o castelo; a maioria passou a noite com familiares ou amigos.",
+      "en": "Ten residents advised to leave home as a precaution due to an unstable slope below the castle; most spent the night with family or friends."
+    },
+    "time": "2026-11-11T13:57:00Z",
+    "place": "Alcácer do Sal (Bairro da Graça)",
+    "district": "setubal",
+    "lat": 38.3725,
+    "lon": -8.5151,
+    "locationApprox": true,
+    "severity": 2,
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "i-lisboa-catana-ramos",
     "title": {
       "pt": "Queda de elementos de construção na Rua Bombeiro Catana Ramos",
