@@ -1,5 +1,18 @@
 [
   {
+    "id": "f-obs-2032-vodafone",
+    "time": "2026-11-11T20:32:00Z",
+    "title": {
+      "pt": "Vodafone registou interrupções de serviço, sobretudo por falta de eletricidade, em zonas pontuais dos distritos de Lisboa, Faro, Santarém e Leiria; na Madeira a rede estava estável",
+      "en": "Vodafone reported service interruptions, mainly due to power cuts, in isolated areas of Lisboa, Faro, Santarém and Leiria districts; the network in Madeira was stable"
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (Lusa)",
+      "url": "https://observador.pt/2026/11/11/mau-tempo-vodafone-registou-interrupcoes-em-lisboa-faro-santarem-e-leiria/"
+    }
+  },
+  {
     "id": "f-obs-2100-neves",
     "time": "2026-11-11T21:00:00Z",
     "title": {
@@ -819,19 +832,6 @@
       "en": "Madeira: regional civil protection says \"the worst has passed\"; the depression passed slightly south of the island, less intense than forecast"
     },
     "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Euronews (liveblog)",
-      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
-    }
-  },
-  {
-    "id": "f-eur-1418-lisboa",
-    "time": "2026-11-11T14:18:00Z",
-    "title": {
-      "pt": "Lisboa: 136 ocorrências até às 12:00, sobretudo inundações (120); 58 continuavam ativas e Alvalade lidera com 12",
-      "en": "Lisbon: 136 incidents by 12:00, mostly floods (120); 58 still active and Alvalade leads with 12"
-    },
     "source": {
       "category": "comunicacao_social",
       "name": "Euronews (liveblog)",

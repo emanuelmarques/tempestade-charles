@@ -348,5 +348,19 @@
       "name": "Observador (liveblog)",
       "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
     }
+  },
+  {
+    "id": "s-ob-vodafone",
+    "type": "comunicacoes",
+    "name": {
+      "pt": "Vodafone: interrupções pontuais em Lisboa, Faro, Santarém e Leiria, sobretudo por falta de eletricidade",
+      "en": "Vodafone: isolated outages in Lisboa, Faro, Santarém and Leiria, mainly due to power cuts"
+    },
+    "status": "sem_servico",
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (Lusa)",
+      "url": "https://observador.pt/2026/11/11/mau-tempo-vodafone-registou-interrupcoes-em-lisboa-faro-santarem-e-leiria/"
+    }
   }
 ]
