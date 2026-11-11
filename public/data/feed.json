@@ -1,5 +1,33 @@
 [
   {
+    "id": "f-obs-1936-voos",
+    "time": "2026-11-11T19:36:00Z",
+    "title": {
+      "pt": "Lusa: perto de 400 voos cancelados nos aeroportos de Lisboa, Porto, Faro e Madeira, segundo dados da ANA até às 18:30.",
+      "en": "Lusa: nearly 400 flights cancelled at Lisbon, Porto, Faro and Madeira airports, according to ANA figures up to 18:30."
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1945-ferrovia",
+    "time": "2026-11-11T19:45:00Z",
+    "title": {
+      "pt": "Ferrovia: reaberta a circulação na linha do Douro e no troço da linha do Norte entre Bobadela Sul e Alverca; continuam suspensas a linha de Cintura (túnel de Alcântara) e a da Beira Baixa entre Santa Margarida e Tramagal.",
+      "en": "Rail: service reopened on the Douro line and on the Norte line between Bobadela Sul and Alverca; the Cintura line (Alcântara tunnel) and Beira Baixa line between Santa Margarida and Tramagal remain suspended."
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "f-obs-1928-montenegro",
     "time": "2026-11-11T19:28:00Z",
     "title": {
@@ -802,34 +830,6 @@
     "title": {
       "pt": "Albufeira: relatos nas redes sociais de novas quedas de árvores nas Açoteias e em Paderne",
       "en": "Albufeira: social media reports of more fallen trees in Açoteias and Paderne"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador (liveblog)",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-obs-1318-setubal",
-    "time": "2026-11-11T13:18:00Z",
-    "title": {
-      "pt": "Setúbal: vereador da Proteção Civil teme que a chuva intensa da tarde coincida com a preia-mar das 15:53 no Sado",
-      "en": "Setúbal: civil protection councillor fears afternoon heavy rain will coincide with the 15:53 high tide on the Sado"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador (liveblog)",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-obs-1316-portalegre",
-    "time": "2026-11-11T13:16:00Z",
-    "title": {
-      "pt": "ULS Alto Alentejo: os 16 centros de saúde do distrito de Portalegre fecharam às 13:00 e reabrem na quinta-feira; em caso de doença aguda, SNS 24",
-      "en": "ULS Alto Alentejo: the 16 health centres in Portalegre district closed at 13:00 and reopen Thursday; for acute illness call SNS 24"
     },
     "verified": false,
     "source": {
