@@ -1,5 +1,19 @@
 [
   {
+    "id": "f-obs-1728-normalizada",
+    "time": "2026-11-11T17:28:00Z",
+    "title": {
+      "pt": "Circulação normalizada na Av. de Ceuta (acesso ao Eixo Norte-Sul), na Marginal de Oeiras e na EN378 em Setúbal; segundo as Infraestruturas de Portugal (16:00), mantêm-se oito estradas nacionais condicionadas por inundações.",
+      "en": "Traffic back to normal on Av. de Ceuta (Eixo Norte-Sul access), the Oeiras Marginal and the EN378 in Setúbal; per Infraestruturas de Portugal (16:00), eight national roads remain restricted by flooding."
+    },
+    "verified": true,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "f-obs-1727-lx",
     "time": "2026-11-11T17:27:00Z",
     "title": {
@@ -822,20 +836,6 @@
       "category": "comunicacao_social",
       "name": "Euronews",
       "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
-    }
-  },
-  {
-    "id": "f-obs-1153-lisboa-voos",
-    "time": "2026-11-11T11:53:00Z",
-    "title": {
-      "pt": "Aeroporto de Lisboa: 288 dos 565 voos previstos foram cancelados antecipadamente, mais de metade",
-      "en": "Lisbon airport: 288 of 565 scheduled flights cancelled in advance, more than half"
-    },
-    "verified": true,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador (liveblog)",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
     }
   }
 ]
