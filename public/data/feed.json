@@ -1,5 +1,19 @@
 [
   {
+    "id": "f-cnn-algarve-faro",
+    "time": "2026-11-11T01:16:00Z",
+    "title": {
+      "pt": "Algarve prepara-se para a Charles; o presidente da Câmara de Faro, António Pina, descreveu os preparativos locais à CNN Portugal",
+      "en": "Algarve prepares for Charles; Faro mayor António Pina described local preparations to CNN Portugal"
+    },
+    "verified": true,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "CNN Portugal (Mau tempo ao minuto)",
+      "url": "https://cnnportugal.iol.pt/aominuto/6af2d07dd34e5a653d7338e2"
+    }
+  },
+  {
     "id": "f-cnn-barreiro-tcb",
     "time": "2026-11-11T01:07:00Z",
     "title": {
@@ -186,6 +200,20 @@
       "category": "redes_sociais",
       "name": "@jt_rebelo@ciberlandia.pt (Mastodon)",
       "url": "https://ciberlandia.pt/@jt_rebelo/117594381971538505"
+    }
+  },
+  {
+    "id": "f-cnn-ulsas-adiamentos",
+    "time": "2026-11-10T21:19:00Z",
+    "title": {
+      "pt": "ULS Amadora-Sintra adia consultas presenciais, exames e cirurgias na quarta-feira (exceto oncologia); visitas ao domicílio suspensas, salvo urgências",
+      "en": "ULS Amadora-Sintra postpones in-person consultations, exams and surgeries on Wednesday (except oncology); home visits suspended except urgent cases"
+    },
+    "verified": true,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "CNN Portugal (Mau tempo ao minuto)",
+      "url": "https://cnnportugal.iol.pt/aominuto/6af2d07dd34e5a653d7338e2"
     }
   },
   {
