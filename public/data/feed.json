@@ -1,16 +1,30 @@
 [
   {
-    "id": "f-masto-117597297354156557",
-    "time": "2026-11-11T10:19:14Z",
+    "id": "f-eu-1215-uls-alentejano",
+    "time": "2026-11-11T12:15:00Z",
     "title": {
-      "pt": "Lisboa: queda de elementos de construção na Rua Bombeiro Catana Ramos (relato numa rede social, não confirmado oficialmente)",
-      "en": "Lisbon: building elements fell on Rua Bombeiro Catana Ramos (social media report, not officially confirmed)"
+      "pt": "ULS do Litoral Alentejano suspende cuidados programados não urgentes (consultas, exames, tratamentos não prioritários); urgências mantêm-se e centros de saúde abertos até às 13h00 para doença aguda",
+      "en": "ULS Litoral Alentejano suspends non-urgent scheduled care (outpatient visits, exams, non-priority treatments); emergency care continues and health centres stay open until 13:00 for acute illness"
     },
     "verified": false,
     "source": {
-      "category": "redes_sociais",
-      "name": "@jt_rebelo@ciberlandia.pt (Mastodon)",
-      "url": "https://ciberlandia.pt/@jt_rebelo/117597297354156557"
+      "category": "comunicacao_social",
+      "name": "Euronews",
+      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
+    }
+  },
+  {
+    "id": "f-eu-1208-transtejo",
+    "time": "2026-11-11T12:08:00Z",
+    "title": {
+      "pt": "Transtejo/Soflusa não prevê cancelar travessias do Tejo; o serviço deve manter-se até ao fim do dia se as condições o permitirem, com menos passageiros",
+      "en": "Transtejo/Soflusa does not plan to cancel Tagus crossings; service should continue through the day if conditions allow, with fewer passengers"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Euronews",
+      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
     }
   },
   {
@@ -42,6 +56,34 @@
     }
   },
   {
+    "id": "f-obs-1122-continente-189",
+    "time": "2026-11-11T11:22:00Z",
+    "title": {
+      "pt": "Proteção Civil: 189 ocorrências no continente às 11h00 (inundações e queda de árvores), com 514 operacionais e 189 meios mobilizados",
+      "en": "Civil Protection: 189 incidents on the mainland at 11:00 (floods and fallen trees), with 514 personnel and 189 vehicles deployed"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1121-alcacer",
+    "time": "2026-11-11T11:21:00Z",
+    "title": {
+      "pt": "Alcácer do Sal: noite mais calma do que o esperado; famílias do Bairro da Graça foram retiradas por precaução e a Avenida dos Aviadores continua fechada",
+      "en": "Alcácer do Sal: calmer night than expected; families from Bairro da Graça moved out as a precaution and Avenida dos Aviadores remains closed"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "f-eu-1120-madeira-200",
     "time": "2026-11-11T11:20:00Z",
     "title": {
@@ -70,6 +112,34 @@
     }
   },
   {
+    "id": "f-obs-1109-alcantara",
+    "time": "2026-11-11T11:09:00Z",
+    "title": {
+      "pt": "Lisboa: chuva persistente forma lençóis de água em Alcântara e na Avenida da Índia; preia-mar prevista para as 16h00",
+      "en": "Lisbon: persistent rain forms sheets of water in Alcântara and Avenida da Índia; high tide expected at 16:00"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1105-algarve-barras",
+    "time": "2026-11-11T11:05:00Z",
+    "title": {
+      "pt": "Autoridade Marítima: Algarve é a zona mais preocupante, com todas as barras fechadas; portos de Lisboa, Setúbal e Sines mantêm-se abertos",
+      "en": "Maritime Authority: the Algarve is the main concern, with all bars closed; Lisbon, Setúbal and Sines ports remain open"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "f-eu-1100-madeira-139",
     "time": "2026-11-11T11:00:00Z",
     "title": {
@@ -95,6 +165,34 @@
       "category": "comunicacao_social",
       "name": "Euronews",
       "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
+    }
+  },
+  {
+    "id": "f-obs-1027-entrecampos",
+    "time": "2026-11-11T10:27:00Z",
+    "title": {
+      "pt": "Túnel de Entrecampos cortado no sentido sul para limpeza de sumidouros",
+      "en": "Entrecampos tunnel closed southbound for drain cleaning"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-masto-117597297354156557",
+    "time": "2026-11-11T10:19:14Z",
+    "title": {
+      "pt": "Lisboa: queda de elementos de construção na Rua Bombeiro Catana Ramos (relato numa rede social, não confirmado oficialmente)",
+      "en": "Lisbon: building elements fell on Rua Bombeiro Catana Ramos (social media report, not officially confirmed)"
+    },
+    "verified": false,
+    "source": {
+      "category": "redes_sociais",
+      "name": "@jt_rebelo@ciberlandia.pt (Mastodon)",
+      "url": "https://ciberlandia.pt/@jt_rebelo/117597297354156557"
     }
   },
   {
@@ -720,96 +818,6 @@
       "category": "comunicacao_social",
       "name": "Diário de Notícias",
       "url": "https://www.dn.pt/sociedade/proteo-civil-alerta-para-chuva-forte-e-rajadas-at-120-kmh-governo-pede-que-se-evitem-sadas-de-casa"
-    }
-  },
-  {
-    "id": "f-2026-11-10-rtp-medidas",
-    "time": "2026-11-10T17:00:00Z",
-    "title": {
-      "pt": "Museus e monumentos nacionais encerrados na quarta-feira; tribunais decidem caso a caso; pais que ficam com os filhos têm falta justificada sem perda de rendimento",
-      "en": "National museums and monuments closed on Wednesday; courts decide case by case; parents staying home with children get a justified absence without loss of income"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "RTP Notícias",
-      "url": "https://www.rtp.pt/noticias/pais/pais-vai-ser-posto-a-prova-governo-declara-situacao-de-alerta-para-quarta-feira_e1778024"
-    }
-  },
-  {
-    "id": "f-2026-11-10-rtp-madeira",
-    "time": "2026-11-10T17:00:00Z",
-    "title": {
-      "pt": "Madeira: aviso vermelho na costa sul e zonas montanhosas desde as 21h00 de terça-feira; percursos pedestres e estrada do Pico do Areeiro fechados; 210 ocorrências na passagem da depressão Bruna (Funchal 94)",
-      "en": "Madeira: red warning for the south coast and mountains from 21:00 Tuesday; hiking trails and Pico do Areeiro road closed; 210 incidents during depression Bruna (Funchal 94)"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "RTP Notícias",
-      "url": "https://www.rtp.pt/noticias/pais/pais-vai-ser-posto-a-prova-governo-declara-situacao-de-alerta-para-quarta-feira_e1778024"
-    }
-  },
-  {
-    "id": "f-2026-11-10-rtp-leiria",
-    "time": "2026-11-10T17:00:00Z",
-    "title": {
-      "pt": "Leiria: atendimento presencial suspenso e mercados (incluindo o Mercado do Falcão) encerrados na quarta e quinta-feira",
-      "en": "Leiria: in-person services suspended and markets (including Mercado do Falcão) closed Wednesday and Thursday"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "RTP Notícias",
-      "url": "https://www.rtp.pt/noticias/pais/pais-vai-ser-posto-a-prova-governo-declara-situacao-de-alerta-para-quarta-feira_e1778024"
-    }
-  },
-  {
-    "id": "x-2120194794357981497",
-    "time": "2026-11-10T16:40:04.000Z",
-    "title": "CICLONE CHARLES: ATUALIZAÇÃO DE TRAJETÓRIA E INTENSIDADE ℹ Antes de mais: Mantenham a prevenção, e sigam os avisos - mantém-se a incerteza Ainda assim, olhando ao satélite e últimas observações dos modelos, a situação está a mudar em relação ao previsto... 1/2",
-    "verified": false,
-    "source": {
-      "category": "redes_sociais",
-      "name": "@LusoMeteo (X)",
-      "url": "https://x.com/LusoMeteo/status/2120194794357981497"
-    }
-  },
-  {
-    "id": "f-2026-11-10-alerta",
-    "time": "2026-11-10T15:22:00Z",
-    "title": {
-      "pt": "Governo declara situação de alerta em Portugal continental para quarta-feira, 11 de novembro, das 00:00 às 23:59",
-      "en": "Government declares a state of alert for mainland Portugal on Wednesday 11 November, from 00:00 to 23:59"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Correio da Manhã",
-      "url": "https://www.cmjornal.pt/sociedade/detalhe/chuva-vento-forte-e-agitacao-maritima-mau-tempo-deixa-pais-em-alerta"
-    }
-  },
-  {
-    "id": "f-2026-11-10-anepc-aviso21",
-    "time": "2026-11-10T15:17:32Z",
-    "verified": false,
-    "title": {
-      "pt": "Partilhada a ligação para o Aviso 21 da ANEPC: \"Depressão Charles: agravamento da situação meteorológica, chuva e vento forte, medidas preventivas\" (conteúdo do aviso não lido nesta recolha)",
-      "en": "Link shared to ANEPC Notice 21: \"Depression Charles: worsening weather, heavy rain and strong wind, preventive measures\" (notice content not read in this run)"
-    },
-    "source": {
-      "category": "redes_sociais",
-      "name": "@brunomiguel@masto.pt (Mastodon)",
-      "url": "https://masto.pt/@brunomiguel/117592808029752517"
-    }
-  },
-  {
-    "id": "f-2026-11-10-moedas",
-    "time": "2026-11-10T14:16:00Z",
-    "title": {
-      "pt": "Lisboa: mais de 300 ocorrências desde a madrugada; túneis, escolas e parques fecham a partir da meia-noite e a Web Summit deverá não decorrer na quarta-feira (decisão final do Ministro da Administração Interna)",
-      "en": "Lisbon: more than 300 incidents since early morning; tunnels, schools and parks close from midnight and the Web Summit probably cannot run on Wednesday (final decision rests with the Internal Administration Minister)"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador",
-      "url": "https://observador.pt/2026/11/10/websummit-em-risco-tuneis-encerrados-e-o-mercado-de-natal-que-se-vai-manter-no-rossio-as-medidas-de-moedas-para-a-depressao-charles/"
     }
   }
 ]
