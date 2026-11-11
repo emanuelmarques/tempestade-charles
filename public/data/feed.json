@@ -1,5 +1,47 @@
 [
   {
+    "id": "f-eu-1127-ren",
+    "time": "2026-11-11T11:27:00Z",
+    "title": {
+      "pt": "REN: sem perturbações relevantes nas infraestruturas de energia durante a noite; plano de emergência mantém-se ativo até ao fim de quarta-feira",
+      "en": "REN: no relevant disruptions to energy infrastructure overnight; emergency plan stays active until the end of Wednesday"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Euronews",
+      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
+    }
+  },
+  {
+    "id": "f-eu-1120-madeira-200",
+    "time": "2026-11-11T11:20:00Z",
+    "title": {
+      "pt": "Madeira: Proteção Civil regista mais de 200 ocorrências (balanço das 08h45), com 529 operacionais e 210 meios mobilizados; Funchal, Santa Cruz e Machico mais afetados; sem mortos",
+      "en": "Madeira: Civil Protection logs over 200 incidents (as of 08:45), with 529 personnel and 210 vehicles deployed; Funchal, Santa Cruz and Machico worst hit; no deaths"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Euronews",
+      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
+    }
+  },
+  {
+    "id": "f-eu-1115-voos",
+    "time": "2026-11-11T11:15:00Z",
+    "title": {
+      "pt": "ANA: 222 voos cancelados nos aeroportos de Lisboa (208) e Faro (14), dados das 09h20",
+      "en": "ANA: 222 flights cancelled at Lisbon (208) and Faro (14) airports, data as of 09:20"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Euronews",
+      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
+    }
+  },
+  {
     "id": "f-eu-1100-madeira-139",
     "time": "2026-11-11T11:00:00Z",
     "title": {
@@ -762,48 +804,6 @@
       "category": "governamental",
       "name": "@TravelGov (X)",
       "url": "https://x.com/TravelGov/status/2120153518057091229"
-    }
-  },
-  {
-    "id": "f-2026-11-10-despacho-alerta",
-    "time": "2026-11-10T13:47:45Z",
-    "verified": false,
-    "title": {
-      "pt": "Publicado em Diário da República o Despacho n.º 13773-A/2026, de 10 de novembro, que declara a situação de alerta para todo o dia 11 de novembro em todo o território continental",
-      "en": "Order no. 13773-A/2026 of 10 November published in the Diário da República, declaring the alert situation for all of 11 November across mainland Portugal"
-    },
-    "source": {
-      "category": "redes_sociais",
-      "name": "@jt_rebelo@ciberlandia.pt (Mastodon)",
-      "url": "https://ciberlandia.pt/@jt_rebelo/117592454978666779"
-    }
-  },
-  {
-    "id": "f-2026-11-10-usembassy",
-    "time": "2026-11-10T13:43:05Z",
-    "verified": true,
-    "title": {
-      "pt": "Embaixada dos EUA em Lisboa: a Bruna afeta o continente com chuva, vento forte e mar agitado até 13 de novembro; a Charles deverá chegar ao continente na quarta-feira",
-      "en": "U.S. Embassy Lisbon: Bruna is affecting the mainland with rain, strong wind and rough seas through 13 November; Charles is expected to reach the mainland on Wednesday"
-    },
-    "source": {
-      "category": "governamental",
-      "name": "@USEmbPortugal (X)",
-      "url": "https://x.com/USEmbPortugal/status/2120150254402109816"
-    }
-  },
-  {
-    "id": "x-2120150254402109816",
-    "time": "2026-11-10T13:43:05.000Z",
-    "title": {
-      "pt": "Embaixada dos EUA em Lisboa: a tempestade Bruna afeta o continente até 13 de novembro; a Charles deve chegar ao continente na quarta-feira, 11 de novembro.",
-      "en": "US Embassy Lisbon: Storm Bruna affects mainland Portugal through November 13; Charles is expected to reach the mainland on Wednesday, November 11."
-    },
-    "verified": true,
-    "source": {
-      "category": "governamental",
-      "name": "@USEmbPortugal (X)",
-      "url": "https://x.com/USEmbPortugal/status/2120150254402109816"
     }
   }
 ]

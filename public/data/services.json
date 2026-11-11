@@ -264,5 +264,19 @@
       "name": "Euronews",
       "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
     }
+  },
+  {
+    "id": "s-aeroportos-lisboa-faro",
+    "type": "aeroporto",
+    "name": {
+      "pt": "Aeroportos de Lisboa e Faro: 222 voos cancelados (dados das 09h20)",
+      "en": "Lisbon and Faro airports: 222 flights cancelled (data as of 09:20)"
+    },
+    "status": "suprimida",
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Euronews",
+      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
+    }
   }
 ]
