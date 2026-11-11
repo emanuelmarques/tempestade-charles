@@ -1,5 +1,33 @@
 [
   {
+    "id": "f-eu-1251-pico",
+    "time": "2026-11-11T12:51:00Z",
+    "title": {
+      "pt": "Governo: \"ainda nem chegou o pior\"; o pico da Charles no continente é esperado entre o meio-dia e as 18h00, com foco na chuva forte e no risco de inundações (fonte oficial citada pelo Euronews)",
+      "en": "Government source: the worst has not yet arrived; Charles is expected to peak on the mainland between noon and 6 pm, with heavy rain and flood risk the main concern"
+    },
+    "verified": true,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Euronews (liveblog)",
+      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
+    }
+  },
+  {
+    "id": "f-obs-1153-lisboa-voos",
+    "time": "2026-11-11T11:53:00Z",
+    "title": {
+      "pt": "Aeroporto de Lisboa: 288 dos 565 voos previstos foram cancelados antecipadamente, mais de metade",
+      "en": "Lisbon airport: 288 of 565 scheduled flights cancelled in advance, more than half"
+    },
+    "verified": true,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "f-eu-1215-uls-alentejano",
     "time": "2026-11-11T12:15:00Z",
     "title": {
@@ -792,32 +820,6 @@
       "category": "comunicacao_social",
       "name": "Público",
       "url": "https://www.publico.pt/2026/11/10/sociedade/noticia/mau-tempo-governo-pede-apenas-deslocacoes-necessarias-periodos-chuva-intensa-2194385"
-    }
-  },
-  {
-    "id": "f-2026-11-10-dn-mar",
-    "time": "2026-11-10T17:58:00Z",
-    "title": {
-      "pt": "Autoridade Marítima prevê ondas até 10 metros a partir das 06:00 de quarta-feira, com pico da maré às 15:20; navegação no Douro proibida a embarcações com menos de 12 metros",
-      "en": "Maritime Authority forecasts waves up to 10 metres from 06:00 on Wednesday, with the tide peaking at 15:20; boats under 12 metres banned from the Douro"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Diário de Notícias",
-      "url": "https://www.dn.pt/sociedade/proteo-civil-alerta-para-chuva-forte-e-rajadas-at-120-kmh-governo-pede-que-se-evitem-sadas-de-casa"
-    }
-  },
-  {
-    "id": "f-2026-11-10-dn-saude",
-    "time": "2026-11-10T17:58:00Z",
-    "title": {
-      "pt": "Hospitais do Sul e algumas unidades de Lisboa adiam consultas e exames não urgentes; cada ULS decide; USF do Arco (Lisboa) encerrada por danos",
-      "en": "Southern hospitals and some Lisbon units postpone non-urgent appointments and tests; each local health unit decides; USF do Arco (Lisbon) closed due to damage"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Diário de Notícias",
-      "url": "https://www.dn.pt/sociedade/proteo-civil-alerta-para-chuva-forte-e-rajadas-at-120-kmh-governo-pede-que-se-evitem-sadas-de-casa"
     }
   }
 ]
