@@ -1,5 +1,16 @@
 [
   {
+    "id": "x-masto-117594916889891466",
+    "time": "2026-11-11T00:13:51Z",
+    "title": "Começou o #AlertaVermelho. O carro está estacionado, as janelas e persianas fechadas. Power banks e pilhas carregados. Frigorífico aprovisionado. Aguardemos.",
+    "verified": false,
+    "source": {
+      "category": "redes_sociais",
+      "name": "@diraquel@masto.pt (Mastodon)",
+      "url": "https://masto.pt/@diraquel/117594916889891466"
+    }
+  },
+  {
     "id": "f-2026-11-10-madeira-26",
     "time": "2026-11-10T22:42:00Z",
     "title": {
@@ -103,6 +114,19 @@
       "category": "comunicacao_social",
       "name": "RTP",
       "url": "https://www.rtp.pt/noticias/pais/pais-vai-ser-posto-a-prova-governo-declara-situacao-de-alerta-para-quarta-feira_e1778024"
+    }
+  },
+  {
+    "id": "f-2026-11-10-lpp-lisboa-300",
+    "time": "2026-11-10T20:20:00Z",
+    "title": {
+      "pt": "Lisboa: mais de 300 ocorrências no concelho ao longo de terça-feira (ainda da tempestade Bruna); túneis rodoviários fecham à meia-noite e Metro abre espaços de acolhimento nas noites de 10 e 11",
+      "en": "Lisbon: over 300 incidents in the municipality on Tuesday (still from storm Bruna); road tunnels close at midnight and Metro opens shelter spaces on the nights of 10 and 11"
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Lisboa para Pessoas",
+      "url": "https://lisboaparapessoas.pt/2026/11/10/tempestade-charles-lisboa-setubal/"
     }
   },
   {
