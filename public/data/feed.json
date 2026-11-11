@@ -28,6 +28,20 @@
     }
   },
   {
+    "id": "f-obs-01h-kristin",
+    "time": "2026-11-11T01:18:00Z",
+    "title": {
+      "pt": "Depressão Charles preocupa terras afetadas pela Kristin",
+      "en": "Depression Charles worries areas hit by Kristin"
+    },
+    "verified": true,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/programas/noticiario/as-noticias-da-1h-2442/"
+    }
+  },
+  {
     "id": "f-cnn-algarve-faro",
     "time": "2026-11-11T01:16:00Z",
     "title": {
@@ -140,6 +154,20 @@
     }
   },
   {
+    "id": "f-obs-00h-madeira",
+    "time": "2026-11-11T00:16:00Z",
+    "title": {
+      "pt": "Efeitos da Depressão Charles já se sentem na Madeira",
+      "en": "Effects of depression Charles are already being felt in Madeira"
+    },
+    "verified": true,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/programas/noticiario/as-noticias-das-00h-2470/"
+    }
+  },
+  {
     "id": "x-masto-117594916889891466",
     "time": "2026-11-11T00:13:51Z",
     "title": "Começou o #AlertaVermelho. O carro está estacionado, as janelas e persianas fechadas. Power banks e pilhas carregados. Frigorífico aprovisionado. Aguardemos.",
@@ -176,6 +204,20 @@
       "category": "comunicacao_social",
       "name": "CNN Portugal (Mau tempo ao minuto)",
       "url": "https://cnnportugal.iol.pt/aominuto/6af2d07dd34e5a653d7338e2"
+    }
+  },
+  {
+    "id": "f-obs-23h-trajetoria",
+    "time": "2026-11-10T23:00:00Z",
+    "title": {
+      "pt": "IPMA admite que a Depressão Charles deverá entrar em Portugal Continental mais a sul do que inicialmente previsto",
+      "en": "IPMA says depression Charles may enter mainland Portugal further south than first forecast"
+    },
+    "verified": true,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/programas/noticiario/as-noticias-das-23h-2206/"
     }
   },
   {
