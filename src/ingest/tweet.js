@@ -2,7 +2,18 @@
 // Endpoint não documentado pelo X: pode deixar de funcionar. Usar só para tweets concretos e a pouco volume.
 
 /** Contas que são organismos públicos oficiais; os seus tweets contam como fonte governamental. */
-export const OFFICIAL_ACCOUNTS = ['ProteccaoCivil'];
+export const OFFICIAL_ACCOUNTS = [
+  'ProteccaoCivil', // ANEPC
+  'govpt', // República Portuguesa (Governo)
+  'ainterna_pt', // Ministério da Administração Interna
+  'ipma_pt', // IPMA
+  'Infra_PT', // Infraestruturas de Portugal
+  'CamaraLisboa', // Câmara Municipal de Lisboa
+  'metro_lisboa', // Metropolitano de Lisboa
+  'VOSTPT', // VOST Portugal (apoio digital à Proteção Civil)
+  'USEmbPortugal', // Embaixada dos EUA em Lisboa
+  'TravelGov', // Departamento de Estado dos EUA (avisos de viagem)
+];
 
 /** Extrai o ID de um tweet a partir de um link x.com/twitter.com ou de um ID numérico. */
 export function parseTweetId(input) {

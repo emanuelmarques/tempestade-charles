@@ -299,9 +299,9 @@
     "id": "x-2120153518057091229",
     "time": "2026-11-10T13:56:03.000Z",
     "title": "Portugal: Storm Bruna is currently affecting mainland Portugal with rain, strong winds, and rough seas forecast through November 13. A second storm, Charles, is expected to reach the mainland on November 11 and will bring heavy rain, winds of up to 140 km/h, rough seas, and the",
-    "verified": false,
+    "verified": true,
     "source": {
-      "category": "redes_sociais",
+      "category": "governamental",
       "name": "@TravelGov (X)",
       "url": "https://x.com/TravelGov/status/2120153518057091229"
     }
@@ -323,13 +323,13 @@
   {
     "id": "f-2026-11-10-usembassy",
     "time": "2026-11-10T13:43:05Z",
-    "verified": false,
+    "verified": true,
     "title": {
       "pt": "Embaixada dos EUA em Lisboa: a Bruna afeta o continente com chuva, vento forte e mar agitado até 13 de novembro; a Charles deverá chegar ao continente na quarta-feira",
       "en": "U.S. Embassy Lisbon: Bruna is affecting the mainland with rain, strong wind and rough seas through 13 November; Charles is expected to reach the mainland on Wednesday"
     },
     "source": {
-      "category": "redes_sociais",
+      "category": "governamental",
       "name": "@USEmbPortugal (X)",
       "url": "https://x.com/USEmbPortugal/status/2120150254402109816"
     }
@@ -362,9 +362,9 @@
     "id": "f-2026-11-10-vost",
     "time": "2026-11-10T09:28:22Z",
     "title": "#FMA_Charles Amanhã, quarta-feira, 11 de novembro de 2026 Portugal Continental - Fica em casa e evita deslocações desnecessárias Existe o risco de inundações urbanas, queda de árvores, ramos e estruturas móveis, bem como interrupções localizadas de eletricidade e comunicações.",
-    "verified": false,
+    "verified": true,
     "source": {
-      "category": "redes_sociais",
+      "category": "governamental",
       "name": "@VOSTPT (X)",
       "url": "https://x.com/VOSTPT/status/2120086149976780825"
     }
@@ -476,9 +476,9 @@
     "id": "x-2119935171012989269",
     "time": "2026-11-09T23:28:25.000Z",
     "title": "☔ De acordo com a informação do Instituto Português do Mar e da Atmosfera (IPMA) prevê, para os próximos dias, um agravamento significativo das condições meteorológicas em Portugal continental.",
-    "verified": false,
+    "verified": true,
     "source": {
-      "category": "redes_sociais",
+      "category": "governamental",
       "name": "@govpt (X)",
       "url": "https://x.com/govpt/status/2119935171012989269"
     }
@@ -490,9 +490,9 @@
       "pt": "VOST Portugal, resumo do comunicado do IPMA: o IPMA atribuiu o nome Charles a uma depressão perto da Madeira que deverá deslocar-se em direção ao Continente; na Madeira, chuva persistente e por vezes forte entre o final do dia 10 e a manhã do dia 11",
       "en": "VOST Portugal, summary of the IPMA statement: IPMA named a depression near Madeira Charles, expected to move towards the mainland; in Madeira, persistent and at times heavy rain between late on the 10th and the morning of the 11th"
     },
-    "verified": false,
+    "verified": true,
     "source": {
-      "category": "redes_sociais",
+      "category": "governamental",
       "name": "@VOSTPT (X)",
       "url": "https://x.com/VOSTPT/status/2119825404613509600"
     }
