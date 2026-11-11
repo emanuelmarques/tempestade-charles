@@ -1,5 +1,29 @@
 [
   {
+    "id": "i-silves-armacao-pera",
+    "title": {
+      "pt": "Armação de Pera (Silves): apartamento inundado deixa quatro desalojados",
+      "en": "Armação de Pera (Silves): flooded apartment leaves four displaced"
+    },
+    "description": {
+      "pt": "Quatro pessoas ficaram sem casa após a inundação de um apartamento e estão em casa de familiares; sem vítimas.",
+      "en": "Four people lost the use of their home after a flooded apartment became uninhabitable and are staying with relatives; no casualties."
+    },
+    "time": "2026-11-11T19:00:00Z",
+    "place": "Armação de Pera, Silves",
+    "district": "faro",
+    "lat": 37.1031,
+    "lon": -8.3574,
+    "locationApprox": true,
+    "severity": 2,
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Executive Digest (Lusa)",
+      "url": "https://executivedigest.sapo.pt/mau-tempo-depressao-charles-desaloja-quatro-pessoas-no-algarve"
+    }
+  },
+  {
     "id": "i-leiria-edificio-devoluto",
     "title": {
       "pt": "Leiria: colapso de um edifício devoluto",

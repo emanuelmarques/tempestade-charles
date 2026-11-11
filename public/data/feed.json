@@ -1,5 +1,89 @@
 [
   {
+    "id": "f-obs-1928-montenegro",
+    "time": "2026-11-11T19:28:00Z",
+    "title": {
+      "pt": "Montenegro: os momentos de maior dificuldade estão praticamente superados; o alerta em vigor até à meia-noite tem razões para ser levantado e o centro de crise do Governo (CORGOV) será desativado.",
+      "en": "Montenegro: the most difficult moments are practically over; the alert in force until midnight has reasons to be lifted and the government crisis centre (CORGOV) will be deactivated."
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1916-madeira",
+    "time": "2026-11-11T19:16:00Z",
+    "title": {
+      "pt": "Madeira: a Proteção Civil regional regista cerca de 325 ocorrências até às 18:40 (Funchal 95, Santa Cruz 78, Machico 43, Câmara de Lobos 42), sobretudo derrocadas (88) e quedas de árvores (50).",
+      "en": "Madeira: regional civil protection reports about 325 occurrences up to 18:40 (Funchal 95, Santa Cruz 78, Machico 43, Câmara de Lobos 42), mostly landslides (88) and fallen trees (50)."
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1914-pontes",
+    "time": "2026-11-11T19:14:00Z",
+    "title": {
+      "pt": "Pontes Vasco da Gama e 25 de Abril: trânsito normalizado, com os limites de velocidade repostos (120 e 70 km/h) e o aconselhamento a motociclos e veículos de lona levantado.",
+      "en": "Vasco da Gama and 25 de Abril bridges: traffic back to normal, speed limits restored (120 and 70 km/h) and the advisory for motorcycles and canvas-top vehicles lifted."
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1912-silves",
+    "time": "2026-11-11T19:12:00Z",
+    "title": {
+      "pt": "Armação de Pera (Silves): quatro pessoas ficaram desalojadas depois de um apartamento inundado ficar inabitável; estão em casa de familiares. O Algarve registou 74 ocorrências nas duas horas anteriores.",
+      "en": "Armação de Pera (Silves): four people were displaced after a flooded apartment became uninhabitable; they are staying with relatives. The Algarve recorded 74 occurrences in the previous two hours."
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1911-anepc",
+    "time": "2026-11-11T19:11:00Z",
+    "title": {
+      "pt": "Proteção Civil: 1630 ocorrências no total, 881 inundações; Grande Lisboa, Península de Setúbal e Algarve foram as zonas mais afetadas.",
+      "en": "Civil protection: 1,630 occurrences in total, 881 of them floods; Greater Lisbon, the Setúbal peninsula and the Algarve were the hardest hit."
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1903-nucleos",
+    "time": "2026-11-11T19:03:00Z",
+    "title": {
+      "pt": "O primeiro núcleo da Charles já entrou em Espanha; o segundo está sobre o Norte de África e o Golfo de Cádis. A depressão Bruna continua a trazer chuva pelo menos até sexta-feira, 13.",
+      "en": "The first core of Charles has moved into Spain; the second is over North Africa and the Gulf of Cádiz. Storm Bruna will keep bringing rain at least until Friday 13."
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "f-obs-1858-leiria",
     "time": "2026-11-11T18:58:00Z",
     "title": {
@@ -752,90 +836,6 @@
       "category": "comunicacao_social",
       "name": "Observador (liveblog)",
       "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-obs-1316-oeiras",
-    "time": "2026-11-11T13:16:00Z",
-    "title": {
-      "pt": "Oeiras: Isaltino Morais diz ter \"centenas\" de operacionais na rua; pontos críticos na Ribeira de Algés, Ribeira da Lage e Ribeira de Massamá",
-      "en": "Oeiras: mayor says \"hundreds\" of personnel are on the street; critical points are Ribeira de Algés, Ribeira da Lage and Ribeira de Massamá"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador (liveblog)",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-obs-1314-seixal",
-    "time": "2026-11-11T13:14:00Z",
-    "title": {
-      "pt": "Seixal: EN378 fechada no sentido Fogueteiro–Fernão Ferro; a câmara fechou também outras ruas do concelho",
-      "en": "Seixal: EN378 closed towards Fernão Ferro; the council also closed other streets"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador (liveblog)",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-obs-1309-portimao",
-    "time": "2026-11-11T13:09:00Z",
-    "title": {
-      "pt": "Portimão: tudo fechado, incluindo centros comerciais e hipermercados; só serviços mínimos, chuva moderada desde as 05:00",
-      "en": "Portimão: everything closed, including malls and hypermarkets; minimum services only, moderate rain since 05:00"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador (liveblog)",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-obs-1307-vfx",
-    "time": "2026-11-11T13:07:00Z",
-    "title": {
-      "pt": "Vila Franca de Xira: autarca alerta para a subida da maré do Tejo e dificuldades de drenagem; escolas fechadas",
-      "en": "Vila Franca de Xira: mayor warns of rising Tagus tide and drainage difficulties; schools closed"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador (liveblog)",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-obs-1306-a2",
-    "time": "2026-11-11T13:06:00Z",
-    "title": {
-      "pt": "A2 (sentido Setúbal): rajadas fazem os carros oscilar e formam-se lençóis de água",
-      "en": "A2 (towards Setúbal): gusts sway cars and water sheets form"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador (liveblog)",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-masto-117597944760333550",
-    "time": "2026-11-11T13:03:53Z",
-    "title": {
-      "pt": "VOST Portugal (Mastodon) divulga ponto de situação da Proteção Civil: 538 ocorrências em Portugal até às 12h; chuva a intensificar-se a partir das 13h, sobretudo entre as 15h e as 18h",
-      "en": "VOST Portugal (Mastodon) shares civil protection update: 538 incidents in Portugal up to 12:00; rain to intensify from 13:00, mainly 15:00–18:00"
-    },
-    "verified": false,
-    "source": {
-      "category": "redes_sociais",
-      "name": "@vostpt@trombas.vost.pt (Mastodon)",
-      "url": "https://trombas.vost.pt/@vostpt/117597944760333550"
     }
   }
 ]
