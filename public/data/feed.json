@@ -1,5 +1,103 @@
 [
   {
+    "id": "f-eu-1017-avisos",
+    "time": "2026-11-11T10:17:00Z",
+    "title": {
+      "pt": "IPMA: Lisboa, Setúbal e Beja deixam o aviso vermelho de vento (passam a laranja, rajadas até 120 km/h) mas mantêm vermelho para chuva até às 21h00; Faro mantém vermelho de chuva e vento (rajadas até 140 km/h) até às 21h00; Leiria, Santarém, Castelo Branco e Portalegre com aviso vermelho de chuva das 12h00 às 18h00",
+      "en": "IPMA: Lisbon, Setúbal and Beja drop from red to orange wind warnings (gusts up to 120 km/h) but stay red for rain until 21:00; Faro keeps red rain and wind warnings (gusts up to 140 km/h) until 21:00; Leiria, Santarém, Castelo Branco and Portalegre have red rain warnings from 12:00 to 18:00"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Euronews",
+      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
+    }
+  },
+  {
+    "id": "f-eu-0954-mar",
+    "time": "2026-11-11T09:54:00Z",
+    "title": {
+      "pt": "Autoridade Marítima: agitação marítima significativa no continente até ao meio-dia de quinta-feira, ondas até 6 m (máximo 10 m); 18 barras fechadas às 07h30",
+      "en": "Maritime Authority: significant sea agitation on the mainland until noon Thursday, waves up to 6 m (max 10 m); 18 harbour bars closed by 07:30"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Euronews",
+      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
+    }
+  },
+  {
+    "id": "f-eu-0932-funchal",
+    "time": "2026-11-11T09:32:00Z",
+    "title": {
+      "pt": "Funchal: homem de 78 anos desaparecido após galgamento de uma ribeira no Caminho da Igreja Velha foi resgatado com vida e levado ao hospital para observação",
+      "en": "Funchal: a 78-year-old man missing after a stream overflowed on Caminho da Igreja Velha was rescued alive and taken to hospital for checks"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Euronews",
+      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
+    }
+  },
+  {
+    "id": "f-eu-0930-machico",
+    "time": "2026-11-11T09:30:00Z",
+    "title": {
+      "pt": "Machico: baixa da cidade inundada e Ribeira de Machico a subir; Machico concentra 28 das 130 ocorrências do último balanço da Proteção Civil da Madeira; Estrada dos Maroços cortada por deslizamento",
+      "en": "Machico: city centre flooded and the Machico stream rising; Machico accounts for 28 of 130 incidents in the latest Madeira Civil Protection tally; Estrada dos Maroços closed by a landslide"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Euronews",
+      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
+    }
+  },
+  {
+    "id": "f-obs-0927-leiria",
+    "time": "2026-11-11T09:27:00Z",
+    "title": {
+      "pt": "Leiria: sem ocorrências significativas durante a noite; Proteção Civil municipal mantém meios em prontidão e alerta para risco de cheias rápidas",
+      "en": "Leiria: no significant incidents overnight; municipal Civil Protection keeps resources on standby and warns of flash-flood risk"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-0923-pontes",
+    "time": "2026-11-11T09:23:00Z",
+    "title": {
+      "pt": "Ponte Vasco da Gama com circulação limitada a 100 km/h por falta de visibilidade; a Lusoponte recomenda que motociclos e veículos sensíveis ao vento não circulem nas duas pontes",
+      "en": "Vasco da Gama Bridge limited to 100 km/h due to poor visibility; Lusoponte advises motorcycles and wind-sensitive vehicles not to use either bridge"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-0920-a3",
+    "time": "2026-11-11T09:20:00Z",
+    "title": {
+      "pt": "A3, Trofa: camião tombado em São Romão do Coronado provoca filas nos dois sentidos; motorista desencarcerado",
+      "en": "A3, Trofa: overturned truck at São Romão do Coronado causes tailbacks both ways; driver freed from the cab"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "f-obs-0903-dois-nucleos",
     "time": "2026-11-11T09:03:00Z",
     "title": {
@@ -39,6 +137,20 @@
       "category": "comunicacao_social",
       "name": "Observador",
       "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-dn-0749-madeira-179",
+    "time": "2026-11-11T07:49:00Z",
+    "title": {
+      "pt": "Madeira: Proteção Civil regional soma 179 ocorrências (mais de 50 inundações, 45 movimentos de árvores, 29 quedas de árvores); Santa Cruz quase 50, Funchal 32, Machico 31, Câmara de Lobos 23; sem vítimas referidas",
+      "en": "Madeira: regional Civil Protection counts 179 incidents (over 50 floods, 45 tree movements, 29 tree falls); Santa Cruz nearly 50, Funchal 32, Machico 31, Câmara de Lobos 23; no casualties reported"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "DNoticias",
+      "url": "https://www.dnoticias.pt/2026/11/11/512499-proteccao-civil-da-madeira-soma-179-ocorrencias-decorrentes-da-depressao-charles/"
     }
   },
   {
@@ -688,109 +800,6 @@
       "category": "governamental",
       "name": "Portal do Governo",
       "url": "https://portugal.gov.pt/gc25/comunicacao/noticias/mau-tempo-governo-declara-situacao-alerta-"
-    }
-  },
-  {
-    "id": "f-2026-11-10-vost",
-    "time": "2026-11-10T09:28:22Z",
-    "title": "#FMA_Charles Amanhã, quarta-feira, 11 de novembro de 2026 Portugal Continental - Fica em casa e evita deslocações desnecessárias Existe o risco de inundações urbanas, queda de árvores, ramos e estruturas móveis, bem como interrupções localizadas de eletricidade e comunicações.",
-    "verified": true,
-    "source": {
-      "category": "governamental",
-      "name": "@VOSTPT (X)",
-      "url": "https://x.com/VOSTPT/status/2120086149976780825"
-    }
-  },
-  {
-    "id": "f-masto-escolas-11nov",
-    "time": "2026-11-10T09:13:42Z",
-    "verified": false,
-    "title": {
-      "pt": "Relato de um utilizador: escolas encerradas amanhã, segundo anúncio do ministro da Administração Interna (não verificado).",
-      "en": "User report: schools closed tomorrow, per an announcement by the Interior Minister (unverified)."
-    },
-    "source": {
-      "category": "redes_sociais",
-      "name": "@nelsonavatar@masto.pt (Mastodon)",
-      "url": "https://masto.pt/@nelsonavatar/117591377335587151"
-    }
-  },
-  {
-    "id": "f-2026-11-10-24n-catolica",
-    "time": "2026-11-10T09:11:00Z",
-    "title": {
-      "pt": "Universidade Católica encerra o campus de Lisboa (incluindo Sintra e Oeiras) na quarta-feira, com aulas online; IPMA admite imprevisibilidade na entrada da depressão por Lisboa",
-      "en": "Universidade Católica closes its Lisbon campus (including Sintra and Oeiras) on Wednesday, with online classes; IPMA admits unpredictability as the depression enters via Lisbon"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "24notícias",
-      "url": "https://24noticias.sapo.pt/atualidade/artigos/tempestade-situacao-e-bastante-complexa-alerta-ipma"
-    }
-  },
-  {
-    "id": "f-2026-11-10-escolas",
-    "time": "2026-11-10T09:08:00Z",
-    "title": {
-      "pt": "Escolas e serviços públicos não essenciais encerrados na quarta-feira em todo o continente; eventos ao ar livre suspensos",
-      "en": "Schools and non-essential public services closed on Wednesday across the mainland; outdoor events suspended"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Correio da Manhã",
-      "url": "https://www.cmjornal.pt/sociedade/detalhe/chuva-vento-forte-e-agitacao-maritima-mau-tempo-deixa-pais-em-alerta"
-    }
-  },
-  {
-    "id": "f-2026-11-10-madeira",
-    "time": "2026-11-10T09:08:00Z",
-    "title": {
-      "pt": "Madeira: Proteção Civil regional pede que se evitem deslocações entre as 21:00 de terça e as 06:00 de quarta; escolas fecham de manhã e percursos pedestres fecham todo o dia",
-      "en": "Madeira: regional Civil Protection asks people to avoid travel between 21:00 Tuesday and 06:00 Wednesday; schools close in the morning and hiking trails all day"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Correio da Manhã",
-      "url": "https://www.cmjornal.pt/sociedade/detalhe/chuva-vento-forte-e-agitacao-maritima-mau-tempo-deixa-pais-em-alerta"
-    }
-  },
-  {
-    "id": "f-2026-11-10-vermelho",
-    "time": "2026-11-10T08:36:00Z",
-    "title": {
-      "pt": "IPMA agrava aviso para vermelho em Beja, Évora, Faro, Leiria, Lisboa, Portalegre, Santarém e Setúbal na quarta-feira até às 21:00; rajadas podem passar os 130 km/h",
-      "en": "IPMA raises warning to red in Beja, Évora, Faro, Leiria, Lisbon, Portalegre, Santarém and Setúbal on Wednesday until 21:00; gusts may exceed 130 km/h"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Executive Digest",
-      "url": "https://executivedigest.sapo.pt/depressao-charles-ipma-agrava-alerta-para-vermelho-em-oito-distritos-vento-pode-ultrapassar-os-130-km-h/"
-    }
-  },
-  {
-    "id": "f-2026-11-10-prontidao",
-    "time": "2026-11-10T07:56:00Z",
-    "title": {
-      "pt": "Proteção Civil eleva a prontidão ao nível mais alto e o Governo pede prudência máxima: só saia se for mesmo necessário",
-      "en": "Civil Protection raises readiness to its highest level and the Government urges maximum caution: only go out if essential"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Euronews",
-      "url": "https://pt.euronews.com/2026/11/10/depressao-charles-traz-chuva-e-vento-forte-governo-pede-prudencia-maxima-so-saia-se-for-me"
-    }
-  },
-  {
-    "id": "f-2026-11-10-orla",
-    "time": "2026-11-10T07:56:00Z",
-    "title": {
-      "pt": "Proibida a circulação em parques, jardins e matas com risco de queda de árvores, e o acesso à orla marítima e a zonas ribeirinhas ou inundáveis",
-      "en": "Access banned to parks, gardens and woodland at risk of falling trees, and to the seafront and flood-prone or riverside areas"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Euronews",
-      "url": "https://pt.euronews.com/2026/11/10/depressao-charles-traz-chuva-e-vento-forte-governo-pede-prudencia-maxima-so-saia-se-for-me"
     }
   }
 ]

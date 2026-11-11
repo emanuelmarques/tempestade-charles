@@ -236,5 +236,33 @@
       "name": "CNN Portugal (Mau tempo ao minuto)",
       "url": "https://cnnportugal.iol.pt/aominuto/6af2d07dd34e5a653d7338e2"
     }
+  },
+  {
+    "id": "s-ob-vasco-gama",
+    "type": "estrada",
+    "name": {
+      "pt": "Ponte Vasco da Gama: circulação limitada a 100 km/h por falta de visibilidade (09h23)",
+      "en": "Vasco da Gama Bridge: speed limited to 100 km/h due to poor visibility (09:23)"
+    },
+    "status": "condicionada",
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "s-eu-funchal-seixal",
+    "type": "estrada",
+    "name": {
+      "pt": "Madeira: Via Expresso entre São Vicente e Porto Moniz cortada por queda de rochas no Seixal",
+      "en": "Madeira: Via Expresso between São Vicente and Porto Moniz closed by rockfall at Seixal"
+    },
+    "status": "cortada",
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Euronews",
+      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
+    }
   }
 ]
