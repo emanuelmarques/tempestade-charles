@@ -1,5 +1,61 @@
 [
   {
+    "id": "f-obs-1621-tavira",
+    "time": "2026-11-11T16:21:00Z",
+    "title": {
+      "pt": "Tavira: chove com mais intensidade e o rio Gilão esteve a cerca de um metro de galgar as margens na preia-mar, por volta das 15:15",
+      "en": "Tavira: heavier rain, and the Gilão river was about one metre from overtopping its banks at high tide, around 15:15"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1614-concelhos",
+    "time": "2026-11-11T16:14:00Z",
+    "title": {
+      "pt": "Concelhos em risco de inundação desceram para 54, mas todos os municípios do Algarve continuam sinalizados pela APA",
+      "en": "Municipalities at flood risk fell to 54, but all Algarve municipalities remain flagged by APA"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1608-vfx",
+    "time": "2026-11-11T16:08:00Z",
+    "title": {
+      "pt": "Vila Franca de Xira: 20 ocorrências (inundações e quedas de árvores); estrada de acesso à ponte Marechal Carmona cortada",
+      "en": "Vila Franca de Xira: 20 incidents (floods and fallen trees); access road to the Marechal Carmona bridge closed"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1607-julio-matos",
+    "time": "2026-11-11T16:07:00Z",
+    "title": {
+      "pt": "Lisboa: cave do Hospital Júlio de Matos inundada (água chegou a um metro num edifício do Parque de Saúde); inundação do edifício 21 já resolvida",
+      "en": "Lisbon: Júlio de Matos Hospital basement flooded (water reached one metre in a Health Park building); flooding in building 21 now resolved"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "f-obs-1552-grande-lisboa",
     "time": "2026-11-11T15:52:00Z",
     "title": {
@@ -780,62 +836,6 @@
       "category": "comunicacao_social",
       "name": "Euronews",
       "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
-    }
-  },
-  {
-    "id": "f-eu-0930-machico",
-    "time": "2026-11-11T09:30:00Z",
-    "title": {
-      "pt": "Machico: baixa da cidade inundada e Ribeira de Machico a subir; Machico concentra 28 das 130 ocorrências do último balanço da Proteção Civil da Madeira; Estrada dos Maroços cortada por deslizamento",
-      "en": "Machico: city centre flooded and the Machico stream rising; Machico accounts for 28 of 130 incidents in the latest Madeira Civil Protection tally; Estrada dos Maroços closed by a landslide"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Euronews",
-      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
-    }
-  },
-  {
-    "id": "f-obs-0927-leiria",
-    "time": "2026-11-11T09:27:00Z",
-    "title": {
-      "pt": "Leiria: sem ocorrências significativas durante a noite; Proteção Civil municipal mantém meios em prontidão e alerta para risco de cheias rápidas",
-      "en": "Leiria: no significant incidents overnight; municipal Civil Protection keeps resources on standby and warns of flash-flood risk"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-obs-0923-pontes",
-    "time": "2026-11-11T09:23:00Z",
-    "title": {
-      "pt": "Ponte Vasco da Gama com circulação limitada a 100 km/h por falta de visibilidade; a Lusoponte recomenda que motociclos e veículos sensíveis ao vento não circulem nas duas pontes",
-      "en": "Vasco da Gama Bridge limited to 100 km/h due to poor visibility; Lusoponte advises motorcycles and wind-sensitive vehicles not to use either bridge"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
-    }
-  },
-  {
-    "id": "f-obs-0920-a3",
-    "time": "2026-11-11T09:20:00Z",
-    "title": {
-      "pt": "A3, Trofa: camião tombado em São Romão do Coronado provoca filas nos dois sentidos; motorista desencarcerado",
-      "en": "A3, Trofa: overturned truck at São Romão do Coronado causes tailbacks both ways; driver freed from the cab"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Observador",
-      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
     }
   }
 ]

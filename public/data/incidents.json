@@ -1,5 +1,29 @@
 [
   {
+    "id": "i-lisboa-julio-matos",
+    "title": {
+      "pt": "Lisboa: cave do Hospital Júlio de Matos inundada",
+      "en": "Lisbon: Júlio de Matos Hospital basement flooded"
+    },
+    "description": {
+      "pt": "Água chegou a um metro num edifício do Parque de Saúde; a cave dos serviços farmacêuticos também foi inundada.",
+      "en": "Water reached one metre in a Health Park building; the pharmacy services basement was also flooded."
+    },
+    "time": "2026-11-11T16:07:00Z",
+    "place": "Hospital Júlio de Matos, Avenida do Brasil, Lisboa",
+    "district": "lisboa",
+    "lat": 38.757,
+    "lon": -9.1461,
+    "locationApprox": true,
+    "severity": 2,
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "i-marvao-en246",
     "title": {
       "pt": "Marvão: EN246-1 cortada nos dois sentidos",
