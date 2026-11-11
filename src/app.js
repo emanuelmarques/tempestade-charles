@@ -97,9 +97,7 @@ function emergencyBar() {
 function countdownBox() {
   const c = countdown(state.now, STORM_START);
   const when = formatDayTime(STORM_START, state.lang);
-  if (c.done) {
-    return `<div class="countdown live" role="timer" id="cd"><span class="t" id="cd-t">${L('Tempestade em curso', 'Storm under way')}</span><span class="l">${L('desde', 'since')} ${esc(when)}</span></div>`;
-  }
+  if (c.done) return '';
   const d = c.days ? `${c.days}d ` : '';
   return `<div class="countdown" role="timer" id="cd"><span class="t" id="cd-t">${d}${pad2(c.hours)}:${pad2(c.minutes)}:${pad2(c.seconds)}</span><span class="l">${L('até ao início da tempestade', 'until the storm begins')} · ${esc(when)}</span></div>`;
 }
@@ -1068,7 +1066,7 @@ function tick() {
   const c = countdown(state.now, STORM_START);
   const t = document.getElementById('cd-t');
   if (t && !c.done) t.textContent = `${c.days ? `${c.days}d ` : ''}${pad2(c.hours)}:${pad2(c.minutes)}:${pad2(c.seconds)}`;
-  else if (c.done && !document.getElementById('cd')?.classList.contains('live')) render();
+  else if (c.done && document.getElementById('cd')) render();
   if (!state.at) updateWhen();
 }
 
