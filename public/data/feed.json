@@ -1,5 +1,33 @@
 [
   {
+    "id": "f-eu-1100-madeira-139",
+    "time": "2026-11-11T11:00:00Z",
+    "title": {
+      "pt": "Madeira: Proteção Civil regional regista 139 ocorrências entre as 20h00 de terça-feira e as 08h30, na maioria inundações, movimentos de massa e queda de árvores; sem mortos",
+      "en": "Madeira: regional Civil Protection logs 139 incidents between 20:00 Tuesday and 08:30, mostly floods, mass movements and fallen trees; no fatalities"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Euronews",
+      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
+    }
+  },
+  {
+    "id": "f-eu-1032-nucleos",
+    "time": "2026-11-11T10:32:00Z",
+    "title": {
+      "pt": "Modelo europeu do IPMA divide a Charles em dois núcleos: o primeiro chega a Lisboa por volta das 15h00 com ventos de 90 a 100 km/h; o segundo entra pelo Algarve mais tarde, com rajadas de 100 a 120 km/h",
+      "en": "IPMA European model splits Charles into two cores: the first reaches Lisbon around 15:00 with winds of 90-100 km/h; the second enters via the Algarve later, with gusts of 100-120 km/h"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Euronews",
+      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
+    }
+  },
+  {
     "id": "f-eu-1017-avisos",
     "time": "2026-11-11T10:17:00Z",
     "title": {
@@ -776,30 +804,6 @@
       "category": "governamental",
       "name": "@USEmbPortugal (X)",
       "url": "https://x.com/USEmbPortugal/status/2120150254402109816"
-    }
-  },
-  {
-    "id": "x-2120139230160499085",
-    "time": "2026-11-10T12:59:17.000Z",
-    "title": "One thing I feel is important to repeat is the lingering uncertainty with exactly how Charles approaches the coast. 1. If the storm curves further north and passes directly over Lisbon or Leiria, there is a greater chance of the system intensifying more and possibly developing",
-    "verified": false,
-    "source": {
-      "category": "redes_sociais",
-      "name": "@WXWatcher07 (X)",
-      "url": "https://x.com/WXWatcher07/status/2120139230160499085"
-    }
-  },
-  {
-    "id": "f-2026-11-10-gov-alerta",
-    "time": "2026-11-10T10:33:00Z",
-    "title": {
-      "pt": "Comunicado do Governo: situação de alerta a 11 de novembro com encerramento de escolas e serviços públicos não essenciais, suspensão de atividades ao ar livre e apelo a que a população fique em casa; INEM e saúde pública ativados",
-      "en": "Government statement: state of alert on 11 November with schools and non-essential public services closed, outdoor activities suspended and an appeal to stay home; INEM and public health activated"
-    },
-    "source": {
-      "category": "governamental",
-      "name": "Portal do Governo",
-      "url": "https://portugal.gov.pt/gc25/comunicacao/noticias/mau-tempo-governo-declara-situacao-alerta-"
     }
   }
 ]
