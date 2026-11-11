@@ -1,19 +1,5 @@
 [
   {
-    "id": "f-dnoticias-madeira-47",
-    "time": "2026-11-11T00:30:00Z",
-    "title": {
-      "pt": "Madeira: Proteção Civil Regional contabiliza 47 ocorrências desde as 20h de terça-feira (balanço das 00h30), sobretudo inundações; seis quedas de árvores",
-      "en": "Madeira: regional civil protection counts 47 incidents since 20:00 on Tuesday (00:30 update), mostly flooding; six fallen trees"
-    },
-    "verified": true,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "DNOTICIAS.PT",
-      "url": "https://www.dnoticias.pt/2026/11/11/512462-novo-balanco-aponta-para-47-ocorrencias/"
-    }
-  },
-  {
     "id": "f-cnn-fluvial-lisboa",
     "time": "2026-11-11T00:36:00Z",
     "title": {
@@ -39,6 +25,20 @@
       "category": "comunicacao_social",
       "name": "CNN Portugal (Mau tempo ao minuto)",
       "url": "https://cnnportugal.iol.pt/aominuto/6af2d07dd34e5a653d7338e2"
+    }
+  },
+  {
+    "id": "f-dnoticias-madeira-47",
+    "time": "2026-11-11T00:30:00Z",
+    "title": {
+      "pt": "Madeira: Proteção Civil Regional contabiliza 47 ocorrências desde as 20h de terça-feira (balanço das 00h30), sobretudo inundações; seis quedas de árvores",
+      "en": "Madeira: regional civil protection counts 47 incidents since 20:00 on Tuesday (00:30 update), mostly flooding; six fallen trees"
+    },
+    "verified": true,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "DNOTICIAS.PT",
+      "url": "https://www.dnoticias.pt/2026/11/11/512462-novo-balanco-aponta-para-47-ocorrencias/"
     }
   },
   {
@@ -422,6 +422,20 @@
       "pt": "Embaixada dos EUA em Lisboa: a Bruna afeta o continente com chuva, vento forte e mar agitado até 13 de novembro; a Charles deverá chegar ao continente na quarta-feira",
       "en": "U.S. Embassy Lisbon: Bruna is affecting the mainland with rain, strong wind and rough seas through 13 November; Charles is expected to reach the mainland on Wednesday"
     },
+    "source": {
+      "category": "governamental",
+      "name": "@USEmbPortugal (X)",
+      "url": "https://x.com/USEmbPortugal/status/2120150254402109816"
+    }
+  },
+  {
+    "id": "x-2120150254402109816",
+    "time": "2026-11-10T13:43:05.000Z",
+    "title": {
+      "pt": "Embaixada dos EUA em Lisboa: a tempestade Bruna afeta o continente até 13 de novembro; a Charles deve chegar ao continente na quarta-feira, 11 de novembro.",
+      "en": "US Embassy Lisbon: Storm Bruna affects mainland Portugal through November 13; Charles is expected to reach the mainland on Wednesday, November 11."
+    },
+    "verified": true,
     "source": {
       "category": "governamental",
       "name": "@USEmbPortugal (X)",
