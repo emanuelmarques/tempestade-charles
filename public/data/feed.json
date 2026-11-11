@@ -1,5 +1,47 @@
 [
   {
+    "id": "f-eu-1223-alges",
+    "time": "2026-11-11T12:23:00Z",
+    "title": {
+      "pt": "Algés, zona baixa vulnerável a inundações, está quase deserta; decorrem trabalhos de limpeza em zonas críticas",
+      "en": "Algés, a low-lying area prone to flooding, is almost deserted; cleanup work is under way in critical areas"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Euronews (liveblog)",
+      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
+    }
+  },
+  {
+    "id": "f-obs-1202-lisboa-50",
+    "time": "2026-11-11T12:02:00Z",
+    "title": {
+      "pt": "Lisboa registou cerca de 50 ocorrências entre as 00h00 e as 10h00, sobretudo inundações; os bombeiros municipais dizem que não houve vítimas",
+      "en": "Lisbon logged about 50 incidents between 00:00 and 10:00, mostly flooding; municipal firefighters say there were no casualties"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1201-baixo-alentejo",
+    "time": "2026-11-11T12:01:00Z",
+    "title": {
+      "pt": "Várias corporações de bombeiros do Baixo Alentejo não estão disponíveis para reforços fora da região, por pagamentos em atraso do apoio na depressão Kristin",
+      "en": "Several Baixo Alentejo fire brigades are unavailable for reinforcements outside the region due to late payments for support during storm Kristin"
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "f-eu-1251-pico",
     "time": "2026-11-11T12:51:00Z",
     "title": {
@@ -783,43 +825,6 @@
       "category": "comunicacao_social",
       "name": "Renascença",
       "url": "https://rr.pt/noticia/pais/2026/11/10/depressao-charles-desvia-se-para-sul-e-podera-entrar-em-portugal-pelo-algarve/493004/"
-    }
-  },
-  {
-    "id": "f-2026-11-10-healthnews-avisos",
-    "time": "2026-11-10T19:50:00Z",
-    "title": {
-      "pt": "A depressão Bruna fica quase estacionária a noroeste da Península até sexta-feira (13) e pode acumular cerca de 200 mm de chuva até ao fim da semana, sobretudo no Norte e Centro",
-      "en": "Depression Bruna stays almost stationary north-west of the Peninsula until Friday (13) and may accumulate about 200 mm of rain by the end of the week, mainly in the North and Centre"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Health News",
-      "url": "https://healthnews.pt/2026/11/10/depressao-charles-seis-distritos-em-aviso-laranja-e-protecao-civil-apela-a-prevencao/"
-    }
-  },
-  {
-    "id": "x-2120239602548027802",
-    "time": "2026-11-10T19:38:08.000Z",
-    "title": "Storm #Charles Update: Changes and Revised Model Guidance Conditions have gradually started to degrade in Madeira this evening. The worst conditions arrive late tonight into early Wednesday morning due to heavy and persistent rain and wind gusts over 100 km/h. Much higher gusts",
-    "verified": false,
-    "source": {
-      "category": "redes_sociais",
-      "name": "@WXWatcher07 (X)",
-      "url": "https://x.com/WXWatcher07/status/2120239602548027802"
-    }
-  },
-  {
-    "id": "f-2026-11-10-publico-saude",
-    "time": "2026-11-10T18:30:00Z",
-    "title": {
-      "pt": "Cuidados programados não urgentes suspensos em vários hospitais e centros de saúde, incluindo Hospital Beatriz Ângelo e as ULS de Leiria, Lezíria, Alto Alentejo, Baixo Alentejo, Coimbra, Gaia e Espinho; estações de Metro de Lisboa ficam abertas para abrigar sem-abrigo",
-      "en": "Non-urgent scheduled care suspended at several hospitals and health centres, including Hospital Beatriz Ângelo and the Leiria, Lezíria, Alto Alentejo, Baixo Alentejo, Coimbra, Gaia and Espinho health units; Lisbon Metro stations stay open to shelter homeless people"
-    },
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Público",
-      "url": "https://www.publico.pt/2026/11/10/sociedade/noticia/mau-tempo-governo-pede-apenas-deslocacoes-necessarias-periodos-chuva-intensa-2194385"
     }
   }
 ]
