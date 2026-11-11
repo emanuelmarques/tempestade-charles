@@ -5,7 +5,6 @@ import { countdown, parseLisbon, freshness, formatTime, formatDayTime, formatDay
 import { toMap } from './lib/projection.js';
 import { districtAt } from './lib/districtAt.js';
 import { paginate } from './lib/paginate.js';
-import { loadNextHours, weatherInfo, OPEN_METEO_SITE } from './data/openmeteo.js';
 import { lookupContacts, GEOAPI_SITE } from './data/geoapi.js';
 import { lookupNearby, OSM_COPYRIGHT } from './data/places.js';
 import { haversineKm } from './lib/geo.js';
@@ -39,7 +38,7 @@ const state = {
 const data = {
   curated: { meta: { updatedAt: null }, incidents: [], feed: [], services: [], shelters: [], myths: [] }, curatedErrors: {}, curatedLoaded: false,
   warnings: [], warnErr: null, warnFetchedAt: null, warnCache: false,
-  contact: null, contactErr: null, nearby: null, wx: null, wxErr: null, locations: [], forecast: null, forecastErr: null, forecastLoc: null, weatherTypes: {},
+  contact: null, contactErr: null, nearby: null, locations: [], forecast: null, forecastErr: null, forecastLoc: null, weatherTypes: {},
 };
 
 const L = (pt, en) => (state.lang === 'en' ? en : pt);
@@ -124,35 +123,6 @@ function navBar(cls = 'mainnav') {
   return `<nav class="${cls}" aria-label="${L('Navegação principal', 'Main navigation')}">${NAV.map(([k, href, [pt, en]]) => `<a href="${href}"${state.page === k ? ' aria-current="page"' : ''}>${L(pt, en)}</a>`).join('')}</nav>`;
 }
 
-/** Ponto para o tempo: a localização do visitante, ou a localidade escolhida. */
-function wxPoint() {
-  if (state.here) return { lat: state.here.lat, lon: state.here.lon, name: null };
-  const l = locById(state.zoneLoc);
-  return l ? { lat: l.lat, lon: l.lon, name: l.name } : null;
-}
-let wxSeq = 0;
-async function loadWx() {
-  const pt = wxPoint(); if (!pt) return;
-  const seq = ++wxSeq;
-  try {
-    const hours = await loadNextHours(pt.lat, pt.lon, new Date());
-    if (seq !== wxSeq) return;
-    data.wx = { hours, name: pt.name, byUser: !!state.here }; data.wxErr = null;
-  } catch (e) { if (seq === wxSeq) { data.wxErr = String(e.message || e); } }
-  render();
-}
-
-function wxWidget() {
-  const w = data.wx;
-  const where = w ? (w.byUser ? L('na sua localização', 'at your location') : esc(w.name || '')) : '';
-  const label = `${L('Tempo nas próximas 4 horas', 'Weather in the next 4 hours')}${where ? ' · ' + where : ''}`;
-  let body;
-  if (!w) body = `<span class="muted wxm">${data.wxErr ? L('Tempo indisponível', 'Weather unavailable') : L('A carregar…', 'Loading…')}</span>`;
-  else if (!w.hours.length) body = `<span class="muted wxm">${L('Sem dados', 'No data')}</span>`;
-  else body = `<ol class="wxh">${w.hours.map((h) => { const i = weatherInfo(h.code, state.lang); return `<li title="${esc(i.label)}: ${Math.round(h.temp)}°, ${L('chuva', 'rain')} ${Math.round(h.pop)}%, ${L('rajada', 'gust')} ${Math.round(h.gust)} km/h"><span class="num muted">${esc(formatTime(h.time, state.lang))}</span><span class="wxe" aria-hidden="true">${i.emoji}</span><strong class="num">${Math.round(h.temp)}°</strong><span class="sr">${esc(i.label)}, ${L('chuva', 'rain')} ${Math.round(h.pop)}%, ${L('rajada', 'gust')} ${Math.round(h.gust)} km/h</span></li>`; }).join('')}</ol>`;
-  return `<div class="wx" role="group" aria-label="${label}" title="${label}"><div class="wxt">${L('Próximas 4h', 'Next 4h')}${where ? ` · ${where}` : ''} · <a href="${OPEN_METEO_SITE}" target="_blank" rel="noopener noreferrer">Open-Meteo</a></div>${body}</div>`;
-}
-
 function topbar() {
   const f = freshnessInfo();
   return `<header class="top">
@@ -163,7 +133,6 @@ function topbar() {
     </a>
     <div class="tools">
       ${countdownBox()}
-      ${wxWidget()}
       <div class="statusbox">
         <p><span style="width:10px;height:10px;border-radius:50%;background:${f.dot};flex:none"></span>${esc(f.text)}</p>
         <div style="display:flex" role="group" aria-label="${L('Idioma', 'Language')}">
@@ -469,7 +438,6 @@ function panelContent(imp) {
   return `<div class="pm">${navBar('panel-nav')}<div class="pm2"><span class="pm-lang">${langToggle()}</span><a class="pm-tel" href="tel:808242424">SNS 24 <b>808 24 24 24</b></a></div></div>
     <div class="field"><label for="loc-p">${L('Localidade', 'Location')}</label><select id="loc-p" data-a="zoneSel" data-key="loc-p">${locOptions()}</select></div>
     ${panelStats(imp)}
-    ${state.region === 'continente' ? wxWidget() : ''}
     ${simNote()}${banners()}
     <div class="tabs" role="group" aria-label="${L('Secções do painel', 'Panel sections')}">${tabs.map(([k, l]) => `<button class="${cur === k ? 'on' : ''}" aria-pressed="${cur === k}" data-a="ptab" data-v="${k}">${l}</button>`).join('')}</div>
     <div class="pbody">${panelBody(imp)}</div>
@@ -711,7 +679,6 @@ function sourcesPage() {
   <p class="muted" style="margin:0 0 20px;max-width:680px">${L('Cada informação do site indica a categoria da fonte e o link original. Aqui está o que usamos e de onde vem.', 'Every item on the site shows its source category and original link. Here is what we use and where it comes from.')}</p>
   <div class="grid">
     ${block('🌦️', 'IPMA', `<p style="margin:0">${L('Avisos meteorológicos e previsão, lidos em tempo real neste dispositivo, com cópia local se a rede falhar.', 'Weather warnings and forecast, read live on this device, with a local copy if the network fails.')}</p>${sourceBadge(IPMA_SOURCE, { lang: state.lang })}`)}
-    ${block('⏱️', 'Open-Meteo', `<p style="margin:0">${L('Tempo nas próximas 4 horas (temperatura, probabilidade de chuva e rajadas), hora a hora. O IPMA só publica previsão diária em dados abertos.', 'Weather for the next 4 hours (temperature, chance of rain and gusts), hour by hour. IPMA only publishes daily forecasts as open data.')}</p>${ext(OPEN_METEO_SITE, 'open-meteo.com')} <span class="muted">CC BY 4.0</span>`)}
     ${block('🗺️', L('Mapa e distritos', 'Map and districts'), `<p style="margin:0">${L('Contornos dos distritos a partir da Carta Administrativa Oficial de Portugal (CAOP), da Direção-Geral do Território, simplificados para o desenho do mapa.', 'District outlines from the Official Administrative Map of Portugal (CAOP), Directorate-General for the Territory, simplified for the map drawing.')}</p>`)}
     ${block('📍', 'geoapi.pt', `<p style="margin:0">${L('Concelho a partir da localização e contactos da câmara municipal (telefone, email, site, morada).', 'Municipality from your location and town-hall contacts (phone, email, website, address).')}</p>${ext(GEOAPI_SITE, 'geoapi.pt')}`)}
     ${block('💊', 'OpenStreetMap', `<p style="margin:0">${L('Farmácias e quartéis de bombeiros mais próximos. Localizações e telefones dos colaboradores do OpenStreetMap: podem estar incompletos e a farmácia pode não estar de serviço. Em alternativa, procuramos em tempo real com o Photon (Komoot) e o Nominatim.', 'Nearest pharmacies and fire stations. Locations and phones from OpenStreetMap contributors: they may be incomplete and the pharmacy may not be on duty. As a fallback we search live with Photon (Komoot) and Nominatim.')}</p><p style="margin:0">${L('Dados', 'Data')} © ${ext(OSM_COPYRIGHT, L('colaboradores do OpenStreetMap', 'OpenStreetMap contributors'))} (ODbL).</p>`)}
@@ -985,7 +952,6 @@ function setZone(id, { keepDistrict = false, here = null } = {}) {
   const loc = locById(id); const d = loc && DISTRICT_BY_AREA[loc.area];
   if (d && !keepDistrict) state.district = d.id;
   if (loc) resolveContacts(here ?? loc, !!here);
-  if (!here && !state.here) loadWx();
   loadForecast(); render();
 }
 
@@ -1013,7 +979,7 @@ function autoLocate() {
   if (!navigator.geolocation) return;
   const go = () => navigator.geolocation.getCurrentPosition((p) => {
     const here = { lat: p.coords.latitude, lon: p.coords.longitude };
-    state.here = here; loadWx();
+    state.here = here;
     const did = districtAt(here.lat, here.lon);
     if (did && !state.userPicked) state.district = did;
     state.locNote = did ? L('Distrito pela sua localização', 'District from your location') : L('Localização fora de Portugal continental', 'Location outside mainland Portugal');
@@ -1097,8 +1063,7 @@ export async function start() {
   const sl = locById(state.zoneLoc); if (sl) resolveContacts(sl);
   loadForecast();
   autoLocate();
-  loadWx();
   await loadAll();
   setInterval(tick, 1000);
-  setInterval(async () => { await loadAll(); loadForecast(); loadWx(); }, REFRESH_MS);
+  setInterval(async () => { await loadAll(); loadForecast(); }, REFRESH_MS);
 }
