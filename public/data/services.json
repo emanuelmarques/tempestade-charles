@@ -194,5 +194,19 @@
       "name": "Público",
       "url": "https://www.publico.pt/2026/11/10/sociedade/noticia/mau-tempo-governo-pede-apenas-deslocacoes-necessarias-periodos-chuva-intensa-2194385"
     }
+  },
+  {
+    "id": "s-sagres-barra",
+    "type": "estrada",
+    "name": {
+      "pt": "Barra de Sagres fechada desde as 18:00 de 10 de novembro; reabre às 08:00 de quarta-feira após avaliação",
+      "en": "Barra de Sagres closed from 18:00 on 10 November; reopens 08:00 Wednesday after assessment"
+    },
+    "status": "encerrada",
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/programas/noticiario/as-noticias-das-22h-1895/"
+    }
   }
 ]

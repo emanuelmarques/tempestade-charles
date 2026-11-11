@@ -1,5 +1,44 @@
 [
   {
+    "id": "f-2026-11-10-obs-mai-casa",
+    "time": "2026-11-10T22:17:00Z",
+    "title": {
+      "pt": "MAI Luís Neves apela a que as pessoas fiquem em casa: a depressão chega ao continente ao fim da manhã de quarta-feira; o Governo pede teletrabalho sempre que possível.",
+      "en": "Interior Minister Luís Neves urges people to stay home: the depression reaches the mainland late Wednesday morning; the government asks for teleworking where possible."
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/programas/noticiario/as-noticias-das-22h-1895/"
+    }
+  },
+  {
+    "id": "f-2026-11-10-obs-pingodoce",
+    "time": "2026-11-10T22:17:00Z",
+    "title": {
+      "pt": "Pingo Doce vai fechar todas as lojas na quarta-feira, 11 de novembro.",
+      "en": "Pingo Doce will close all stores on Wednesday, 11 November."
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/programas/noticiario/as-noticias-das-22h-1895/"
+    }
+  },
+  {
+    "id": "f-2026-11-10-obs-sagres",
+    "time": "2026-11-10T22:17:00Z",
+    "title": {
+      "pt": "Sagres: Barra de Sagres fechada desde as 18:00, com reabertura prevista às 08:00 de quarta-feira após avaliação; Sines não exclui evacuações e prepara abrigo temporário em instalações municipais.",
+      "en": "Sagres: Barra de Sagres closed from 18:00, reopening 08:00 Wednesday after assessment; Sines does not rule out evacuations and is preparing temporary shelter in municipal facilities."
+    },
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador",
+      "url": "https://observador.pt/programas/noticiario/as-noticias-das-22h-1895/"
+    }
+  },
+  {
     "id": "f-masto-escolas-11nov",
     "time": "2026-11-10T09:13:42Z",
     "verified": false,
