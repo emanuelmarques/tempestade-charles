@@ -1,5 +1,33 @@
 [
   {
+    "id": "f-obs-1858-leiria",
+    "time": "2026-11-11T18:58:00Z",
+    "title": {
+      "pt": "Leiria: a Câmara diz que a situação melhora; alerta municipal até às 23:59, depois desce para NPA2. Três inundações em caves/garagens e o colapso de um edifício devoluto; serviços municipais, escolas e transportes públicos reabrem amanhã.",
+      "en": "Leiria: the municipality says the situation is improving; municipal alert until 23:59, then drops to NPA2. Three cellar/garage floods and a derelict building collapse; municipal services, schools and public transport reopen tomorrow."
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
+    "id": "f-obs-1854-estradas",
+    "time": "2026-11-11T18:54:00Z",
+    "title": {
+      "pt": "GNR (Lusa): às 18:00 havia oito estradas restringidas, entre elas A1 em Vialonga (parcial), EN3-3 Azambuja–Valada, EN252 em Palmela, EN10-4 em Setúbal e EN246-1 em Marvão (cortadas nos dois sentidos).",
+      "en": "GNR (Lusa): at 18:00 eight roads were restricted, including A1 at Vialonga (partial), EN3-3 Azambuja–Valada, EN252 in Palmela, EN10-4 in Setúbal and EN246-1 in Marvão (closed both ways)."
+    },
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "f-obs-1827-algarve",
     "time": "2026-11-11T18:27:00Z",
     "title": {
@@ -808,34 +836,6 @@
       "category": "redes_sociais",
       "name": "@vostpt@trombas.vost.pt (Mastodon)",
       "url": "https://trombas.vost.pt/@vostpt/117597944760333550"
-    }
-  },
-  {
-    "id": "f-eu-1251-pico",
-    "time": "2026-11-11T12:51:00Z",
-    "title": {
-      "pt": "Governo: \"ainda nem chegou o pior\"; o pico da Charles no continente é esperado entre o meio-dia e as 18h00, com foco na chuva forte e no risco de inundações (fonte oficial citada pelo Euronews)",
-      "en": "Government source: the worst has not yet arrived; Charles is expected to peak on the mainland between noon and 6 pm, with heavy rain and flood risk the main concern"
-    },
-    "verified": true,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Euronews (liveblog)",
-      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
-    }
-  },
-  {
-    "id": "f-eu-1223-alges",
-    "time": "2026-11-11T12:23:00Z",
-    "title": {
-      "pt": "Algés, zona baixa vulnerável a inundações, está quase deserta; decorrem trabalhos de limpeza em zonas críticas",
-      "en": "Algés, a low-lying area prone to flooding, is almost deserted; cleanup work is under way in critical areas"
-    },
-    "verified": false,
-    "source": {
-      "category": "comunicacao_social",
-      "name": "Euronews (liveblog)",
-      "url": "https://pt.euronews.com/2026/11/11/mau-tempo-portugal-em-alerta-devido-a-passagem-da-depressao-charles"
     }
   }
 ]

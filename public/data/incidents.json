@@ -1,5 +1,29 @@
 [
   {
+    "id": "i-leiria-edificio-devoluto",
+    "title": {
+      "pt": "Leiria: colapso de um edifício devoluto",
+      "en": "Leiria: derelict building collapse"
+    },
+    "description": {
+      "pt": "Além de três inundações em caves e garagens, colapsou um edifício devoluto, que será tratado amanhã.",
+      "en": "Besides three cellar and garage floods, a derelict building collapsed; it will be dealt with tomorrow."
+    },
+    "time": "2026-11-11T18:58:00Z",
+    "place": "Leiria",
+    "district": "leiria",
+    "lat": 39.7437,
+    "lon": -8.8071,
+    "locationApprox": true,
+    "severity": 1,
+    "verified": false,
+    "source": {
+      "category": "comunicacao_social",
+      "name": "Observador (liveblog)",
+      "url": "https://observador.pt/liveblogs/charles-causou-ventos-de-130-km-hora-na-madeira-e-dirige-se-para-o-continente/"
+    }
+  },
+  {
     "id": "i-palmela-inundacoes",
     "title": {
       "pt": "Palmela: inundações deixam três casas inabitáveis",
